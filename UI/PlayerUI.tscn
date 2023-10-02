@@ -29,14 +29,23 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 2
 
 [node name="PlayerCounters" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCounters" instance=ExtResource("2_2hqx1")]
-layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCounters" instance=ExtResource("1_q4k88")]
 layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme_override_constants/separation = 15
+
+[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer" instance=ExtResource("2_2hqx1")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1

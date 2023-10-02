@@ -21,9 +21,9 @@ GameEvents="*res://AutoLoad/game_events.tscn"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="canvas_items"
+window/size/viewport_width=1536
+window/size/viewport_height=864
+window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://Art Assets/crosheir.png"
 
 [dotnet]
@@ -83,3 +83,8 @@ ChangeBullet={
 
 textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+camera/size/viewport_height=720
+camera/size/viewport_width=1280
+camera/stretch/mode="canvas_items"
+camera/snap/snap_2d_vertices_to_pixel=false

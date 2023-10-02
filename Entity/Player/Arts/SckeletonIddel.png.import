@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn11o25xenvum"
-path="res://.godot/imported/Hands.png-c5f47b1288520a5e999ad847eb790b1b.ctex"
+uid="uid://bdto3woumuy74"
+path="res://.godot/imported/SckeletonIddel.png-bd2a8508de1f252c3b23b899d543d5d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entity/Player/Arts/Hands.png"
-dest_files=["res://.godot/imported/Hands.png-c5f47b1288520a5e999ad847eb790b1b.ctex"]
+source_file="res://Entity/Player/Arts/SckeletonIddel.png"
+dest_files=["res://.godot/imported/SckeletonIddel.png-bd2a8508de1f252c3b23b899d543d5d8.ctex"]
 
 [params]
 
