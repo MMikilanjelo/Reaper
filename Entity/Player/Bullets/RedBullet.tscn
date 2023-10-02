@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvc6qkfqiqpu5"]
+
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="1_1ayaa"]
+[ext_resource type="Script" path="res://Entity/Player/Bullets/RedBullet.cs" id="1_l5mma"]
+[ext_resource type="Texture2D" uid="uid://ce4068kyv2gc1" path="res://Entity/Player/Arts/BulletArts/RedBullet.png" id="3_8ys8o"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="3_jgg2w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dlabb"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y0be0"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hitBoxComponent", "timer", "velocityComponent")]
+collision_layer = 2
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_l5mma")
+hitBoxComponent = NodePath("HitBoxComponent")
+timer = NodePath("Timer")
+velocityComponent = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dlabb")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("1_1ayaa")]
+dmg = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_y0be0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("3_8ys8o")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_jgg2w")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

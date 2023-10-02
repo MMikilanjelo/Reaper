@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://h8x0ws2wrn56"]
+
+[ext_resource type="Script" path="res://EnemyParts/EnemyPartsProjectilesResourses/Resourses/HeadRes.cs" id="1_xximn"]
+[ext_resource type="PackedScene" uid="uid://dfqwn8of1fv8u" path="res://EnemyParts/EnemyPartsProjectilesResourses/BulletsScenes/ToxicProjectile.tscn" id="1_y71ku"]
+
+[resource]
+script = ExtResource("1_xximn")
+projectileScene = ExtResource("1_y71ku")
+projectileMoveSpeed = 300.0

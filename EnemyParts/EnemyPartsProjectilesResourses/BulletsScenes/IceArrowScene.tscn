@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwsadnn172pyx"]
+
+[ext_resource type="Script" path="res://EnemyParts/EnemyPartsProjectilesResourses/BulletsScenes/IceArrow.cs" id="1_ovvmd"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="2_mwobt"]
+[ext_resource type="Texture2D" uid="uid://cbjk0i2r4j8dn" path="res://EnemyParts/EnemyPartsProjectilesResourses/Arts/IceBullet.png" id="3_ocu5w"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="4_x5mob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c22x4"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xsds"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hitBoxComponent", "timer", "velocityComponent")]
+collision_layer = 2
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_ovvmd")
+hitBoxComponent = NodePath("HitBoxComponent")
+timer = NodePath("Timer")
+velocityComponent = NodePath("VelocityComponent")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_mwobt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c22x4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_ocu5w")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("4_x5mob")]
+collision_layer = 2
+dmg = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_7xsds")

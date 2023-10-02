@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmdxbg6rk6p5b"]
+
+[ext_resource type="Script" path="res://World/Managers/enemy_spawner_manager.cs" id="1_5l8e1"]
+
+[node name="EnemySpawnerManager" type="Node" node_paths=PackedStringArray("EnemySpawnerInterval")]
+script = ExtResource("1_5l8e1")
+EnemySpawnerInterval = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

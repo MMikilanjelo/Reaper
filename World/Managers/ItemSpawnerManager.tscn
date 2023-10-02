@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnserb7q8yhh4"]
+
+[ext_resource type="Script" path="res://World/Managers/ItemSpawnerManager.cs" id="1_mpfib"]
+[ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_sut7v"]
+
+[node name="ItemsSpawnerManager" type="Node"]
+script = ExtResource("1_mpfib")
+ExpirienceScene = ExtResource("2_sut7v")

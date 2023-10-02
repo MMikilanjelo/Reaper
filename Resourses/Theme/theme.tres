@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctxx7js4j4snw"]
+
+[ext_resource type="FontFile" uid="uid://cblys7unxg2v3" path="res://Resourses/Theme/AtariGames.ttf" id="1_ay55h"]
+
+[resource]
+default_font = ExtResource("1_ay55h")
+default_font_size = 32

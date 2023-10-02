@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfqwn8of1fv8u"]
+
+[ext_resource type="Script" path="res://EnemyParts/EnemyPartsProjectilesResourses/BulletsScenes/ToxicProjectile.cs" id="1_ryqeb"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="2_6b1ma"]
+[ext_resource type="Texture2D" uid="uid://b6ql08qbkkcri" path="res://EnemyParts/EnemyPartsProjectilesResourses/Arts/ToxicBullet.png" id="3_cqj0k"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="4_acdbg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_we0at"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fxfox"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hitBoxComponent", "timer", "velocityComponent")]
+scale = Vector2(3, 3)
+collision_layer = 2
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_ryqeb")
+hitBoxComponent = NodePath("HitBoxComponent")
+timer = NodePath("Timer")
+velocityComponent = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_we0at")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("2_6b1ma")]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_fxfox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_cqj0k")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="VelocityComponent" parent="." instance=ExtResource("4_acdbg")]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://64oa2c2ly8tt"]
+
+[ext_resource type="Script" path="res://Components/BulletControlerComponent.cs" id="1_yf3ne"]
+
+[node name="BulletControler" type="Node"]
+script = ExtResource("1_yf3ne")
+CardScene = Array[PackedScene]([null, null])

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds70gf11ajlcg"]
+
+[ext_resource type="Script" path="res://Game/Components/TimerControllerComponent.cs" id="1_juq8k"]
+
+[node name="TimerController" type="Node"]
+script = ExtResource("1_juq8k")
+
+[node name="Timer" type="Timer" parent="."]

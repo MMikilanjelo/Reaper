@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://8lk0kx0u5smq"]
+
+[ext_resource type="Script" path="res://Game/Components/PathFindingComponent.cs" id="1_hfkh6"]
+
+[node name="PathFindingComponent" type="Node2D" node_paths=PackedStringArray("intervalTimer")]
+script = ExtResource("1_hfkh6")
+intervalTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

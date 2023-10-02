@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1e1fqjhkdm4i"]
+
+[ext_resource type="Script" path="res://Game/Components/BulletHandlerComponent.cs" id="1_8mqrj"]
+
+[node name="BulletHandlerComponent" type="Node2D"]
+script = ExtResource("1_8mqrj")

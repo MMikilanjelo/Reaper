@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://doc7xuc0ro55c"]
+
+[ext_resource type="Script" path="res://Game/Components/BulletPatternComponent.cs" id="1_8db5f"]
+
+[sub_resource type="Curve2D" id="Curve2D_b721v"]
+bake_interval = 300.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -57, 43, 0, 0, 0, 0, -38, 42, 0, 0, 0, 0, -34, 23, 0, 0, 0, 0, -27, 18, 0, 0, 0, 0, -19, 13, 0, 0, 0, 0, -25, 36, 0, 0, 0, 0, -24, 49, 0, 0, 0, 0, -11, 50, 0, 0, 0, 0, 1, 48, 0, 0, 0, 0, 4, 39, 0, 0, 0, 0, 11, 45, 0, 0, 0, 0, 19, 53, 0, 0, 0, 0, 9, 57, 0, 0, 0, 0, 2, 61, 0, 0, 0, 0, -10, 65, 0, 0, 0, 0, -48, 76, 0, 0, 0, 0, -28, 58, 0, 0, 0, 0, -43, 52, 0, 0, 0, 0, -59, 52)
+}
+point_count = 19
+
+[node name="BulletPatternComponent" type="Node2D" node_paths=PackedStringArray("bulletPatternPath")]
+script = ExtResource("1_8db5f")
+bulletPatternPath = NodePath("Path2D")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_b721v")

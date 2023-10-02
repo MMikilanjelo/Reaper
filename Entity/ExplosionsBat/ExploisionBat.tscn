@@ -1,0 +1,287 @@
+[gd_scene load_steps=19 format=3 uid="uid://dfp0djjym5ctb"]
+
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="1_1jb48"]
+[ext_resource type="Script" path="res://Entity/ExplosionsBat/ExploisionBat.cs" id="1_l801k"]
+[ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_0y6te"]
+[ext_resource type="Texture2D" uid="uid://cvntpf3l2up" path="res://Entity/ExplosionsBat/crystalbat.png" id="2_231kp"]
+[ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="3_clt8o"]
+[ext_resource type="Texture2D" uid="uid://dmwghsh6a6hjd" path="res://Entity/ExplosionsBat/crystalBatExploisonANimation.png" id="4_8m5qo"]
+[ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_buqyl"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_3tgip"]
+[ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_2lo7i"]
+[ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="6_y4x8q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4ub5"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mb5lw"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahqgg"]
+radius = 28.1603
+
+[sub_resource type="Animation" id="Animation_ukxjt"]
+resource_name = "ExplodeAnimation"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Explode:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Explode:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Areas/HitBoxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 0.9, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hg6x0"]
+resource_name = "FlyingAnimation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Visuals/Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(0.996078, 0.996078, 0.996078, 1), Color(0.996078, 0.996078, 0.996078, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8i6qd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Explode:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Areas/HitBoxComponent/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.996078, 0.996078, 0.996078, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yk1nc"]
+_data = {
+"ExplodeAnimation": SubResource("Animation_ukxjt"),
+"FlyingAnimation": SubResource("Animation_hg6x0"),
+"RESET": SubResource("Animation_8i6qd")
+}
+
+[node name="ExploisionBat" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "healthComponent", "hitBoxComponent", "Animation")]
+collision_layer = 2
+script = ExtResource("1_l801k")
+enemySensorComponent = NodePath("Areas/EnemySensorComponent")
+pathFindingComponent = NodePath("PathFindingComponent")
+velocityComponent = NodePath("VelocityComponent")
+healthComponent = NodePath("HealthComponent")
+ExperiencePeal = ExtResource("2_0y6te")
+hitBoxComponent = NodePath("Areas/HitBoxComponent")
+Animation = NodePath("AnimationPlayer")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ChangePostionTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Visuals" type="Node2D" parent="."]
+scale = Vector2(0.974483, 0.974483)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+modulate = Color(0.996078, 0.996078, 0.996078, 1)
+position = Vector2(0, -7)
+texture = ExtResource("2_231kp")
+hframes = 5
+frame = 3
+
+[node name="Explode" type="Sprite2D" parent="Visuals"]
+visible = false
+position = Vector2(0, -7)
+texture = ExtResource("4_8m5qo")
+hframes = 14
+frame = 12
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_1jb48")]
+accelerationCoeficient = 50.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 5.0
+neighbor_distance = 100.0
+time_horizon = 0.1
+max_speed = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_r6jm6")
+
+[node name="PathFindingComponent" parent="." node_paths=PackedStringArray("NavigationAgent2D", "velocityComponent") instance=ExtResource("3_clt8o")]
+NavigationAgent2D = NodePath("../NavigationAgent2D")
+velocityComponent = NodePath("../VelocityComponent")
+
+[node name="Areas" type="Node2D" parent="."]
+visible = false
+
+[node name="EnemySensorComponent" parent="Areas" instance=ExtResource("6_y4x8q")]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/EnemySensorComponent"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_c4ub5")
+
+[node name="HurtBoxComponent" parent="Areas" node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_buqyl")]
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HurtBoxComponent"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_mb5lw")
+
+[node name="HitBoxComponent" parent="Areas" node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("5_3tgip")]
+collision_layer = 2
+collision_mask = 0
+hitBoxArea = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HitBoxComponent"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_ahqgg")
+disabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_2lo7i")]
+MaxHealth = 30.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yk1nc")
+}
