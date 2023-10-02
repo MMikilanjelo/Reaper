@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv5fmhvyf2jwf"]
+[gd_scene load_steps=3 format=3 uid="uid://bv5fmhvyf2jwf"]
 
-[ext_resource type="Script" path="res://UI/KillCounterContainer.cs" id="1_lxokd"]
-[ext_resource type="Texture2D" uid="uid://b5ivqbdjitfv5" path="res://Visuals/UI/ScullUI.png" id="1_oydjy"]
-[ext_resource type="Texture2D" uid="uid://brhfssipx0xlq" path="res://Visuals/UI/UIBUllet.png" id="3_0xx8c"]
-[ext_resource type="Script" path="res://UI/RemainingBulletsContainer.cs" id="3_u826c"]
+[ext_resource type="PackedScene" uid="uid://dg0yovq6g1kem" path="res://UI/KiilCounterContainer.tscn" id="1_q4k88"]
+[ext_resource type="PackedScene" uid="uid://c3sh7wb8r7wmf" path="res://UI/RemainungBulletsContainer.tscn" id="2_2hqx1"]
 
 [node name="PlayerUII" type="CanvasLayer"]
 
@@ -33,46 +31,12 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 mouse_filter = 2
 
-[node name="KillCounterContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer" node_paths=PackedStringArray("kill_count_label")]
-custom_minimum_size = Vector2(50, 50)
+[node name="PlayerCountElements" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-mouse_filter = 2
-script = ExtResource("1_lxokd")
-kill_count_label = NodePath("Label")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/KillCounterContainer"]
+[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCountElements" instance=ExtResource("2_2hqx1")]
 layout_mode = 2
-texture = ExtResource("1_oydjy")
-expand_mode = 3
 
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/KillCounterContainer"]
+[node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCountElements" instance=ExtResource("1_q4k88")]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 48
-text = "0"
-vertical_alignment = 1
-
-[node name="RemainingBulletsContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer" node_paths=PackedStringArray("ammo_count_label")]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-script = ExtResource("3_u826c")
-ammo_count_label = NodePath("Label")
-
-[node name="BulletTexture" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/RemainingBulletsContainer"]
-layout_mode = 2
-texture = ExtResource("3_0xx8c")
-expand_mode = 3
-
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/RemainingBulletsContainer"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 48
-text = "100
-"

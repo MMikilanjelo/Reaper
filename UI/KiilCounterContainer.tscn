@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg0yovq6g1kem"]
+
+[ext_resource type="Script" path="res://UI/KillCounterContainer.cs" id="1_dgb2u"]
+[ext_resource type="Texture2D" uid="uid://b5ivqbdjitfv5" path="res://Visuals/UI/ScullUI.png" id="2_g633m"]
+
+[node name="KillCounterContainer" type="HBoxContainer" node_paths=PackedStringArray("kill_count_label")]
+custom_minimum_size = Vector2(50, 50)
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+script = ExtResource("1_dgb2u")
+kill_count_label = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_g633m")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "0"
+vertical_alignment = 1
