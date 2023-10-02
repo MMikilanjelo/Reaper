@@ -97,6 +97,7 @@ _data = {
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
+scale = Vector2(1.2, 1.2)
 collision_layer = 2
 motion_mode = 1
 safe_margin = 10.0

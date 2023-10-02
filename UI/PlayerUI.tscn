@@ -31,12 +31,12 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PlayerCountElements" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="PlayerCounters" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCountElements" instance=ExtResource("2_2hqx1")]
+[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCounters" instance=ExtResource("2_2hqx1")]
 layout_mode = 2
 
-[node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCountElements" instance=ExtResource("1_q4k88")]
+[node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerCounters" instance=ExtResource("1_q4k88")]
 layout_mode = 2

@@ -4,7 +4,6 @@ using System;
 public partial class experience : Node2D
 {
 	[Export] Area2D PickableArea;
-	[Export] PackedScene expVial;
 	 game_events game_Events;
 	public override void _Ready()
 	{
