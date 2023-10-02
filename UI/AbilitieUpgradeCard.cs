@@ -12,7 +12,7 @@ public partial class AbilitieUpgradeCard : PanelContainer
 	{
 		Connect(SignalName.GuiInput , new Callable(this , nameof (OnGuiInput)));
 	}
-	public void SetAbilitieUpgrade(PlayerUpgrades upgrade)
+	public void SetAbilitieUpgrade(Upgrade upgrade)
 	{
 		cardNameLabel.Text = upgrade.Name;
 		descriptionCardLabel.Text = upgrade.description;

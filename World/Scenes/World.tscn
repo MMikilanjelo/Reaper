@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b0d5s2lt170kg"]
+[gd_scene load_steps=20 format=3 uid="uid://b0d5s2lt170kg"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://testing_generation.png" id="2_1dpl5"]
@@ -8,11 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="5_4ppwt"]
 [ext_resource type="PackedScene" uid="uid://b3qnb7yc0nxvm" path="res://UI/UpgradeScreen.tscn" id="5_i2uh0"]
-[ext_resource type="Resource" uid="uid://d3elrcoc2n5qs" path="res://Resourses/Upgrades/Player_Upgrades.tres" id="6_0w4g7"]
 [ext_resource type="PackedScene" uid="uid://diyt82uirkxk" path="res://UI/ArenaTimeUI.tscn" id="6_ifwme"]
-[ext_resource type="Resource" uid="uid://rr714nbxqcgi" path="res://Resourses/Upgrades/BulletDmgIncresmant.tres" id="7_rxujj"]
 [ext_resource type="PackedScene" uid="uid://spidl7800c31" path="res://World/Managers/experience_manager.tscn" id="8_itx35"]
-[ext_resource type="Resource" uid="uid://cxn7ejyeei10w" path="res://Resourses/Upgrades/HpUpgrade.tres" id="8_t6hae"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
 [ext_resource type="PackedScene" uid="uid://cy1nqxsxkiehv" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="15_sjun6"]
@@ -389,7 +386,6 @@ metadata/_edit_horizontal_guides_ = []
 [node name="Managers" type="Node" parent="."]
 
 [node name="UpgradeManager" parent="Managers" node_paths=PackedStringArray("ExperienceManager") instance=ExtResource("4_51vqn")]
-upgradesPool = [ExtResource("7_rxujj"), ExtResource("6_0w4g7"), ExtResource("8_t6hae")]
 ExperienceManager = NodePath("../ExperienceManager")
 UpgradeSceenScene = ExtResource("5_i2uh0")
 

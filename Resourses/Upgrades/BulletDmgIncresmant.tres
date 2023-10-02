@@ -1,9 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://rr714nbxqcgi"]
-
-[ext_resource type="Script" path="res://Resourses/Upgrades/PlayerUpgrades.cs" id="1_x4ud5"]
-
-[resource]
-script = ExtResource("1_x4ud5")
-Name = "bullet"
-description = "bl + 100"
-id = "bl"

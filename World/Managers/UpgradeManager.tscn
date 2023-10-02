@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqc705ciop623"]
+[gd_scene load_steps=2 format=3 uid="uid://bqc705ciop623"]
 
 [ext_resource type="Script" path="res://World/Managers/UpgradeManager.cs" id="1_fprjd"]
-[ext_resource type="Resource" uid="uid://d3elrcoc2n5qs" path="res://Resourses/Upgrades/Player_Upgrades.tres" id="2_xknsw"]
 
 [node name="UpgradeManager" type="Node"]
 script = ExtResource("1_fprjd")
-abilities = [ExtResource("2_xknsw")]

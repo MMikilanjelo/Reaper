@@ -99,7 +99,7 @@ public partial class PlayerController : CharacterBody2D
 		QueueFree();
 	}
 	
-	private void OnAbilityUpgradeAded(PlayerUpgrades addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<PlayerUpgrades , int>> currentPlayerUpgrades)
+	private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
 	{
 		//Do some check and aditing an upgrades
 		

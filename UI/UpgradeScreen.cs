@@ -11,7 +11,7 @@ public partial class UpgradeScreen : CanvasLayer
 	[Export] HBoxContainer CardConteinerRight;
 	List<HBoxContainer> CardContainers = new List<HBoxContainer>();
 
-	[Signal] public delegate void UpgradeSelectedEventHandler(PlayerUpgrades playerUpgrade);
+	[Signal] public delegate void UpgradeSelectedEventHandler(Upgrade playerUpgrade);
 
 	public override void _Ready()
 	{
@@ -21,7 +21,7 @@ public partial class UpgradeScreen : CanvasLayer
 		GetTree().Paused = true;
 
 	}
-	public void SetAbilitiesUpgrades(Godot.Collections.Array<PlayerUpgrades> upgrades)
+	public void SetAbilitiesUpgrades(Godot.Collections.Array<Upgrade> upgrades)
 	{
 		
 		foreach(var upgrade in upgrades)
@@ -36,7 +36,7 @@ public partial class UpgradeScreen : CanvasLayer
 		}
 			
 	}
-	private void OnUpgradeSelected(PlayerUpgrades upgrade)
+	private void OnUpgradeSelected(Upgrade upgrade)
 	{
 		EmitSignal(SignalName.UpgradeSelected , upgrade);
 		GetTree().Paused = false;

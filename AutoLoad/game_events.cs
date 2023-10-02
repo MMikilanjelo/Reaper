@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class game_events : Node
 {
 	[Signal] public delegate void ExperienceVialCollectedEventHandler(int amount);
-	[Signal] public delegate void OnAbilityUpgradeAdedEventHandler(PlayerUpgrades addedUpgrade , Godot.Collections.Dictionary<PlayerUpgrades , int> playerUpgrades);
+	[Signal] public delegate void OnAbilityUpgradeAdedEventHandler(Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades);
 	[Signal] public delegate void OnEnemyDiedEventHandler(Vector2 enemy_died_position , int enemy_bullet_cost);
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
 	[Signal] public delegate void OnRunOutAmmoEventHandler();
@@ -14,7 +14,7 @@ public partial class game_events : Node
 	{
 		EmitSignal(SignalName.ExperienceVialCollected, amount);
 	}
-	public void OmAbilityUpgradeAded(PlayerUpgrades addedUpgrade , Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<PlayerUpgrades , int>> playerUpgrades)
+	public void OmAbilityUpgradeAded(Upgrade addedUpgrade , Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> playerUpgrades)
 	{
 		EmitSignal(SignalName.OnAbilityUpgradeAded , addedUpgrade , playerUpgrades);
 	}
