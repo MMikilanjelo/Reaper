@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cmr1quvowsg8d" path="res://Visuals/Particles/ShootPatickle.tscn" id="3_ll62t"]
 [ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="4_27wxb"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="5_bwik8"]
-[ext_resource type="Texture2D" uid="uid://bni38nqhdxyim" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
+[ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
 [ext_resource type="Script" path="res://Entity/Player/Scipts/ShootPositionParticleEmiter.cs" id="6_5fspl"]
 [ext_resource type="PackedScene" uid="uid://1e1fqjhkdm4i" path="res://Components/BulletHandlerComponent.tscn" id="7_lwvhc"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]

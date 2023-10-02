@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kcxm6vjepjlk"
-path="res://.godot/imported/ReaperMainCharackter.png-2afd208c9b059972e9049d6464071ed4.ctex"
+uid="uid://s5jrkhpp0pcy"
+path="res://.godot/imported/UITheming.png-cf96e6796bbac9ca250e276ebc13e6d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entity/Player/Arts/ReaperMainCharackter.png"
-dest_files=["res://.godot/imported/ReaperMainCharackter.png-2afd208c9b059972e9049d6464071ed4.ctex"]
+source_file="res://Visuals/UI/UITheming.png"
+dest_files=["res://.godot/imported/UITheming.png-cf96e6796bbac9ca250e276ebc13e6d7.ctex"]
 
 [params]
 

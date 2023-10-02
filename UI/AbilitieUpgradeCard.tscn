@@ -4,20 +4,40 @@
 
 [node name="AbilitieUpgradeCard" type="PanelContainer" node_paths=PackedStringArray("cardNameLabel", "descriptionCardLabel")]
 custom_minimum_size = Vector2(250, 350)
+offset_right = 250.0
+offset_bottom = 350.0
 script = ExtResource("1_0c4yc")
-cardNameLabel = NodePath("VBoxContainer/NameLabel")
-descriptionCardLabel = NodePath("VBoxContainer/DescriptionLabel")
+cardNameLabel = NodePath("MarginContainer/VBoxContainer/PanelContainer/NameLabel")
+descriptionCardLabel = NodePath("MarginContainer/VBoxContainer/DescriptionLabel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+mouse_filter = 2
+theme_type_variation = &"AlternativePannelContainer"
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "
-"
-autowrap_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "123123"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Settttttings"
+autowrap_mode = 3

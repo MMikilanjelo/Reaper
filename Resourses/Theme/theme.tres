@@ -1,7 +1,26 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctxx7js4j4snw"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ctxx7js4j4snw"]
 
 [ext_resource type="FontFile" uid="uid://cblys7unxg2v3" path="res://Resourses/Theme/AtariGames.ttf" id="1_ay55h"]
+[ext_resource type="Texture2D" uid="uid://s5jrkhpp0pcy" path="res://Visuals/UI/UITheming.png" id="1_c4p8t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v6vry"]
+texture = ExtResource("1_c4p8t")
+texture_margin_left = 1.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(50, 5, 20, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0lfn"]
+texture = ExtResource("1_c4p8t")
+texture_margin_left = 12.0
+texture_margin_top = 17.0
+texture_margin_right = 12.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(3, 1, 38, 49)
 
 [resource]
 default_font = ExtResource("1_ay55h")
 default_font_size = 32
+AlternativePannelContainer/base_type = &"PanelContainer"
+AlternativePannelContainer/styles/panel = SubResource("StyleBoxTexture_v6vry")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_c0lfn")
