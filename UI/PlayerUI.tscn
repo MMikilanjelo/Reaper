@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bv5fmhvyf2jwf"]
 
 [ext_resource type="Script" path="res://UI/KillCounterContainer.cs" id="1_lxokd"]
-[ext_resource type="Texture2D" path="res://Visuals/UI/ScullUI.png" id="1_oydjy"]
-[ext_resource type="Texture2D" path="res://Visuals/UI/UIBUllet.png" id="3_0xx8c"]
+[ext_resource type="Texture2D" uid="uid://b5ivqbdjitfv5" path="res://Visuals/UI/ScullUI.png" id="1_oydjy"]
+[ext_resource type="Texture2D" uid="uid://brhfssipx0xlq" path="res://Visuals/UI/UIBUllet.png" id="3_0xx8c"]
 [ext_resource type="Script" path="res://UI/RemainingBulletsContainer.cs" id="3_u826c"]
 
 [node name="PlayerUII" type="CanvasLayer"]
