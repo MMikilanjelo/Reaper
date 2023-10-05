@@ -16,6 +16,7 @@ public partial class UpgradeManager : Node
 	[Export] PackedScene UpgradeSceenScene;
 	private readonly LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
 	private readonly LootTable<Godot.Collections.Array<Upgrade>> tier_List = new();
+
 	private game_events game_Events;
 	
 	private readonly Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> current_upgrades = new ();
@@ -27,11 +28,14 @@ public partial class UpgradeManager : Node
 		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,5);
 		tier_List.AddItemToTable( avaible_legendary_upgrades_Pool,2);
 
+		
+		
+
 		Upgrade dmg_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/dmg_reduction.tres");
 		Upgrade hp_bonus = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/hp_bonus.tres");
 		Upgrade move_speed_increment = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/move_speed_increment.tres");
-	
 		
+
 		avaible_common_upgrades_Pool.Add(dmg_reduction);
 		avaible_common_upgrades_Pool.Add(hp_bonus);
 		avaible_common_upgrades_Pool.Add(move_speed_increment);
@@ -107,8 +111,9 @@ public partial class UpgradeManager : Node
 		foreach(KeyValuePair<Upgrade , int> pair in current_upgrades[chosenUpgrade.id] )
 		{
 		 	GD.Print(pair.Key , pair.Value);
-		}
 		
+	
+		}
 		game_Events.OmAbilityUpgradeAded(chosenUpgrade , current_upgrades);
 	}
 	private Godot.Collections.Array<Upgrade> filterArray(Godot.Collections.Array<Upgrade> arrayToFilter , Upgrade chosenUpgrade)
