@@ -14,7 +14,8 @@ public partial class UpgradeManager : Node
 
 	[Export] experience_manager ExperienceManager;
 	[Export] PackedScene UpgradeSceenScene;
-	private LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
+	private readonly LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
+	private readonly LootTable<Godot.Collections.Array<Upgrade>> tier_List = new();
 	private game_events game_Events;
 	
 	private readonly Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> current_upgrades = new ();
@@ -22,34 +23,33 @@ public partial class UpgradeManager : Node
 	{	
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
+		tier_List.AddItemToTable(avaible_common_upgrades_Pool,10);
+		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,5);
+		tier_List.AddItemToTable( avaible_legendary_upgrades_Pool,2);
+
 		Upgrade dmg_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/dmg_reduction.tres");
-		upgradeTable.AddItemToTable(dmg_reduction , 40);
 		Upgrade hp_bonus = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/hp_bonus.tres");
-		upgradeTable.AddItemToTable(hp_bonus , 30);
 		Upgrade move_speed_increment = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/move_speed_increment.tres");
-		upgradeTable.AddItemToTable(move_speed_increment , 20);
+	
 		
 		avaible_common_upgrades_Pool.Add(dmg_reduction);
 		avaible_common_upgrades_Pool.Add(hp_bonus);
 		avaible_common_upgrades_Pool.Add(move_speed_increment);
 
 		Upgrade armor_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/arrmor_reduction.tres");
-		upgradeTable.AddItemToTable(armor_reduction , 12);
 		Upgrade miss = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/miss_chance.tres");
-		upgradeTable.AddItemToTable(miss , 11);
 		Upgrade vampire = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/vampire.tres");
-		upgradeTable.AddItemToTable(vampire , 10);
+		
 
 		avaible_rare_upgrades_Pool.Add(armor_reduction);
 		avaible_rare_upgrades_Pool.Add(miss);
 		avaible_rare_upgrades_Pool.Add(vampire);
 
+		
 		Upgrade serial = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Shroud.tres");
-		upgradeTable.AddItemToTable(serial , 3);
 		Upgrade toxic = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Toxic.tres");
-		upgradeTable.AddItemToTable( toxic , 2);
 		Upgrade shroud = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Unstopoble.tres");
-		upgradeTable.AddItemToTable(shroud , 1);
+	
 
 		avaible_legendary_upgrades_Pool.Add(serial);
 		avaible_legendary_upgrades_Pool.Add(toxic);
@@ -73,31 +73,13 @@ public partial class UpgradeManager : Node
 		
 		var upgradeScreenInstance = UpgradeSceenScene.Instantiate() as UpgradeScreen;
 		AddChild(upgradeScreenInstance);
-		var chosen_upgrade_pool = GetUpgradePool();
-		Godot.Collections.Array<Upgrade> chosenUpgrades = pickUpgrades(chosen_upgrade_pool);
+		var current_item_tier = tier_List.PickItem();
+		Godot.Collections.Array<Upgrade> chosenUpgrades = pickUpgrades( current_item_tier);
 		upgradeScreenInstance.SetAbilitiesUpgrades(chosenUpgrades);
-		upgradeScreenInstance.UpgradeSelected += (Upgrade upgrade) => OnUpgradeSelected(upgrade  , chosen_upgrade_pool);
+		upgradeScreenInstance.UpgradeSelected += (Upgrade upgrade) => OnUpgradeSelected(upgrade  , current_item_tier);
 
     }
-	private Godot.Collections.Array<Upgrade> GetUpgradePool()
-	{
-		var chosen_Upgrade_Weigth = upgradeTable.PickItem();
-		
-		if(avaible_common_upgrades_Pool.Contains(chosen_Upgrade_Weigth))
-		{
-			GD.Print("common");
-			return avaible_common_upgrades_Pool;
-		}
-		else if (avaible_rare_upgrades_Pool.Contains(chosen_Upgrade_Weigth))
-		{
-			GD.Print("rare");
-			return avaible_rare_upgrades_Pool;
-		}
-		else {
-			GD.Print("legendary");
-			return avaible_legendary_upgrades_Pool;
-		}
-	}
+	
 	private void OnUpgradeSelected(Upgrade upgrade ,Godot.Collections.Array<Upgrade> chosen_upgrade_pool )
 	{
 		ApplyUpgrade(upgrade , chosen_upgrade_pool);
