@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://t7gwlxl31ura"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_aatrp"]
+
+[resource]
+script = ExtResource("1_aatrp")
+Name = "Toxic"
+description = "can spawn toxic pollition area"
+id = "toxic"
+isUnique = false

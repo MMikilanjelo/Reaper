@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dra3rdl1ubai"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_e308i"]
+
+[resource]
+script = ExtResource("1_e308i")
+Name = "miss"
+description = "+ 10 chance to avoid all dmg"
+id = "miss_chance"
+isUnique = false

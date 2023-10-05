@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://h5iu3bp6bhu8"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_7d8u4"]
+
+[resource]
+script = ExtResource("1_7d8u4")
+Name = "Vampire"
+description = "Chance to gain laife after killing enemy"
+id = "vampire"
+isUnique = false

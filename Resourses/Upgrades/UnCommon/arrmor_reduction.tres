@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://oa57jvv8sk4p"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_bh32u"]
+
+[resource]
+script = ExtResource("1_bh32u")
+Name = "arrmor reduction"
+description = "-10 arrmor to enemy"
+id = "arrmor_reduction"
+isUnique = false

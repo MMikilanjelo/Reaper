@@ -16,11 +16,9 @@ public partial class Bullet : CharacterBody2D
 	{
 		
 		TopLevel = true;
-		// velocityComponent.SetMaxSpeed(MoveSpeed);
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnImpackt , new Callable(this , nameof(OnImpackt)));
 		timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof(OnTimeTimeOut)));
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnWallCollide , new Callable(this, nameof(OnWallColide)));
-		GD.Print("hi");
 
 	}
 	private void OnImpackt()

@@ -10,7 +10,7 @@ namespace GameLogick
     public class LootTable<T>
     {
         private Godot.RandomNumberGenerator random;
-        public Dictionary<T  , int > WeigthTable = new ();
+        public readonly Dictionary<T  , int > WeigthTable = new ();
         public LootTable()
         {
             random = MathUtil.RNG;
@@ -19,7 +19,7 @@ namespace GameLogick
 
         public void SetRandom(Godot.RandomNumberGenerator random) => this.random = random;
        
-        int  TotalWeigthSum = 0;
+        private int  TotalWeigthSum = 0;
         public void AddItemToTable(T item , int item_weigth)
         {
             WeigthTable.Add(item , item_weigth);
@@ -29,9 +29,12 @@ namespace GameLogick
         {
             var chosen_random_weigth = random.RandiRange(1 , TotalWeigthSum);
             var iteration_sum_coeficient = 0;
+            
             foreach(var item in WeigthTable)
             {
+               
                 iteration_sum_coeficient += item.Value;
+               
                 if(chosen_random_weigth <= iteration_sum_coeficient)
                 {
                     return item.Key;

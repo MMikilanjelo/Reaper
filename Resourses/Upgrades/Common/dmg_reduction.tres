@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://0pocdkinkah3"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_pys3d"]
+
+[resource]
+script = ExtResource("1_pys3d")
+Name = "Move Speed incement"
+description = "+ 10 moveSpeed"
+id = "dmg_reduction"
+isUnique = false

@@ -3,7 +3,7 @@ using System;
 
 public partial class experience_manager : Node
 {
-	const int TARGET_EXP_GROWTH  = 5;
+	const int TARGET_EXP_GROWTH  = 1;
 	game_events game_Events;
 	int current_Experience = 0;
 	int current_level = 1;

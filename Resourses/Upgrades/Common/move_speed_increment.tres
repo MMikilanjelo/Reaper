@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://duoja53cbx6er"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_chmed"]
+
+[resource]
+script = ExtResource("1_chmed")
+Name = "move Speed"
+description = "+10 move speed"
+id = "move_speed"
+isUnique = false

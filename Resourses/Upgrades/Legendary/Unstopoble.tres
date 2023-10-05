@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://hen8y7m2dy8f"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_mnshu"]
+
+[resource]
+script = ExtResource("1_mnshu")
+Name = "Unstopoble"
+description = "after killing 3 ene,ies in a raw gain + 10 movespeed and + 100 dmg efect can stack"
+id = "unstopoble"
+isUnique = false
