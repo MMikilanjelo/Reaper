@@ -29,8 +29,7 @@ public partial class PlayerController : CharacterBody2D
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.AddState(Shoot , EnterShootState);
 		delegateStateMachine.SetInitiioalState(NormalState);
-		delegateStateMachine.AddState(DeadState);
-		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> delegateStateMachine.ChangeState(DeadState)));		
+		delegateStateMachine.AddState(DeadState);		
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
 	   	game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From(()=> _HasAmmoRemaining =false));
@@ -60,7 +59,6 @@ public partial class PlayerController : CharacterBody2D
 			game_Events.EmitPlayerShootSignal(1);
 			directionToTarget = (GetGlobalMousePosition() - GlobalPosition).Normalized();
 			bulletHandlerComponent.Shoot( this  , directionToTarget , Visuals.shootPositionParticleEmiter.GlobalPosition , BulletMoveSpeed);
-			//Visuals.EmitShootPartickles(directionToTarget);
 			Visuals.EmitBulletShelsParticle();
 			AtackDeleyTimer.Start(AtackDeley);
 			
@@ -91,6 +89,9 @@ public partial class PlayerController : CharacterBody2D
 				delegateStateMachine.ChangeState(Shoot);
 			}
 			
+		}
+		if(!healthComponent._HasHealthRamaining){
+			delegateStateMachine.ChangeState(DeadState);
 		}
 		velocityComponent.AccelerateInDirection(direction);
 	}
