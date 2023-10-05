@@ -10,6 +10,7 @@ public partial class UpgradeManager : Node
 	[Export] Godot.Collections.Array<Upgrade> upgradesPool = new();
 	[Export] experience_manager ExperienceManager;
 	[Export] PackedScene UpgradeSceenScene;
+	private LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
 	private game_events game_Events;
 	
 	private readonly Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> current_upgrades = new ();
