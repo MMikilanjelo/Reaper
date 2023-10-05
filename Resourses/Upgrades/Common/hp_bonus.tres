@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://edmjc28g1ul1"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_3faay"]
+
+[resource]
+script = ExtResource("1_3faay")
+Name = "Hp bonus"
+description = "+ 10 hp"
+id = "hp_bonus"
+isUnique = false

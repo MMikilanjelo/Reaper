@@ -32,7 +32,6 @@ namespace Game.Components
 			{
 				
 				DealDmg(hitBoxComponent.dmg);
-				GD.Print(healthComponent.CurrentHealth);
 				hitBoxComponent.OnHit();
 				EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
 				var floating_text = floatingTextScene.Instantiate() as FloatingText;

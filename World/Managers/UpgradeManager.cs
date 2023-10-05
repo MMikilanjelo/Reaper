@@ -7,7 +7,11 @@ using GameLogick;
 
 public partial class UpgradeManager : Node
 {
-	[Export] Godot.Collections.Array<Upgrade> upgradesPool = new();
+	
+	private readonly  Godot.Collections.Array<Upgrade> avaible_common_upgrades_Pool = new ();
+	private readonly  Godot.Collections.Array<Upgrade> avaible_rare_upgrades_Pool = new ();
+	private readonly Godot.Collections.Array<Upgrade> avaible_legendary_upgrades_Pool = new ();
+
 	[Export] experience_manager ExperienceManager;
 	[Export] PackedScene UpgradeSceenScene;
 	private LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
@@ -18,17 +22,44 @@ public partial class UpgradeManager : Node
 	{	
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
-		Upgrade first = new Upgrade("hh" , "gl" , "h123");
-		Upgrade second = new Upgrade("h123" , "gbrash" , "h000");
-		Upgrade secooo = new Upgrade("h1567h" , "reposiory" , "h111111");
-		upgradesPool.Add(first);
-		upgradesPool.Add(secooo);
-		upgradesPool.Add(second);
-	}
-	private Godot.Collections.Array<Upgrade> pickUpgrades()
+		Upgrade dmg_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/dmg_reduction.tres");
+		upgradeTable.AddItemToTable(dmg_reduction , 40);
+		Upgrade hp_bonus = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/hp_bonus.tres");
+		upgradeTable.AddItemToTable(hp_bonus , 30);
+		Upgrade move_speed_increment = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Common/move_speed_increment.tres");
+		upgradeTable.AddItemToTable(move_speed_increment , 20);
+		
+		avaible_common_upgrades_Pool.Add(dmg_reduction);
+		avaible_common_upgrades_Pool.Add(hp_bonus);
+		avaible_common_upgrades_Pool.Add(move_speed_increment);
+
+		Upgrade armor_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/arrmor_reduction.tres");
+		upgradeTable.AddItemToTable(armor_reduction , 12);
+		Upgrade miss = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/miss_chance.tres");
+		upgradeTable.AddItemToTable(miss , 11);
+		Upgrade vampire = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/vampire.tres");
+		upgradeTable.AddItemToTable(vampire , 10);
+
+		avaible_rare_upgrades_Pool.Add(armor_reduction);
+		avaible_rare_upgrades_Pool.Add(miss);
+		avaible_rare_upgrades_Pool.Add(vampire);
+
+		Upgrade serial = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Shroud.tres");
+		upgradeTable.AddItemToTable(serial , 3);
+		Upgrade toxic = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Toxic.tres");
+		upgradeTable.AddItemToTable( toxic , 2);
+		Upgrade shroud = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Unstopoble.tres");
+		upgradeTable.AddItemToTable(shroud , 1);
+
+		avaible_legendary_upgrades_Pool.Add(serial);
+		avaible_legendary_upgrades_Pool.Add(toxic);
+		avaible_legendary_upgrades_Pool.Add(shroud);
+
+}
+	private Godot.Collections.Array<Upgrade> pickUpgrades(Godot.Collections.Array<Upgrade> upgrades_pool)
 	{
 		Godot.Collections.Array<Upgrade> chosenUpgrades = new Godot.Collections.Array<Upgrade>();
-		Godot.Collections.Array<Upgrade> filtered_upgrades = upgradesPool.Duplicate();
+		Godot.Collections.Array<Upgrade> filtered_upgrades = upgrades_pool.Duplicate();
 		for(int i = 0 ; i < 3 ; i ++)
 		{
 			var chosenUpgrade = filtered_upgrades.PickRandom() as Upgrade;
@@ -42,22 +73,49 @@ public partial class UpgradeManager : Node
 		
 		var upgradeScreenInstance = UpgradeSceenScene.Instantiate() as UpgradeScreen;
 		AddChild(upgradeScreenInstance);
-		Godot.Collections.Array<Upgrade> chosenUpgrades = pickUpgrades();
-		GD.Print(chosenUpgrades.Count + "chosen upgrades count");
+		var chosen_upgrade_pool = GetUpgradePool();
+		Godot.Collections.Array<Upgrade> chosenUpgrades = pickUpgrades(chosen_upgrade_pool);
 		upgradeScreenInstance.SetAbilitiesUpgrades(chosenUpgrades);
-		upgradeScreenInstance.Connect(UpgradeScreen.SignalName.UpgradeSelected , new Callable (this , nameof(OnUpgradeSelected)));
-	}
-	private void OnUpgradeSelected(Upgrade upgrade)
+		upgradeScreenInstance.UpgradeSelected += (Upgrade upgrade) => OnUpgradeSelected(upgrade  , chosen_upgrade_pool);
+
+    }
+	private Godot.Collections.Array<Upgrade> GetUpgradePool()
 	{
-		ApplyUpgrade(upgrade);
+		var chosen_Upgrade_Weigth = upgradeTable.PickItem();
+		
+		if(avaible_common_upgrades_Pool.Contains(chosen_Upgrade_Weigth))
+		{
+			GD.Print("common");
+			return avaible_common_upgrades_Pool;
+		}
+		else if (avaible_rare_upgrades_Pool.Contains(chosen_Upgrade_Weigth))
+		{
+			GD.Print("rare");
+			return avaible_rare_upgrades_Pool;
+		}
+		else {
+			GD.Print("legendary");
+			return avaible_legendary_upgrades_Pool;
+		}
 	}
-	private void ApplyUpgrade(Upgrade chosenUpgrade)
+	private void OnUpgradeSelected(Upgrade upgrade ,Godot.Collections.Array<Upgrade> chosen_upgrade_pool )
+	{
+		ApplyUpgrade(upgrade , chosen_upgrade_pool);
+	}
+	private void ApplyUpgrade(Upgrade chosenUpgrade , Godot.Collections.Array<Upgrade> chosen_upgrade_pool)
 	{
 		var hasUpgrade = current_upgrades.ContainsKey(chosenUpgrade.id);
 		if(!hasUpgrade)
 		{
+			
 			current_upgrades.Add(chosenUpgrade.id , new ());	
 			current_upgrades[chosenUpgrade.id].Add(chosenUpgrade ,1);
+			if(chosenUpgrade.isUnique)
+			{
+				chosen_upgrade_pool.Remove(chosenUpgrade);
+				
+			}
+			
 			
 		}
 		else 
@@ -68,6 +126,7 @@ public partial class UpgradeManager : Node
 		{
 		 	GD.Print(pair.Key , pair.Value);
 		}
+		
 		game_Events.OmAbilityUpgradeAded(chosenUpgrade , current_upgrades);
 	}
 	private Godot.Collections.Array<Upgrade> filterArray(Godot.Collections.Array<Upgrade> arrayToFilter , Upgrade chosenUpgrade)
