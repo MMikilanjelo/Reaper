@@ -23,8 +23,6 @@ public partial class UpgradeManager : Node
 		upgradesPool.Add(first);
 		upgradesPool.Add(secooo);
 		upgradesPool.Add(second);
-		
-		
 	}
 	private Godot.Collections.Array<Upgrade> pickUpgrades()
 	{

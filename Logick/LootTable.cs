@@ -22,8 +22,8 @@ namespace GameLogick
         int  TotalWeigthSum = 0;
         public void AddItemToTable(T item , int item_weigth)
         {
-                WeigthTable.Add(item , item_weigth);
-                TotalWeigthSum += item_weigth;
+            WeigthTable.Add(item , item_weigth);
+            TotalWeigthSum += item_weigth;
         }
         public T PickItem()
         {
