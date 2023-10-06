@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_pys3d")
 Name = "Move Speed incement"
-description = "+ 10 moveSpeed"
+description = "+ 10 percent of dmg reduction"
 id = "dmg_reduction"
 isUnique = false

@@ -6,13 +6,13 @@ using System.Runtime.CompilerServices;
 
 public partial class PlayerController : CharacterBody2D
 {
-	[Export] VelocityComponent velocityComponent;
-	[Export] BulletHandlerComponent bulletHandlerComponent;
-	[Export] HealthComponent healthComponent;
-	[Export] Timer AtackDeleyTimer;
-	[Export] AnimationPlayer animationPlayer;
-	[Export] AnimationPlayer weaponAnimation;
-	[Export] PlayerSpriteImager Visuals;
+	[Export]public  VelocityComponent velocityComponent;
+	[Export]public  BulletHandlerComponent bulletHandlerComponent;
+	[Export]public  HealthComponent healthComponent;
+	[Export]public   Timer AtackDeleyTimer;
+	[Export]  AnimationPlayer animationPlayer;
+	[Export]  AnimationPlayer weaponAnimation;
+	[Export]  PlayerSpriteImager Visuals;
 	private bool _HasAmmoRemaining = true;
 	private float AtackDeley = 0.2f;
 	private game_events game_Events;
@@ -32,7 +32,7 @@ public partial class PlayerController : CharacterBody2D
 		delegateStateMachine.AddState(DeadState);		
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
-	   	game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From(()=> _HasAmmoRemaining =false));
+	   	game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From(()=> _HasAmmoRemaining = false));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -102,7 +102,7 @@ public partial class PlayerController : CharacterBody2D
 	
 	private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
 	{
-		
+
 	}
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=27 format=3 uid="uid://dd0dru4yce800"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://clhhhqclo1q5v" path="res://Bullet.tscn" id="2_t3lx4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://1e1fqjhkdm4i" path="res://Components/BulletHandlerComponent.tscn" id="7_lwvhc"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="8_w1vio"]
+[ext_resource type="PackedScene" uid="uid://c4bv8rfrsgp1p" path="res://Components/AbilitieUpgradeRecivierComponent.tscn" id="9_33jpr"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
 
@@ -261,6 +262,8 @@ hframes = 3
 use_parent_material = true
 texture = ExtResource("8_w1vio")
 offset = Vector2(0, -10)
+
+[node name="AbilitieUpgradeRecivier" parent="." instance=ExtResource("9_33jpr")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_bwik8")]
 accelerationCoeficient = 75.0

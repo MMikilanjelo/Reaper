@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Game.Components
 {
@@ -9,11 +10,13 @@ public partial class HealthComponent : Node2D
 	[Signal] public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
 	[Signal] public delegate void DiedEventHandler();
 	private bool _hasDied;
+	
 	public bool _isDamaged => CurrentHealth < MaxHealth;
 	public bool _HasHealthRamaining => !Mathf.IsEqualApprox(CurrentHealth , 0f);
 
 	private float _currentHealth = 15f;
 	private float _maxHealth = 15f;
+	
 	public bool canAcceptDamage{get ; set;} = true;
 
 	
@@ -41,7 +44,9 @@ public partial class HealthComponent : Node2D
 			{
 				CurrentHealth = _currentHealth,
 				MaxHealth  = _maxHealth,
+				
 			};
+			
 			EmitSignal(SignalName.HealthChanged , healthUpdate);
 			if(!_HasHealthRamaining && !_hasDied)
 			{
@@ -53,6 +58,7 @@ public partial class HealthComponent : Node2D
 		}
 
 	}
+	
 	
 	
 	public override void _Ready()
@@ -76,6 +82,10 @@ public partial class HealthComponent : Node2D
 			CurrentHealth -= damage;
 		}
 		
+	}
+	public void SetCurrentHealth(int amount)
+	{
+		CurrentHealth += amount;
 	}
 	public partial class HealthUpdate : RefCounted
 	{

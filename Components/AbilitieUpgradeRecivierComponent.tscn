@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4bv8rfrsgp1p"]
+
+[ext_resource type="Script" path="res://Game/Components/AbilitieUpgradeRecivierComponent.cs" id="1_is0aw"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_is0aw")

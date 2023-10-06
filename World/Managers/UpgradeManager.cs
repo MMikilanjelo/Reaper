@@ -24,9 +24,9 @@ public partial class UpgradeManager : Node
 	{	
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
-		tier_List.AddItemToTable(avaible_common_upgrades_Pool,10);
-		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,5);
-		tier_List.AddItemToTable( avaible_legendary_upgrades_Pool,2);
+		tier_List.AddItemToTable(avaible_common_upgrades_Pool,8);
+		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,4);
+		tier_List.AddItemToTable( avaible_legendary_upgrades_Pool,1);
 
 		
 		
@@ -101,8 +101,6 @@ public partial class UpgradeManager : Node
 				chosen_upgrade_pool.Remove(chosenUpgrade);
 				
 			}
-			
-			
 		}
 		else 
 		{
@@ -110,9 +108,7 @@ public partial class UpgradeManager : Node
 		}
 		foreach(KeyValuePair<Upgrade , int> pair in current_upgrades[chosenUpgrade.id] )
 		{
-		 	GD.Print(pair.Key , pair.Value);
-		
-	
+		 	GD.Print(pair.Key.id , pair.Value);
 		}
 		game_Events.OmAbilityUpgradeAded(chosenUpgrade , current_upgrades);
 	}
