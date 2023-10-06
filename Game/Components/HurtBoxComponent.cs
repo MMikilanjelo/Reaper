@@ -7,7 +7,7 @@ namespace Game.Components
 	public partial class HurtBoxComponent : Area2D
 	{
 		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
-		private float dmg_Reduction_Multiplier = 1f;
+		private float dmg_Reduction_Multiplier = 0f;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
 		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
@@ -17,13 +17,13 @@ namespace Game.Components
 			get => dmg_Reduction_Multiplier;
 			
 			set{
-				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 1);
+				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 0.7f);
 				dmg_Reduction_Multiplier = value;
 			}
 		}
 		public void SetDmgReductonMultiplier(float percent)
 		{
-			DmgReductonMultiplier -= percent;
+			DmgReductonMultiplier += percent;
 		}
 		public override void _Ready()
 		{
@@ -44,7 +44,7 @@ namespace Game.Components
 		{
 			if(oterArea is HitBoxComponent hitBoxComponent)
 			{
-				var totaldmg = hitBoxComponent.dmg * dmg_Reduction_Multiplier;
+				var totaldmg = hitBoxComponent.dmg - (hitBoxComponent.dmg*dmg_Reduction_Multiplier);
 				DealDmg(totaldmg);
 				hitBoxComponent.OnHit();
 				EmitSignal(SignalName.HitByHitBox , hitBoxComponent);

@@ -8,9 +8,11 @@ namespace Game.Components
 	{
 		game_events Game_Events;
 		PlayerController player;
+		HurtBoxComponent playerHurtBox;
         public override void _Ready()
         {
 			player  = GetParent<PlayerController>();
+			playerHurtBox = player.GetNode<HurtBoxComponent>("HurtBoxComponent");
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
         }
@@ -21,11 +23,12 @@ namespace Game.Components
 			}
 			if(addedUpgrade.id == "move_speed")
 			{
-				player.velocityComponent.SpeedMultiplier += 0.2f;
+				player.velocityComponent.SpeedMultiplier += 0.1f;
 			}
 			if(addedUpgrade.id =="dmg_reduction")
 			{
-				player.GetNode<HurtBoxComponent>("HurtBoxComponent").SetDmgReductonMultiplier(0.5f);
+				
+				playerHurtBox.SetDmgReductonMultiplier(0.1f);
 			}	
 		}
     }
