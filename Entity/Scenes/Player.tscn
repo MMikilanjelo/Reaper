@@ -22,7 +22,7 @@ radius = 4.0
 height = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b7bvv"]
-size = Vector2(2, 10)
+size = Vector2(4, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gr87u"]
 radius = 15.0
@@ -288,7 +288,7 @@ shape = SubResource("CapsuleShape2D_wtuf1")
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 6)
+position = Vector2(-0.999996, 5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_b7bvv")
 one_way_collision_margin = 0.0

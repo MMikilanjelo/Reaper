@@ -8,27 +8,27 @@
 [ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="5_4ppwt"]
 [ext_resource type="PackedScene" uid="uid://b3qnb7yc0nxvm" path="res://UI/UpgradeScreen.tscn" id="5_i2uh0"]
+[ext_resource type="PackedScene" uid="uid://dfp0djjym5ctb" path="res://Entity/ExplosionsBat/ExploisionBat.tscn" id="6_3iwpt"]
 [ext_resource type="PackedScene" uid="uid://diyt82uirkxk" path="res://UI/ArenaTimeUI.tscn" id="6_ifwme"]
 [ext_resource type="PackedScene" uid="uid://spidl7800c31" path="res://World/Managers/experience_manager.tscn" id="8_itx35"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
-[ext_resource type="PackedScene" uid="uid://cy1nqxsxkiehv" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="15_sjun6"]
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="16_eqwgn"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_osi82"]
-vertices = PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tdgp2"]
+vertices = PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)])
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_25jkg"]
-vertices = PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_756gh"]
+vertices = PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)])
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_aiwsm"]
-vertices = PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_fush6"]
+vertices = PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(2, -8, 8, -3.5, 8, 2.5, 2.5, 8, -2, 8, -8, 2.5, -8, -3.5, -2, -8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_876pc"]
 texture = ExtResource("2_1dpl5")
@@ -40,19 +40,19 @@ texture = ExtResource("2_1dpl5")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 6)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 6)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 6)
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:0/0 = 0
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 6, -8, 6)
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:0/0 = 0
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
@@ -78,15 +78,15 @@ texture = ExtResource("2_1dpl5")
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_osi82")
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_tdgp2")
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_25jkg")
+2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_756gh")
 3:1/0 = 0
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_aiwsm")
+3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_fush6")
 4:1/0 = 0
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
@@ -185,19 +185,19 @@ texture = ExtResource("2_1dpl5")
 1:4/0 = 0
 1:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:4/0/physics_layer_0/angular_velocity = 0.0
-1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.5, 8, -6.5, 8, 8, -8, 8)
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:4/0 = 0
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.5, 8, -6.5, 8, 8, -8, 8)
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:4/0 = 0
 3:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:4/0/physics_layer_0/angular_velocity = 0.0
-3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.5, 8, -6.5, 8, 8, -8, 8)
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:4/0 = 0
 4:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:4/0/physics_layer_0/angular_velocity = 0.0
-4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.5, 8, -6.5, 8, 8, -8, 8)
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:4/0 = 0
 5:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:4/0/physics_layer_0/angular_velocity = 0.0
@@ -392,7 +392,7 @@ UpgradeSceenScene = ExtResource("5_i2uh0")
 [node name="ExperienceManager" parent="Managers" instance=ExtResource("8_itx35")]
 
 [node name="EnemySpawnerManager" parent="Managers" instance=ExtResource("14_amk35")]
-BasickEnemyScene = ExtResource("15_sjun6")
+BasickEnemyScene = ExtResource("6_3iwpt")
 
 [node name="ItemsSpawnerManager" parent="Managers" instance=ExtResource("10_lywje")]
 
@@ -419,10 +419,10 @@ layer_0/tile_data = PackedInt32Array(-2555942, 524288, 7, -2490406, 524288, 7, -
 
 [node name="WorldGeneratorComponent" parent="." node_paths=PackedStringArray("worldTileMap") instance=ExtResource("3_cp0yf")]
 worldTileMap = NodePath("../TileMap")
-iterations = 30
+iterations = 60
 walkLenght = 30
 corridor_count = 4
-corridor_length = 40
+corridor_length = 20
 roomPercent = 1.0
 startRandomlyEachIteration = true
 Floor_atlas_tile_coordinates = Vector2i(1, 1)

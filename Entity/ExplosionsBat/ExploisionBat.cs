@@ -16,11 +16,11 @@ public partial class ExploisionBat : CharacterBody2D
 	[Export] AnimationPlayer Animation;
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	CharacterBody2D player;
+	game_events Game_Events;
 	public override void _Ready()
 	{
+		Game_Events = GetNode<game_events>("/root/GameEvents");
 		player = GameUtilities.GetPlayerNode(this);
-		enemySensorComponent.Connect(EnemySensorComponent.SignalName.PlayerEnteredInRange ,Callable.From(()=>
-		stateMachine.ChangeState(ExplodeState)));
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
 		stateMachine.AddState(DeadState);
@@ -35,22 +35,24 @@ public partial class ExploisionBat : CharacterBody2D
 	
 	private void StateNormal()
 	{
-		
+		if(enemySensorComponent.isInRange)
+		{
+			stateMachine.ChangeState(ExplodeState);
+		}
 		Animation.Play("FlyingAnimation");
 		velocityComponent.Move(this);
 		pathFindingComponent.FollowPath();
 		pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition);
+		
 	}
 	private void EnterExplodeState()
 	{
-		healthComponent.canAcceptDamage = false;
+
 		Animation.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string animationName)=> {
 		if(animationName == "ExplodeAnimation")
 		{
 				QueueFree();
 		}
-			
-			
 		}));
 		Animation.Play("ExplodeAnimation");
 		
@@ -67,9 +69,7 @@ public partial class ExploisionBat : CharacterBody2D
 	
 	private  void DeadState()
 	{
-		experience exp = ExperiencePeal.Instantiate() as experience;
-		exp.Position = this.GlobalPosition;
-		GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(exp);
+		Game_Events.EmitEnemyDeathSignal(Position , 10);
 		QueueFree();
 	}
 

@@ -312,7 +312,14 @@ namespace Game.Components
 
 			foreach(var position in floorPositions)
 			{
-
+				foreach(var direction in Directions.allDirectionsList)
+				{
+					var neighbour_tile_position = direction + position;
+					if(!floorPositions.Contains(neighbour_tile_position))
+					{
+						
+					}
+				}
 			}
 			return positions_to_spawn;
 		}

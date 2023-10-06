@@ -18,7 +18,8 @@ namespace Game.Components
         }
 		private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
 		{
-			if(addedUpgrade.id == "hp_bonus"){
+			if(addedUpgrade.id == "hp_bonus")
+			{
 				player.healthComponent.SetCurrentHealth(10);
 			}
 			if(addedUpgrade.id == "move_speed")
@@ -27,8 +28,7 @@ namespace Game.Components
 			}
 			if(addedUpgrade.id =="dmg_reduction")
 			{
-				
-				playerHurtBox.SetDmgReductonMultiplier(0.1f);
+				playerHurtBox.SetDmgReductonMultiplier(0.5f);
 			}	
 		}
     }

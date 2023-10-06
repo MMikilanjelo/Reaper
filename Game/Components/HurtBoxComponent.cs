@@ -8,6 +8,7 @@ namespace Game.Components
 	{
 		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
 		private float dmg_Reduction_Multiplier = 0f;
+		private int armmor = 0;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
 		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
@@ -18,7 +19,6 @@ namespace Game.Components
 			
 			set{
 				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 0.7f);
-				dmg_Reduction_Multiplier = value;
 			}
 		}
 		public void SetDmgReductonMultiplier(float percent)
@@ -28,7 +28,6 @@ namespace Game.Components
 		public override void _Ready()
 		{
 			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
-
 			if(CollisionLayer == 1)
 			{
 				AddToGroup(GROUP_ENEMY_HURTBOX);
@@ -36,7 +35,7 @@ namespace Game.Components
 			}
 			
 		}
-		private bool canAceptBulletCOlisions()
+		private bool canAceptBulletColisions()
 		{
 			return  healthComponent?._HasHealthRamaining ?? true;
 		}
@@ -44,7 +43,7 @@ namespace Game.Components
 		{
 			if(oterArea is HitBoxComponent hitBoxComponent)
 			{
-				var totaldmg = hitBoxComponent.dmg - (hitBoxComponent.dmg*dmg_Reduction_Multiplier);
+				var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 				DealDmg(totaldmg);
 				hitBoxComponent.OnHit();
 				EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
@@ -59,10 +58,13 @@ namespace Game.Components
 		}
 		private void DealDmg(float dmg)
 		{
-			
 			healthComponent?.Damage(dmg);
 		}
-		
+		private int CalculateIncomingDamage(float dmg  , float dmg_Reduction_Multiplier , int armmor = 0)
+		{
+			
+			return Mathf.CeilToInt(dmg - (dmg * dmg_Reduction_Multiplier) - armmor); 
+		}
 	}
 }
 
