@@ -15,13 +15,15 @@ namespace Game.Components
 		public float DmgReductonMultiplier
 		{
 			get => dmg_Reduction_Multiplier;
+			
 			set{
+				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 1);
 				dmg_Reduction_Multiplier = value;
 			}
 		}
 		public void SetDmgReductonMultiplier(float percent)
 		{
-			DmgReductonMultiplier = percent;
+			DmgReductonMultiplier -= percent;
 		}
 		public override void _Ready()
 		{
