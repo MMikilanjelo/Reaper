@@ -1,3 +1,4 @@
+using DotEffects;
 using GameUI;
 using Godot;
 using System;
@@ -11,7 +12,7 @@ namespace Game.Components
 		private int armmor = 0;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
-		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
+		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent );
 
 		public float DmgReductonMultiplier
 		{

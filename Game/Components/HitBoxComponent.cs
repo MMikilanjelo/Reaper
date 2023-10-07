@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using Enemy.Parts;
+using DotEffects;
+using System.Collections.Generic;
 
 namespace Game.Components
 {
@@ -10,6 +12,7 @@ namespace Game.Components
 		[Signal] public delegate void OnImpacktEventHandler();
 		[Signal] public delegate void OnWallCollideEventHandler();
 		[Export] public CollisionShape2D hitBoxArea;
+		public PackedScene effect = null;
 
         public override void _Ready()
         {
