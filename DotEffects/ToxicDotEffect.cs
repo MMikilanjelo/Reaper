@@ -6,40 +6,26 @@ using System;
 namespace DotEffects
 {
 	
-	public partial class ToxicDotEffect : Node2D , IEffect
+	public partial class ToxicDotEffect : BaseEffect 
 	{
-	    public void ApplyEffect()
-        {
-			GD.Print("Applyed Toxic dmg");
-		}
-		public void HandleEffect()
-        {
-			GD.Print("deadling dmg");
-        }
-		public void RemoveEffect()
-        {
-           GD.Print("dmg is over"); 
-		   QueueFree();
-        }
+		[Export] TimerControllerComponent timer;
+		Timer total_effect_duration_timer;
+        private const float EFFECT_TICK_DURATION = 0.1f;
+		private const float EFFECT_TOTAL_DURATION = 3f;
+		private float  EFFECT_TICK_DMG = 1f;
         public override void _Ready()
         {
-
-            ApplyEffect();
-			HandleEffect();
-			RemoveEffect();
+			total_effect_duration_timer= timer.CreateTimer(OneShoot: true);
+        }
+        public override void ApplyEffect()
+        {
+			GD.Print("I am toxic effect");
+			total_effect_duration_timer.Start(EFFECT_TOTAL_DURATION);
+			GD.Print(total_effect_duration_timer.TimeLeft);
 		}
+       
+
+
     }
-	public interface IEffect
-	{
-		public void ApplyEffect();
-		public void HandleEffect();
-		public void RemoveEffect();
-	}
-	public partial class StatusEffectData : RefCounted
-	{
-		private float _affect_time_duration;
-		private float _affect_tick_time;
-		private HealthComponent entityHealthComponent;
 	
-	}
 }

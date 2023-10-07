@@ -14,7 +14,7 @@ namespace Game.Components
 		CharacterBody2D entity;
 		[Export] HurtBoxComponent entityHurtBoxComponent;
 		[Export] HealthComponent healthComponent;
-		[Signal] public delegate void EffectAppliedEventHandler(StatusEffectData _data);
+		[Signal] public delegate void EffectAppliedEventHandler();
         public override void _Ready()
         {
 			entity = GetParent<CharacterBody2D>();
@@ -25,8 +25,9 @@ namespace Game.Components
 		}
 		public void ApplyEffect(PackedScene effect)
 		{
-			var currentEffect = effect.Instantiate() as Node2D;
+			var currentEffect = effect.Instantiate() as BaseEffect;
 			entity.AddChild(currentEffect);
+			currentEffect.ApplyEffect();
 		}
         
 

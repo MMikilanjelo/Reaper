@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ia8ha7m7gjyn"]
+[gd_scene load_steps=3 format=3 uid="uid://ia8ha7m7gjyn"]
 
 [ext_resource type="Script" path="res://DotEffects/ToxicDotEffect.cs" id="1_dtgdm"]
+[ext_resource type="PackedScene" uid="uid://ds70gf11ajlcg" path="res://TImerControllerManager.tscn" id="2_hf8dm"]
 
-[node name="ToxicDotEffect" type="Node2D"]
+[node name="ToxicDotEffect" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_dtgdm")
+timer = NodePath("TimerController")
+
+[node name="TimerController" parent="." instance=ExtResource("2_hf8dm")]

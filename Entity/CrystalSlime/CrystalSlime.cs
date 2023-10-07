@@ -24,9 +24,9 @@ public partial class CrystalSlime : CharacterBody2D
 	game_events Game_Events;
 	public override void _Ready()
 	{
-		atackTimer = timerControllerComponent.CreateTimer(5 , OneShoot : true);
-		timrerBetwenntShots = timerControllerComponent.CreateTimer(1 , OneShoot : true);
-		awaitAtackTimer = timerControllerComponent.CreateTimer(4  , OneShoot : true);
+		atackTimer = timerControllerComponent.CreateTimer( OneShoot : true);
+		timrerBetwenntShots = timerControllerComponent.CreateTimer( OneShoot : true);
+		awaitAtackTimer = timerControllerComponent.CreateTimer(  OneShoot : true);
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		player = GameUtilities.GetPlayerNode(this);
