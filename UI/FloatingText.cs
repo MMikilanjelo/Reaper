@@ -7,11 +7,7 @@ namespace GameUI
 	public partial class FloatingText : Node2D
 	{
 		[Export] private Label floating_text_label;
-        public override void _Ready()
-        {
-			
-			
-		}
+       
 		public void Start(string text)
 		{
 			floating_text_label.Text = text;

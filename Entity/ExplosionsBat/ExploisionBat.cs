@@ -4,6 +4,7 @@ using Game.Components;
 using GameLogick.StateMachine;
 using Enemy.Parts;
 using GameLogick.Utilities;
+using DotEffects;
 public partial class ExploisionBat : CharacterBody2D
 {
 	[Export] EnemySensorComponent enemySensorComponent;
@@ -14,6 +15,7 @@ public partial class ExploisionBat : CharacterBody2D
 	[Export] PackedScene ExperiencePeal;
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
+
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	CharacterBody2D player;
 	game_events Game_Events;
@@ -22,6 +24,7 @@ public partial class ExploisionBat : CharacterBody2D
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		player = GameUtilities.GetPlayerNode(this);
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
+		hitBoxComponent.effect = ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicDotEffect.tscn");	
 		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(ExplodeState , EnterExplodeState);

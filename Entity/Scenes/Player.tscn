@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=28 format=3 uid="uid://dd0dru4yce800"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://clhhhqclo1q5v" path="res://Bullet.tscn" id="2_t3lx4"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="8_w1vio"]
 [ext_resource type="PackedScene" uid="uid://c4bv8rfrsgp1p" path="res://Components/AbilitieUpgradeRecivierComponent.tscn" id="9_33jpr"]
+[ext_resource type="PackedScene" uid="uid://s2p61tu30xc3" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
 
@@ -262,6 +263,10 @@ hframes = 3
 use_parent_material = true
 texture = ExtResource("8_w1vio")
 offset = Vector2(0, -10)
+
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("entityHurtBoxComponent", "healthComponent") instance=ExtResource("9_o4o0l")]
+entityHurtBoxComponent = NodePath("../HurtBoxComponent")
+healthComponent = NodePath("../HealthComponent")
 
 [node name="AbilitieUpgradeRecivier" parent="." instance=ExtResource("9_33jpr")]
 
