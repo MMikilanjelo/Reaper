@@ -24,7 +24,8 @@ public partial class ExploisionBat : CharacterBody2D
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		player = GameUtilities.GetPlayerNode(this);
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
-		hitBoxComponent.effect = ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicDotEffect.tscn");	
+			
+		
 		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(ExplodeState , EnterExplodeState);

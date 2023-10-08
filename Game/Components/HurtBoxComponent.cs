@@ -44,11 +44,16 @@ namespace Game.Components
 		{
 			if(oterArea is HitBoxComponent hitBoxComponent)
 			{
+				var HitInfo = new HitInfo{
+					hittedHealthComponent = healthComponent
+				};
 				var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 				DealDmg(totaldmg);
-				hitBoxComponent.OnHit();
+				hitBoxComponent.OnHit(HitInfo);
 				EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
+				
 				var floating_text = floatingTextScene.Instantiate() as FloatingText;
+				
 				GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
 				floating_text.GlobalPosition = GlobalPosition;
 				floating_text.Start(Convert.ToString(totaldmg));
@@ -66,6 +71,10 @@ namespace Game.Components
 			
 			return Mathf.CeilToInt(dmg - (dmg * dmg_Reduction_Multiplier) - armmor); 
 		}
+	}
+	public partial class HitInfo : RefCounted
+	{
+		public HealthComponent hittedHealthComponent;
 	}
 }
 

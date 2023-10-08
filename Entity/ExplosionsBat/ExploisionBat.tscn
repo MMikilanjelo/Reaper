@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://dfp0djjym5ctb"]
+[gd_scene load_steps=21 format=3 uid="uid://dfp0djjym5ctb"]
 
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="1_1jb48"]
 [ext_resource type="Script" path="res://Entity/ExplosionsBat/ExploisionBat.cs" id="1_l801k"]
 [ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_0y6te"]
 [ext_resource type="Texture2D" uid="uid://cvntpf3l2up" path="res://Entity/ExplosionsBat/crystalbat.png" id="2_231kp"]
 [ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="3_clt8o"]
+[ext_resource type="PackedScene" uid="uid://dojrb6m4wde6m" path="res://Components/StatusApplierComponent.tscn" id="3_moxfd"]
 [ext_resource type="Texture2D" uid="uid://dmwghsh6a6hjd" path="res://Entity/ExplosionsBat/crystalBatExploisonANimation.png" id="4_8m5qo"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_buqyl"]
+[ext_resource type="PackedScene" uid="uid://ia8ha7m7gjyn" path="res://DotEffects/ToxicDotEffect.tscn" id="4_pn5nm"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_3tgip"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_2lo7i"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="6_y4x8q"]
@@ -208,6 +210,9 @@ healthComponent = NodePath("HealthComponent")
 ExperiencePeal = ExtResource("2_0y6te")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
+
+[node name="StatusApplierComponent" parent="." instance=ExtResource("3_moxfd")]
+effectToApllyScene = ExtResource("4_pn5nm")
 
 [node name="Timers" type="Node" parent="."]
 

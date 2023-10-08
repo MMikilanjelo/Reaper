@@ -35,7 +35,6 @@ namespace Game.Components
 			bulletInstance.LookAt(GetGlobalMousePosition());
 			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
 			timeToRecoilDecresment.Start(2);
-
 		}
 	}
 

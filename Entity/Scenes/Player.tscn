@@ -264,9 +264,7 @@ use_parent_material = true
 texture = ExtResource("8_w1vio")
 offset = Vector2(0, -10)
 
-[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("entityHurtBoxComponent", "healthComponent") instance=ExtResource("9_o4o0l")]
-entityHurtBoxComponent = NodePath("../HurtBoxComponent")
-healthComponent = NodePath("../HealthComponent")
+[node name="StatusRecivierComponent" parent="." instance=ExtResource("9_o4o0l")]
 
 [node name="AbilitieUpgradeRecivier" parent="." instance=ExtResource("9_33jpr")]
 

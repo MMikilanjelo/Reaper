@@ -12,15 +12,17 @@ namespace Game.Components
 		[Signal] public delegate void OnImpacktEventHandler();
 		[Signal] public delegate void OnWallCollideEventHandler();
 		[Export] public CollisionShape2D hitBoxArea;
-		public PackedScene effect = null;
+		game_events Game_Events;
 
         public override void _Ready()
         {
+			Game_Events = GetNode<game_events>("/root/GameEvents");
             Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
         }
         
-		public void  OnHit()
+		public void  OnHit(HitInfo hitInfo)
 		{
+			Game_Events.HitByHitBox(hitInfo);
 			EmitSignal(SignalName.OnImpackt);
 		}
 

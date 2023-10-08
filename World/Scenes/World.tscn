@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0d5s2lt170kg"]
+[gd_scene load_steps=21 format=3 uid="uid://b0d5s2lt170kg"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://testing_generation.png" id="2_1dpl5"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b3qnb7yc0nxvm" path="res://UI/UpgradeScreen.tscn" id="5_i2uh0"]
 [ext_resource type="PackedScene" uid="uid://dfp0djjym5ctb" path="res://Entity/ExplosionsBat/ExploisionBat.tscn" id="6_3iwpt"]
 [ext_resource type="PackedScene" uid="uid://diyt82uirkxk" path="res://UI/ArenaTimeUI.tscn" id="6_ifwme"]
+[ext_resource type="PackedScene" uid="uid://cy1nqxsxkiehv" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="7_xxf12"]
 [ext_resource type="PackedScene" uid="uid://spidl7800c31" path="res://World/Managers/experience_manager.tscn" id="8_itx35"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
@@ -391,10 +392,10 @@ UpgradeSceenScene = ExtResource("5_i2uh0")
 
 [node name="ExperienceManager" parent="Managers" instance=ExtResource("8_itx35")]
 
-[node name="EnemySpawnerManager" parent="Managers" instance=ExtResource("14_amk35")]
-BasickEnemyScene = ExtResource("6_3iwpt")
-
 [node name="ItemsSpawnerManager" parent="Managers" instance=ExtResource("10_lywje")]
+
+[node name="EnemySpawnerManager" parent="Managers" instance=ExtResource("14_amk35")]
+BasickEnemyScene = ExtResource("7_xxf12")
 
 [node name="UI" type="Node" parent="."]
 
@@ -440,5 +441,7 @@ Diagonal_Corner_Up_Right_Atlas_Coordinates = Vector2i(5, 0)
 [node name="Entities" type="Node2D" parent="." groups=["EntitiesLayer"]]
 
 [node name="CharacterBody2D" parent="Entities" instance=ExtResource("4_kqosp")]
+
+[node name="ExploisionBat" parent="Entities" instance=ExtResource("6_3iwpt")]
 
 [node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]

@@ -1,3 +1,4 @@
+using Game.Components;
 using Godot;
 using System;
 namespace DotEffects
@@ -10,7 +11,7 @@ namespace DotEffects
         {
             
         }
-        public override void ApplyEffect()
+        public override void ApplyEffect(StatusEfffectData _data)
         {
             GD.Print("I am fire effect");
 		}
