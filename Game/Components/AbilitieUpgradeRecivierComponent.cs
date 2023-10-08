@@ -28,7 +28,11 @@ namespace Game.Components
 			}
 			if(addedUpgrade.id =="dmg_reduction")
 			{
-				playerHurtBox.SetDmgReductonMultiplier(0.5f);
+				playerHurtBox.SetDmgReductonMultiplier(0.1f);
+			}
+			if(addedUpgrade.id == "miss_chance")
+			{
+				playerHurtBox.SetMissChance(100);
 			}	
 		}
     }

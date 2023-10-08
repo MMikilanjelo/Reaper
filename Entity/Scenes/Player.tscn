@@ -276,7 +276,7 @@ Bullet = ExtResource("2_t3lx4")
 timeToRecoilDecresment = NodePath("../TimeToRecoilDecresment")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 600.0
+MaxHealth = 100000.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 visible = false

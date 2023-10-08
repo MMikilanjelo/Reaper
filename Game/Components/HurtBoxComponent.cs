@@ -2,32 +2,45 @@ using DotEffects;
 using GameUI;
 using Godot;
 using System;
+using GameLogick.Utilities;
 
 namespace Game.Components
 {
 	public partial class HurtBoxComponent : Area2D
 	{
+		RandomNumberGenerator random;
 		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
 		private float dmg_Reduction_Multiplier = 0f;
 		private int armmor = 0;
+		private float miss_chance = 0;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
 		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent );
-
+		public float MissChance
+		{
+			get => miss_chance;
+			set{
+				miss_chance = Mathf.Clamp(value , 0 , 100);
+			}
+		}
 		public float DmgReductonMultiplier
 		{
 			get => dmg_Reduction_Multiplier;
-			
 			set{
-				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 0.7f);
+				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 1);
 			}
 		}
 		public void SetDmgReductonMultiplier(float percent)
 		{
 			DmgReductonMultiplier += percent;
 		}
+		public void SetMissChance(float amount)
+		{
+			MissChance += amount;
+		}
 		public override void _Ready()
 		{
+			random = MathUtil.RNG;
 			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 			if(CollisionLayer == 1)
 			{
@@ -44,19 +57,35 @@ namespace Game.Components
 		{
 			if(oterArea is HitBoxComponent hitBoxComponent)
 			{
-				var HitInfo = new HitInfo{
+				
+				var hitChance = random.RandiRange(0 , 100);
+				if(hitChance >= miss_chance)
+				{
+					
+					var HitInfo = new HitInfo{
 					hittedHealthComponent = healthComponent
-				};
-				var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
-				DealDmg(totaldmg);
-				hitBoxComponent.OnHit(HitInfo);
-				EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
+					};
+					
+					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
+					DealDmg(totaldmg);
+					hitBoxComponent.OnHit(HitInfo);
+					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
+					var floating_text = floatingTextScene.Instantiate() as FloatingText;
 				
-				var floating_text = floatingTextScene.Instantiate() as FloatingText;
+					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
+					floating_text.GlobalPosition = GlobalPosition;
+					floating_text.Start(Convert.ToString(totaldmg));	
+				}
+				else 
+				{
+					hitBoxComponent.EmitImpackt();
+					var Missed_text = floatingTextScene.Instantiate() as FloatingText;
+					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(Missed_text);
+					Missed_text.GlobalPosition = GlobalPosition;
+					Missed_text.Start("Missed");
+				}
 				
-				GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
-				floating_text.GlobalPosition = GlobalPosition;
-				floating_text.Start(Convert.ToString(totaldmg));
+			
 				
 			}
 		

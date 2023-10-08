@@ -11,8 +11,6 @@ public partial class game_events : Node
 	[Signal] public delegate void OnEnemyDiedEventHandler(Vector2 enemy_died_position , int enemy_bullet_cost);
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
 	[Signal] public delegate void OnRunOutAmmoEventHandler();
-	[Signal] public delegate void OnHitByHitBoxEventHandler(HitInfo hitInfo);
-	[Signal] public delegate void ApplyAffexToEntityEventHandler(PackedScene efectToApply , HitInfo hitInfo);
 
 	public void On_ExperienceVialCollected(float amount)
 	{
@@ -34,12 +32,5 @@ public partial class game_events : Node
 	{
 		EmitSignal(SignalName.OnRunOutAmmo);
 	}
-	public void HitByHitBox(HitInfo hitInfo)
-	{
-		EmitSignal(SignalName.OnHitByHitBox  ,  hitInfo);
-	}
-	public void OnApplyAfexToEntity(PackedScene effectToApply , HitInfo hitInfo)
-	{
-		EmitSignal(SignalName.ApplyAffexToEntity , effectToApply , hitInfo);
-	}
+
 }

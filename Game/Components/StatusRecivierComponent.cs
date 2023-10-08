@@ -13,14 +13,14 @@ namespace Game.Components
 	{
 		CharacterBody2D entity;
 		game_events Game_Events;
-		[Signal] public delegate void EffectAppliedEventHandler();
+		CombatEvents CombatEvents;
         public override void _Ready()
         {
 			Game_Events = GetNode<game_events>("/root/GameEvents");
-			Game_Events.Connect(game_events.SignalName.ApplyAffexToEntity , Callable.From((PackedScene efectToApply , HitInfo hitInfo)=> ApplyEffectUsingGameEvents(efectToApply , hitInfo)));
+			CombatEvents = GetNode<CombatEvents>("/root/CombatEvents");
+			CombatEvents.Connect(CombatEvents.SignalName.ApplyAffexToHittedEntity , Callable.From((PackedScene efectToApply , HitInfo hitInfo)=> 
+			ApplyEffectUsingGameEvents(efectToApply , hitInfo)));
 			entity = GetParent<CharacterBody2D>();
-			
-
 		}
 		public void ApplyEffectUsingGameEvents(PackedScene effectToApply , HitInfo hitInfo)
 		{
@@ -28,7 +28,6 @@ namespace Game.Components
 			{
 				healthComponent = hitInfo.hittedHealthComponent
 			};
-			GD.Print(_efect_recivier_data.healthComponent);
 			var currentEffect = effectToApply.Instantiate() as BaseEffect;
 			entity.AddChild(currentEffect);
 			currentEffect.ApplyEffect(_efect_recivier_data);

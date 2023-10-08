@@ -410,6 +410,7 @@ Experience_Manager = NodePath("../../Managers/ExperienceManager")
 zoom = Vector2(4, 4)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visibility_layer = 2
 color = Color(0.560784, 0, 0.560784, 1)
 
 [node name="TileMap" type="TileMap" parent="."]

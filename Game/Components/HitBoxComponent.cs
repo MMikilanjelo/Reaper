@@ -3,6 +3,7 @@ using System;
 using Enemy.Parts;
 using DotEffects;
 using System.Collections.Generic;
+using GameLogick.Utilities;
 
 namespace Game.Components
 {
@@ -13,16 +14,20 @@ namespace Game.Components
 		[Signal] public delegate void OnWallCollideEventHandler();
 		[Export] public CollisionShape2D hitBoxArea;
 		game_events Game_Events;
+		CombatEvents combatEvents;
+	
 
         public override void _Ready()
         {
 			Game_Events = GetNode<game_events>("/root/GameEvents");
-            Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
+			combatEvents = GetNode<CombatEvents>("/root/CombatEvents");
+			Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
+			
         }
         
 		public void  OnHit(HitInfo hitInfo)
 		{
-			Game_Events.HitByHitBox(hitInfo);
+			combatEvents.OnHitByHitBox(hitInfo);
 			EmitSignal(SignalName.OnImpackt);
 		}
 
@@ -41,6 +46,10 @@ namespace Game.Components
 		public void DisableHitBox()
 		{
 			hitBoxArea.Disabled = true;
+		}
+		public void EmitImpackt()
+		{
+			EmitSignal(SignalName.OnImpackt);
 		}
 	}
 }

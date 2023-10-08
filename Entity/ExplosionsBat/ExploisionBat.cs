@@ -19,13 +19,13 @@ public partial class ExploisionBat : CharacterBody2D
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	CharacterBody2D player;
 	game_events Game_Events;
+	CombatEvents combatEvents;
 	public override void _Ready()
 	{
 		Game_Events = GetNode<game_events>("/root/GameEvents");
+		combatEvents = GetNode<CombatEvents>("/root/CombatEvents");
 		player = GameUtilities.GetPlayerNode(this);
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
-			
-		
 		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(ExplodeState , EnterExplodeState);
@@ -55,7 +55,8 @@ public partial class ExploisionBat : CharacterBody2D
 		Animation.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string animationName)=> {
 		if(animationName == "ExplodeAnimation")
 		{
-				QueueFree();
+		
+			QueueFree();
 		}
 		}));
 		Animation.Play("ExplodeAnimation");
