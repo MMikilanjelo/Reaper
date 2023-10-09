@@ -9,8 +9,10 @@ namespace Game.Components
 		game_events Game_Events;
 		PlayerController player;
 		HurtBoxComponent playerHurtBox;
+		UIEvents uiEvents;
         public override void _Ready()
         {
+			uiEvents = GetNode<UIEvents>("/root/UIEvents");
 			player  = GetParent<PlayerController>();
 			playerHurtBox = player.GetNode<HurtBoxComponent>("HurtBoxComponent");
 			Game_Events = GetNode<game_events>("/root/GameEvents");
@@ -24,17 +26,23 @@ namespace Game.Components
 			}
 			if(addedUpgrade.id == "move_speed")
 			{
-				player.velocityComponent.SpeedMultiplier += 0.1f;
+				player.velocityComponent.SpeedMultiplier += addedUpgrade.value;
+				uiEvents.playerStats.speed_Multiplier = player.velocityComponent.SpeedMultiplier;
 			}
 			if(addedUpgrade.id =="dmg_reduction")
 			{
-				playerHurtBox.SetDmgReductonMultiplier(0.1f);
-			}
+				
+				playerHurtBox.SetDmgReductonMultiplier(addedUpgrade.value);
+				uiEvents.playerStats.dmg_reduction = playerHurtBox.DmgReductonMultiplier;
+            }
 			if(addedUpgrade.id == "miss_chance")
 			{
-				playerHurtBox.SetMissChance(100);
+				playerHurtBox.SetMissChance(addedUpgrade.value);
+				uiEvents.playerStats.miis_chance = playerHurtBox.MissChance;
 			}	
 		}
+	
     }
+	
 }
 

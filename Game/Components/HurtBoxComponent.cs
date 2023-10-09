@@ -19,14 +19,14 @@ namespace Game.Components
 		public float MissChance
 		{
 			get => miss_chance;
-			set{
+			private set{
 				miss_chance = Mathf.Clamp(value , 0 , 100);
 			}
 		}
 		public float DmgReductonMultiplier
 		{
 			get => dmg_Reduction_Multiplier;
-			set{
+			private set{
 				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 1);
 			}
 		}
@@ -62,13 +62,10 @@ namespace Game.Components
 				if(hitChance >= miss_chance)
 				{
 					
-					var HitInfo = new HitInfo{
-					hittedHealthComponent = healthComponent
-					};
 					
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 					DealDmg(totaldmg);
-					hitBoxComponent.OnHit(HitInfo);
+					hitBoxComponent.OnHit();
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
 					var floating_text = floatingTextScene.Instantiate() as FloatingText;
 				
@@ -101,9 +98,6 @@ namespace Game.Components
 			return Mathf.CeilToInt(dmg - (dmg * dmg_Reduction_Multiplier) - armmor); 
 		}
 	}
-	public partial class HitInfo : RefCounted
-	{
-		public HealthComponent hittedHealthComponent;
-	}
+	
 }
 

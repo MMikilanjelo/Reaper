@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxv1yj4o2u5tk"]
+
+[ext_resource type="Texture2D" uid="uid://b7uqh0mf1bhct" path="res://Visuals/UI/ShielUI.png" id="1_1xnk0"]
+[ext_resource type="Script" path="res://UI/ArrmorContainer.cs" id="1_ma734"]
+
+[node name="ArmorContainer" type="HBoxContainer" node_paths=PackedStringArray("arrmorLabel")]
+script = ExtResource("1_ma734")
+arrmorLabel = NodePath("Label")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_1xnk0")
+
+[node name="Label" type="Label" parent="."]
+process_mode = 3
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 128
+text = "0%
+"

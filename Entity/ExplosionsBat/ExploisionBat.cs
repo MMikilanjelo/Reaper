@@ -57,6 +57,7 @@ public partial class ExploisionBat : CharacterBody2D
 		{
 		
 			QueueFree();
+			//TODO fix entite hit box area
 		}
 		}));
 		Animation.Play("ExplodeAnimation");

@@ -71,10 +71,10 @@ tracks/3/path = NodePath("Areas/HitBoxComponent/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.7, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.8, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -236,7 +236,6 @@ visible = false
 position = Vector2(0, -7)
 texture = ExtResource("4_8m5qo")
 hframes = 14
-frame = 12
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_1jb48")]
 accelerationCoeficient = 50.0

@@ -8,3 +8,4 @@ Name = "Move Speed incement"
 description = "+ 10 percent of dmg reduction"
 id = "dmg_reduction"
 isUnique = false
+value = 0.1

@@ -8,3 +8,4 @@ Name = "miss"
 description = "+ 10 chance to avoid all dmg"
 id = "miss_chance"
 isUnique = false
+value = 10.0

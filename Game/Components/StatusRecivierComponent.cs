@@ -18,15 +18,15 @@ namespace Game.Components
         {
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			CombatEvents = GetNode<CombatEvents>("/root/CombatEvents");
-			CombatEvents.Connect(CombatEvents.SignalName.ApplyAffexToHittedEntity , Callable.From((PackedScene efectToApply , HitInfo hitInfo)=> 
-			ApplyEffectUsingGameEvents(efectToApply , hitInfo)));
+			CombatEvents.Connect(CombatEvents.SignalName.ApplyAffexToHittedEntity , Callable.From((PackedScene efectToApply)=> 
+			ApplyEffectUsingGameEvents(efectToApply)));
 			entity = GetParent<CharacterBody2D>();
 		}
-		public void ApplyEffectUsingGameEvents(PackedScene effectToApply , HitInfo hitInfo)
+		public void ApplyEffectUsingGameEvents(PackedScene effectToApply )
 		{
 			var  _efect_recivier_data = new StatusEfffectData
 			{
-				healthComponent = hitInfo.hittedHealthComponent
+				healthComponent = entity.GetNode<HealthComponent>("HealthComponent")
 			};
 			var currentEffect = effectToApply.Instantiate() as BaseEffect;
 			entity.AddChild(currentEffect);

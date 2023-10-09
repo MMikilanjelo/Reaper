@@ -8,3 +8,4 @@ Name = "move Speed"
 description = "+10 move speed"
 id = "move_speed"
 isUnique = false
+value = 0.1

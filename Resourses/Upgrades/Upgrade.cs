@@ -7,4 +7,5 @@ public partial class Upgrade : Resource
 	[Export(PropertyHint.MultilineText)] public string description;
 	[Export] public string id;
 	[Export] public bool isUnique;
+	[Export] public float value;
 }

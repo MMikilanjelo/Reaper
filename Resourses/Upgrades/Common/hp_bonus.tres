@@ -8,3 +8,4 @@ Name = "Hp bonus"
 description = "+ 10 hp"
 id = "hp_bonus"
 isUnique = false
+value = 10.0

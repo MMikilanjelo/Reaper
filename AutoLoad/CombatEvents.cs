@@ -4,18 +4,18 @@ using System;
 
 public partial class CombatEvents : Node
 {
-	[Signal] public delegate void HittedByHitBoxEventHandler(HitInfo hitInfo);
-	[Signal] public delegate void ApplyAffexToHittedEntityEventHandler(PackedScene efectToApply , HitInfo hitInfo);
+	[Signal] public delegate void HittedByHitBoxEventHandler();
+	[Signal] public delegate void ApplyAffexToHittedEntityEventHandler(PackedScene efectToApply);
 	[Signal] public delegate void ApplyAffexToEntityEventHandler(PackedScene efectToApply,StatusRecivierComponent entety);
 
-	public void OnHitByHitBox(HitInfo hitInfo)
+	public void OnHitByHitBox()
 	{
-		EmitSignal(SignalName.HittedByHitBox , hitInfo);
+		EmitSignal(SignalName.HittedByHitBox);
 	}
 
-	public void Apply_Affex_To_HittedEntity(PackedScene efectToApply , HitInfo hitInfo)
+	public void Apply_Affex_To_HittedEntity(PackedScene efectToApply )
 	{
-		EmitSignal(SignalName.ApplyAffexToHittedEntity , efectToApply , hitInfo);
+		EmitSignal(SignalName.ApplyAffexToHittedEntity , efectToApply);
 	}
 	public void Apply_Affex_To_Entity(PackedScene efectToApply,StatusRecivierComponent entity)
 	{
@@ -23,3 +23,4 @@ public partial class CombatEvents : Node
 	}	
 
 }
+

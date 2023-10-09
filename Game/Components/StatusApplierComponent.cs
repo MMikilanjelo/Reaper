@@ -15,11 +15,11 @@ namespace Game.Components
         {
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			combatEvents = GetNode<CombatEvents>("/root/CombatEvents");
-			combatEvents.Connect(CombatEvents.SignalName.HittedByHitBox , Callable.From((HitInfo hitInfo) => ApplyAffexOnHit(hitInfo)));
+			combatEvents.Connect(CombatEvents.SignalName.HittedByHitBox , Callable.From(() => ApplyAffexOnHit()));
 	    }
-		private void ApplyAffexOnHit(HitInfo hitInfo)
+		private void ApplyAffexOnHit()
 		{
-			combatEvents.Apply_Affex_To_HittedEntity(effectToApllyScene , hitInfo);
+			combatEvents.Apply_Affex_To_HittedEntity(effectToApllyScene);
 		}
 		
 

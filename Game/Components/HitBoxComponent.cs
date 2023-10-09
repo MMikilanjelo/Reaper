@@ -25,9 +25,10 @@ namespace Game.Components
 			
         }
         
-		public void  OnHit(HitInfo hitInfo)
+		public void  OnHit()
 		{
-			combatEvents.OnHitByHitBox(hitInfo);
+			
+			combatEvents.OnHitByHitBox();
 			EmitSignal(SignalName.OnImpackt);
 		}
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d8qkub8u0ufr"]
+
+[ext_resource type="Script" path="res://AutoLoad/UIEvents.cs" id="1_e4mpe"]
+
+[node name="UIEvents" type="Node"]
+script = ExtResource("1_e4mpe")

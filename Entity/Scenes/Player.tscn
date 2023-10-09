@@ -279,7 +279,6 @@ timeToRecoilDecresment = NodePath("../TimeToRecoilDecresment")
 MaxHealth = 100000.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
-visible = false
 collision_mask = 2
 monitorable = false
 healthComponent = NodePath("../HealthComponent")
