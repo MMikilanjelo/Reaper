@@ -10,28 +10,27 @@ namespace Game.Components
 	public partial class HitBoxComponent : Area2D
 	{	
 		[Export] public float dmg = 1;
+		[Export] public CollisionShape2D hitBoxArea;
 		[Signal] public delegate void OnImpacktEventHandler();
 		[Signal] public delegate void OnWallCollideEventHandler();
-		[Export] public CollisionShape2D hitBoxArea;
-		game_events Game_Events;
-		CombatEvents combatEvents;
+
+		private PackedScene afex = null;
+		public PackedScene AtackAfex
+		{
+			get => afex;
+			private	set=> afex = value;
+		} 
 	
 
         public override void _Ready()
         {
-			Game_Events = GetNode<game_events>("/root/GameEvents");
-			combatEvents = GetNode<CombatEvents>("/root/CombatEvents");
 			Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
-			
-        }
+		}
         
 		public void  OnHit()
 		{
-			
-			combatEvents.OnHitByHitBox();
 			EmitSignal(SignalName.OnImpackt);
 		}
-
 		private void onBodyEntered(Node2D Body)
 		{
 			EmitSignal(SignalName.OnWallCollide);
@@ -51,6 +50,10 @@ namespace Game.Components
 		public void EmitImpackt()
 		{
 			EmitSignal(SignalName.OnImpackt);
+		}
+		public void AddEffecToHit(PackedScene afexToAdd)
+		{
+			AtackAfex = afexToAdd;
 		}
 	}
 }

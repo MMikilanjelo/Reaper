@@ -15,15 +15,16 @@ public partial class ExploisionBat : CharacterBody2D
 	[Export] PackedScene ExperiencePeal;
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
+	[Export] private PackedScene afex;
 
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	CharacterBody2D player;
 	game_events Game_Events;
-	CombatEvents combatEvents;
+	
 	public override void _Ready()
 	{
 		Game_Events = GetNode<game_events>("/root/GameEvents");
-		combatEvents = GetNode<CombatEvents>("/root/CombatEvents");
+		hitBoxComponent.AddEffecToHit(afex);
 		player = GameUtilities.GetPlayerNode(this);
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
@@ -57,7 +58,6 @@ public partial class ExploisionBat : CharacterBody2D
 		{
 		
 			QueueFree();
-			//TODO fix entite hit box area
 		}
 		}));
 		Animation.Play("ExplodeAnimation");

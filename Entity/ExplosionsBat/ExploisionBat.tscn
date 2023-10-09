@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_0y6te"]
 [ext_resource type="Texture2D" uid="uid://cvntpf3l2up" path="res://Entity/ExplosionsBat/crystalbat.png" id="2_231kp"]
 [ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="3_clt8o"]
-[ext_resource type="PackedScene" uid="uid://dojrb6m4wde6m" path="res://Components/StatusApplierComponent.tscn" id="3_moxfd"]
 [ext_resource type="Texture2D" uid="uid://dmwghsh6a6hjd" path="res://Entity/ExplosionsBat/crystalBatExploisonANimation.png" id="4_8m5qo"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_buqyl"]
 [ext_resource type="PackedScene" uid="uid://ia8ha7m7gjyn" path="res://DotEffects/ToxicDotEffect.tscn" id="4_pn5nm"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_3tgip"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_2lo7i"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="6_y4x8q"]
+[ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="11_ltikm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
@@ -23,7 +23,7 @@ radius = 26.0
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahqgg"]
-radius = 34.0
+radius = 25.9105
 
 [sub_resource type="Animation" id="Animation_ukxjt"]
 resource_name = "ExplodeAnimation"
@@ -71,10 +71,10 @@ tracks/3/path = NodePath("Areas/HitBoxComponent/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.1, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, true, false]
+"values": [true, false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -210,9 +210,7 @@ healthComponent = NodePath("HealthComponent")
 ExperiencePeal = ExtResource("2_0y6te")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
-
-[node name="StatusApplierComponent" parent="." instance=ExtResource("3_moxfd")]
-effectToApllyScene = ExtResource("4_pn5nm")
+afex = ExtResource("4_pn5nm")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -236,6 +234,7 @@ visible = false
 position = Vector2(0, -7)
 texture = ExtResource("4_8m5qo")
 hframes = 14
+frame = 12
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_1jb48")]
 accelerationCoeficient = 50.0
@@ -289,3 +288,6 @@ MaxHealth = 30.0
 libraries = {
 "": SubResource("AnimationLibrary_yk1nc")
 }
+
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("11_ltikm")]
+hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")

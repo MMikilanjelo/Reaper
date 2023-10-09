@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameEvents="*res://AutoLoad/game_events.tscn"
-CombatEvents="*res://AutoLoad/CombatEvents.tscn"
 UIEvents="*res://AutoLoad/UIEvents.tscn"
 
 [display]

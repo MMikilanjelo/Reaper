@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://s2p61tu30xc3"]
+[gd_scene load_steps=2 format=3 uid="uid://cxndb0p4gyk3t"]
 
 [ext_resource type="Script" path="res://Game/Components/StatusRecivierComponent.cs" id="1_5aqux"]
 

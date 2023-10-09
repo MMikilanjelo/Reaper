@@ -15,7 +15,7 @@ namespace Game.Components
 		private float miss_chance = 0;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
-		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent );
+		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent  , PackedScene atackEffect);
 		public float MissChance
 		{
 			get => miss_chance;
@@ -62,13 +62,13 @@ namespace Game.Components
 				if(hitChance >= miss_chance)
 				{
 					
-					
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
+					
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
+					
 					var floating_text = floatingTextScene.Instantiate() as FloatingText;
-				
 					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
 					floating_text.GlobalPosition = GlobalPosition;
 					floating_text.Start(Convert.ToString(totaldmg));	
@@ -85,8 +85,6 @@ namespace Game.Components
 			
 				
 			}
-		
-			
 		}
 		private void DealDmg(float dmg)
 		{

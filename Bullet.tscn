@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://clhhhqclo1q5v"]
+[gd_scene load_steps=9 format=3 uid="uid://clhhhqclo1q5v"]
 
 [ext_resource type="Script" path="res://Bullet.cs" id="1_o7mrv"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="3_ukrl2"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="4_b1etm"]
 [ext_resource type="Texture2D" uid="uid://bs8kspljud0gn" path="res://Entity/Player/Arts/BulletArts/bullet.png" id="4_ha8uw"]
 [ext_resource type="Texture2D" uid="uid://bo6ds5us15mvm" path="res://Visuals/LightArt/bulletLight.png" id="5_3fv31"]
+[ext_resource type="PackedScene" uid="uid://ia8ha7m7gjyn" path="res://DotEffects/ToxicDotEffect.tscn" id="7_lgkb5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txq7d"]
 radius = 2.0
@@ -21,6 +22,7 @@ script = ExtResource("1_o7mrv")
 hitBoxComponent = NodePath("HitBoxComponent")
 timer = NodePath("Timer")
 velocityComponent = NodePath("VelocityComponent")
+afex = ExtResource("7_lgkb5")
 metadata/_edit_horizontal_guides_ = [-1.0]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_b1etm")]
@@ -31,8 +33,9 @@ accelerationCoeficient = 1000.0
 wait_time = 100.0
 autostart = true
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("3_ukrl2")]
-dmg = 20.0
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_ukrl2")]
+dmg = 1.0
+hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 visible = false
