@@ -5,7 +5,6 @@ public partial class PlayerSpriteImager : Node2D
 {
 	[Export] Sprite2D PlayerSprite;
 	[Export] Marker2D HandRotation;
-	[Export] public ShootPositionParticleEmiter shootPositionParticleEmiter;
 	[Export] PackedScene bulletParickle;
 	public override void _Process(double delta)
 	{

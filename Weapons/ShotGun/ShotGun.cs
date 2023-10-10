@@ -5,7 +5,7 @@ using Generation.Alghoritms;
 
 namespace Game.Weapons
 {
-	public partial class ShotGun : Weapon
+	public partial class ShotGun : Weapon  , IWeapon
 	{
 		[Export] PackedScene Bullet;
 		[Export] Timer timeToRecoilDecresment;

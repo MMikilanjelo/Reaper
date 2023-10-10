@@ -17,17 +17,20 @@ namespace Game.Components
 			game_Events = GetNode<game_events>("/root/GameEvents");	
 	   		game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From((bool _hasAmmmo)=> _HasAmmoRemaining = _hasAmmmo));
         }
-		public void ChangeWeapon(Weapon newWeapon)
+		public void ChangeWeapon(PackedScene newWeapon)
 		{
+			
 			CurrentWeapon.QueueFree();
-			CurrentWeapon = newWeapon;
+			var Weapon_To_Change = newWeapon.Instantiate() as Weapon;
+			AddChild(Weapon_To_Change);
+			CurrentWeapon = Weapon_To_Change;
 		}
 		public void ShootFromCurrentWeapon(Vector2 directionToShoot)
 		{
 			if( _HasAmmoRemaining && CurrentWeapon._canShoot)
 			{
 				EmitSignal(SignalName.ShotedFromWeapon);
-				CurrentWeapon.Shoot(directionToShoot);
+				CurrentWeapon?.Shoot(directionToShoot);
 			}
 		}
 		

@@ -47,7 +47,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 texture = ExtResource("4_ha8uw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_vtis2")
 

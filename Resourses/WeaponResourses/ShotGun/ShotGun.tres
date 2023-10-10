@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_0upwp")
-dmg = 30.0
-atack_deley = 0.5
+dmg = 10.0
+atack_deley = 0.4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=23 format=3 uid="uid://dd0dru4yce800"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_xhqy0"]
@@ -13,6 +13,41 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_ipsht"]
+script/source = "using Godot;
+using System;
+
+namespace Game.Weapons
+{
+	public partial class Hands : Weapon
+	{
+        public override void _Ready()
+        {
+			GD.Print(\"Hands Here\");
+            _canShoot = true;
+        }
+        public override void Shoot(Vector2 directionToTarget)
+        {
+           GD.Print(\"bah bah bah with my hands\");
+        }
+    }
+}
+
+"
+
+[sub_resource type="PackedScene" id="PackedScene_vltsl"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Hands", "script", "Node2D"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 2, 0, -1, 1, 1, 0, 0),
+"variants": [SubResource("CSharpScript_ipsht")],
+"version": 3
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtuf1"]
 radius = 4.0
@@ -126,12 +161,12 @@ healthComponent = NodePath("HealthComponent")
 animationPlayer = NodePath("AnimationPlayer")
 Visuals = NodePath("Visuals")
 weaponRootComponent = NodePath("Visuals/RotationPivot/WeaponRootComponent")
+HandsWeapon = SubResource("PackedScene_vltsl")
 
-[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation", "shootPositionParticleEmiter")]
+[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation")]
 script = ExtResource("2_yw8l3")
 PlayerSprite = NodePath("Player")
 HandRotation = NodePath("RotationPivot")
-shootPositionParticleEmiter = NodePath("")
 bulletParickle = ExtResource("2_xhqy0")
 
 [node name="Player" type="Sprite2D" parent="Visuals"]
