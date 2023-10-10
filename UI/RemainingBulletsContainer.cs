@@ -19,15 +19,20 @@ namespace GameUI
 		}
 		private void IncreaseBulletsCount(int amount)
 		{
+			if(ammo_count == 0)
+			{
+				Game_Events.EmitRunOutAmoo(true);
+			}
 			ammo_count += amount;
 			ammo_count_label.Text = ammo_count.ToString();
+		
 		}
 		private void DecreseBulletsCount(int amount)
 		{
 			ammo_count -= amount;
 			ammo_count_label.Text = ammo_count.ToString();
 			if(ammo_count == 0){
-				Game_Events.EmitRunOutAmoo();
+				Game_Events.EmitRunOutAmoo(false);
 			}
 		}
 

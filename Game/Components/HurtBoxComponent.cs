@@ -65,9 +65,7 @@ namespace Game.Components
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
-					
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
-					
 					var floating_text = floatingTextScene.Instantiate() as FloatingText;
 					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
 					floating_text.GlobalPosition = GlobalPosition;

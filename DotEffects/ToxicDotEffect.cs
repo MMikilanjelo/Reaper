@@ -42,7 +42,7 @@ namespace DotEffects
 			total_count_of_effect --;
 			_data?.healthComponent?.Damage(EFFECT_TICK_DMG);
 			
-			AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
+			//AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
 			poisonCountersLabel.Text = total_count_of_effect.ToString();
 			tick_effect_duration_timer.Start(EFFECT_TICK_DURATION);
 			
@@ -50,7 +50,7 @@ namespace DotEffects
 		public void RemoveEffect(StatusEfffectData _data)
 		{
 			_data.healthComponent.Damage(EFFECT_TICK_DMG);
-			AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
+			//AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
 			EmitSignal(SignalName.OnRemoveEfect);
 			QueueFree();
 		}
@@ -59,7 +59,9 @@ namespace DotEffects
 		 	var floatText =	floating_text_scene.Instantiate() as FloatingText;
 			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild( floatText);
 			floatText.GlobalPosition = position;
+			floatText.SetScale(0.4f);
 			floatText.Start(text);
+			
 		}
 
 

@@ -20,15 +20,14 @@ namespace Game.Components
 			get => afex;
 			private	set=> afex = value;
 		} 
-	
-
-        public override void _Ready()
+		public override void _Ready()
         {
 			Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
 		}
         
 		public void  OnHit()
 		{
+			
 			EmitSignal(SignalName.OnImpackt);
 		}
 		private void onBodyEntered(Node2D Body)

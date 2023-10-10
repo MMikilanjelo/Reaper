@@ -7,32 +7,26 @@ using System.Runtime.CompilerServices;
 public partial class PlayerController : CharacterBody2D
 {
 	[Export]public  VelocityComponent velocityComponent;
-	[Export]public  BulletHandlerComponent bulletHandlerComponent;
 	[Export]public  HealthComponent healthComponent;
-	[Export]public   Timer AtackDeleyTimer;
 	[Export]  AnimationPlayer animationPlayer;
-	[Export]  AnimationPlayer weaponAnimation;
 	[Export]  PlayerSpriteImager Visuals;
-	private bool _HasAmmoRemaining = true;
-	private float AtackDeley = 0.2f;
+	[Export] WeaponRootComponent weaponRootComponent;
+
 	private game_events game_Events;
 	
 	public float xMovent;
 	public float yMovent;
-	Vector2 directionToTarget;
 
 	private DelegateStateMachine delegateStateMachine = new ();
-	private int BulletMoveSpeed = 300;
+
 	public override void _Ready()
 	{
 		
 		delegateStateMachine.AddState(NormalState );
-		delegateStateMachine.AddState(Shoot , EnterShootState);
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
-		game_Events = GetNode<game_events>("/root/GameEvents");
-		game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
-	   	game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From(()=> _HasAmmoRemaining = false));
+		game_Events = GetNode<game_events>("/root/GameEvents");	
+		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=> game_Events.EmitPlayerShootSignal(1)));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -48,25 +42,8 @@ public partial class PlayerController : CharacterBody2D
 		movementVector = new Vector2(xMovent , yMovent);
 		return movementVector;
 	}
-	private void EnterShootState()
-	{
-		weaponAnimation.Play("Shoot");
-	}
-	void Shoot()
-	{
-		if(AtackDeleyTimer.IsStopped())
-		{
-			game_Events.EmitPlayerShootSignal(1);
-			directionToTarget = (GetGlobalMousePosition() - GlobalPosition).Normalized();
-			bulletHandlerComponent.Shoot( this  , directionToTarget , Visuals.shootPositionParticleEmiter.GlobalPosition , BulletMoveSpeed);
-			Visuals.EmitBulletShelsParticle();
-			AtackDeleyTimer.Start(AtackDeley);
-			
-		}
-		else{
-			delegateStateMachine.ChangeState(NormalState);
-		}	
-	}
+
+
 
 	void NormalState()
 	{
@@ -84,11 +61,9 @@ public partial class PlayerController : CharacterBody2D
 		}
 		if(Input.IsActionPressed("Shoot"))
 		{
-			if(AtackDeleyTimer.IsStopped() && _HasAmmoRemaining)
-			{
-				delegateStateMachine.ChangeState(Shoot);
-			}
 			
+			var directionToShoot = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+			weaponRootComponent.ShootFromCurrentWeapon(directionToShoot);
 		}
 		if(!healthComponent._HasHealthRamaining){
 			delegateStateMachine.ChangeState(DeadState);
@@ -99,11 +74,8 @@ public partial class PlayerController : CharacterBody2D
 	{
 		QueueFree();
 	}
-	
-	private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
-	{
 
-	}
+	
 
 
 }

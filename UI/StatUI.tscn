@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8qodeffenf0v"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://UI/StatUI.cs" id="1_ri2rr"]
-[ext_resource type="PackedScene" uid="uid://bxv1yj4o2u5tk" path="res://ArrmorContainer.tscn" id="2_kmrtu"]
+[ext_resource type="PackedScene" uid="uid://bxv1yj4o2u5tk" path="res://UI/ArrmorContainer.tscn" id="2_kmrtu"]
 
 [node name="StatMenu" type="CanvasLayer"]
 process_mode = 3

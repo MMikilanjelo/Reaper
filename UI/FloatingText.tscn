@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://UI/FloatingText.cs" id="1_whiyw"]
 
 [node name="FloatingText" type="Node2D" node_paths=PackedStringArray("floating_text_label")]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_whiyw")
 floating_text_label = NodePath("Label")
 

@@ -1,18 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=21 format=3 uid="uid://dd0dru4yce800"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
-[ext_resource type="PackedScene" uid="uid://clhhhqclo1q5v" path="res://Bullet.tscn" id="2_t3lx4"]
 [ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_xhqy0"]
 [ext_resource type="Script" path="res://Visuals/PlayerSpriteImager.cs" id="2_yw8l3"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="3_a1ggc"]
-[ext_resource type="PackedScene" uid="uid://cmr1quvowsg8d" path="res://Visuals/Particles/ShootPatickle.tscn" id="3_ll62t"]
-[ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="4_27wxb"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="5_bwik8"]
+[ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="5_m8lgp"]
 [ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
-[ext_resource type="Script" path="res://Entity/Player/Scipts/ShootPositionParticleEmiter.cs" id="6_5fspl"]
-[ext_resource type="PackedScene" uid="uid://1e1fqjhkdm4i" path="res://Components/BulletHandlerComponent.tscn" id="7_lwvhc"]
+[ext_resource type="PackedScene" uid="uid://djld4k1yojajb" path="res://Weapons/ShotGun/ShotGun.tscn" id="6_dxcox"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
-[ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="8_w1vio"]
 [ext_resource type="PackedScene" uid="uid://c4bv8rfrsgp1p" path="res://Components/AbilitieUpgradeRecivierComponent.tscn" id="9_33jpr"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
@@ -71,18 +67,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_m5b7l"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/HandRotation/Weapon:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_aukva"]
 resource_name = "Walk"
@@ -132,137 +116,38 @@ _data = {
 "Walk": SubResource("Animation_aukva")
 }
 
-[sub_resource type="Animation" id="Animation_gb0rf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/HandRotation/Weapon:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/HandRotation/Weapon:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/HandRotation/Weapon:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 2)]
-}
-
-[sub_resource type="Animation" id="Animation_4t1y3"]
-resource_name = "Shoot"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/HandRotation/Weapon:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.436332, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/HandRotation/Weapon:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.7, 1), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/HandRotation/Weapon:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-2, 1), Vector2(0, 2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5iy4g"]
-_data = {
-"RESET": SubResource("Animation_gb0rf"),
-"Shoot": SubResource("Animation_4t1y3")
-}
-
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "bulletHandlerComponent", "healthComponent", "AtackDeleyTimer", "animationPlayer", "weaponAnimation", "Visuals") groups=["Player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "Visuals", "weaponRootComponent") groups=["Player"]]
 collision_layer = 2
 motion_mode = 1
 safe_margin = 0.001
 script = ExtResource("1_t5no0")
 velocityComponent = NodePath("VelocityComponent")
-bulletHandlerComponent = NodePath("BulletHandlerComponent")
 healthComponent = NodePath("HealthComponent")
-AtackDeleyTimer = NodePath("AtackDelay")
 animationPlayer = NodePath("AnimationPlayer")
-weaponAnimation = NodePath("weaponAnimation")
 Visuals = NodePath("Visuals")
+weaponRootComponent = NodePath("Visuals/RotationPivot/WeaponRootComponent")
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation", "shootPositionParticleEmiter")]
 script = ExtResource("2_yw8l3")
 PlayerSprite = NodePath("Player")
-HandRotation = NodePath("HandRotation")
-shootPositionParticleEmiter = NodePath("HandRotation/ShootPosition")
+HandRotation = NodePath("RotationPivot")
+shootPositionParticleEmiter = NodePath("")
 bulletParickle = ExtResource("2_xhqy0")
-ShootPartickle = ExtResource("3_ll62t")
 
 [node name="Player" type="Sprite2D" parent="Visuals"]
 texture_filter = 1
-texture = ExtResource("5_tuklw")
+texture = ExtResource("14_xvhy2")
 offset = Vector2(0, -9)
-hframes = 8
+hframes = 4
 
-[node name="HandRotation" type="Marker2D" parent="Visuals"]
+[node name="RotationPivot" type="Marker2D" parent="Visuals"]
 position = Vector2(0, -2)
 
-[node name="ShootPosition" type="Marker2D" parent="Visuals/HandRotation"]
-position = Vector2(9, 2)
-script = ExtResource("6_5fspl")
+[node name="WeaponRootComponent" parent="Visuals/RotationPivot" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("5_m8lgp")]
+entity = NodePath("../../..")
+CurrentWeapon = NodePath("ShotGun")
 
-[node name="Weapon" type="Sprite2D" parent="Visuals/HandRotation"]
-texture_filter = 1
-use_parent_material = true
-position = Vector2(0, 2)
-texture = ExtResource("4_27wxb")
-offset = Vector2(0, -10)
-hframes = 3
-
-[node name="hands" type="Sprite2D" parent="Visuals/HandRotation/Weapon"]
-use_parent_material = true
-texture = ExtResource("8_w1vio")
-offset = Vector2(0, -10)
+[node name="ShotGun" parent="Visuals/RotationPivot/WeaponRootComponent" instance=ExtResource("6_dxcox")]
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
@@ -272,12 +157,8 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 [node name="VelocityComponent" parent="." instance=ExtResource("5_bwik8")]
 accelerationCoeficient = 75.0
 
-[node name="BulletHandlerComponent" parent="." node_paths=PackedStringArray("timeToRecoilDecresment") instance=ExtResource("7_lwvhc")]
-Bullet = ExtResource("2_t3lx4")
-timeToRecoilDecresment = NodePath("../TimeToRecoilDecresment")
-
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 100000.0
+MaxHealth = 300.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 2
@@ -304,24 +185,13 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickableArea"]
 shape = SubResource("CircleShape2D_gr87u")
 
-[node name="AtackDelay" type="Timer" parent="."]
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x3dpk")
 }
-
-[node name="TimeToRecoilDecresment" type="Timer" parent="."]
-one_shot = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.917647, 0.678431, 0.929412, 1)
 energy = 0.4
 texture = ExtResource("15_5scag")
 texture_scale = 3.0
-
-[node name="weaponAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5iy4g")
-}

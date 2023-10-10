@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="3_clt8o"]
 [ext_resource type="Texture2D" uid="uid://dmwghsh6a6hjd" path="res://Entity/ExplosionsBat/crystalBatExploisonANimation.png" id="4_8m5qo"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_buqyl"]
-[ext_resource type="PackedScene" uid="uid://ia8ha7m7gjyn" path="res://DotEffects/ToxicDotEffect.tscn" id="4_pn5nm"]
+[ext_resource type="PackedScene" uid="uid://btt656hcrkbj" path="res://DotEffects/ToxicDotEffect.tscn" id="4_pn5nm"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_3tgip"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_2lo7i"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="6_y4x8q"]
@@ -23,7 +23,7 @@ radius = 26.0
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahqgg"]
-radius = 25.9105
+radius = 15.0
 
 [sub_resource type="Animation" id="Animation_ukxjt"]
 resource_name = "ExplodeAnimation"
@@ -71,7 +71,7 @@ tracks/3/path = NodePath("Areas/HitBoxComponent/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9, 1),
+"times": PackedFloat32Array(0, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -257,6 +257,7 @@ velocityComponent = NodePath("../VelocityComponent")
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="EnemySensorComponent" parent="Areas" instance=ExtResource("6_y4x8q")]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/EnemySensorComponent"]
@@ -264,6 +265,7 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_c4ub5")
 
 [node name="HurtBoxComponent" parent="Areas" node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_buqyl")]
+visible = false
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HurtBoxComponent"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cy1nqxsxkiehv"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://Entity/CrystalSlime/CrystalSlime.cs" id="1_yfvsi"]
 [ext_resource type="PackedScene" path="res://Components/EnemyConstractorComponent.tscn" id="2_eq5p4"]
 [ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_fihov"]
-[ext_resource type="PackedScene" uid="uid://ds70gf11ajlcg" path="res://TImerControllerManager.tscn" id="3_0rsrh"]
+[ext_resource type="PackedScene" uid="uid://ds70gf11ajlcg" path="res://World/Managers/TImerControllerManager.tscn" id="3_0rsrh"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="3_paws7"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="4_uf5tc"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_easg5"]

@@ -10,7 +10,7 @@ public partial class game_events : Node
 	[Signal] public delegate void OnAbilityUpgradeAdedEventHandler(Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades);
 	[Signal] public delegate void OnEnemyDiedEventHandler(Vector2 enemy_died_position , int enemy_bullet_cost);
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
-	[Signal] public delegate void OnRunOutAmmoEventHandler();
+	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
 	
 
 	public void On_ExperienceVialCollected(float amount)
@@ -29,9 +29,9 @@ public partial class game_events : Node
 	{
 		EmitSignal(SignalName.OnPlayerShoot , amount);
 	}
-	public void EmitRunOutAmoo()
+	public void EmitRunOutAmoo(bool _hasAmmmo)
 	{
-		EmitSignal(SignalName.OnRunOutAmmo);
+		EmitSignal(SignalName.OnRunOutAmmo , _hasAmmmo);
 	}
 	
 

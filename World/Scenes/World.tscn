@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0d5s2lt170kg"]
+[gd_scene load_steps=21 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
-[ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://testing_generation.png" id="2_1dpl5"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
-[ext_resource type="PackedScene" uid="uid://b8qodeffenf0v" path="res://UI/StatUI.tscn" id="2_l04er"]
+[ext_resource type="PackedScene" path="res://UI/StatUI.tscn" id="2_l04er"]
 [ext_resource type="PackedScene" uid="uid://s0u5p4pxkhuk" path="res://Components/WorldGeneratorComponent.tscn" id="3_cp0yf"]
 [ext_resource type="PackedScene" uid="uid://bqc705ciop623" path="res://World/Managers/UpgradeManager.tscn" id="4_51vqn"]
 [ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://diyt82uirkxk" path="res://UI/ArenaTimeUI.tscn" id="6_ifwme"]
 [ext_resource type="PackedScene" uid="uid://spidl7800c31" path="res://World/Managers/experience_manager.tscn" id="8_itx35"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
+[ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://World/TIleSet/testing_generation.png" id="13_v5n3o"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="16_eqwgn"]
 
@@ -32,7 +32,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_876pc"]
-texture = ExtResource("2_1dpl5")
+texture = ExtResource("13_v5n3o")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
