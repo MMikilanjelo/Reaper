@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Weapons/ShotGun/ShotGun.cs" id="1_tgw5h"]
 [ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="2_xlgnl"]
-[ext_resource type="PackedScene" uid="uid://clhhhqclo1q5v" path="res://Bullet.tscn" id="2_xqlpw"]
+[ext_resource type="PackedScene" uid="uid://cddla4w8thoj5" path="res://Bullet.tscn" id="2_xqlpw"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_36tjs"]
 
 [node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "atackDelayTimer", "shootPosition")]

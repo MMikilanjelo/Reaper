@@ -332,9 +332,6 @@ sources/0 = SubResource("TileSetAtlasSource_nddsn")
 
 [node name="Polygon" type="Node2D"]
 
-[node name="Camera2D" parent="." instance=ExtResource("1_rn4pu")]
-zoom = Vector2(4, 4)
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_arxxc")
 format = 2
@@ -342,6 +339,14 @@ layer_0/tile_data = PackedInt32Array(-196614, 196608, 2, -131078, 196608, 2, -65
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_6ap0i")]
 
-[node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]
-
 [node name="CharacterBody2D2" parent="." instance=ExtResource("3_vs4y7")]
+position = Vector2(-102, 20)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+texture_filter = 1
+color = Color(0.427451, 0, 0.658824, 1)
+
+[node name="Camera2D" parent="." instance=ExtResource("1_rn4pu")]
+zoom = Vector2(4, 4)
+
+[node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]

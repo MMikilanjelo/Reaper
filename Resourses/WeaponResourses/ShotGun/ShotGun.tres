@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dnh08ged7e1nh"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bjo2syoo4wmrs"]
 
 [ext_resource type="Script" path="res://Resourses/WeaponResourses/WeaponStats.cs" id="1_0upwp"]
 
 [resource]
 script = ExtResource("1_0upwp")
 dmg = 10.0
-atack_deley = 0.4
+atack_deley = 0.2
