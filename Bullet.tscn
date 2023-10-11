@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://clhhhqclo1q5v"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://Bullet.cs" id="1_o7mrv"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="3_ukrl2"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="4_b1etm"]
 [ext_resource type="Texture2D" uid="uid://bs8kspljud0gn" path="res://Entity/Player/Arts/BulletArts/bullet.png" id="4_ha8uw"]
 [ext_resource type="Texture2D" uid="uid://bo6ds5us15mvm" path="res://Visuals/LightArt/bulletLight.png" id="5_3fv31"]
-[ext_resource type="PackedScene" uid="uid://btt656hcrkbj" path="res://DotEffects/ToxicDotEffect.tscn" id="7_lgkb5"]
+[ext_resource type="PackedScene" path="res://DotEffects/ToxicEffect/ToxicDotEffect.tscn" id="7_lgkb5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txq7d"]
 radius = 2.0

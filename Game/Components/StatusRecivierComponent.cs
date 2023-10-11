@@ -27,7 +27,6 @@ namespace Game.Components
 		{
 			if(effectToApply == null || CanReciveEffect == false)
 			{
-				GD.Print(CanReciveEffect);
 				return;
 			}
 			var  _efect_recivier_data = new StatusEfffectData

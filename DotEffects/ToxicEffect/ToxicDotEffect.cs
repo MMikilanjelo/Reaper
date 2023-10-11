@@ -15,12 +15,11 @@ namespace DotEffects
 		Timer total_effect_duration_timer;
 		Timer tick_effect_duration_timer;
 		
-        private const float EFFECT_TICK_DURATION = 1f;
-		private const float EFFECT_TOTAL_DURATION = 5f;
-		private const float  EFFECT_TICK_DMG = 10f;
-		private  int total_count_of_effect = (int)(EFFECT_TOTAL_DURATION/EFFECT_TICK_DURATION);
+		private  int total_count_of_effect;
         public override void _Ready()
         {
+			effectStatsData = ResourceLoader.Load<EffectStats>("res://DotEffects/ToxicEffect/ToxicEfectData.tres");
+			total_count_of_effect = (int)(effectStatsData.EFFECT_TOTAL_DURATION/effectStatsData.EFFECT_TICK_DURATION);
 			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 			poisonCountersLabel = GetNode<Label>("VBoxContainer/HBoxContainer/Label");
 			total_effect_duration_timer= timer.CreateTimer(OneShoot: true);
@@ -29,9 +28,9 @@ namespace DotEffects
         public override void ApplyEffect(StatusEfffectData _data)
         {
 			poisonCountersLabel.Text = total_count_of_effect.ToString();
-			total_effect_duration_timer.Start(EFFECT_TOTAL_DURATION);
+			total_effect_duration_timer.Start(effectStatsData.EFFECT_TOTAL_DURATION);
 			total_effect_duration_timer.Connect(Timer.SignalName.Timeout, Callable.From(()=> RemoveEffect(_data)));
-			tick_effect_duration_timer.Start(EFFECT_TICK_DURATION);
+			tick_effect_duration_timer.Start(effectStatsData.EFFECT_TICK_DURATION);
 			tick_effect_duration_timer.Connect(Timer.SignalName.Timeout , Callable.From(() => HandleEffect(_data)));
 		}
 		public void HandleEffect(StatusEfffectData _data)
@@ -40,16 +39,16 @@ namespace DotEffects
 				return ;
 			}
 			total_count_of_effect --;
-			_data?.healthComponent?.Damage(EFFECT_TICK_DMG);
+			_data?.healthComponent?.Damage(effectStatsData.EFFECT_TICK_DMG);
 			
 			//AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
 			poisonCountersLabel.Text = total_count_of_effect.ToString();
-			tick_effect_duration_timer.Start(EFFECT_TICK_DURATION);
+			tick_effect_duration_timer.Start(effectStatsData.EFFECT_TICK_DURATION);
 			
 		}
 		public void RemoveEffect(StatusEfffectData _data)
 		{
-			_data.healthComponent.Damage(EFFECT_TICK_DMG);
+			_data.healthComponent.Damage(effectStatsData.EFFECT_TICK_DMG);
 			//AddFloatingText(floatingTextScene , GlobalPosition , EFFECT_TICK_DMG.ToString());
 			EmitSignal(SignalName.OnRemoveEfect);
 			QueueFree();
