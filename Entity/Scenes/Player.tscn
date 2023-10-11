@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=26 format=3 uid="uid://dd0dru4yce800"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/PixelPerfectShader.gdshader" id="2_s0422"]
 [ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_xhqy0"]
 [ext_resource type="Script" path="res://Visuals/PlayerSpriteImager.cs" id="2_yw8l3"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="3_a1ggc"]
@@ -49,6 +50,12 @@ _bundled = {
 "version": 3
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rm71e"]
+shader = ExtResource("2_s0422")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
+shader = ExtResource("2_s0422")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtuf1"]
 radius = 4.0
 height = 16.0
@@ -66,7 +73,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Player:frame")
+tracks/0/path = NodePath("Visuals/CanvasGroup/Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -78,7 +85,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Player:texture")
+tracks/1/path = NodePath("Visuals/CanvasGroup/Player:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -90,7 +97,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Player:hframes")
+tracks/2/path = NodePath("Visuals/CanvasGroup/Player:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -110,7 +117,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/Player:frame")
+tracks/0/path = NodePath("Visuals/CanvasGroup/Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -122,7 +129,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/Player:texture")
+tracks/1/path = NodePath("Visuals/CanvasGroup/Player:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -134,7 +141,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Player:hframes")
+tracks/2/path = NodePath("Visuals/CanvasGroup/Player:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -151,7 +158,8 @@ _data = {
 "Walk": SubResource("Animation_aukva")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "Visuals", "weaponRootComponent") groups=["Player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "Visuals", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
+texture_filter = 1
 collision_layer = 2
 motion_mode = 1
 safe_margin = 0.001
@@ -160,29 +168,36 @@ velocityComponent = NodePath("VelocityComponent")
 healthComponent = NodePath("HealthComponent")
 animationPlayer = NodePath("AnimationPlayer")
 Visuals = NodePath("Visuals")
-weaponRootComponent = NodePath("Visuals/RotationPivot/WeaponRootComponent")
+weaponRootComponent = NodePath("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent")
 HandsWeapon = SubResource("PackedScene_vltsl")
+playerSpriteImager = NodePath("Visuals")
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation")]
+texture_filter = 2
+material = SubResource("ShaderMaterial_rm71e")
 script = ExtResource("2_yw8l3")
-PlayerSprite = NodePath("Player")
-HandRotation = NodePath("RotationPivot")
+PlayerSprite = NodePath("CanvasGroup/Player")
+HandRotation = NodePath("CanvasGroup/RotationPivot")
 bulletParickle = ExtResource("2_xhqy0")
 
-[node name="Player" type="Sprite2D" parent="Visuals"]
+[node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
+
+[node name="Player" type="Sprite2D" parent="Visuals/CanvasGroup"]
 texture_filter = 1
 texture = ExtResource("14_xvhy2")
 offset = Vector2(0, -9)
 hframes = 4
 
-[node name="RotationPivot" type="Marker2D" parent="Visuals"]
+[node name="RotationPivot" type="Marker2D" parent="Visuals/CanvasGroup"]
 position = Vector2(0, -2)
 
-[node name="WeaponRootComponent" parent="Visuals/RotationPivot" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("5_m8lgp")]
-entity = NodePath("../../..")
+[node name="WeaponRootComponent" parent="Visuals/CanvasGroup/RotationPivot" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("5_m8lgp")]
+entity = NodePath("../../../..")
 CurrentWeapon = NodePath("ShotGun")
 
-[node name="ShotGun" parent="Visuals/RotationPivot/WeaponRootComponent" instance=ExtResource("6_dxcox")]
+[node name="ShotGun" parent="Visuals/CanvasGroup/RotationPivot/WeaponRootComponent" instance=ExtResource("6_dxcox")]
+texture_filter = 1
+material = SubResource("ShaderMaterial_6pqcu")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")

@@ -12,6 +12,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export]  PlayerSpriteImager Visuals;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] PackedScene HandsWeapon;
+	[Export] PlayerSpriteImager playerSpriteImager;
 
 	private game_events game_Events;
 	
@@ -27,7 +28,10 @@ public partial class PlayerController : CharacterBody2D
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
 		game_Events = GetNode<game_events>("/root/GameEvents");	
-		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=> game_Events.EmitPlayerShootSignal(1)));
+		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
+			playerSpriteImager.EmitBulletShelsParticle();
+			game_Events.EmitPlayerShootSignal(1);
+		}));
 	}
 
 	public override void _PhysicsProcess(double delta)

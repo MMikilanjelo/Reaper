@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://dl7eefty3fjxr"]
+[gd_scene load_steps=22 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
-[ext_resource type="PackedScene" path="res://UI/StatUI.tscn" id="2_l04er"]
+[ext_resource type="PackedScene" uid="uid://lipl4gu8wsws" path="res://UI/StatUI.tscn" id="2_l04er"]
 [ext_resource type="PackedScene" uid="uid://s0u5p4pxkhuk" path="res://Components/WorldGeneratorComponent.tscn" id="3_cp0yf"]
 [ext_resource type="PackedScene" uid="uid://bqc705ciop623" path="res://World/Managers/UpgradeManager.tscn" id="4_51vqn"]
 [ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
@@ -15,6 +15,18 @@
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://World/TIleSet/testing_generation.png" id="13_v5n3o"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="16_eqwgn"]
+
+[sub_resource type="Environment" id="Environment_lhngk"]
+background_mode = 3
+ambient_light_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_light_energy = 10.0
+fog_height_density = 0.0157
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_contrast = 1.2
+adjustment_saturation = 1.2
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tdgp2"]
 vertices = PackedVector2Array(-3.5, -8, 3.5, -8, 8, -2, 8, 3, 4, 8, -4, 8, -8, 2.5, -8, -3)
@@ -385,6 +397,9 @@ tileMap = NodePath("TileMap")
 StatUIScene = ExtResource("2_l04er")
 metadata/_edit_horizontal_guides_ = []
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lhngk")
+
 [node name="Managers" type="Node" parent="."]
 
 [node name="UpgradeManager" parent="Managers" node_paths=PackedStringArray("ExperienceManager") instance=ExtResource("4_51vqn")]
@@ -408,12 +423,6 @@ Experience_Manager = NodePath("../../Managers/ExperienceManager")
 [node name="PlayerUI" parent="UI" instance=ExtResource("16_eqwgn")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_4ppwt")]
-zoom = Vector2(4, 4)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visibility_layer = 2
-texture_filter = 1
-color = Color(0.560784, 0, 0.560784, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(1.3, 1.3)

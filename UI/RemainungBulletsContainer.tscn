@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://brhfssipx0xlq" path="res://Visuals/UI/UIBUllet.png" id="2_l210t"]
 
 [node name="RemainingBulletsContainer" type="HBoxContainer" node_paths=PackedStringArray("ammo_count_label")]
-custom_minimum_size = Vector2(50, 50)
+offset_right = 125.0
+offset_bottom = 44.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("1_84r2n")
@@ -12,13 +13,16 @@ ammo_count_label = NodePath("Label")
 
 [node name="BulletTexture" type="TextureRect" parent="."]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture = ExtResource("2_l210t")
-expand_mode = 3
+stretch_mode = 2
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 3
 text = "5000
 "

@@ -22,7 +22,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
@@ -33,10 +34,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
@@ -51,11 +52,11 @@ script = ExtResource("1_a0woe")
 playerHealth = NodePath("TextureProgressBar")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer"]
-custom_minimum_size = Vector2(160, 44)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 max_value = 1.0
 step = 0.1
-nine_patch_stretch = true
 texture_under = SubResource("AtlasTexture_ytnrh")
 texture_progress = SubResource("AtlasTexture_h4isi")
 
@@ -65,23 +66,17 @@ theme_override_constants/margin_left = 3
 
 [node name="PlayerCounters" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer/MarginContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_constants/separation = 30
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer/MarginContainer/PlayerCounters" instance=ExtResource("1_q4k88")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 1
-theme_override_constants/separation = 15
 
 [node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer" instance=ExtResource("2_2hqx1")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+theme_override_constants/separation = 8

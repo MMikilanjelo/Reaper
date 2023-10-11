@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://lipl4gu8wsws"]
 
 [ext_resource type="Script" path="res://UI/StatUI.cs" id="1_ri2rr"]
 [ext_resource type="PackedScene" uid="uid://bxv1yj4o2u5tk" path="res://UI/ArrmorContainer.tscn" id="2_kmrtu"]

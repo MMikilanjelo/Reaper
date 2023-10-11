@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cblys7unxg2v3"
-path="res://.godot/imported/AtariGames.ttf-a38e6ba9a24cc7614227edb427e581ee.fontdata"
+path="res://.godot/imported/AtariGames.ttf-daed0869de8eabc3152751d26aa4c4a2.fontdata"
 
 [deps]
 
-source_file="res://Resourses/Theme/AtariGames.ttf"
-dest_files=["res://.godot/imported/AtariGames.ttf-a38e6ba9a24cc7614227edb427e581ee.fontdata"]
+source_file="res://Resourses/Theme/Fonts/AtariGames.ttf"
+dest_files=["res://.godot/imported/AtariGames.ttf-daed0869de8eabc3152751d26aa4c4a2.fontdata"]
 
 [params]
 

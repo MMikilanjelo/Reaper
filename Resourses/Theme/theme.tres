@@ -1,7 +1,7 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ctxx7js4j4snw"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://7b3emhk4csf1"]
 
-[ext_resource type="FontFile" uid="uid://cblys7unxg2v3" path="res://Resourses/Theme/AtariGames.ttf" id="1_ay55h"]
 [ext_resource type="Texture2D" uid="uid://s5jrkhpp0pcy" path="res://Visuals/UI/UITheming.png" id="1_c4p8t"]
+[ext_resource type="FontFile" uid="uid://b224c1slyuvsd" path="res://Resourses/Theme/Fonts/TinyPixie2.ttf" id="2_fmeak"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v6vry"]
 texture = ExtResource("1_c4p8t")
@@ -19,8 +19,8 @@ texture_margin_bottom = 16.0
 region_rect = Rect2(3, 1, 38, 49)
 
 [resource]
-default_font = ExtResource("1_ay55h")
-default_font_size = 32
+default_font = ExtResource("2_fmeak")
+default_font_size = 12
 AlternativePannelContainer/base_type = &"PanelContainer"
 AlternativePannelContainer/styles/panel = SubResource("StyleBoxTexture_v6vry")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_c0lfn")

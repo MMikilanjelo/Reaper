@@ -19,6 +19,7 @@ public partial class Core : Node2D
 
 	public override void _Process(double delta)
 	{
+		GD.Print(Engine.GetFramesPerSecond());
 		if(Input.IsActionJustPressed("OpenTab"))
 		{
 

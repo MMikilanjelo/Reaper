@@ -6,7 +6,7 @@ public partial class PlayerSpriteImager : Node2D
 	[Export] Sprite2D PlayerSprite;
 	[Export] Marker2D HandRotation;
 	[Export] PackedScene bulletParickle;
-	public override void _Process(double delta)
+    public override void _Process(double delta)
 	{
 		HandRotation.LookAt(GetGlobalMousePosition());
 		if(Mathf.RadToDeg(HandRotation.Transform.Rotation) > -90 && Mathf.RadToDeg(HandRotation.Transform.Rotation)< 90 )
