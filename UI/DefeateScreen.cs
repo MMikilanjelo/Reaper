@@ -11,11 +11,21 @@ namespace GameUI
         double angle_redius  = 0;
         public override void _Ready()
         {
-            //shaderMaterial = GetNode<TextureRect>("TextureRect").Material as ShaderMaterial;
             transitionAnimationPlayer.Play("Fade_out");
+            //shaderMaterial = GetNode<TextureRect>("TextureRect").Material as ShaderMaterial;
+            
         }
         public override void _Process(double delta)
         {
+            if(Input.IsActionJustPressed("CloseTab"))
+            {
+                
+                transitionAnimationPlayer.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string name)=>
+                {
+                    GetTree().ChangeSceneToFile("res://UI/MainMenu.tscn");
+                }));
+                transitionAnimationPlayer.Play("Fade_in");
+            }
             // angle_redius += 0.5f * delta;
             // angle_redius = angle_redius % 360f;
             // GD.Print(angle_redius);

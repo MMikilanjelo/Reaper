@@ -7,6 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://7bqi7dbg7u85" path="res://TransitionTexture.png" id="5_g4m01"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="5_pyrrj"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x13l7"]
+shader = ExtResource("1_ltcmq")
+shader_parameter/color_gap = Color(0.172549, 0.0745098, 0.180392, 1)
+shader_parameter/color_stripe = Color(0.0784314, 0.0352941, 0.0705882, 1)
+shader_parameter/divisions = 4.0
+shader_parameter/stripe_bias = 2.0
+shader_parameter/speed = 0.1
+shader_parameter/angle = 1.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1w3vl"]
+
 [sub_resource type="Animation" id="Animation_o16oe"]
 resource_name = "Fade_in"
 tracks/0/type = "value"
@@ -61,7 +72,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dqyqv"]
@@ -70,17 +81,6 @@ _data = {
 "Fade_out": SubResource("Animation_7b56s"),
 "RESET": SubResource("Animation_vbsp1")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x13l7"]
-shader = ExtResource("1_ltcmq")
-shader_parameter/color_gap = Color(0.172549, 0.0745098, 0.180392, 1)
-shader_parameter/color_stripe = Color(0.0784314, 0.0352941, 0.0705882, 1)
-shader_parameter/divisions = 4.0
-shader_parameter/stripe_bias = 2.0
-shader_parameter/speed = 0.1
-shader_parameter/angle = 1.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_1w3vl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6yusb"]
 shader = ExtResource("3_f7k0k")
@@ -116,7 +116,7 @@ shader_parameter/speed = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lia7v"]
 shader = ExtResource("5_pyrrj")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 40.0
 
 [node name="DefeateScreen" type="CanvasLayer" node_paths=PackedStringArray("transitionAnimationPlayer")]
@@ -131,11 +131,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TransitionAnimation" type="AnimationPlayer" parent="Control"]
-libraries = {
-"": SubResource("AnimationLibrary_dqyqv")
-}
-
 [node name="TextureRect" type="TextureRect" parent="Control"]
 material = SubResource("ShaderMaterial_x13l7")
 layout_mode = 1
@@ -145,6 +140,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_1w3vl")
+
+[node name="TransitionAnimation" type="AnimationPlayer" parent="Control"]
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_dqyqv")
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1

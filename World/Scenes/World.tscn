@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
 [ext_resource type="PackedScene" uid="uid://lipl4gu8wsws" path="res://UI/StatUI.tscn" id="2_l04er"]
 [ext_resource type="PackedScene" uid="uid://s0u5p4pxkhuk" path="res://Components/WorldGeneratorComponent.tscn" id="3_cp0yf"]
-[ext_resource type="PackedScene" uid="uid://b6vvkj3vu4ch5" path="res://UI/DefeateScreen.tscn" id="3_y2r0b"]
 [ext_resource type="PackedScene" uid="uid://bqc705ciop623" path="res://World/Managers/UpgradeManager.tscn" id="4_51vqn"]
 [ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="5_4ppwt"]
@@ -85,16 +84,44 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_vm3ed"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s881c"]
 _data = {
 "RESET": SubResource("Animation_erkh0"),
-"fade_in": SubResource("Animation_p44nm")
+"fade_in": SubResource("Animation_p44nm"),
+"fade_out": SubResource("Animation_vm3ed")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0vc71"]
 shader = ExtResource("13_t0234")
 shader_parameter/progress = 0.0
-shader_parameter/diamondPixelSize = 10.0
+shader_parameter/diamondPixelSize = 20.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_65u61"]
 
@@ -462,7 +489,6 @@ worldGenerator = NodePath("WorldGeneratorComponent")
 tileMap = NodePath("WorldGeneratorComponent/TileMap")
 StatUIScene = ExtResource("2_l04er")
 transitionAnimation = NodePath("UI/TransitionLayer/Control/AnimationPlayer")
-DefeatScene = ExtResource("3_y2r0b")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -504,7 +530,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TransitionLayer/Control"]
-playback_process_mode = 0
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_s881c")
 }
