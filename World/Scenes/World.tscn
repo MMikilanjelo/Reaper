@@ -31,33 +31,6 @@ adjustment_brightness = 0.8
 adjustment_contrast = 1.2
 adjustment_saturation = 1.2
 
-[sub_resource type="Animation" id="Animation_p44nm"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/TextureRect:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/TextureRect:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
 [sub_resource type="Animation" id="Animation_erkh0"]
 length = 0.001
 tracks/0/type = "value"
@@ -83,6 +56,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_p44nm"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/TextureRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s881c"]
@@ -461,7 +461,7 @@ script = ExtResource("1_h2ty1")
 worldGenerator = NodePath("WorldGeneratorComponent")
 tileMap = NodePath("WorldGeneratorComponent/TileMap")
 StatUIScene = ExtResource("2_l04er")
-transitionAnimation = NodePath("UI/CanvasLayer/Control/AnimationPlayer")
+transitionAnimation = NodePath("UI/TransitionLayer/Control/AnimationPlayer")
 DefeatScene = ExtResource("3_y2r0b")
 metadata/_edit_horizontal_guides_ = []
 
@@ -492,9 +492,9 @@ Experience_Manager = NodePath("../../Managers/ExperienceManager")
 
 [node name="PlayerUI" parent="UI" instance=ExtResource("16_eqwgn")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+[node name="TransitionLayer" type="CanvasLayer" parent="UI"]
 
-[node name="Control" type="Control" parent="UI/CanvasLayer"]
+[node name="Control" type="Control" parent="UI/TransitionLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -503,13 +503,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TransitionLayer/Control"]
 playback_process_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_s881c")
 }
 
-[node name="TextureRect" type="TextureRect" parent="UI/CanvasLayer/Control/AnimationPlayer"]
+[node name="TextureRect" type="TextureRect" parent="UI/TransitionLayer/Control/AnimationPlayer"]
 self_modulate = Color(0.0784314, 0.0352941, 0.0705882, 1)
 material = SubResource("ShaderMaterial_0vc71")
 anchors_preset = 15
