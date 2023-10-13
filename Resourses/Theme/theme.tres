@@ -20,7 +20,7 @@ region_rect = Rect2(3, 1, 38, 49)
 
 [resource]
 default_font = ExtResource("2_fmeak")
-default_font_size = 12
+default_font_size = 6
 AlternativePannelContainer/base_type = &"PanelContainer"
 AlternativePannelContainer/styles/panel = SubResource("StyleBoxTexture_v6vry")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_c0lfn")

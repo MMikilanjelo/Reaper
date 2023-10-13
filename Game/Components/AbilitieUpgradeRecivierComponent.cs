@@ -39,6 +39,7 @@ namespace Game.Components
 			{
 				playerHurtBox.SetMissChance(addedUpgrade.value);
 				uiEvents.playerStats.miis_chance = playerHurtBox.MissChance;
+				
 			}	
 		}
 	

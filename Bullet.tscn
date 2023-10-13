@@ -34,7 +34,6 @@ wait_time = 100.0
 autostart = true
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_ukrl2")]
-dmg = 1.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]

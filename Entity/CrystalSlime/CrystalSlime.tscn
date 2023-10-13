@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://cd8qi5uva4rmb"]
 
 [ext_resource type="Script" path="res://Entity/CrystalSlime/CrystalSlime.cs" id="1_yfvsi"]
 [ext_resource type="PackedScene" path="res://Components/EnemyConstractorComponent.tscn" id="2_eq5p4"]

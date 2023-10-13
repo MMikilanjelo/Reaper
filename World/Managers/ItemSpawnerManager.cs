@@ -18,7 +18,7 @@ public partial class ItemSpawnerManager : Node
 	{
 		experience exp = ExpirienceScene.Instantiate() as experience;
 		exp.Position = position_to_instantiate;
-		GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(exp);
+		GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(exp);
 	}
 
 

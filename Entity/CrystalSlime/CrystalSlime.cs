@@ -92,6 +92,10 @@ public partial class CrystalSlime : CharacterBody2D
 			timrerBetwenntShots.Start(1f);
 			enemyConstructor.headPart.DoSomethisngSpecial( this , player );
 		} 
+		if(enemySensorComponent.isInRange)
+		{
+			stateMachine.ChangeState(CloseRangeAtackState);
+		}
 	}
 	private  void DeadState()
 	{
