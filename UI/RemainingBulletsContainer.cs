@@ -13,8 +13,14 @@ namespace GameUI
 		{
 			ammo_count_label.Text = ammo_count.ToString();
 			Game_Events = GetNode<game_events>("/root/GameEvents");
-			Game_Events.OnPlayerShoot += (int amount) => DecreseBulletsCount(amount);
-			Game_Events.OnEnemyDied += (Vector2 _ , int enemy_cost_inBullets)=> IncreaseBulletsCount(enemy_cost_inBullets);
+			Game_Events.Connect(game_events.SignalName.OnPlayerShoot , Callable.From((int amount)=> DecreseBulletsCount(amount)));
+			Game_Events.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
+			{
+				IncreaseBulletsCount(enemy_cost_inBullets);
+			}
+			));
+			//Game_Events.OnPlayerShoot += (int amount) => DecreseBulletsCount(amount);
+			//Game_Events.OnEnemyDied += (Vector2 _ , int enemy_cost_inBullets)=> IncreaseBulletsCount(enemy_cost_inBullets);
 			
 		}
 		private void IncreaseBulletsCount(int amount)
@@ -24,7 +30,7 @@ namespace GameUI
 				Game_Events.EmitRunOutAmoo(true);
 			}
 			ammo_count += amount;
-			ammo_count_label.Text = ammo_count.ToString();
+				ammo_count_label.Text = ammo_count.ToString();
 		
 		}
 		private void DecreseBulletsCount(int amount)

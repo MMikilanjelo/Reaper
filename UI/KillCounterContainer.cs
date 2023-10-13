@@ -13,7 +13,12 @@ namespace GameUI
         {
 			
 			Game_Events = GetNode<game_events>("/root/GameEvents");
-			Game_Events.OnEnemyDied += (Vector2 enemy_died_position , int _)=> UpdateKillsCount();
+			Game_Events.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
+			{
+				UpdateKillsCount();
+			}
+			));
+			//Game_Events.OnEnemyDied += (Vector2 enemy_died_position , int _)=> UpdateKillsCount();
 			kill_count_label.Text = currentKills.ToString();
         }
         public override void _Process(double delta)
