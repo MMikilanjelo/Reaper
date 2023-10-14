@@ -71,7 +71,7 @@ _data = {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xi0gx"]
 shader = ExtResource("3_c3cg7")
 shader_parameter/progress = 1.0
-shader_parameter/diamondPixelSize = 40.0
+shader_parameter/diamondPixelSize = 46.0
 
 [node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("transitionAnimation")]
 script = ExtResource("1_wt4bp")

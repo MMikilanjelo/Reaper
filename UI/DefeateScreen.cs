@@ -12,6 +12,14 @@ namespace GameUI
         public override void _Ready()
         {
             transitionAnimationPlayer.Play("Fade_out");
+            transitionAnimationPlayer.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string name)=>
+            {
+                if(name == "Fade_in")
+                {
+                     GetTree().ChangeSceneToFile("res://UI/MainMenu.tscn");
+                }
+                   
+            }));
             //shaderMaterial = GetNode<TextureRect>("TextureRect").Material as ShaderMaterial;
             
         }
@@ -19,11 +27,6 @@ namespace GameUI
         {
             if(Input.IsActionJustPressed("CloseTab"))
             {
-                
-                transitionAnimationPlayer.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string name)=>
-                {
-                    GetTree().ChangeSceneToFile("res://UI/MainMenu.tscn");
-                }));
                 transitionAnimationPlayer.Play("Fade_in");
             }
             // angle_redius += 0.5f * delta;
