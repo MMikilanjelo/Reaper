@@ -11,6 +11,7 @@ script = ExtResource("1_kqyy4")
 PickableArea = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 1, 2, 1)
 texture = ExtResource("2_x4at3")
 
 [node name="Area2D" type="Area2D" parent="."]

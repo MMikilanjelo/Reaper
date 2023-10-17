@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cd8qi5uva4rmb"]
+[gd_scene load_steps=23 format=3 uid="uid://cd8qi5uva4rmb"]
 
 [ext_resource type="Script" path="res://Entity/CrystalSlime/CrystalSlime.cs" id="1_yfvsi"]
 [ext_resource type="PackedScene" path="res://Components/EnemyConstractorComponent.tscn" id="2_eq5p4"]
@@ -7,10 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="3_paws7"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="4_uf5tc"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_easg5"]
+[ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="6_awkp0"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="6_n5nvc"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="7_nglbb"]
 [ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="7_rwp3l"]
 [ext_resource type="Texture2D" uid="uid://dwa36rqo6uxb0" path="res://Entity/CrystalSlime/CrystalSlime.png" id="8_6vnel"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="9_4507k"]
+[ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7x7x"]
+resource_local_to_scene = true
+shader = ExtResource("7_nglbb")
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8mf2o"]
 radius = 2.0
@@ -97,7 +105,6 @@ _data = {
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
-scale = Vector2(1.2, 1.2)
 collision_layer = 2
 motion_mode = 1
 safe_margin = 10.0
@@ -119,6 +126,11 @@ metadata/_edit_horizontal_guides_ = [-67.0]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_paws7")]
 accelerationCoeficient = 100.0
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_awkp0")]
+hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
+sprite2D = NodePath("../Visuals/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_f7x7x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -165,7 +177,6 @@ velocityComponent = NodePath("../VelocityComponent")
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_6vnel")
 hframes = 11
-frame = 10
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
@@ -176,7 +187,7 @@ time_horizon = 0.1
 max_speed = 600.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("9_4507k")]
-MaxHealth = 10.0
+MaxHealth = 50.0
 
 [node name="timerBetweenShots" type="Timer" parent="."]
 wait_time = 0.5
@@ -187,3 +198,6 @@ autoplay = "WalkAnimation"
 libraries = {
 "": SubResource("AnimationLibrary_r2ymp")
 }
+
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("14_gak0x")]
+hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")

@@ -16,17 +16,16 @@ public partial class CrystalSlime : CharacterBody2D
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
 	[Export] TimerControllerComponent timerControllerComponent;	
-	private DelegateStateMachine stateMachine = new DelegateStateMachine();
+	
 	Timer atackTimer;
 	Timer timrerBetwenntShots;
 	Timer awaitAtackTimer;
 	CharacterBody2D player;
 	game_events Game_Events;
+	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	public override void _Ready()
 	{
-		atackTimer = timerControllerComponent.CreateTimer( OneShoot : true);
 		timrerBetwenntShots = timerControllerComponent.CreateTimer( OneShoot : true);
-		awaitAtackTimer = timerControllerComponent.CreateTimer(  OneShoot : true);
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		player = GameUtilities.GetPlayerNode(this);
@@ -62,10 +61,6 @@ public partial class CrystalSlime : CharacterBody2D
 		{
 			stateMachine.ChangeState(CloseRangeAtackState);
 		}
-		if(awaitAtackTimer.IsStopped())
-		{
-			stateMachine.ChangeState(AtackState);
-		}
 		velocityComponent.Move(this);
 		pathFindingComponent.FollowPath();
 		pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition); 
@@ -73,20 +68,14 @@ public partial class CrystalSlime : CharacterBody2D
 	
 	private void EnteredStateNormal()
 	{
-		
-		awaitAtackTimer.Start(3);
+		GetTree().CreateTimer(3).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(AtackState)));
   	}
 	private void EnterAtackState()
 	{
-
-		atackTimer.Start(5);
+		GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(StateNormal)));
 	}
 	private void AtackState()
 	{
-		if(atackTimer.IsStopped())
-		{
-			stateMachine.ChangeState(StateNormal);
-		}
 		if(timrerBetwenntShots.IsStopped())
 		{	
 			timrerBetwenntShots.Start(1f);

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bkbwfqp7iavbg"]
+
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="1_jge54"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_jge54")
+shader_parameter/lerp_percent = 0.0

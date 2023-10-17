@@ -1,17 +1,16 @@
-[gd_scene load_steps=31 format=3 uid="uid://dl7eefty3fjxr"]
+[gd_scene load_steps=30 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
 [ext_resource type="PackedScene" uid="uid://lipl4gu8wsws" path="res://UI/StatUI.tscn" id="2_l04er"]
 [ext_resource type="PackedScene" uid="uid://s0u5p4pxkhuk" path="res://Components/WorldGeneratorComponent.tscn" id="3_cp0yf"]
 [ext_resource type="PackedScene" uid="uid://bqc705ciop623" path="res://World/Managers/UpgradeManager.tscn" id="4_51vqn"]
-[ext_resource type="PackedScene" uid="uid://dd0dru4yce800" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
+[ext_resource type="PackedScene" uid="uid://5ff3qb6320gg" path="res://Entity/Scenes/Player.tscn" id="4_kqosp"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="5_4ppwt"]
 [ext_resource type="PackedScene" uid="uid://b3qnb7yc0nxvm" path="res://UI/UpgradeScreen.tscn" id="5_i2uh0"]
-[ext_resource type="PackedScene" path="res://Entity/ExplosionsBat/ExploisionBat.tscn" id="6_3iwpt"]
 [ext_resource type="PackedScene" uid="uid://diyt82uirkxk" path="res://UI/ArenaTimeUI.tscn" id="6_ifwme"]
 [ext_resource type="PackedScene" uid="uid://spidl7800c31" path="res://World/Managers/experience_manager.tscn" id="8_itx35"]
-[ext_resource type="PackedScene" uid="uid://cd8qi5uva4rmb" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="8_v2eup"]
+[ext_resource type="PackedScene" uid="uid://cd8qi5uva4rmb" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="9_d2qf5"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="13_t0234"]
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://World/TIleSet/testing_generation.png" id="13_v5n3o"]
@@ -20,7 +19,12 @@
 
 [sub_resource type="Environment" id="Environment_lhngk"]
 background_mode = 3
-ambient_light_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+ambient_light_energy = 2.0
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/4 = 1.0
+glow_levels/6 = 1.0
+glow_levels/7 = 1.0
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
 fog_light_energy = 10.0
 fog_height_density = 0.0157
@@ -78,10 +82,10 @@ tracks/1/path = NodePath("AnimationPlayer/TextureRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vm3ed"]
@@ -125,25 +129,25 @@ shader_parameter/diamondPixelSize = 20.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_65u61"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_k2yw3"]
-vertices = PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_364fb"]
+vertices = PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)])
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_4ofi1"]
-vertices = PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vh272"]
+vertices = PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)])
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_7yp0v"]
-vertices = PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_achbr"]
+vertices = PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)])
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jyl1f"]
-vertices = PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xm4rn"]
+vertices = PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -8, 2.5, -8, 8, -3.5, 8, 2.5, 3, 8, -2, 8, -8, 1.5, -8, -3.5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5, -8, 4.5, -8, 8, -4, 8, 3, 4, 8, -3.5, 8, -8, 3, -8, -3.5)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iljsc"]
 texture = ExtResource("13_v5n3o")
@@ -190,15 +194,15 @@ texture = ExtResource("13_v5n3o")
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_k2yw3")
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_364fb")
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_4ofi1")
+2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_vh272")
 3:1/0 = 0
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_jyl1f")
+3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_xm4rn")
 4:1/0 = 0
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
@@ -260,7 +264,7 @@ texture = ExtResource("13_v5n3o")
 2:3/0 = 0
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
-2:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_7yp0v")
+2:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_achbr")
 3:3/0 = 0
 3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:3/0/physics_layer_0/angular_velocity = 0.0
@@ -507,7 +511,7 @@ UpgradeSceenScene = ExtResource("5_i2uh0")
 [node name="ItemsSpawnerManager" parent="Managers" instance=ExtResource("10_lywje")]
 
 [node name="EnemySpawnerManager" parent="Managers" instance=ExtResource("14_amk35")]
-BasickEnemyScene = ExtResource("8_v2eup")
+BasickEnemyScene = ExtResource("9_d2qf5")
 
 [node name="UI" type="Node" parent="."]
 
@@ -547,10 +551,10 @@ texture = SubResource("CanvasTexture_65u61")
 
 [node name="WorldGeneratorComponent" parent="." node_paths=PackedStringArray("worldTileMap") instance=ExtResource("3_cp0yf")]
 worldTileMap = NodePath("TileMap")
-iterations = 60
-walkLenght = 30
-corridor_count = 4
-corridor_length = 20
+iterations = 5
+walkLenght = 20
+corridor_count = 1
+corridor_length = 50
 roomPercent = 1.0
 startRandomlyEachIteration = true
 Floor_atlas_tile_coordinates = Vector2i(1, 1)
@@ -573,7 +577,5 @@ layer_0/tile_data = PackedInt32Array(-720925, 524288, 7, -655389, 524288, 7, -58
 [node name="Entities" type="Node2D" parent="." groups=["EntitiesLayer"]]
 
 [node name="CharacterBody2D" parent="Entities" instance=ExtResource("4_kqosp")]
-
-[node name="ExploisionBat" parent="Entities" instance=ExtResource("6_3iwpt")]
 
 [node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]

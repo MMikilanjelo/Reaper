@@ -20,7 +20,6 @@ namespace GameUI
                 }
                    
             }));
-            //shaderMaterial = GetNode<TextureRect>("TextureRect").Material as ShaderMaterial;
             
         }
         public override void _Process(double delta)
@@ -29,10 +28,7 @@ namespace GameUI
             {
                 transitionAnimationPlayer.Play("Fade_in");
             }
-            // angle_redius += 0.5f * delta;
-            // angle_redius = angle_redius % 360f;
-            // GD.Print(angle_redius);
-		    // shaderMaterial.SetShaderParameter("angle_radians"   , angle_redius);
+            
             
         }
         public void PlayApperence()

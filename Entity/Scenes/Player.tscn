@@ -1,10 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://dd0dru4yce800"]
+[gd_scene load_steps=27 format=3 uid="uid://5ff3qb6320gg"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/PixelPerfectShader.gdshader" id="2_s0422"]
 [ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_xhqy0"]
-[ext_resource type="Script" path="res://Visuals/PlayerSpriteImager.cs" id="2_yw8l3"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="3_a1ggc"]
+[ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerSpriteImager.cs" id="3_vkl3q"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="5_bwik8"]
 [ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="5_m8lgp"]
 [ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
@@ -51,6 +51,9 @@ _bundled = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rm71e"]
+shader = ExtResource("2_s0422")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggq5a"]
 shader = ExtResource("2_s0422")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
@@ -175,7 +178,7 @@ playerSpriteImager = NodePath("Visuals")
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation")]
 texture_filter = 2
 material = SubResource("ShaderMaterial_rm71e")
-script = ExtResource("2_yw8l3")
+script = ExtResource("3_vkl3q")
 PlayerSprite = NodePath("CanvasGroup/Player")
 HandRotation = NodePath("CanvasGroup/RotationPivot")
 bulletParickle = ExtResource("2_xhqy0")
@@ -183,7 +186,8 @@ bulletParickle = ExtResource("2_xhqy0")
 [node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
 
 [node name="Player" type="Sprite2D" parent="Visuals/CanvasGroup"]
-texture_filter = 1
+texture_filter = 2
+material = SubResource("ShaderMaterial_ggq5a")
 texture = ExtResource("14_xvhy2")
 offset = Vector2(0, -9)
 hframes = 4
@@ -208,7 +212,7 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 accelerationCoeficient = 75.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 300.0
+MaxHealth = 100.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 2

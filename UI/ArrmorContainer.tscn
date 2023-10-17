@@ -4,13 +4,15 @@
 [ext_resource type="Script" path="res://UI/ArrmorContainer.cs" id="1_ma734"]
 
 [node name="ArmorContainer" type="HBoxContainer" node_paths=PackedStringArray("arrmorLabel")]
+offset_right = 349.0
+offset_bottom = 132.0
 script = ExtResource("1_ma734")
 arrmorLabel = NodePath("Label")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("1_1xnk0")
+expand_mode = 2
 
 [node name="Label" type="Label" parent="."]
 process_mode = 3

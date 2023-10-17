@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0wfbynjuunx1"
-path="res://.godot/imported/TextingCustomShader.png-c9d85411f30c09211db9561f822eee22.ctex"
+uid="uid://7bqi7dbg7u85"
+path="res://.godot/imported/TransitionTexture.png-e3f812a9c952910ef55b1bfa8ab9a368.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TextingCustomShader.png"
-dest_files=["res://.godot/imported/TextingCustomShader.png-c9d85411f30c09211db9561f822eee22.ctex"]
+source_file="res://Visuals/UI/TransitionTexture.png"
+dest_files=["res://.godot/imported/TransitionTexture.png-e3f812a9c952910ef55b1bfa8ab9a368.ctex"]
 
 [params]
 

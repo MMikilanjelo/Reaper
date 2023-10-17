@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4g8imw7qm47q"]
+[gd_scene load_steps=12 format=3 uid="uid://lvs4ige8sb8o"]
 
 [ext_resource type="Shader" path="res://Visuals/Shaders/DefeateScreen.gdshader" id="1_e2c51"]
 [ext_resource type="Script" path="res://UI/MainMenu.cs" id="1_wt4bp"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="3_c3cg7"]
-[ext_resource type="Texture2D" uid="uid://7bqi7dbg7u85" path="res://TransitionTexture.png" id="4_8ihnj"]
+[ext_resource type="Texture2D" uid="uid://7bqi7dbg7u85" path="res://Visuals/UI/TransitionTexture.png" id="4_8ihnj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6eex3"]
 
@@ -30,6 +30,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionAnimation/TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_peykk"]
 resource_name = "fade_in"
@@ -44,6 +56,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionAnimation/TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_pl1kc"]

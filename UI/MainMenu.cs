@@ -10,10 +10,11 @@ namespace GameUI
 		const string sceneName = "res://World/Scenes/World.tscn";
 		private Button StartButton;
 		[Export] private Button QuitBUtton;
-		[Export] private AnimationPlayer transitionAnimation;
+		[Export] AnimationPlayer transitionAnimation;
 
         public override void _Ready()
         {
+			
 			transitionAnimation.Play("fade_out");
 			StartButton = GetNode<Button>("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/StartButton");
 			StartButton.Pressed += () =>  LoadMainScene();

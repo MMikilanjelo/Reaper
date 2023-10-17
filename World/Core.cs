@@ -26,7 +26,6 @@ public partial class Core : Node2D
 		var player = GameUtilities.GetPlayerNode(this);
 		var playerHealth = player.GetNode<HealthComponent>("HealthComponent");
 		playerHealth.Connect(HealthComponent.SignalName.Died , Callable.From(()=>ChangeScene()));
-		
 	}
 	
 
@@ -37,7 +36,6 @@ public partial class Core : Node2D
 			var statMenu = StatUIScene.Instantiate() as StatUI;
 			AddChild(statMenu);
 		}
-		
 	}
 	public void ChangeScene()
 	{

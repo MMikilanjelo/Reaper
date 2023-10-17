@@ -8,6 +8,8 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using System.Net;
 
 namespace Game.Components
 {
@@ -39,11 +41,28 @@ namespace Game.Components
 		[Export] private Vector2I Diagonal_Corner_Up_Left_Atlas_Coordinates;
 		[Export] private Vector2I Diagonal_Corner_Up_Right_Atlas_Coordinates;
 	
+
+
+		private Dictionary<Vector2I , HashSet<Vector2I>> RoomData = new Dictionary<Vector2I, HashSet<Vector2I>>();
+		private HashSet<Vector2I> corridorsPos = new HashSet<Vector2I>();
+		private List<FloorNode> corridorsNodes = new List<FloorNode>();
         public override void _Ready()
         {
-			
-            RunProceduralGeneration();
+			//worldTileMap.Clear();
+			RunProceduralGeneration();	
+			PainSingleTile(worldTileMap ,RoomData.Keys.Last(),new Vector2I(4,8));
+			GD.Print(corridorsPos.Count);
+			GD.Print(corridorsNodes.Count);
+		
         }
+		private void GetNodesFromCorridorsPosition()
+		{
+			foreach(var pos in corridorsPos)
+			{
+				corridorsNodes.Add(new FloorNode(pos));
+			}
+			
+		}
         public void RunProceduralGeneration()
 		{
 			HashSet<Vector2I> floorPosition = new HashSet<Vector2I>();
@@ -57,6 +76,13 @@ namespace Game.Components
 			//Generate Walls
 			PaintGeneretedWallTiles(floorPosition);
 			PaintGeneretedFloorTiles(floorPosition ,Floor_atlas_tile_coordinates);
+			GetNodesFromCorridorsPosition();
+			FindPath(corridorsPos.First() , corridorsPos.Last() , corridorsNodes);
+			foreach(var Node in corridorsNodes)
+			{
+				GD.Print(Node.gCost);
+			}
+			
 		}
 
 		/// <Generation Logick>
@@ -85,7 +111,9 @@ namespace Game.Components
 				var corridor = GenerationAlghoritms.RandomWalkCorridor(currentposition , corridor_length);
 				currentposition = corridor[corridor.Count - 1];
 				potentialRoomPosition.Add(currentposition);
+				corridorsPos.UnionWith(corridor);
 				floorPosition.UnionWith(corridor);
+				
 			}
 		}
 		private HashSet<Vector2I> CreatRooms (HashSet<Vector2I> potentialRoomPosition)
@@ -99,6 +127,7 @@ namespace Game.Components
 			foreach(var roomPosition in roomToCreat)
 			{
 				var roomFLoor  = RunRandomwalk(iterations , walkLenght , roomPosition);
+				SafeRoomData(roomPosition, roomFLoor);
 				roomPositions.UnionWith(roomFLoor);
 			}
 			return roomPositions;
@@ -130,11 +159,11 @@ namespace Game.Components
 					if(roomFloors.Contains(position) == false)
 					{
 						HashSet<Vector2I> roomAtDeadEnd = RunRandomwalk(iterations ,walkLenght , position);
+						SafeRoomData(position ,roomAtDeadEnd);
 						roomFloors.UnionWith(roomAtDeadEnd);
 					}
 				}
 			} 
-	
 		private HashSet<Vector2I> FindWallsPositionInGivenDirection(IEnumerable<Vector2I> floorPositions , List<Vector2I> directions)
 		{
 			HashSet<Vector2I> wall_postion = new HashSet<Vector2I>();
@@ -153,9 +182,7 @@ namespace Game.Components
 			}
 			return wall_postion;
 		}
-
 		/// <Generation Logick>
-		
 		
 		/// <Drawing tiles based on floor postion>///
 		private void PaintGeneretedFloorTiles(IEnumerable<Vector2I> tilespostion  , Vector2I atlas_tile_coordinates)
@@ -169,7 +196,6 @@ namespace Game.Components
 				PainSingleTile(tileMap , position , atlas_tile_coordinates);
 			}
 		}
-
 		private void PainSingleTile(TileMap tileMap , Vector2I position , Vector2I atlas_tile_coordinates )
 		{
 			var tilePosition = position;
@@ -182,8 +208,10 @@ namespace Game.Components
 			GetBasickWallType(get_basick_walls_position , floor_positions);
 			GetCornerWallsType(get_corner_walls_position , floor_positions);
 		}
+		/// <Drawing tiles based on floor postion>///
+		
+		
 		///<Tile desision helper>
-
 		private void GetBasickWallType(IEnumerable<Vector2I>wall_positions , IEnumerable<Vector2I> floor_positions)
 		{
 			foreach(var wall_pos in wall_positions)
@@ -301,29 +329,113 @@ namespace Game.Components
 				
 			
 		}	
+		///<Tile desision helper>
 
 
-
-		///<Findig Positions To Spawn Enemy>
-		
-		private HashSet<Vector2I>GetPosiblePositionToSpawnEnemies(IEnumerable<Vector2I> floorPositions)
+		///<Room Data Extracktor>
+		private void SafeRoomData(Vector2I roomCentrePosition, HashSet<Vector2I> room_floor_postion )
 		{
-			HashSet<Vector2I> positions_to_spawn =  new HashSet<Vector2I>();
+			RoomData.Add(roomCentrePosition , room_floor_postion);
 
-			foreach(var position in floorPositions)
+		}
+
+		///<A* alghoritm>
+		private void FindPath(Vector2I startPosition , Vector2I FinalPosition , List<FloorNode> floorNodes)
+		{
+			FloorNode startNode = GetNodeFromTilePos(startPosition , floorNodes);
+			FloorNode destinationNode = GetNodeFromTilePos(FinalPosition , floorNodes);
+			List<FloorNode> openSet= new List<FloorNode>();
+			HashSet<FloorNode> closedSet = new HashSet<FloorNode>();
+			openSet.Add(startNode);
+
+			while (openSet.Count > 0)
 			{
-				foreach(var direction in Directions.allDirectionsList)
+				FloorNode currentNode = openSet[0];
+				for(int i =1 ;i < openSet.Count ; i ++)
 				{
-					var neighbour_tile_position = direction + position;
-					if(!floorPositions.Contains(neighbour_tile_position))
+					if(openSet[i].fCost < currentNode.fCost||openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
 					{
-						
+						currentNode = openSet[i];
 					}
 				}
+				openSet.Remove(currentNode);
+				closedSet.Add(currentNode);
+				if(currentNode == destinationNode)
+				{
+					return;
+				}
+				foreach(FloorNode neighbourNode in GetNodeNeighbours(currentNode,floorNodes))
+				{
+					if(closedSet.Contains(neighbourNode))
+					{
+						continue;
+					}
+					int newMovmentCost = currentNode.gCost + GetDistance(currentNode, neighbourNode);
+					if(newMovmentCost < neighbourNode.gCost || !openSet.Contains(neighbourNode))
+					{
+						neighbourNode.gCost = newMovmentCost;
+						neighbourNode.hCost = GetDistance(neighbourNode , destinationNode);
+						neighbourNode.parent = currentNode;
+						if(!openSet.Contains(neighbourNode))
+						{
+							openSet.Add(neighbourNode);
+						}
+					}
+
+				}
+
 			}
-			return positions_to_spawn;
+
+		}
+		private int GetDistance(FloorNode start , FloorNode destionation)
+		{
+			int distancex = Mathf.Abs(start.TileMapPosition.X -destionation.TileMapPosition.X);
+			return 10 * distancex;
+		}
+		
+		private List<FloorNode> GetNodeNeighbours(FloorNode floorNode ,  List<FloorNode> floorNodes)
+		{
+			List<FloorNode> neighbours = new List<FloorNode>();
+			foreach(var direction in Directions.cardinalDirectionList)
+			{
+				var neighbour_position = floorNode.TileMapPosition + direction;
+				var neighbourNode = GetNodeFromTilePos(neighbour_position , floorNodes);
+				if(neighbourNode != null)
+				{
+					neighbours.Add(neighbourNode);
+				}
+			}
+			return neighbours;
+		}
+		private FloorNode GetNodeFromTilePos(Vector2I tilePos , List<FloorNode> floorNodes)
+		{
+			foreach(var Node in floorNodes)
+			{
+				if(Node.TileMapPosition == tilePos)
+				{
+					return Node;
+				}
+				
+			}
+			 
+			return null;
+				
+		}
+		private class FloorNode
+		{
+			public int gCost;
+			public int hCost;
+			public Vector2I TileMapPosition;
+			public int fCost => gCost + hCost;
+			public FloorNode parent;
+
+			public FloorNode(Vector2I position)
+			{
+				TileMapPosition = position;
+			}
 		}
     }
+	
 
 }
 

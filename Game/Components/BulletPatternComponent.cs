@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 
 
@@ -11,6 +12,7 @@ namespace Game.Components
 	{
 		[Export] Path2D bulletPatternPath;
 		[Export] PackedScene bulletScene;
+		[Export] private int bulletCount;
 	
 		public override void _Ready()
 		{
@@ -36,6 +38,7 @@ namespace Game.Components
 			}
 			return bulletPositions;
 		}
+		
 	}
 }
 
