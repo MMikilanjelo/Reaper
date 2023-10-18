@@ -10,6 +10,7 @@ using System.Threading;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace Game.Components
 {
@@ -43,26 +44,17 @@ namespace Game.Components
 	
 
 
-		private Dictionary<Vector2I , HashSet<Vector2I>> RoomData = new Dictionary<Vector2I, HashSet<Vector2I>>();
+		private Dictionary<Vector2I , Room> RoomData = new Dictionary<Vector2I, Room>();
 		private HashSet<Vector2I> corridorsPos = new HashSet<Vector2I>();
-		private List<FloorNode> corridorsNodes = new List<FloorNode>();
+		
         public override void _Ready()
         {
 			//worldTileMap.Clear();
 			RunProceduralGeneration();	
 			PainSingleTile(worldTileMap ,RoomData.Keys.Last(),new Vector2I(4,8));
-			GD.Print(corridorsPos.Count);
-			GD.Print(corridorsNodes.Count);
-		
-        }
-		private void GetNodesFromCorridorsPosition()
-		{
-			foreach(var pos in corridorsPos)
-			{
-				corridorsNodes.Add(new FloorNode(pos));
-			}
 			
-		}
+        }
+
         public void RunProceduralGeneration()
 		{
 			HashSet<Vector2I> floorPosition = new HashSet<Vector2I>();
@@ -76,12 +68,14 @@ namespace Game.Components
 			//Generate Walls
 			PaintGeneretedWallTiles(floorPosition);
 			PaintGeneretedFloorTiles(floorPosition ,Floor_atlas_tile_coordinates);
-			GetNodesFromCorridorsPosition();
-			FindPath(corridorsPos.First() , corridorsPos.Last() , corridorsNodes);
-			foreach(var Node in corridorsNodes)
+			List<FloorNode>  walkableNodes =  CreatNodesFronTilePositions(floorPosition);
+			GD.Print(RoomData.Count);
+			foreach(var item in RoomData)
 			{
-				GD.Print(Node.gCost);
+				GD.Print(GetDistanceToRoom(item.Value , new Vector2I(0,0) , walkableNodes));
 			}
+			
+
 			
 		}
 
@@ -333,14 +327,14 @@ namespace Game.Components
 
 
 		///<Room Data Extracktor>
-		private void SafeRoomData(Vector2I roomCentrePosition, HashSet<Vector2I> room_floor_postion )
+		private void SafeRoomData(Vector2I roomCentrePosition, HashSet<Vector2I> room_floor_postion)
 		{
-			RoomData.Add(roomCentrePosition , room_floor_postion);
 
+			RoomData.Add(roomCentrePosition , new Room(roomCentrePosition , room_floor_postion));
 		}
 
 		///<A* alghoritm>
-		private void FindPath(Vector2I startPosition , Vector2I FinalPosition , List<FloorNode> floorNodes)
+		private List<FloorNode> FindPath(Vector2I startPosition , Vector2I FinalPosition , List<FloorNode> floorNodes)
 		{
 			FloorNode startNode = GetNodeFromTilePos(startPosition , floorNodes);
 			FloorNode destinationNode = GetNodeFromTilePos(FinalPosition , floorNodes);
@@ -362,9 +356,9 @@ namespace Game.Components
 				closedSet.Add(currentNode);
 				if(currentNode == destinationNode)
 				{
-					return;
+					return RetracePath(startNode , destinationNode);
 				}
-				foreach(FloorNode neighbourNode in GetNodeNeighbours(currentNode,floorNodes))
+				foreach(FloorNode neighbourNode in GetNodeNeighbours(currentNode, floorNodes , Directions.cardinalDirectionList))
 				{
 					if(closedSet.Contains(neighbourNode))
 					{
@@ -385,21 +379,49 @@ namespace Game.Components
 				}
 
 			}
+			return null;
 
+		}
+		private List<FloorNode> RetracePath(FloorNode startNode , FloorNode endNode)
+		{
+			List<FloorNode> path = new List<FloorNode>();
+			FloorNode currentNode = endNode;
+			while(currentNode != startNode)
+			{
+				path.Add(currentNode);
+				currentNode = currentNode.parent;
+
+			}
+			path.Reverse();
+			return path;
 		}
 		private int GetDistance(FloorNode start , FloorNode destionation)
 		{
-			int distancex = Mathf.Abs(start.TileMapPosition.X -destionation.TileMapPosition.X);
-			return 10 * distancex;
+			int distanceX = Mathf.Abs(start.TileMapPosition.X -destionation.TileMapPosition.X);
+			int distanceY = Mathf.Abs(start.TileMapPosition.Y - destionation.TileMapPosition.Y);
+			if(distanceX > distanceY)
+			{
+				return 14 * distanceY + 10*(distanceX - distanceY);
+			}
+			return 14 * distanceX + 10 *(distanceY - distanceX);
 		}
-		
-		private List<FloorNode> GetNodeNeighbours(FloorNode floorNode ,  List<FloorNode> floorNodes)
+		private List<FloorNode> CreatNodesFronTilePositions(HashSet<Vector2I> tilePosition)
+		{
+			List<FloorNode>nodes = new List<FloorNode>();
+			foreach(var pos in tilePosition)
+			{
+				nodes.Add(new FloorNode(pos));
+			}
+			return nodes;
+			
+		}
+		private List<FloorNode> GetNodeNeighbours(FloorNode floorNode ,  List<FloorNode> availableNodes , List<Vector2I>directionsToCheck)
 		{
 			List<FloorNode> neighbours = new List<FloorNode>();
-			foreach(var direction in Directions.cardinalDirectionList)
+			foreach(var direction in directionsToCheck)
 			{
 				var neighbour_position = floorNode.TileMapPosition + direction;
-				var neighbourNode = GetNodeFromTilePos(neighbour_position , floorNodes);
+				var neighbourNode = GetNodeFromTilePos(neighbour_position , availableNodes);
 				if(neighbourNode != null)
 				{
 					neighbours.Add(neighbourNode);
@@ -407,9 +429,9 @@ namespace Game.Components
 			}
 			return neighbours;
 		}
-		private FloorNode GetNodeFromTilePos(Vector2I tilePos , List<FloorNode> floorNodes)
+		private FloorNode GetNodeFromTilePos(Vector2I tilePos , List<FloorNode> NodesToCheck)
 		{
-			foreach(var Node in floorNodes)
+			foreach(var Node in NodesToCheck)
 			{
 				if(Node.TileMapPosition == tilePos)
 				{
@@ -419,9 +441,17 @@ namespace Game.Components
 			}
 			 
 			return null;
-				
 		}
-		private class FloorNode
+		private int GetDistanceToRoom(Room room , Vector2I startPoint , List<FloorNode> floorNodes)
+		{
+			if(room.roomCentre == startPoint)
+			{
+				return 0;
+			}
+			List<FloorNode> path = FindPath(startPoint , room.roomCentre , floorNodes);
+			return path.Count();
+		}
+		private  class FloorNode 
 		{
 			public int gCost;
 			public int hCost;
@@ -434,6 +464,18 @@ namespace Game.Components
 				TileMapPosition = position;
 			}
 		}
+		private class Room 
+		{
+			public Vector2I roomCentre;
+			public HashSet<Vector2I> floorPositions;
+			public int distanceToRoom;
+			public Room(Vector2I roomCentre , HashSet<Vector2I> floorPositions)
+			{
+				this.roomCentre = roomCentre;
+				this.floorPositions = floorPositions;
+			}
+		}
+
     }
 	
 

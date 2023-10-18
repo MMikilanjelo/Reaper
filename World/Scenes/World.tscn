@@ -551,10 +551,10 @@ texture = SubResource("CanvasTexture_65u61")
 
 [node name="WorldGeneratorComponent" parent="." node_paths=PackedStringArray("worldTileMap") instance=ExtResource("3_cp0yf")]
 worldTileMap = NodePath("TileMap")
-iterations = 5
-walkLenght = 20
-corridor_count = 1
-corridor_length = 50
+iterations = 15
+walkLenght = 15
+corridor_count = 6
+corridor_length = 20
 roomPercent = 1.0
 startRandomlyEachIteration = true
 Floor_atlas_tile_coordinates = Vector2i(1, 1)

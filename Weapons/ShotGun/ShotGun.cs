@@ -9,7 +9,7 @@ namespace Game.Weapons
 	{
 		[Export] PackedScene Bullet;
 		[Export] Timer timeToRecoilDecresment;
-
+		[Export] AnimationPlayer animationPlayer;
 		[Export] Timer atackDelayTimer;
 		[Export] float MaxRecoil = 30;
 		[Export] Marker2D shootPosition;
@@ -33,6 +33,7 @@ namespace Game.Weapons
         }
         public override void Shoot(Vector2 directionToTarget )
 		{
+			animationPlayer.Play("Shoot");
 			_canShoot = false;
 			var recoilIncreasment = MaxRecoil * 0.1f;
 			var recoil_degree_max = currentRecoil * 0.5f;

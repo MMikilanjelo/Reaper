@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="9_4507k"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7x7x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kf0dk"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
@@ -130,7 +130,7 @@ accelerationCoeficient = 100.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_awkp0")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_f7x7x")
+hit_flash_material = SubResource("ShaderMaterial_kf0dk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

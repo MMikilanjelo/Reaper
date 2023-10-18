@@ -1,14 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://djld4k1yojajb"]
+[gd_scene load_steps=7 format=3 uid="uid://djld4k1yojajb"]
 
 [ext_resource type="Script" path="res://Weapons/ShotGun/ShotGun.cs" id="1_tgw5h"]
 [ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="2_xlgnl"]
 [ext_resource type="PackedScene" uid="uid://cddla4w8thoj5" path="res://Bullet.tscn" id="2_xqlpw"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_36tjs"]
 
-[node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "atackDelayTimer", "shootPosition")]
+[sub_resource type="Animation" id="Animation_0lei4"]
+resource_name = "Shoot"
+length = 0.18
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.18),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.18),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.18),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6b5s0"]
+_data = {
+"Shoot": SubResource("Animation_0lei4")
+}
+
+[node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "animationPlayer", "atackDelayTimer", "shootPosition")]
 script = ExtResource("1_tgw5h")
 Bullet = ExtResource("2_xqlpw")
 timeToRecoilDecresment = NodePath("RecoilTimer")
+animationPlayer = NodePath("AnimationPlayer")
 atackDelayTimer = NodePath("AtackDelayTimer")
 shootPosition = NodePath("Weapon/ShootPosition")
 
@@ -29,3 +75,8 @@ one_shot = true
 
 [node name="AtackDelayTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6b5s0")
+}
