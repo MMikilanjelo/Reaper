@@ -512,6 +512,7 @@ UpgradeSceenScene = ExtResource("5_i2uh0")
 
 [node name="EnemySpawnerManager" parent="Managers" instance=ExtResource("14_amk35")]
 BasickEnemyScene = ExtResource("9_d2qf5")
+Activate = true
 
 [node name="UI" type="Node" parent="."]
 
@@ -551,7 +552,7 @@ texture = SubResource("CanvasTexture_65u61")
 
 [node name="WorldGeneratorComponent" parent="." node_paths=PackedStringArray("worldTileMap") instance=ExtResource("3_cp0yf")]
 worldTileMap = NodePath("TileMap")
-iterations = 15
+iterations = 60
 walkLenght = 15
 corridor_count = 6
 corridor_length = 20

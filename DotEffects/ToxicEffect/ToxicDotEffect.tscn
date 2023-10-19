@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://6mya25p2ciqh"]
+[gd_scene load_steps=6 format=3 uid="uid://6mya25p2ciqh"]
 
 [ext_resource type="Script" path="res://DotEffects/ToxicEffect/ToxicDotEffect.cs" id="1_1n6y2"]
 [ext_resource type="PackedScene" uid="uid://cixnybcbjxhdn" path="res://Visuals/Particles/DotEffects/PoisonPartickle.tscn" id="2_3g71q"]
 [ext_resource type="PackedScene" uid="uid://ds70gf11ajlcg" path="res://World/Managers/TImerControllerManager.tscn" id="2_sefdb"]
+[ext_resource type="PackedScene" uid="uid://hsntbqns2v4i" path="res://UI/FloatingText.tscn" id="4_bsjep"]
+[ext_resource type="Resource" uid="uid://b6amiiyukbanl" path="res://DotEffects/ToxicEffect/ToxicEfectData.tres" id="5_0h6ku"]
 
-[node name="ToxicDotEffect" type="Node2D" node_paths=PackedStringArray("timer")]
+[node name="ToxicDotEffect" type="Node2D" node_paths=PackedStringArray("timer", "resourcePreloader")]
 script = ExtResource("1_1n6y2")
 timer = NodePath("TimerController")
 EffectPatrickle = ExtResource("2_3g71q")
+resourcePreloader = NodePath("ResourcePreloader")
 
 [node name="TimerController" parent="." instance=ExtResource("2_sefdb")]
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("FloatingText", "ToxicEfectData"), [ExtResource("4_bsjep"), ExtResource("5_0h6ku")]]

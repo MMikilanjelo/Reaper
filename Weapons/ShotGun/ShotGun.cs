@@ -21,6 +21,7 @@ namespace Game.Weapons
         }
         public override void _PhysicsProcess(double delta)
         {
+			
 			if(timeToRecoilDecresment.IsStopped())
 			{
 				var recoil_increment = MaxRecoil * 0.1f;

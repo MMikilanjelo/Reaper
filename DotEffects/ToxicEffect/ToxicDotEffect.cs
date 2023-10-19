@@ -11,16 +11,19 @@ namespace DotEffects
 	{
 		[Export] TimerControllerComponent timer;
 		[Export] PackedScene EffectPatrickle;
-		PackedScene floatingTextScene;
+		[Export] ResourcePreloader resourcePreloader;
+		PackedScene floatingTextScene ;
 		Timer total_effect_duration_timer;
 		Timer tick_effect_duration_timer;
+		
 		
 		private  int total_count_of_effect;
         public override void _Ready()
         {
-			effectStatsData = ResourceLoader.Load<EffectStats>("res://DotEffects/ToxicEffect/ToxicEfectData.tres");
+			effectStatsData = resourcePreloader.GetResource("ToxicEfectData") as EffectStats;
+			floatingTextScene = resourcePreloader.GetResource("FloatingText") as PackedScene;
 			total_count_of_effect = (int)(effectStatsData.EFFECT_TOTAL_DURATION/effectStatsData.EFFECT_TICK_DURATION);
-			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
+			
 			
 			total_effect_duration_timer= timer.CreateTimer(OneShoot: true);
 			tick_effect_duration_timer = timer.CreateTimer(OneShoot : true);
