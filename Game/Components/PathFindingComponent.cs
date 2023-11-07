@@ -11,20 +11,22 @@ namespace Game.Components
 		[Export] private VelocityComponent velocityComponent;
 		[Export] public Timer intervalTimer;
 		[Signal] public delegate void NavigationFinishedEventHandler();
+		[Export] private bool MakeSmoothHalfWayDestination;
+		[Export] private float ChangeNavigationInterval = 2f;
 		CharacterBody2D player;
 		public override void _Ready()
 		{
 			player = GameUtilities.GetPlayerNode(this);
+			if(MakeSmoothHalfWayDestination)
+			{
+				NavigationAgent2D.Connect(NavigationAgent2D.SignalName.VelocityComputed , new Callable(this , nameof(OnVelocityComputed)));
+			}
 			
-			NavigationAgent2D.Connect(NavigationAgent2D.SignalName.VelocityComputed , new Callable(this , nameof(OnVelocityComputed)));
 			
 			intervalTimer.Connect(Timer.SignalName.Timeout ,  Callable.From( ()=>
 			{
 				if(!GameUtilities.CheckIfPlayerExist(this)){return ;}
-					
 				SetTargetPosition(player?.Position ?? Position);
-				
-
 			}
 			));
 		}
@@ -34,7 +36,7 @@ namespace Game.Components
 			if(player != null)
 			{
 				if(!intervalTimer.IsStopped()){return;}
-				intervalTimer.Start(Directions.random.Randfn(0.2f , 2));
+				intervalTimer.Start(Directions.random.Randfn(0.2f , ChangeNavigationInterval));
 				NavigationAgent2D.TargetPosition = targetPosition;
 			}	
 			
@@ -43,7 +45,7 @@ namespace Game.Components
 		{
 			if(player == null)
 			{
-			return;
+				return;
 			}
 			NavigationAgent2D.TargetPosition = targetPosition;
 			intervalTimer.Start(Directions.random.RandiRange(1 , 4));

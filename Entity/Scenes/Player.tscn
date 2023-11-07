@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://5ff3qb6320gg"]
+[gd_scene load_steps=26 format=3 uid="uid://5ff3qb6320gg"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/PixelPerfectShader.gdshader" id="2_s0422"]
@@ -49,9 +49,6 @@ _bundled = {
 "variants": [SubResource("CSharpScript_ipsht")],
 "version": 3
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rm71e"]
-shader = ExtResource("2_s0422")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ggq5a"]
 shader = ExtResource("2_s0422")
@@ -176,8 +173,6 @@ HandsWeapon = SubResource("PackedScene_vltsl")
 playerSpriteImager = NodePath("Visuals")
 
 [node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation")]
-texture_filter = 2
-material = SubResource("ShaderMaterial_rm71e")
 script = ExtResource("3_vkl3q")
 PlayerSprite = NodePath("CanvasGroup/Player")
 HandRotation = NodePath("CanvasGroup/RotationPivot")
@@ -212,7 +207,7 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 accelerationCoeficient = 75.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 100.0
+MaxHealth = 1e+06
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 2

@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmnrm1qhc6sqg"]
+
+[ext_resource type="Texture2D" uid="uid://bcani880mu0rr" path="res://Visuals/Particles/Textures/Blood.png" id="1_mr1n3"]
+
+[sub_resource type="Gradient" id="Gradient_161ve"]
+offsets = PackedFloat32Array(0.341772, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nbcdl"]
+gradient = SubResource("Gradient_161ve")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j61vn"]
+spread = 35.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 350.0
+damping_min = 700.0
+damping_max = 1000.0
+scale_min = 0.2
+scale_max = 0.8
+color_ramp = SubResource("GradientTexture1D_nbcdl")
+
+[sub_resource type="Animation" id="Animation_r5rp6"]
+resource_name = "OnSpawn"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1g7sf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i2ti5"]
+_data = {
+"OnSpawn": SubResource("Animation_r5rp6"),
+"RESET": SubResource("Animation_1g7sf")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_j61vn")
+texture = ExtResource("1_mr1n3")
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "OnSpawn"
+libraries = {
+"": SubResource("AnimationLibrary_i2ti5")
+}

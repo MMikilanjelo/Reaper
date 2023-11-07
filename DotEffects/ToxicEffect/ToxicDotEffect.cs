@@ -20,7 +20,7 @@ namespace DotEffects
 		private  int total_count_of_effect;
         public override void _Ready()
         {
-			effectStatsData = resourcePreloader.GetResource("ToxicEfectData") as EffectStats;
+			this.effectStatsData = resourcePreloader.GetResource("ToxicEfectData") as EffectStats;
 			floatingTextScene = resourcePreloader.GetResource("FloatingText") as PackedScene;
 			total_count_of_effect = (int)(effectStatsData.EFFECT_TOTAL_DURATION/effectStatsData.EFFECT_TICK_DURATION);
 			

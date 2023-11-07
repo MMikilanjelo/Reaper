@@ -8,6 +8,7 @@ namespace Game.Components
 	{
 		[Export] CharacterBody2D entity;
 		[Export] Weapon CurrentWeapon;
+		public PackedScene AffexToApply = null;
 		[Signal] public delegate void ShotedFromWeaponEventHandler();
 		public WeaponStats currentWeaponStats;
 		private bool _HasAmmoRemaining = true;
@@ -29,10 +30,17 @@ namespace Game.Components
 		{
 			if( _HasAmmoRemaining && CurrentWeapon._canShoot)
 			{
+
 				EmitSignal(SignalName.ShotedFromWeapon);
 				CurrentWeapon?.Shoot(directionToShoot);
+				
 			}
 		}
+		public void AddAfexToWeapon(PackedScene AffexToAdd)
+		{
+			CurrentWeapon.Affex = AffexToAdd;
+		}
+
 		
         
     }

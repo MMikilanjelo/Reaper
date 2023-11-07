@@ -451,7 +451,7 @@ namespace Game.Components
 			List<FloorNode> path = FindPath(startPoint , room.roomCentre , floorNodes);
 			return path.Count();
 		}
-		private  class FloorNode 
+		public  class FloorNode 
 		{
 			public int gCost;
 			public int hCost;
@@ -469,6 +469,7 @@ namespace Game.Components
 			public Vector2I roomCentre;
 			public HashSet<Vector2I> floorPositions;
 			public int distanceToRoom;
+			
 			public Room(Vector2I roomCentre , HashSet<Vector2I> floorPositions)
 			{
 				this.roomCentre = roomCentre;

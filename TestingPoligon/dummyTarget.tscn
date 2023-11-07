@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpbabs0lgbloo"]
+[gd_scene load_steps=12 format=3 uid="uid://dpbabs0lgbloo"]
 
 [ext_resource type="Script" path="res://TestingPoligon/DummyTarget.cs" id="1_q6utx"]
 [ext_resource type="Texture2D" uid="uid://cyywjyhauwv70" path="res://TestingPoligon/dummy.png" id="2_nbl6f"]
+[ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="2_wj3i5"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="3_oly2q"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_psdoa"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="5_efr5r"]
+[ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="6_55cds"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="7_i0wue"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_esacc"]
 radius = 5.0
@@ -14,8 +17,15 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejbr1"]
+resource_local_to_scene = true
+shader = ExtResource("7_i0wue")
+shader_parameter/lerp_percent = 0.0
+
+[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent")]
 script = ExtResource("1_q6utx")
+hurtBoxComponent = NodePath("HurtBoxComponent")
+BloodParticle = ExtResource("2_wj3i5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_nbl6f")
@@ -34,3 +44,8 @@ healthComponent = NodePath("../HealthComponent")
 shape = SubResource("CapsuleShape2D_eaqag")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_efr5r")]
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_55cds")]
+hurtBoxComponent = NodePath("../HurtBoxComponent")
+sprite2D = NodePath("../Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_ejbr1")

@@ -5,6 +5,8 @@ using Game.Components;
 using Enemy.Parts;
 using Generation.Alghoritms;
 using GameLogick.Utilities;
+using System.Collections.Generic;
+using System.Net;
 public partial class CrystalSlime : CharacterBody2D
 {
 	[Export] EnemySensorComponent enemySensorComponent;
@@ -16,7 +18,6 @@ public partial class CrystalSlime : CharacterBody2D
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
 	[Export] TimerControllerComponent timerControllerComponent;	
-	
 	Timer atackTimer;
 	Timer timrerBetwenntShots;
 	Timer awaitAtackTimer;
@@ -25,12 +26,13 @@ public partial class CrystalSlime : CharacterBody2D
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	public override void _Ready()
 	{
+	
 		timrerBetwenntShots = timerControllerComponent.CreateTimer( OneShoot : true);
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		player = GameUtilities.GetPlayerNode(this);
 		stateMachine.AddState(StateNormal , EnteredStateNormal );
-		stateMachine.AddState(AtackState  , EnterAtackState);
+		//stateMachine.AddState(AtackState  , EnterAtackState);
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState( CloseRangeAtackState , EnterCLoseRangeAtack);	
 		stateMachine.SetInitiioalState(StateNormal);
@@ -53,6 +55,7 @@ public partial class CrystalSlime : CharacterBody2D
 	{
 		if(!Animation.IsPlaying()){
 			stateMachine.ChangeState(StateNormal);
+			
 		}
 	}
 	private void StateNormal()
@@ -68,24 +71,24 @@ public partial class CrystalSlime : CharacterBody2D
 	
 	private void EnteredStateNormal()
 	{
-		GetTree().CreateTimer(3).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(AtackState)));
+		pathFindingComponent.ForceSetTargetPosition(player.GlobalPosition);
   	}
-	private void EnterAtackState()
-	{
-		GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(StateNormal)));
-	}
-	private void AtackState()
-	{
-		if(timrerBetwenntShots.IsStopped())
-		{	
-			timrerBetwenntShots.Start(1f);
-			enemyConstructor.headPart.DoSomethisngSpecial( this , player );
-		} 
-		if(enemySensorComponent.isInRange)
-		{
-			stateMachine.ChangeState(CloseRangeAtackState);
-		}
-	}
+	// private void EnterAtackState()
+	// {
+	// 	GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(StateNormal)));
+	// }
+	// private void AtackState()
+	// {
+	// 	if(timrerBetwenntShots.IsStopped())
+	// 	{	
+	// 		timrerBetwenntShots.Start(1f);
+	// 		enemyConstructor.headPart.DoSomethisngSpecial( this , player );
+	// 	} 
+	// 	if(enemySensorComponent.isInRange)
+	// 	{
+	// 		stateMachine.ChangeState(CloseRangeAtackState);
+	// 	}
+	// }
 	private  void DeadState()
 	{
 		

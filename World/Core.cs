@@ -31,11 +31,13 @@ public partial class Core : Node2D
 
 	public override void _Process(double delta)
 	{
-		if(Input.IsActionJustPressed("OpenTab"))
-		{
-			var statMenu = StatUIScene.Instantiate() as StatUI;
-			AddChild(statMenu);
-		}
+		// if(Input.IsActionJustPressed("OpenTab"))
+		// {
+		// 	var statMenu = StatUIScene.Instantiate() as StatUI;
+		// 	AddChild(statMenu);
+		// }
+		//implement stat menu later;
+		
 	}
 	public void ChangeScene()
 	{

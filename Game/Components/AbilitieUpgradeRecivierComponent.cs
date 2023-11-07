@@ -9,12 +9,14 @@ namespace Game.Components
 		game_events Game_Events;
 		PlayerController player;
 		HurtBoxComponent playerHurtBox;
+		WeaponRootComponent playerWeaponRootComponent;
 		UIEvents uiEvents;
         public override void _Ready()
         {
 			uiEvents = GetNode<UIEvents>("/root/UIEvents");
 			player  = GetParent<PlayerController>();
 			playerHurtBox = player.GetNode<HurtBoxComponent>("HurtBoxComponent");
+			playerWeaponRootComponent = player.GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
         }
@@ -41,6 +43,10 @@ namespace Game.Components
 				uiEvents.playerStats.miis_chance = playerHurtBox.MissChance;
 				
 			}	
+			if(addedUpgrade.id == "toxic")
+			{
+				playerWeaponRootComponent.AddAfexToWeapon(ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicEffect/ToxicDotEffect.tscn"));	
+			}
 		}
 	
     }

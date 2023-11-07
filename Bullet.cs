@@ -16,7 +16,6 @@ public partial class Bullet : CharacterBody2D
 	public override void _Ready()
 	{
 		TopLevel = true;
-		hitBoxComponent.AddEffecToHit(afex);
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnImpackt , new Callable(this , nameof(OnImpackt)));
 		timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof(OnTimeTimeOut)));
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnWallCollide , new Callable(this, nameof(OnWallColide)));
@@ -39,5 +38,9 @@ public partial class Bullet : CharacterBody2D
 		velocityComponent.AccelerateInDirection(direction);
 		velocityComponent.Move(this);
 		
+	}
+	public void ApplyAfexForBullet(PackedScene afex)
+	{
+		hitBoxComponent.AddEffecToHit(afex);
 	}
 }

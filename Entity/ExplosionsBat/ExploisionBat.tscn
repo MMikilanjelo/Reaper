@@ -18,7 +18,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_35ceo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rt6ao"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -259,11 +259,12 @@ shape = SubResource("CircleShape2D_r6jm6")
 [node name="PathFindingComponent" parent="." node_paths=PackedStringArray("NavigationAgent2D", "velocityComponent") instance=ExtResource("3_clt8o")]
 NavigationAgent2D = NodePath("../NavigationAgent2D")
 velocityComponent = NodePath("../VelocityComponent")
+MakeSmoothHalfWayDestination = true
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("8_vju3f")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_35ceo")
+hit_flash_material = SubResource("ShaderMaterial_rt6ao")
 
 [node name="Areas" type="Node2D" parent="."]
 

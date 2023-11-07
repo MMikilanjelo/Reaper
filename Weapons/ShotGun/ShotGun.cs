@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Generation.Alghoritms;
+using Game.Components;
 
 
 namespace Game.Weapons
@@ -41,16 +42,15 @@ namespace Game.Weapons
 			var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
 			currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
 			Bullet bulletInstance =  Bullet.Instantiate() as Bullet;
+			bulletInstance.ApplyAfexForBullet(Affex);
 			bulletInstance.Position = shootPosition.GlobalPosition;
 			bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
-			bulletInstance.MoveSpeed = 100;
 			bulletInstance.LookAt(GetGlobalMousePosition());
 			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
 			timeToRecoilDecresment.Start(2);
 			atackDelayTimer.Start(shotGunStats.atack_deley);
-			
-			
 		}
+		
     }
 }
 
