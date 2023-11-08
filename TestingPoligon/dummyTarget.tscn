@@ -17,12 +17,14 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ejbr1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ix2f"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
 
 [node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent")]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_q6utx")
 hurtBoxComponent = NodePath("HurtBoxComponent")
 BloodParticle = ExtResource("2_wj3i5")
@@ -38,6 +40,9 @@ shape = SubResource("CapsuleShape2D_esacc")
 hurtBoxComponent = NodePath("../HurtBoxComponent")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_psdoa")]
+collision_layer = 2
+collision_mask = 16
+monitorable = false
 healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
@@ -48,4 +53,4 @@ shape = SubResource("CapsuleShape2D_eaqag")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_55cds")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
 sprite2D = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_ejbr1")
+hit_flash_material = SubResource("ShaderMaterial_4ix2f")

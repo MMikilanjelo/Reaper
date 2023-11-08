@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dipdqwhcwymbn"]
+
+[ext_resource type="Script" path="res://Weapons/Bullets/BaseBullet/Bullet.cs" id="1_kbyo1"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="2_l7o52"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="3_iyplb"]
+[ext_resource type="Texture2D" uid="uid://c33vuncxr5wx8" path="res://Weapons/Bullets/BaseBullet/bullet.png" id="4_2goqs"]
+[ext_resource type="Texture2D" uid="uid://bo6ds5us15mvm" path="res://Visuals/LightArt/bulletLight.png" id="5_iy3m1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f5et6"]
+radius = 2.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7o20"]
+radius = 2.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("timer", "velocityComponent", "hitBoxComponent")]
+collision_layer = 0
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_kbyo1")
+timer = NodePath("Timer")
+velocityComponent = NodePath("VelocityComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+metadata/_edit_horizontal_guides_ = [-1.0]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_l7o52")]
+maxSpeed = 300.0
+accelerationCoeficient = 1000.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 100.0
+autostart = true
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_iyplb")]
+collision_layer = 16
+collision_mask = 4
+dmg = 20.0
+hitBoxArea = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_f5et6")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_2goqs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h7o20")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4.47035e-07, 0)
+scale = Vector2(0.875, 0.5)
+color = Color(1, 1, 0.623529, 1)
+texture = ExtResource("5_iy3m1")

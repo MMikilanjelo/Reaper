@@ -1,14 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://5ff3qb6320gg"]
+[gd_scene load_steps=25 format=3 uid="uid://ci5u1meyx80l2"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
+[ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_prbvy"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/PixelPerfectShader.gdshader" id="2_s0422"]
-[ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_xhqy0"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="3_a1ggc"]
-[ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerSpriteImager.cs" id="3_vkl3q"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="5_bwik8"]
 [ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="5_m8lgp"]
 [ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
-[ext_resource type="PackedScene" uid="uid://djld4k1yojajb" path="res://Weapons/ShotGun/ShotGun.tscn" id="6_dxcox"]
+[ext_resource type="PackedScene" uid="uid://diq1xiiwcc07y" path="res://Weapons/ShotGun/ShotGun.tscn" id="6_dxcox"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
 [ext_resource type="PackedScene" uid="uid://c4bv8rfrsgp1p" path="res://Components/AbilitieUpgradeRecivierComponent.tscn" id="9_33jpr"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
@@ -158,25 +157,23 @@ _data = {
 "Walk": SubResource("Animation_aukva")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "Visuals", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
 texture_filter = 1
-collision_layer = 2
+collision_layer = 0
+collision_mask = 4
 motion_mode = 1
 safe_margin = 0.001
 script = ExtResource("1_t5no0")
 velocityComponent = NodePath("VelocityComponent")
 healthComponent = NodePath("HealthComponent")
 animationPlayer = NodePath("AnimationPlayer")
-Visuals = NodePath("Visuals")
 weaponRootComponent = NodePath("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent")
 HandsWeapon = SubResource("PackedScene_vltsl")
 playerSpriteImager = NodePath("Visuals")
 
-[node name="Visuals" type="Node2D" parent="." node_paths=PackedStringArray("PlayerSprite", "HandRotation")]
-script = ExtResource("3_vkl3q")
-PlayerSprite = NodePath("CanvasGroup/Player")
+[node name="Visuals" parent="." node_paths=PackedStringArray("EntitySprite", "HandRotation") instance=ExtResource("2_prbvy")]
+EntitySprite = NodePath("CanvasGroup/Player")
 HandRotation = NodePath("CanvasGroup/RotationPivot")
-bulletParickle = ExtResource("2_xhqy0")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
 
@@ -210,18 +207,17 @@ accelerationCoeficient = 75.0
 MaxHealth = 1e+06
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
-collision_mask = 2
+collision_mask = 8
 monitorable = false
 healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-visible = false
-position = Vector2(-1, 0)
+position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_wtuf1")
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.999996, 5)
+position = Vector2(-1, 5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_b7bvv")
 one_way_collision_margin = 0.0

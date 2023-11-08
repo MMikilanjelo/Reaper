@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c83qg8usfn8jx"]
+
+[ext_resource type="Script" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.cs" id="1_q8y00"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="2_il4cc"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="3_4ybvx"]
+[ext_resource type="Texture2D" uid="uid://c7jegqg03hmey" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.png" id="4_1vj14"]
+[ext_resource type="Texture2D" uid="uid://bo6ds5us15mvm" path="res://Visuals/LightArt/bulletLight.png" id="5_gsr03"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnq0w"]
+radius = 2.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x86fb"]
+radius = 2.0
+
+[node name="EnemyBullet" type="CharacterBody2D" node_paths=PackedStringArray("timer", "velocityComponent", "hitBoxComponent")]
+collision_layer = 0
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_q8y00")
+timer = NodePath("Timer")
+velocityComponent = NodePath("VelocityComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_il4cc")]
+maxSpeed = 150.0
+accelerationCoeficient = 300.0
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_4ybvx")]
+collision_layer = 8
+collision_mask = 4
+hitBoxArea = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_hnq0w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_1vj14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x86fb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-4.47035e-07, 0)
+scale = Vector2(0.875, 0.5)
+color = Color(1, 0, 0.623529, 1)
+texture = ExtResource("5_gsr03")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true

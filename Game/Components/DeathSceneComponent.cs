@@ -26,7 +26,7 @@ namespace Game.Components
         	var blood = BloodParticle.Instantiate() as GpuParticles2D;
        		GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(blood);
         	blood.GlobalPosition = Position;
-        	blood.Rotation  = GlobalPosition.AngleToPoint(Position - player.GlobalPosition);
+        	blood.Rotation  = GlobalPosition.AngleToPoint(player.GlobalPosition);
 		}
 		public void OnEnemyDied()
 		{

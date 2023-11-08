@@ -9,10 +9,9 @@ public partial class PlayerController : CharacterBody2D
 	[Export]public  VelocityComponent velocityComponent;
 	[Export]public  HealthComponent healthComponent;
 	[Export]  AnimationPlayer animationPlayer;
-	[Export]  PlayerSpriteImager Visuals;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] PackedScene HandsWeapon;
-	[Export] PlayerSpriteImager playerSpriteImager;
+	[Export] EntitySpriteImager playerSpriteImager;
 
 	private game_events game_Events;
 	
@@ -37,6 +36,7 @@ public partial class PlayerController : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{	
 		delegateStateMachine.Update();
+		playerSpriteImager.LookAtTarget(GetGlobalMousePosition());
 		
 	}
 	public Vector2 GetMovementVector()

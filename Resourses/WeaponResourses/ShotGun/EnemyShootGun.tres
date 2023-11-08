@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bjmlbqbpi587p"]
+
+[ext_resource type="PackedScene" uid="uid://c83qg8usfn8jx" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.tscn" id="1_vfta4"]
+[ext_resource type="Script" path="res://Resourses/WeaponResourses/WeaponStats.cs" id="1_yfjat"]
+
+[resource]
+script = ExtResource("1_yfjat")
+dmg = 10.0
+atack_deley = 0.2
+Bullet = ExtResource("1_vfta4")

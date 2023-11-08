@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://5pil5ykbrsu7"]
+
+[ext_resource type="Script" path="res://Entity/Knight/Knigth.cs" id="1_tyaew"]
+[ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_6k5sy"]
+[ext_resource type="Texture2D" uid="uid://nviuvmp5pjp3" path="res://Entity/Knight/knight_with_shootGun.png" id="2_kcl85"]
+[ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="3_yal06"]
+[ext_resource type="PackedScene" uid="uid://diq1xiiwcc07y" path="res://Weapons/ShotGun/ShotGun.tscn" id="5_0sbwb"]
+[ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="6_42i4o"]
+[ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="6_euxbu"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="7_r1ao8"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="7_yqwiy"]
+[ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="8_4a4pq"]
+[ext_resource type="PackedScene" uid="uid://7sjmmjt1jfke" path="res://Components/DeathSceneComponent.tscn" id="8_wf6ay"]
+[ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="9_uvlmx"]
+[ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tj34j"]
+resource_local_to_scene = true
+shader = ExtResource("7_r1ao8")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eo8c"]
+size = Vector2(7, 1.5)
+
+[sub_resource type="Animation" id="Animation_nqxke"]
+resource_name = "Shooting"
+
+[sub_resource type="Animation" id="Animation_a0omo"]
+resource_name = "Walking"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/CanvasGroup/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h188n"]
+_data = {
+"Shooting": SubResource("Animation_nqxke"),
+"Walking": SubResource("Animation_a0omo")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d1jo6"]
+radius = 3.0
+height = 10.0
+
+[node name="Knigth" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent", "knigthSpriteImager", "pathFindingComponent", "velocityComponent", "weaponRootComponent", "animationPlayer")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_tyaew")
+healthComponent = NodePath("HealthComponent")
+knigthSpriteImager = NodePath("Visuals")
+pathFindingComponent = NodePath("PathFindingComponent")
+velocityComponent = NodePath("VelocityComponent")
+weaponRootComponent = NodePath("Visuals/CanvasGroup/Marker2D/WeaponRootComponent")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Visuals" parent="." node_paths=PackedStringArray("EntitySprite", "HandRotation") instance=ExtResource("2_6k5sy")]
+EntitySprite = NodePath("CanvasGroup/Sprite2D")
+HandRotation = NodePath("CanvasGroup/Marker2D")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals/CanvasGroup"]
+texture = ExtResource("2_kcl85")
+offset = Vector2(7, -7)
+hframes = 6
+
+[node name="Marker2D" type="Marker2D" parent="Visuals/CanvasGroup"]
+
+[node name="WeaponRootComponent" parent="Visuals/CanvasGroup/Marker2D" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("3_yal06")]
+entity = NodePath("../../../..")
+CurrentWeapon = NodePath("ShotGun")
+
+[node name="ShotGun" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent" instance=ExtResource("5_0sbwb")]
+isEnemy = true
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_42i4o")]
+hurtBoxComponent = NodePath("../HurtBoxComponent")
+sprite2D = NodePath("../Visuals/CanvasGroup/Sprite2D")
+hit_flash_material = SubResource("ShaderMaterial_tj34j")
+
+[node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
+BloodParticle = ExtResource("9_y5kyf")
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_2eo8c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h188n")
+}
+
+[node name="PathFindingComponent" parent="." node_paths=PackedStringArray("NavigationAgent2D", "velocityComponent") instance=ExtResource("6_euxbu")]
+NavigationAgent2D = NodePath("../NavigationAgent2D")
+velocityComponent = NodePath("../VelocityComponent")
+MakeSmoothHalfWayDestination = true
+ChangeNavigationInterval = 4.0
+
+[node name="VelocityComponent" parent="." instance=ExtResource("7_yqwiy")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_4a4pq")]
+MaxHealth = 500.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_uvlmx")]
+position = Vector2(-1, 1)
+collision_layer = 2
+collision_mask = 16
+monitorable = false
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(2, 0)
+shape = SubResource("CapsuleShape2D_d1jo6")

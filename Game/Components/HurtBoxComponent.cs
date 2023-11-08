@@ -15,7 +15,7 @@ namespace Game.Components
 		private float miss_chance = 0;
 		PackedScene floatingTextScene;
 		[Export] private HealthComponent healthComponent;
-		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent  , PackedScene atackEffect);
+		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
 		public float MissChance
 		{
 			get => miss_chance;
@@ -42,11 +42,12 @@ namespace Game.Components
 		{
 			random = MathUtil.RNG;
 			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
-			if(CollisionLayer == 1)
+			if(CollisionLayer == 2)
 			{
 				AddToGroup(GROUP_ENEMY_HURTBOX);
-				Connect("area_entered" , new Callable(this, nameof(onAreaEntered)));
+				
 			}
+			Connect("area_entered" , new Callable(this, nameof(onAreaEntered)));
 			
 		}
 		private bool canAceptBulletColisions()

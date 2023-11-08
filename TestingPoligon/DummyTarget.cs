@@ -18,10 +18,9 @@ public partial class DummyTarget : CharacterBody2D
     }
     public void SpawnBlood()
     {
-        GD.Print("Blood");
         var blood = BloodParticle.Instantiate() as GpuParticles2D;
         GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(blood);
         blood.GlobalPosition = GlobalPosition;
-        blood.Rotation  = GlobalPosition.AngleToPoint(-player.GlobalPosition);
+        blood.Rotation  = GlobalPosition.AngleToPoint(player.GlobalPosition);
     }
 }

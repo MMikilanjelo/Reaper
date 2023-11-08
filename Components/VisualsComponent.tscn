@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1pg5udysiplf"]
+
+[ext_resource type="Script" path="res://Entity/Player/Scipts/EntitySpriteImager.cs" id="1_33gyn"]
+[ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_p1ms0"]
+
+[node name="Visuals" type="Node2D" node_paths=PackedStringArray("EntitySprite", "HandRotation")]
+script = ExtResource("1_33gyn")
+EntitySprite = NodePath("../CanvasGroup/Player")
+HandRotation = NodePath("../CanvasGroup/RotationPivot")
+bulletParickle = ExtResource("2_p1ms0")

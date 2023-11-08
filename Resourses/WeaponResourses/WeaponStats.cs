@@ -9,5 +9,6 @@ namespace Game.Weapons
 	{
 		[Export] public float dmg;
 		[Export] public float atack_deley;
+		[Export] public PackedScene Bullet;
 	}
 }

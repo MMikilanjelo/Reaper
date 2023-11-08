@@ -1,15 +1,13 @@
 using Godot;
 using System;
 using Game.Components;
-public partial class Bullet : CharacterBody2D 
+using Game.Weapons;
+public partial class Bullet : BaseBullet
 {
 
-	public float MoveSpeed{get ; set;}
-	[Export] protected  HitBoxComponent hitBoxComponent;
 	[Export] protected Timer timer;
 	[Export] protected VelocityComponent velocityComponent;
-	[Export] PackedScene afex;
-	public Vector2  direction {get; set;}
+	
 	
 	
 
@@ -39,8 +37,5 @@ public partial class Bullet : CharacterBody2D
 		velocityComponent.Move(this);
 		
 	}
-	public void ApplyAfexForBullet(PackedScene afex)
-	{
-		hitBoxComponent.AddEffecToHit(afex);
-	}
+	
 }

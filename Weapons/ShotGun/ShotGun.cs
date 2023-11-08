@@ -8,17 +8,26 @@ namespace Game.Weapons
 {
 	public partial class ShotGun : Weapon  , IWeapon
 	{
-		[Export] PackedScene Bullet;
 		[Export] Timer timeToRecoilDecresment;
 		[Export] AnimationPlayer animationPlayer;
 		[Export] Timer atackDelayTimer;
 		[Export] float MaxRecoil = 30;
 		[Export] Marker2D shootPosition;
+		[Export] private bool isEnemy = false;
+
 		float currentRecoil = 0;
 		private WeaponStats shotGunStats;
         public override void _Ready()
         {
-            shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
+			if(isEnemy)
+			{
+				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
+			}
+			else
+			{
+				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
+			}
+			
         }
         public override void _PhysicsProcess(double delta)
         {
@@ -41,11 +50,11 @@ namespace Game.Weapons
 			var recoil_degree_max = currentRecoil * 0.5f;
 			var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
 			currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
-			Bullet bulletInstance =  Bullet.Instantiate() as Bullet;
+			BaseBullet bulletInstance =  shotGunStats.Bullet.Instantiate() as BaseBullet;
 			bulletInstance.ApplyAfexForBullet(Affex);
 			bulletInstance.Position = shootPosition.GlobalPosition;
 			bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
-			bulletInstance.LookAt(GetGlobalMousePosition());
+			bulletInstance.LookAt(directionToTarget);
 			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
 			timeToRecoilDecresment.Start(2);
 			atackDelayTimer.Start(shotGunStats.atack_deley);
