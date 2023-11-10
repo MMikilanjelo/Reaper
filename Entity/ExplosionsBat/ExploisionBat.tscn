@@ -20,7 +20,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3br7g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xaftq"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -211,6 +211,7 @@ _data = {
 
 [node name="ExploisionBat" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "healthComponent", "hitBoxComponent", "Animation")]
 collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_l801k")
 enemySensorComponent = NodePath("Areas/EnemySensorComponent")
 pathFindingComponent = NodePath("PathFindingComponent")
@@ -270,20 +271,20 @@ MakeSmoothHalfWayDestination = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("8_vju3f")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_3br7g")
+hit_flash_material = SubResource("ShaderMaterial_xaftq")
 
 [node name="Areas" type="Node2D" parent="."]
 
 [node name="EnemySensorComponent" parent="Areas" instance=ExtResource("6_y4x8q")]
-visible = false
-collision_mask = 3
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/EnemySensorComponent"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_c4ub5")
 
 [node name="HurtBoxComponent" parent="Areas" node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_buqyl")]
-visible = false
+collision_layer = 2
+collision_mask = 16
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/HurtBoxComponent"]
@@ -291,8 +292,8 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_mb5lw")
 
 [node name="HitBoxComponent" parent="Areas" node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("5_3tgip")]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 8
+collision_mask = 4
 dmg = 200.0
 hitBoxArea = NodePath("CollisionShape2D")
 

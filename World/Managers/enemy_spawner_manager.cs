@@ -3,20 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-
+using GameLogick;
 namespace Managers
 {
 	public partial class enemy_spawner_manager : Node
 	{
 		[Export] PackedScene BasickEnemyScene;
+		[Export] PackedScene BatEnemyScene;
+		[Export] PackedScene KnigthEnemyScene;
+		
 		[Export] Timer EnemySpawnerInterval;
 		[Export] const float SPAWN_RADIUS = 100f;
 		[Export] private bool Activate = false;
 		CharacterBody2D player;
 		public static  RandomNumberGenerator random = new RandomNumberGenerator();
+		private readonly LootTable<PackedScene> enemyTable = new LootTable<PackedScene>();
 		public override void _Ready()
 		{
-			
+			enemyTable.AddItemToTable(KnigthEnemyScene , 30);
+			enemyTable.AddItemToTable(BasickEnemyScene , 20);
+			enemyTable.AddItemToTable(BatEnemyScene , 10);
+
 			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
 			
 		}
@@ -59,8 +66,8 @@ namespace Managers
 			{
 				return;
 			}
-
-			var  enemy = BasickEnemyScene.Instantiate() as CharacterBody2D;
+			var enemyScene = enemyTable.PickItem();
+			var  enemy = enemyScene.Instantiate() as CharacterBody2D;
 			GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(enemy);
 			enemy.GlobalPosition = GetSpawnPosition();
 			

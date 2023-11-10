@@ -10,7 +10,6 @@ public partial class PlayerController : CharacterBody2D
 	[Export]public  HealthComponent healthComponent;
 	[Export]  AnimationPlayer animationPlayer;
 	[Export] WeaponRootComponent weaponRootComponent;
-	[Export] PackedScene HandsWeapon;
 	[Export] EntitySpriteImager playerSpriteImager;
 
 	private game_events game_Events;

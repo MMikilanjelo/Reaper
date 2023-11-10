@@ -32,7 +32,6 @@ public partial class CrystalSlime : CharacterBody2D
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		player = GameUtilities.GetPlayerNode(this);
 		stateMachine.AddState(StateNormal , EnteredStateNormal );
-		//stateMachine.AddState(AtackState  , EnterAtackState);
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState( CloseRangeAtackState , EnterCLoseRangeAtack);	
 		stateMachine.SetInitiioalState(StateNormal);
@@ -71,24 +70,8 @@ public partial class CrystalSlime : CharacterBody2D
 	
 	private void EnteredStateNormal()
 	{
-		pathFindingComponent.ForceSetTargetPosition(player.GlobalPosition);
+		pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition);
   	}
-	// private void EnterAtackState()
-	// {
-	// 	GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=> stateMachine.ChangeState(StateNormal)));
-	// }
-	// private void AtackState()
-	// {
-	// 	if(timrerBetwenntShots.IsStopped())
-	// 	{	
-	// 		timrerBetwenntShots.Start(1f);
-	// 		enemyConstructor.headPart.DoSomethisngSpecial( this , player );
-	// 	} 
-	// 	if(enemySensorComponent.isInRange)
-	// 	{
-	// 		stateMachine.ChangeState(CloseRangeAtackState);
-	// 	}
-	// }
 	private  void DeadState()
 	{
 		

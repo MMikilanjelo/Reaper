@@ -34,7 +34,7 @@ autostart = true
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_iyplb")]
 collision_layer = 16
 collision_mask = 4
-dmg = 20.0
+dmg = 60.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
