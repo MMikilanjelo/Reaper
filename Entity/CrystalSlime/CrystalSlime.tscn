@@ -17,17 +17,17 @@
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_mkrsl"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mnfyo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3l8pb"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaqc2"]
-radius = 2.0
-height = 6.0
+radius = 4.0
+height = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lq28w"]
-radius = 21.0
+radius = 10.0499
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbah7"]
 radius = 10.1203
@@ -104,7 +104,7 @@ _data = {
 "WalkAnimation": SubResource("Animation_m0ywm")
 }
 
-[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation", "timerControllerComponent")]
+[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation")]
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
 collision_layer = 2
@@ -119,7 +119,6 @@ healthComponent = NodePath("HealthComponent")
 ExperiencePeal = ExtResource("2_fihov")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
-timerControllerComponent = NodePath("TimerController")
 metadata/_edit_horizontal_guides_ = [-67.0]
 
 [node name="TimerController" parent="." instance=ExtResource("3_0rsrh")]
@@ -132,14 +131,14 @@ accelerationCoeficient = 100.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_awkp0")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_mnfyo")
+hit_flash_material = SubResource("ShaderMaterial_3l8pb")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")
 healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 7)
+position = Vector2(0, 5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_oaqc2")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -178,10 +177,18 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_a2sqj")
 
 [node name="PathFindingComponent" parent="." node_paths=PackedStringArray("NavigationAgent2D", "velocityComponent") instance=ExtResource("7_rwp3l")]
-NavigationAgent2D = NodePath("../NavigationAgent2D")
+position = Vector2(0, 4)
+NavigationAgent2D = NodePath("NavigationAgent2D")
 velocityComponent = NodePath("../VelocityComponent")
-MakeSmoothHalfWayDestination = true
 ChangeNavigationInterval = 1.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="PathFindingComponent"]
+path_desired_distance = 4.0
+target_desired_distance = 1.0
+avoidance_enabled = true
+radius = 1.0
+max_neighbors = 400
+time_horizon = 0.1
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -190,10 +197,6 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_6vnel")
 hframes = 11
 frame = 10
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
-time_horizon = 0.1
 
 [node name="HealthComponent" parent="." instance=ExtResource("9_4507k")]
 MaxHealth = 50.0

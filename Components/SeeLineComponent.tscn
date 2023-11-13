@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xsef7l74ejdq"]
+
+[ext_resource type="Script" path="res://Game/Components/SeeLineComponent.cs" id="1_utyrj"]
+
+[node name="RayCast2D" type="RayCast2D"]
+target_position = Vector2(67, 0)
+collide_with_areas = true
+script = ExtResource("1_utyrj")

@@ -1,3 +1,4 @@
+using Game.Components;
 using Godot;
 using System;
 
@@ -14,6 +15,10 @@ public partial class experience : Node2D
 
 	private void  OnAreaEntered(Area2D oterArea)
 	{
+		if(oterArea is HitBoxComponent)
+		{
+			return;
+		}
 		game_Events.On_ExperienceVialCollected(1);
 		QueueFree();
 	}

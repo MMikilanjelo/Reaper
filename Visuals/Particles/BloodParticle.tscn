@@ -73,6 +73,7 @@ _data = {
 }
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+process_mode = 3
 emitting = false
 amount = 13
 process_material = SubResource("ParticleProcessMaterial_j61vn")

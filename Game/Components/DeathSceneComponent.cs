@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using GameLogick.Utilities;
 
 namespace Game.Components
 {
@@ -22,11 +22,11 @@ namespace Game.Components
         }
         public void SpawnBloodPartickle(Vector2 Position)
 		{
-			  
+			if(!GameUtilities.CheckIfPlayerExist(this)) return;
         	var blood = BloodParticle.Instantiate() as GpuParticles2D;
        		GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(blood);
         	blood.GlobalPosition = Position;
-        	blood.Rotation  = GlobalPosition.AngleToPoint(player.GlobalPosition);
+        	blood.Rotation  = GlobalPosition.AngleToPoint(player?.GlobalPosition ?? GlobalPosition);
 		}
 		public void OnEnemyDied()
 		{
@@ -41,6 +41,7 @@ namespace Game.Components
 			enteties.AddChild(this);
 			GlobalPosition = spawnPosition;
 			SpawnBloodPartickle(spawnPosition);
+			QueueFree();
 		}
 	}
 }

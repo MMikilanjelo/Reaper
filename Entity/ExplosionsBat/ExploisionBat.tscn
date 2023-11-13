@@ -20,7 +20,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xaftq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brjkv"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -250,7 +250,7 @@ BloodParticle = ExtResource("7_5tont")
 healthComponent = NodePath("../HealthComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_1jb48")]
-accelerationCoeficient = 50.0
+maxSpeed = 50.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
@@ -271,7 +271,7 @@ MakeSmoothHalfWayDestination = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("8_vju3f")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_xaftq")
+hit_flash_material = SubResource("ShaderMaterial_brjkv")
 
 [node name="Areas" type="Node2D" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://5pil5ykbrsu7"]
+[gd_scene load_steps=21 format=3 uid="uid://5pil5ykbrsu7"]
 
 [ext_resource type="Script" path="res://Entity/Knight/Knigth.cs" id="1_tyaew"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_6k5sy"]
@@ -13,14 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://7sjmmjt1jfke" path="res://Components/DeathSceneComponent.tscn" id="8_wf6ay"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="9_uvlmx"]
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
+[ext_resource type="PackedScene" uid="uid://xsef7l74ejdq" path="res://Components/SeeLineComponent.tscn" id="14_hvday"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rtwe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwu3c"]
 resource_local_to_scene = true
 shader = ExtResource("7_r1ao8")
 shader_parameter/lerp_percent = 0.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eo8c"]
-size = Vector2(7, 1.5)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3v65f"]
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_nqxke"]
 resource_name = "Shooting"
@@ -51,9 +52,10 @@ _data = {
 radius = 3.0
 height = 10.0
 
-[node name="Knigth" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent", "knigthSpriteImager", "pathFindingComponent", "velocityComponent", "weaponRootComponent", "animationPlayer")]
+[node name="Knigth" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent", "knigthSpriteImager", "pathFindingComponent", "velocityComponent", "weaponRootComponent", "animationPlayer", "lineOfSigth")]
 collision_layer = 2
 collision_mask = 4
+motion_mode = 1
 script = ExtResource("1_tyaew")
 healthComponent = NodePath("HealthComponent")
 knigthSpriteImager = NodePath("Visuals")
@@ -61,6 +63,7 @@ pathFindingComponent = NodePath("PathFindingComponent")
 velocityComponent = NodePath("VelocityComponent")
 weaponRootComponent = NodePath("Visuals/CanvasGroup/Marker2D/WeaponRootComponent")
 animationPlayer = NodePath("AnimationPlayer")
+lineOfSigth = NodePath("RayCast2D")
 
 [node name="Visuals" parent="." node_paths=PackedStringArray("EntitySprite", "HandRotation") instance=ExtResource("2_6k5sy")]
 EntitySprite = NodePath("CanvasGroup/Sprite2D")
@@ -86,7 +89,7 @@ isEnemy = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_42i4o")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
 sprite2D = NodePath("../Visuals/CanvasGroup/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_4rtwe")
+hit_flash_material = SubResource("ShaderMaterial_mwu3c")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
 visible = false
@@ -94,8 +97,8 @@ BloodParticle = ExtResource("9_y5kyf")
 healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 8)
-shape = SubResource("RectangleShape2D_2eo8c")
+position = Vector2(2, 7)
+shape = SubResource("CircleShape2D_3v65f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -103,19 +106,21 @@ libraries = {
 }
 
 [node name="PathFindingComponent" parent="." node_paths=PackedStringArray("NavigationAgent2D", "velocityComponent") instance=ExtResource("6_euxbu")]
-NavigationAgent2D = NodePath("../NavigationAgent2D")
+position = Vector2(2, 7)
+NavigationAgent2D = NodePath("NavigationAgent2D")
 velocityComponent = NodePath("../VelocityComponent")
 MakeSmoothHalfWayDestination = true
-ChangeNavigationInterval = 4.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="PathFindingComponent"]
+avoidance_enabled = true
+max_neighbors = 300
+time_horizon = 0.1
 
 [node name="VelocityComponent" parent="." instance=ExtResource("7_yqwiy")]
+accelerationCoeficient = 30.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_4a4pq")]
 MaxHealth = 60.0
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
-time_horizon = 0.1
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_uvlmx")]
 position = Vector2(-1, 1)
@@ -127,3 +132,7 @@ healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(3, 0)
 shape = SubResource("CapsuleShape2D_d1jo6")
+
+[node name="RayCast2D" parent="." instance=ExtResource("14_hvday")]
+position = Vector2(11, 1)
+target_position = Vector2(50, 0)

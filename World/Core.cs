@@ -37,6 +37,7 @@ public partial class Core : Node2D
 		// 	AddChild(statMenu);
 		// }
 		//implement stat menu later;
+		GD.Print(Engine.GetFramesPerSecond());
 		
 	}
 	public void ChangeScene()

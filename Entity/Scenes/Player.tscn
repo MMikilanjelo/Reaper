@@ -164,10 +164,10 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 [node name="AbilitieUpgradeRecivier" parent="." instance=ExtResource("9_33jpr")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_bwik8")]
-accelerationCoeficient = 75.0
+accelerationCoeficient = 50.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 1e+06
+MaxHealth = 1.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 8
@@ -180,7 +180,7 @@ shape = SubResource("CapsuleShape2D_wtuf1")
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 5)
+position = Vector2(-0.999996, 5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_b7bvv")
 one_way_collision_margin = 0.0

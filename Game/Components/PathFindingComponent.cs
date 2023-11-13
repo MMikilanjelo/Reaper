@@ -2,6 +2,9 @@ using Godot;
 using System;
 using Generation.Alghoritms;
 using GameLogick.Utilities;
+using System.Collections.Generic;
+using Generation;
+using System.Linq;
 namespace Game.Components
 {
 	
@@ -53,18 +56,17 @@ namespace Game.Components
 		}
 		public void FollowPath()
 		{
-
 			
 			if(NavigationAgent2D.IsNavigationFinished())
 			{
 				EmitSignal(SignalName.NavigationFinished);
 				velocityComponent.Decelerate();
-				
-			 	return;
+				return;
 			}
 			var direction  = (NavigationAgent2D.GetNextPathPosition() - GlobalPosition ).Normalized();
 			velocityComponent.AccelerateInDirection(direction);
 			NavigationAgent2D.SetVelocity(velocityComponent.Velocity);
+			
 			
 		}
 		private void OnVelocityComputed(Vector2 velocity)
@@ -74,6 +76,9 @@ namespace Game.Components
 			var halfvay = newDirection.Lerp(currentDirection  , 1f - Mathf.Exp(velocityComponent.AccelerationCoeficient * (float)GetProcessDeltaTime())).Normalized();
 			velocityComponent.Velocity = halfvay * velocityComponent.Velocity.Length();
 		}
+		
+
+	
 		
 	}
 }

@@ -10,7 +10,7 @@ namespace Managers
         
 		public double GetTImeEepsed()
 		{
-			return timer.WaitTime - timer.TimeLeft; 
+			return timer.WaitTime - timer.TimeLeft;
 		}
 	}
 }

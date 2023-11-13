@@ -52,7 +52,7 @@ public partial class ExploisionBat : CharacterBody2D
 	}
 	private void EnterExplodeState()
 	{
-
+		
 		Animation.Connect(AnimationPlayer.SignalName.AnimationFinished , Callable.From((string animationName)=> {
 		if(animationName == "ExplodeAnimation")
 		{
@@ -60,6 +60,7 @@ public partial class ExploisionBat : CharacterBody2D
 			QueueFree();
 		}
 		}));
+		healthComponent.canAcceptDamage = false;
 		Animation.Play("ExplodeAnimation");
 		
 	}

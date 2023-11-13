@@ -16,7 +16,7 @@ namespace Game.Components
 {
 	public partial class WorldGeneratorComponent : Node2D
 	{
-		[Export]private TileMap worldTileMap;
+		[Export]public TileMap worldTileMap;
 		
 		[ExportGroup("Generation Parameters")]
 		[Export] private int iterations;
@@ -46,6 +46,7 @@ namespace Game.Components
 
 		private Dictionary<Vector2I , Room> RoomData = new Dictionary<Vector2I, Room>();
 		private HashSet<Vector2I> corridorsPos = new HashSet<Vector2I>();
+		public List<FloorNode>  walkableNodes;
 		
         public override void _Ready()
         {
@@ -68,7 +69,7 @@ namespace Game.Components
 			//Generate Walls
 			PaintGeneretedWallTiles(floorPosition);
 			PaintGeneretedFloorTiles(floorPosition ,Floor_atlas_tile_coordinates);
-			List<FloorNode>  walkableNodes =  CreatNodesFronTilePositions(floorPosition);
+			walkableNodes =  CreatNodesFronTilePositions(floorPosition);
 			GD.Print(RoomData.Count);
 			foreach(var item in RoomData)
 			{
@@ -334,7 +335,7 @@ namespace Game.Components
 		}
 
 		///<A* alghoritm>
-		private List<FloorNode> FindPath(Vector2I startPosition , Vector2I FinalPosition , List<FloorNode> floorNodes)
+		public List<FloorNode> FindPath(Vector2I startPosition , Vector2I FinalPosition , List<FloorNode> floorNodes)
 		{
 			FloorNode startNode = GetNodeFromTilePos(startPosition , floorNodes);
 			FloorNode destinationNode = GetNodeFromTilePos(FinalPosition , floorNodes);
@@ -382,7 +383,7 @@ namespace Game.Components
 			return null;
 
 		}
-		private List<FloorNode> RetracePath(FloorNode startNode , FloorNode endNode)
+		public List<FloorNode> RetracePath(FloorNode startNode , FloorNode endNode)
 		{
 			List<FloorNode> path = new List<FloorNode>();
 			FloorNode currentNode = endNode;
@@ -395,7 +396,7 @@ namespace Game.Components
 			path.Reverse();
 			return path;
 		}
-		private int GetDistance(FloorNode start , FloorNode destionation)
+		public int GetDistance(FloorNode start , FloorNode destionation)
 		{
 			int distanceX = Mathf.Abs(start.TileMapPosition.X -destionation.TileMapPosition.X);
 			int distanceY = Mathf.Abs(start.TileMapPosition.Y - destionation.TileMapPosition.Y);
@@ -405,7 +406,7 @@ namespace Game.Components
 			}
 			return 14 * distanceX + 10 *(distanceY - distanceX);
 		}
-		private List<FloorNode> CreatNodesFronTilePositions(HashSet<Vector2I> tilePosition)
+		public List<FloorNode> CreatNodesFronTilePositions(HashSet<Vector2I> tilePosition)
 		{
 			List<FloorNode>nodes = new List<FloorNode>();
 			foreach(var pos in tilePosition)
@@ -415,7 +416,7 @@ namespace Game.Components
 			return nodes;
 			
 		}
-		private List<FloorNode> GetNodeNeighbours(FloorNode floorNode ,  List<FloorNode> availableNodes , List<Vector2I>directionsToCheck)
+		public List<FloorNode> GetNodeNeighbours(FloorNode floorNode ,  List<FloorNode> availableNodes , List<Vector2I>directionsToCheck)
 		{
 			List<FloorNode> neighbours = new List<FloorNode>();
 			foreach(var direction in directionsToCheck)

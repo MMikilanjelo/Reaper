@@ -17,17 +17,12 @@ public partial class CrystalSlime : CharacterBody2D
 	[Export] PackedScene ExperiencePeal;
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
-	[Export] TimerControllerComponent timerControllerComponent;	
-	Timer atackTimer;
-	Timer timrerBetwenntShots;
-	Timer awaitAtackTimer;
 	CharacterBody2D player;
 	game_events Game_Events;
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	public override void _Ready()
 	{
 	
-		timrerBetwenntShots = timerControllerComponent.CreateTimer( OneShoot : true);
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		player = GameUtilities.GetPlayerNode(this);
