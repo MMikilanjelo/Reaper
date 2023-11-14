@@ -6,7 +6,6 @@ using GameLogick.StateMachine;
 public partial class DummyTarget : CharacterBody2D
 {
     [Export] HurtBoxComponent hurtBoxComponent;
-    [Export] PackedScene enemyScene;
     [Export] Area2D baffArea;
     [Export] PackedScene effect;
     CharacterBody2D player;

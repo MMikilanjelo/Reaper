@@ -39,11 +39,10 @@ namespace Managers
 			for(int i = 0 ; i < 4 ; i++)
 			{
 				
-				spawnPosition = player.GlobalPosition +(randomDirection * SPAWN_RADIUS );
+				spawnPosition = player.GlobalPosition + (randomDirection * SPAWN_RADIUS );
 				var addditional_check_offset = randomDirection * 2;
-				var quety_parameters = PhysicsRayQueryParameters2D.Create(player.Position , spawnPosition  + addditional_check_offset , 1);
+				var quety_parameters = PhysicsRayQueryParameters2D.Create(player.GlobalPosition , spawnPosition  + addditional_check_offset , 1);
 				var result =  GetTree().Root.World2D.DirectSpaceState.IntersectRay(quety_parameters);
-				
 				if (result.Count == 0)
 				{
 					return spawnPosition ;
@@ -53,10 +52,7 @@ namespace Managers
 					randomDirection = randomDirection.Rotated(Godot.Mathf.DegToRad(90));
 				}
 			}
-
-			
-			
-			return spawnPosition;
+			return Vector2.Zero;
 		}
 		private void SpawnEnemy()
 		{

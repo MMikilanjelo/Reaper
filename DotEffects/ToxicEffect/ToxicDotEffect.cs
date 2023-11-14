@@ -74,7 +74,12 @@ namespace DotEffects
 			patickles.Position = Position;
 			AddChild(patickles);
 		}
-	
+        public override void UpdateEffect()
+        {
+            
+        }
+
+
 
 
 

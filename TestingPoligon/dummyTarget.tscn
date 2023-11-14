@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dpbabs0lgbloo"]
+[gd_scene load_steps=13 format=3 uid="uid://dpbabs0lgbloo"]
 
 [ext_resource type="Script" path="res://TestingPoligon/DummyTarget.cs" id="1_q6utx"]
-[ext_resource type="PackedScene" uid="uid://ce6u3vwjt6eyk" path="res://Entity/ExplosionsBat/ExploisionBat.tscn" id="2_2sbwg"]
 [ext_resource type="Texture2D" uid="uid://cyywjyhauwv70" path="res://TestingPoligon/dummy.png" id="2_nbl6f"]
 [ext_resource type="PackedScene" uid="uid://boyomwo4rksxo" path="res://BuffsEffects/IndestructebleStatus.tscn" id="3_c5136"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="3_oly2q"]
@@ -18,7 +17,7 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvjee"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqu4d"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
@@ -31,7 +30,6 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_q6utx")
 hurtBoxComponent = NodePath("HurtBoxComponent")
-enemyScene = ExtResource("2_2sbwg")
 baffArea = NodePath("DmgReductionArea")
 effect = ExtResource("3_c5136")
 
@@ -56,13 +54,14 @@ shape = SubResource("CapsuleShape2D_eaqag")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_efr5r")]
 
-[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "sprite2D") instance=ExtResource("6_55cds")]
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "sprite2D") instance=ExtResource("6_55cds")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
+healthComponent = NodePath("../HealthComponent")
 sprite2D = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_qvjee")
+hit_flash_material = SubResource("ShaderMaterial_mqu4d")
 
 [node name="DmgReductionArea" type="Area2D" parent="."]
-visible = false
+show_behind_parent = true
 collision_layer = 0
 collision_mask = 2
 

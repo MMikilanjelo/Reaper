@@ -8,6 +8,7 @@ namespace DotEffects
 		[Export]public  float EFFECT_TICK_DURATION;
 		[Export]public  float EFFECT_TOTAL_DURATION ;
 		[Export]public  float  EFFECT_TICK_DMG ;
+		[Export] public bool isStackable;
 	}
 }
 

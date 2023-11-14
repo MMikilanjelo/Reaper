@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using DotEffects;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Net;
 
 namespace Game.Components
 {
@@ -37,8 +38,12 @@ namespace Game.Components
 				statusRecivierComponent = this
 			};
 			var currentEffect = effectToApply.Instantiate() as BaseEffect;
+			
 			entity.AddChild(currentEffect);
-			currentEffect.Connect(BaseEffect.SignalName.OnRemoveEfect  , Callable.From(()=>CanReciveEffect = true));
+			currentEffect.Connect(BaseEffect.SignalName.OnRemoveEfect  , Callable.From(()=>
+			{
+				CanReciveEffect = true;
+			}));
 			currentEffect.ApplyEffect(_efect_recivier_data);
 			CanReciveEffect = false;
 		}

@@ -7,3 +7,4 @@ script = ExtResource("1_bgw0w")
 EFFECT_TICK_DURATION = 1.0
 EFFECT_TOTAL_DURATION = 5.0
 EFFECT_TICK_DMG = 10.0
+isStackable = true

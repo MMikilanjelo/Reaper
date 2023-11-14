@@ -6,7 +6,7 @@ namespace Game.Components
 {
 	public partial class HitFlashComponent : Node
 	{
-		[Export] HurtBoxComponent hurtBoxComponent;
+		[Export] HealthComponent healthComponent;
 		[Export] Sprite2D sprite2D;
 		[Export] ShaderMaterial hit_flash_material;
 		Tween hit_flash_tween;
@@ -14,8 +14,14 @@ namespace Game.Components
         public override void _Ready()
         {
 			sprite2D.Material = hit_flash_material;
-			hurtBoxComponent.Connect(HurtBoxComponent.SignalName.HitByHitBox , Callable.From((HitBoxComponent hitbox)=>
-			AppyMaterial()));
+			healthComponent.Connect(HealthComponent.SignalName.HealthChanged ,Callable.From((HealthComponent.HealthUpdate healthUpdate)=>
+			{
+				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth)
+				{
+					return;
+				}
+				AppyMaterial();
+			}));
 			
         }
 		private void AppyMaterial()

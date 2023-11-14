@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwt02ygosk2jy"]
+[gd_scene load_steps=10 format=3 uid="uid://bwt02ygosk2jy"]
 
 [ext_resource type="Texture2D" uid="uid://87p6mdqn23ui" path="res://World/TIleSet/NewDungeon.png" id="1_lm1i1"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="1_rn4pu"]
 [ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="2_6ap0i"]
 [ext_resource type="PackedScene" uid="uid://ci5u1meyx80l2" path="res://Entity/Scenes/Player.tscn" id="3_vs4y7"]
-[ext_resource type="PackedScene" uid="uid://cd8qi5uva4rmb" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="5_g7mng"]
 
 [sub_resource type="Environment" id="Environment_4bebh"]
 background_mode = 3
@@ -401,4 +400,3 @@ position = Vector2(-30, 1)
 z_index = 3
 
 [node name="dummyTarget" parent="." instance=ExtResource("2_6ap0i")]
-enemyScene = ExtResource("5_g7mng")
