@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cwlx12ig1bmly"
+path="res://.godot/imported/Blood Splat 4 - QuickSounds.com.mp3-0bba21847c621c0598d5bc7cbb000274.mp3str"
+
+[deps]
+
+source_file="res://Audio/Blood Splat 4 - QuickSounds.com.mp3"
+dest_files=["res://.godot/imported/Blood Splat 4 - QuickSounds.com.mp3-0bba21847c621c0598d5bc7cbb000274.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

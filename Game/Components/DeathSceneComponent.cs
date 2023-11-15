@@ -9,6 +9,7 @@ namespace Game.Components
 		CharacterBody2D player;
 		[Export] PackedScene BloodParticle;
 		[Export] HealthComponent healthComponent;
+		[Export] RandomAudioPlayer randomAudioPlayer;
 
         public override void _Ready()
         {
@@ -41,7 +42,11 @@ namespace Game.Components
 			enteties.AddChild(this);
 			GlobalPosition = spawnPosition;
 			SpawnBloodPartickle(spawnPosition);
-			QueueFree();
+			randomAudioPlayer.PlayRandom();
+			randomAudioPlayer.Connect(AudioStreamPlayer.SignalName.Finished , Callable.From(()=>
+			QueueFree()
+			));
+			
 		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://5pil5ykbrsu7"]
+[gd_scene load_steps=22 format=3 uid="uid://5pil5ykbrsu7"]
 
 [ext_resource type="Script" path="res://Entity/Knight/Knigth.cs" id="1_tyaew"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_6k5sy"]
@@ -14,8 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="9_uvlmx"]
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
 [ext_resource type="PackedScene" uid="uid://xsef7l74ejdq" path="res://Components/SeeLineComponent.tscn" id="14_hvday"]
+[ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="15_nwxgw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbmd1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqo00"]
 resource_local_to_scene = true
 shader = ExtResource("7_r1ao8")
 shader_parameter/lerp_percent = 0.0
@@ -63,22 +64,26 @@ pathFindingComponent = NodePath("PathFindingComponent")
 velocityComponent = NodePath("VelocityComponent")
 weaponRootComponent = NodePath("Visuals/CanvasGroup/Marker2D/WeaponRootComponent")
 animationPlayer = NodePath("AnimationPlayer")
-lineOfSigth = NodePath("RayCast2D")
+lineOfSigth = NodePath("Visuals/CanvasGroup/Marker2D/WeaponRootComponent/RayCast2D")
 
 [node name="Visuals" parent="." node_paths=PackedStringArray("EntitySprite", "HandRotation") instance=ExtResource("2_6k5sy")]
 EntitySprite = NodePath("CanvasGroup/Sprite2D")
 HandRotation = NodePath("CanvasGroup/Marker2D")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
+use_parent_material = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals/CanvasGroup"]
+use_parent_material = true
 texture = ExtResource("2_kcl85")
 offset = Vector2(8, -7)
 hframes = 6
 
 [node name="Marker2D" type="Marker2D" parent="Visuals/CanvasGroup"]
+use_parent_material = true
 
 [node name="WeaponRootComponent" parent="Visuals/CanvasGroup/Marker2D" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("3_yal06")]
+use_parent_material = true
 entity = NodePath("../../../..")
 CurrentWeapon = NodePath("ShotGun")
 
@@ -86,11 +91,14 @@ CurrentWeapon = NodePath("ShotGun")
 position = Vector2(1, 0)
 isEnemy = true
 
-[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "sprite2D") instance=ExtResource("6_42i4o")]
-hurtBoxComponent = NodePath("../HurtBoxComponent")
+[node name="RayCast2D" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent" instance=ExtResource("14_hvday")]
+position = Vector2(11, 1)
+target_position = Vector2(300, 0)
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_42i4o")]
 healthComponent = NodePath("../HealthComponent")
-sprite2D = NodePath("../Visuals/CanvasGroup/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_pbmd1")
+visualsNode = NodePath("../Visuals")
+hit_flash_material = SubResource("ShaderMaterial_lqo00")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
 visible = false
@@ -134,6 +142,6 @@ healthComponent = NodePath("../HealthComponent")
 position = Vector2(3, 0)
 shape = SubResource("CapsuleShape2D_d1jo6")
 
-[node name="RayCast2D" parent="." instance=ExtResource("14_hvday")]
-position = Vector2(11, 1)
-target_position = Vector2(50, 0)
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("15_nwxgw")]
+hurtBoxComponent = NodePath("../HurtBoxComponent")
+visualsNode = NodePath("../Visuals")

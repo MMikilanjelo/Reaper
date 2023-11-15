@@ -15,10 +15,15 @@ run/main_scene="res://World/Scenes/World.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Audio/default_bus_layout.tres"
+
 [autoload]
 
 GameEvents="*res://AutoLoad/game_events.tscn"
 UIEvents="*res://AutoLoad/UIEvents.tscn"
+MusicPlayer="*res://AutoLoad/MusicPlayer.tscn"
 
 [display]
 

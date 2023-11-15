@@ -23,7 +23,8 @@ public partial class Knigth : CharacterBody2D
     {
        	Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
-		lineOfSigth.SetViewDistance(600);
+		pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));
+		lineOfSigth.SetViewDistance(400);
 		player = GameUtilities.GetPlayerNode(this);
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(NormalState , EnteredNormalState);
@@ -39,7 +40,6 @@ public partial class Knigth : CharacterBody2D
 		
 		stateMachine.Update();
 		knigthSpriteImager.LookAtTarget(player.Position);
-		lineOfSigth.SetTargetPosition(player.GlobalPosition - GlobalPosition);
     }
 	
    

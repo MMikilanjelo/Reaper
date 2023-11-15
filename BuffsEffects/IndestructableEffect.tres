@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c037636u4hmhw"]
+
+[ext_resource type="Script" path="res://DotEffects/EffectLogickScript/EffectStats.cs" id="1_phdhe"]
+
+[resource]
+script = ExtResource("1_phdhe")
+EFFECT_TICK_DURATION = 0.0
+EFFECT_TOTAL_DURATION = 0.0
+EFFECT_TICK_DMG = 0.0
+isStackable = false

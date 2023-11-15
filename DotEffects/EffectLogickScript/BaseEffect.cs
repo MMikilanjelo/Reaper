@@ -6,7 +6,7 @@ namespace DotEffects
 {
 	public partial class BaseEffect : Node2D
 	{
-		[Signal] public delegate void OnRemoveEfectEventHandler();
+		[Signal] public delegate void OnRemoveEfectEventHandler(BaseEffect effect);
 		public EffectStats effectStatsData;
 		public virtual void ApplyEffect(StatusEfffectData _data)
 		{

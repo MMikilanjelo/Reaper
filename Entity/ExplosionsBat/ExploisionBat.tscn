@@ -20,7 +20,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo8ov"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7d62c"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -234,6 +234,7 @@ scale = Vector2(0.975, 0.975)
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 modulate = Color(0.996078, 0.996078, 0.996078, 1)
+use_parent_material = true
 position = Vector2(0, -7)
 texture = ExtResource("2_231kp")
 hframes = 5
@@ -268,11 +269,10 @@ NavigationAgent2D = NodePath("../NavigationAgent2D")
 velocityComponent = NodePath("../VelocityComponent")
 MakeSmoothHalfWayDestination = true
 
-[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "sprite2D") instance=ExtResource("8_vju3f")]
-hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("8_vju3f")]
 healthComponent = NodePath("../HealthComponent")
-sprite2D = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_jo8ov")
+visualsNode = NodePath("../Visuals")
+hit_flash_material = SubResource("ShaderMaterial_7d62c")
 
 [node name="Areas" type="Node2D" parent="."]
 
@@ -311,5 +311,6 @@ libraries = {
 "": SubResource("AnimationLibrary_yk1nc")
 }
 
-[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("11_ltikm")]
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("11_ltikm")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
+visualsNode = NodePath("../Visuals")

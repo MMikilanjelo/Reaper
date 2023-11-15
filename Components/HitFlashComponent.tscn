@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Game/Components/HitFlashComponent.cs" id="1_irkn8"]
 [ext_resource type="Material" uid="uid://bkbwfqp7iavbg" path="res://Visuals/Materials/HitFlashMaterials.tres" id="2_5hs6w"]
 
-[node name="HitFlashComponent" type="Node" node_paths=PackedStringArray("sprite2D")]
+[node name="HitFlashComponent" type="Node"]
 script = ExtResource("1_irkn8")
-sprite2D = NodePath("")
 hit_flash_material = ExtResource("2_5hs6w")

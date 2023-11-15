@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform vec4 color_gap: source_color = vec4(0.25);
-uniform vec4 color_stripe: source_color = vec4(1.0, 0.75, 0.0, 1.0);
+uniform vec4 color_stripe: source_color = vec4(1.0, 0.65, 1, 1.0);
 uniform float divisions = 8.0; // increase for more stripe density
 uniform float stripe_bias = 2.5; // 1.0 means no stripes; 2.0 means stripes and gaps are equal size
 uniform float speed = 0.1;

@@ -67,10 +67,7 @@ namespace Game.Components
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
-					var floating_text = floatingTextScene.Instantiate() as FloatingText;
-					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
-					floating_text.GlobalPosition = GlobalPosition;
-					floating_text.Start(Convert.ToString(totaldmg));	
+						
 				}
 				else 
 				{

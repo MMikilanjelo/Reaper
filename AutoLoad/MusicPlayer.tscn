@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgy2wyvevq4nr"]
+
+[ext_resource type="AudioStream" uid="uid://fu53lkc80vud" path="res://Audio/Backbeat.mp3" id="1_wn7do"]
+[ext_resource type="Script" path="res://AutoLoad/MusicPlayer.cs" id="2_cyxsq"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_wn7do")
+volume_db = -5.0
+autoplay = true
+bus = &"music"
+script = ExtResource("2_cyxsq")

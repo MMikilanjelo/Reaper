@@ -50,6 +50,7 @@ _data = {
 }
 
 [node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "animationPlayer", "atackDelayTimer", "shootPosition")]
+use_parent_material = true
 script = ExtResource("1_tgw5h")
 timeToRecoilDecresment = NodePath("RecoilTimer")
 animationPlayer = NodePath("AnimationPlayer")
@@ -57,6 +58,7 @@ atackDelayTimer = NodePath("AtackDelayTimer")
 shootPosition = NodePath("Weapon/ShootPosition")
 
 [node name="Weapon" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("2_xlgnl")
 offset = Vector2(0, -8)
 hframes = 3
@@ -66,6 +68,7 @@ texture = ExtResource("3_36tjs")
 offset = Vector2(0, -8)
 
 [node name="ShootPosition" type="Marker2D" parent="Weapon"]
+use_parent_material = true
 position = Vector2(10, 1)
 
 [node name="RecoilTimer" type="Timer" parent="."]

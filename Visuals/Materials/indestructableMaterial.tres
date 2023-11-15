@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnuawfd75kxqe"]
+
+[ext_resource type="Shader" path="res://Visuals/Shaders/OutLine.gdshader" id="1_3tl14"]
+
+[resource]
+shader = ExtResource("1_3tl14")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true

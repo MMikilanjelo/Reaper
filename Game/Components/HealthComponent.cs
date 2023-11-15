@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Runtime.CompilerServices;
+using GameUI;
 
 namespace Game.Components
 {
@@ -10,7 +11,7 @@ public partial class HealthComponent : Node2D
 	[Signal] public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
 	[Signal] public delegate void DiedEventHandler();
 	private bool _hasDied;
-	
+	private PackedScene floatingTextScene;
 	public bool _isDamaged => CurrentHealth < MaxHealth;
 	public bool _HasHealthRamaining => !Mathf.IsEqualApprox(CurrentHealth , 0f);
 
@@ -64,6 +65,7 @@ public partial class HealthComponent : Node2D
 	public override void _Ready()
 	{
 		InitializeHealth();
+		floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 	}
 
 	
@@ -80,6 +82,10 @@ public partial class HealthComponent : Node2D
 		if(canAcceptDamage)
 		{
 			CurrentHealth -= damage;
+			var floating_text = floatingTextScene.Instantiate() as FloatingText;
+			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(floating_text);
+			floating_text.GlobalPosition = GlobalPosition;
+			floating_text.Start(Convert.ToString(damage));
 		}
 		
 	}

@@ -167,7 +167,7 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 accelerationCoeficient = 50.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 1.0
+MaxHealth = 50.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 8

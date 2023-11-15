@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://boyomwo4rksxo"]
+[gd_scene load_steps=4 format=3 uid="uid://boyomwo4rksxo"]
 
 [ext_resource type="Script" path="res://BuffsEffects/IndestructebleStatus.cs" id="1_atktj"]
+[ext_resource type="Material" uid="uid://bnuawfd75kxqe" path="res://Visuals/Materials/indestructableMaterial.tres" id="2_6qaik"]
+[ext_resource type="Resource" uid="uid://c037636u4hmhw" path="res://BuffsEffects/IndestructableEffect.tres" id="3_6rcrw"]
 
-[node name="IndestructebleStatus" type="Node2D"]
+[node name="IndestructebleStatus" type="Node2D" node_paths=PackedStringArray("resourcePreloader")]
 script = ExtResource("1_atktj")
+shaderMaterial = ExtResource("2_6qaik")
+resourcePreloader = NodePath("ResourcePreloader")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("IndestructableEffect"), [ExtResource("3_6rcrw")]]

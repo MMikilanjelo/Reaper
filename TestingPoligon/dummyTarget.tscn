@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpbabs0lgbloo"]
+[gd_scene load_steps=16 format=3 uid="uid://dpbabs0lgbloo"]
 
 [ext_resource type="Script" path="res://TestingPoligon/DummyTarget.cs" id="1_q6utx"]
 [ext_resource type="Texture2D" uid="uid://cyywjyhauwv70" path="res://TestingPoligon/dummy.png" id="2_nbl6f"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/DotedCircle.gdshader" id="3_3rp7r"]
 [ext_resource type="PackedScene" uid="uid://boyomwo4rksxo" path="res://BuffsEffects/IndestructebleStatus.tscn" id="3_c5136"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="3_oly2q"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="4_psdoa"]
@@ -17,31 +18,46 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqu4d"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc6h8"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a70y2"]
-radius = 62.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2dx8"]
+shader = ExtResource("3_3rp7r")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/diameter = 1.0
+shader_parameter/thickness = 0.02
+shader_parameter/frequency = 20.0
+shader_parameter/phase_speed = 1.0
 
-[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "baffArea")]
-collision_layer = 0
+[sub_resource type="CanvasTexture" id="CanvasTexture_0jdf7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a70y2"]
+radius = 86.0
+
+[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea")]
+collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_q6utx")
 hurtBoxComponent = NodePath("HurtBoxComponent")
+healthComponent = NodePath("HealthComponent")
 baffArea = NodePath("DmgReductionArea")
 effect = ExtResource("3_c5136")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+use_parent_material = true
 texture = ExtResource("2_nbl6f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_esacc")
 
-[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("3_oly2q")]
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("3_oly2q")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
+visualsNode = NodePath("../Visuals")
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_psdoa")]
 collision_layer = 2
@@ -53,17 +69,25 @@ healthComponent = NodePath("../HealthComponent")
 shape = SubResource("CapsuleShape2D_eaqag")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_efr5r")]
+MaxHealth = 600.0
 
-[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "sprite2D") instance=ExtResource("6_55cds")]
-hurtBoxComponent = NodePath("../HurtBoxComponent")
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_55cds")]
 healthComponent = NodePath("../HealthComponent")
-sprite2D = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_mqu4d")
+visualsNode = NodePath("../Visuals")
+hit_flash_material = SubResource("ShaderMaterial_tc6h8")
 
 [node name="DmgReductionArea" type="Area2D" parent="."]
 show_behind_parent = true
 collision_layer = 0
 collision_mask = 2
 
+[node name="AuraReduction" type="Sprite2D" parent="DmgReductionArea"]
+z_as_relative = false
+material = SubResource("ShaderMaterial_u2dx8")
+position = Vector2(91, 90)
+scale = Vector2(180, 180)
+texture = SubResource("CanvasTexture_0jdf7")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DmgReductionArea"]
 shape = SubResource("CircleShape2D_a70y2")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)

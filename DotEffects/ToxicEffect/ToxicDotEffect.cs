@@ -2,6 +2,7 @@ using Game.Components;
 using GameUI;
 using Godot;
 using System;
+using System.Data.Common;
 
 
 namespace DotEffects
@@ -20,7 +21,7 @@ namespace DotEffects
 		private  int total_count_of_effect;
         public override void _Ready()
         {
-			this.effectStatsData = resourcePreloader.GetResource("ToxicEfectData") as EffectStats;
+			effectStatsData = resourcePreloader.GetResource("ToxicEfectData") as EffectStats;
 			floatingTextScene = resourcePreloader.GetResource("FloatingText") as PackedScene;
 			total_count_of_effect = (int)(effectStatsData.EFFECT_TOTAL_DURATION/effectStatsData.EFFECT_TICK_DURATION);
 			
@@ -56,7 +57,7 @@ namespace DotEffects
 			
 			//AddFloatingText(floatingTextScene , GlobalPosition , effectStatsData.EFFECT_TICK_DMG.ToString());
 			AddPartcike(EffectPatrickle);
-			EmitSignal(SignalName.OnRemoveEfect);
+			EmitSignal(SignalName.OnRemoveEfect , this);
 			QueueFree();
 		}
 		private void AddFloatingText(PackedScene floating_text_scene, Vector2 position , string text)
@@ -76,7 +77,14 @@ namespace DotEffects
 		}
         public override void UpdateEffect()
         {
-            
+			total_count_of_effect += 10;
+			total_effect_duration_timer.WaitTime += total_count_of_effect * effectStatsData.EFFECT_TICK_DURATION;
+			total_effect_duration_timer.Start();
+			//GD.Print(GetMaxStacks());
+        }
+        public override int GetMaxStacks()
+        {
+            return total_count_of_effect;
         }
 
 
