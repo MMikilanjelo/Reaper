@@ -11,6 +11,7 @@ namespace Managers
 		[Export] PackedScene BasickEnemyScene;
 		[Export] PackedScene BatEnemyScene;
 		[Export] PackedScene KnigthEnemyScene;
+		[Export] PackedScene DummyTargetScene;
 		
 		[Export] Timer EnemySpawnerInterval;
 		[Export] const float SPAWN_RADIUS = 100f;
@@ -20,9 +21,10 @@ namespace Managers
 		private readonly LootTable<PackedScene> enemyTable = new LootTable<PackedScene>();
 		public override void _Ready()
 		{
-			enemyTable.AddItemToTable(KnigthEnemyScene , 30);
-			enemyTable.AddItemToTable(BasickEnemyScene , 20);
-			enemyTable.AddItemToTable(BatEnemyScene , 10);
+			enemyTable.AddItemToTable(KnigthEnemyScene , 60);
+			enemyTable.AddItemToTable(BasickEnemyScene , 40);
+			enemyTable.AddItemToTable(BatEnemyScene , 20);
+			enemyTable.AddItemToTable(DummyTargetScene , 5);
 
 			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
 			

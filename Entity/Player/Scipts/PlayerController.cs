@@ -11,7 +11,6 @@ public partial class PlayerController : CharacterBody2D
 	[Export]  AnimationPlayer animationPlayer;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] EntitySpriteImager playerSpriteImager;
-
 	private game_events game_Events;
 	
 	public float xMovent;

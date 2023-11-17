@@ -15,14 +15,14 @@ public partial class DummyTarget : CharacterBody2D
     {
         baffArea.Connect(Area2D.SignalName.BodyEntered , Callable.From((Node2D otherBody)=>
         {
-            if(otherBody != this)
+            if(otherBody is not DummyTarget)
             {
                 ApplyBaff(otherBody);   
             }
             
         }));
-        baffArea.Connect(Area2D.SignalName.BodyExited , Callable.From((Node2D otherBody)=>
-        RemoveBaff(otherBody)));
+        
+        baffArea.Connect(Area2D.SignalName.BodyExited , Callable.From((Node2D otherBody)=> RemoveBaff(otherBody)));
         healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>
         {
             QueueFree();
@@ -33,19 +33,20 @@ public partial class DummyTarget : CharacterBody2D
     public void ApplyBaff(Node2D otherBody)
     {
        StatusRecivierComponent entityStatusComponent = otherBody.GetNodeOrNull<StatusRecivierComponent>("StatusRecivierComponent");
-       if(entityStatusComponent == null)
+       if(entityStatusComponent != null)
        {
-            return;
+            entityStatusComponent.ApplyEffect(effect);
        }
-       entityStatusComponent.ApplyEffect(effect);
+      
     }
     public void RemoveBaff(Node2D otherBody)
     {
         StatusRecivierComponent entityStatusComponent = otherBody.GetNodeOrNull<StatusRecivierComponent>("StatusRecivierComponent");
-        if(entityStatusComponent == null)
+        if(entityStatusComponent != null)
         {
-            return;
+            entityStatusComponent.ForcedRemoveEffect();
         }
-        entityStatusComponent.ForcedRemoveEffect();
+        
     }
+    // fix bug when enemy cross multiple areas the baff is  going on 
 }

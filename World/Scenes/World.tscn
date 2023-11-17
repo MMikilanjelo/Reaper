@@ -572,6 +572,7 @@ UpgradeSceenScene = ExtResource("5_i2uh0")
 BasickEnemyScene = ExtResource("9_m1bbd")
 BatEnemyScene = ExtResource("10_exb6d")
 KnigthEnemyScene = ExtResource("11_61di8")
+DummyTargetScene = ExtResource("20_avvrh")
 Activate = true
 
 [node name="UI" type="Node" parent="."]
@@ -639,8 +640,5 @@ z_index = 3
 position = Vector2(46, -7)
 
 [node name="CharacterBody2D" parent="Entities" instance=ExtResource("4_kqosp")]
-
-[node name="dummyTarget" parent="Entities" instance=ExtResource("20_avvrh")]
-position = Vector2(142, 50)
 
 [node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]

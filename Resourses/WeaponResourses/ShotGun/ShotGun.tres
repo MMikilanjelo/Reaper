@@ -1,12 +1,10 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bjo2syoo4wmrs"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bjo2syoo4wmrs"]
 
 [ext_resource type="Script" path="res://Resourses/WeaponResourses/WeaponStats.cs" id="1_0upwp"]
 [ext_resource type="PackedScene" uid="uid://dipdqwhcwymbn" path="res://Weapons/Bullets/BaseBullet/Bullet.tscn" id="1_70gcc"]
-[ext_resource type="PackedScene" uid="uid://c83qg8usfn8jx" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.tscn" id="2_p1vfo"]
 
 [resource]
 script = ExtResource("1_0upwp")
 dmg = 10.0
-atack_deley = 0.2
+atack_deley = 0.4
 Bullet = ExtResource("1_70gcc")
-EnemyBulletVersion = ExtResource("2_p1vfo")

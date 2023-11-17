@@ -14,6 +14,7 @@ namespace Game.Weapons
 		[Export] float MaxRecoil = 30;
 		[Export] Marker2D shootPosition;
 		[Export] private bool isEnemy = false;
+		[Export] AudioStreamPlayer2D gunAudioPlayer;
 
 		float currentRecoil = 0;
 		private WeaponStats shotGunStats;
@@ -45,6 +46,7 @@ namespace Game.Weapons
         public override void Shoot(Vector2 directionToTarget )
 		{
 			animationPlayer.Play("Shoot");
+			gunAudioPlayer.Play();
 			_canShoot = false;
 			var recoilIncreasment = MaxRecoil * 0.1f;
 			var recoil_degree_max = currentRecoil * 0.5f;

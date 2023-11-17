@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_yfjat")
 dmg = 10.0
-atack_deley = 0.2
+atack_deley = 0.4
 Bullet = ExtResource("1_vfta4")

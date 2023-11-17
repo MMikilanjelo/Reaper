@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_mkrsl"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpwqo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dtmh"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
@@ -27,7 +27,7 @@ radius = 4.0
 height = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lq28w"]
-radius = 10.0499
+radius = 22.0227
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xbah7"]
 radius = 10.1203
@@ -131,7 +131,7 @@ maxSpeed = 10.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_awkp0")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_kpwqo")
+hit_flash_material = SubResource("ShaderMaterial_3dtmh")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://5pil5ykbrsu7"]
+[gd_scene load_steps=21 format=3 uid="uid://5pil5ykbrsu7"]
 
 [ext_resource type="Script" path="res://Entity/Knight/Knigth.cs" id="1_tyaew"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_6k5sy"]
@@ -13,10 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://7sjmmjt1jfke" path="res://Components/DeathSceneComponent.tscn" id="8_wf6ay"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="9_uvlmx"]
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
-[ext_resource type="PackedScene" uid="uid://xsef7l74ejdq" path="res://Components/SeeLineComponent.tscn" id="14_hvday"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="15_nwxgw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqo00"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02q02"]
 resource_local_to_scene = true
 shader = ExtResource("7_r1ao8")
 shader_parameter/lerp_percent = 0.0
@@ -91,14 +90,14 @@ CurrentWeapon = NodePath("ShotGun")
 position = Vector2(1, 0)
 isEnemy = true
 
-[node name="RayCast2D" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent" instance=ExtResource("14_hvday")]
-position = Vector2(11, 1)
-target_position = Vector2(300, 0)
+[node name="RayCast2D" type="RayCast2D" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent"]
+target_position = Vector2(150, 0)
+collide_with_areas = true
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_42i4o")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_lqo00")
+hit_flash_material = SubResource("ShaderMaterial_02q02")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
 visible = false

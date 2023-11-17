@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci5u1meyx80l2"]
+[gd_scene load_steps=22 format=3 uid="uid://ci5u1meyx80l2"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_prbvy"]
@@ -13,9 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggq5a"]
-shader = ExtResource("2_s0422")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
@@ -124,6 +121,7 @@ _data = {
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
 texture_filter = 1
+collision_layer = 0
 collision_mask = 4
 motion_mode = 1
 safe_margin = 0.001
@@ -141,8 +139,6 @@ HandRotation = NodePath("CanvasGroup/RotationPivot")
 [node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
 
 [node name="Player" type="Sprite2D" parent="Visuals/CanvasGroup"]
-texture_filter = 2
-material = SubResource("ShaderMaterial_ggq5a")
 texture = ExtResource("14_xvhy2")
 offset = Vector2(0, -9)
 hframes = 4

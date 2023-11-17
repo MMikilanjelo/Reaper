@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://diq1xiiwcc07y"]
+[gd_scene load_steps=7 format=3 uid="uid://diq1xiiwcc07y"]
 
 [ext_resource type="Script" path="res://Weapons/ShotGun/ShotGun.cs" id="1_tgw5h"]
 [ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="2_xlgnl"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_36tjs"]
+[ext_resource type="AudioStream" uid="uid://dxww4oyv16jj6" path="res://Audio/desert-eagle-gunshot-14622.mp3" id="4_dap3a"]
 
 [sub_resource type="Animation" id="Animation_0lei4"]
 resource_name = "Shoot"
@@ -49,13 +50,14 @@ _data = {
 "Shoot": SubResource("Animation_0lei4")
 }
 
-[node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "animationPlayer", "atackDelayTimer", "shootPosition")]
+[node name="ShotGun" type="Node2D" node_paths=PackedStringArray("timeToRecoilDecresment", "animationPlayer", "atackDelayTimer", "shootPosition", "gunAudioPlayer")]
 use_parent_material = true
 script = ExtResource("1_tgw5h")
 timeToRecoilDecresment = NodePath("RecoilTimer")
 animationPlayer = NodePath("AnimationPlayer")
 atackDelayTimer = NodePath("AtackDelayTimer")
 shootPosition = NodePath("Weapon/ShootPosition")
+gunAudioPlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Weapon" type="Sprite2D" parent="."]
 use_parent_material = true
@@ -81,3 +83,8 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_6b5s0")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dap3a")
+max_distance = 300.0
+bus = &"sfx"

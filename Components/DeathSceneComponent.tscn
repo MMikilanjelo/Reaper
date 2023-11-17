@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7sjmmjt1jfke"]
+[gd_scene load_steps=7 format=3 uid="uid://7sjmmjt1jfke"]
 
 [ext_resource type="Script" path="res://Game/Components/DeathSceneComponent.cs" id="1_n7y5e"]
 [ext_resource type="PackedScene" uid="uid://bmbc68ovi54ey" path="res://Components/RandomAudioPlayer.tscn" id="2_oifo6"]
@@ -6,11 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://divtjomiqeha5" path="res://Audio/Blood Splat 3 - QuickSounds.com.mp3" id="4_owwks"]
 [ext_resource type="AudioStream" uid="uid://cwlx12ig1bmly" path="res://Audio/Blood Splat 4 - QuickSounds.com.mp3" id="5_eibgv"]
 [ext_resource type="AudioStream" uid="uid://c75y8gdg4uk1f" path="res://Audio/Blood Splat - QuickSounds.com.mp3" id="6_fm0f7"]
-[ext_resource type="AudioStream" uid="uid://bt1wk0lcjs4m7" path="res://Audio/very-loud-splat-88998.mp3" id="7_yk7na"]
 
 [node name="DeathSceneComponent" type="Node2D" node_paths=PackedStringArray("randomAudioPlayer")]
 script = ExtResource("1_n7y5e")
 randomAudioPlayer = NodePath("RandomAudioStreamPlayer2DComponent")
 
 [node name="RandomAudioStreamPlayer2DComponent" parent="." instance=ExtResource("2_oifo6")]
-streams = [ExtResource("3_0jd4i"), ExtResource("4_owwks"), ExtResource("5_eibgv"), ExtResource("6_fm0f7"), ExtResource("7_yk7na")]
+process_mode = 3
+streams = [ExtResource("3_0jd4i"), ExtResource("4_owwks"), ExtResource("5_eibgv"), ExtResource("6_fm0f7")]

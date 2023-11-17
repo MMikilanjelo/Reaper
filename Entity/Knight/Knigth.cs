@@ -17,14 +17,14 @@ public partial class Knigth : CharacterBody2D
 	[Export] VelocityComponent velocityComponent;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] AnimationPlayer animationPlayer;
-	[Export] SeeLineComponent lineOfSigth;
+	[Export] RayCast2D lineOfSigth;
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
     public override void _Ready()
     {
        	Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 		pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));
-		lineOfSigth.SetViewDistance(400);
+	
 		player = GameUtilities.GetPlayerNode(this);
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(NormalState , EnteredNormalState);
@@ -39,19 +39,19 @@ public partial class Knigth : CharacterBody2D
 		}
 		
 		stateMachine.Update();
+		
 		knigthSpriteImager.LookAtTarget(player.Position);
+		
     }
-	
-   
-	private void EnteredNormalState()
+    
+
+    private void EnteredNormalState()
 	{
 		GetTree().CreateTimer(1).Connect(Timer.SignalName.Timeout , Callable.From(()=>
 			stateMachine.ChangeState(DetectionState)));
   	}
 	private void NormalState()
 	{
-		
-		
 		velocityComponent.Move(this);
 		pathFindingComponent.FollowPath();
 		pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition);
@@ -76,6 +76,7 @@ public partial class Knigth : CharacterBody2D
 	}
 	private void DetectionState()
 	{
+		
 		if(lineOfSigth.IsColliding())
 		{
 			if(lineOfSigth.GetCollider() is HurtBoxComponent hurtBoxComponent)
@@ -83,7 +84,9 @@ public partial class Knigth : CharacterBody2D
 				stateMachine.ChangeState(AtackState);
 			}
 			else{
+				
 				stateMachine.ChangeState(NormalState);
+				
 			}
 		}
 		else{

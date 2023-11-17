@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://brt1ygqkmec13"]
+[gd_scene load_steps=10 format=3 uid="uid://brt1ygqkmec13"]
 
 [ext_resource type="Texture2D" uid="uid://dm71tc2bit4mj" path="res://Visuals/Particles/Textures/bullletparticle.png" id="1_eh087"]
+[ext_resource type="AudioStream" uid="uid://cgwl1n05bwmla" path="res://Audio/gun-shells-hitting-ground-40297.mp3" id="2_n5d3o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0fhqk"]
 
@@ -97,3 +98,8 @@ speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_r5ro5")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_n5d3o")
+volume_db = -15.0
+autoplay = true

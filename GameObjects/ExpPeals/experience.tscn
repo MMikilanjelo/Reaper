@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://drr3p0egpr4rx"]
+[gd_scene load_steps=5 format=3 uid="uid://drr3p0egpr4rx"]
 
 [ext_resource type="Script" path="res://GameObjects/ExpPeals/experience.cs" id="1_kqyy4"]
+[ext_resource type="Material" uid="uid://bnuawfd75kxqe" path="res://Visuals/Materials/indestructableMaterial.tres" id="2_2eia5"]
 [ext_resource type="Texture2D" uid="uid://b54wdc65t5wnd" path="res://GameObjects/ExpPeals/expireence.png" id="2_x4at3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2lic4"]
@@ -11,6 +12,7 @@ script = ExtResource("1_kqyy4")
 PickableArea = NodePath("Area2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_2eia5")
 texture = ExtResource("2_x4at3")
 
 [node name="Area2D" type="Area2D" parent="."]

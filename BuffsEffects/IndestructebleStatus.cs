@@ -15,7 +15,7 @@ public partial class IndestructebleStatus : BaseEffect
     {
 		this._data = _data;
 		_data.visuals.Material = shaderMaterial;
-		shaderMaterial.SetShaderParameter("color" , new Color(240 , 0 ,0 ,0.5f));
+		shaderMaterial.SetShaderParameter("color" , new Color(0 , 255 ,255 ,0.5f));
 		shaderMaterial.SetShaderParameter("width" , .7);
 		shaderMaterial.SetShaderParameter("pattern" , 2);
 		_data.healthComponent.canAcceptDamage = false;
