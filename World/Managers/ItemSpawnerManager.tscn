@@ -2,5 +2,10 @@
 
 [ext_resource type="Script" path="res://World/Managers/ItemSpawnerManager.cs" id="1_mpfib"]
 
-[node name="ItemsSpawnerManager" type="Node"]
+[node name="ItemsSpawnerManager" type="Node" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_mpfib")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true

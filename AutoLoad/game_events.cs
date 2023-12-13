@@ -11,6 +11,7 @@ public partial class game_events : Node
 	[Signal] public delegate void OnEnemyDiedEventHandler(Vector2 enemy_died_position , int enemy_bullet_cost);
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
 	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
+	[Signal] public delegate void OnBulletChestCollectedEventHandler(int bullets_amount);
 	
 
 	public void On_ExperienceVialCollected(float amount)
@@ -32,6 +33,10 @@ public partial class game_events : Node
 	public void EmitRunOutAmoo(bool _hasAmmmo)
 	{
 		EmitSignal(SignalName.OnRunOutAmmo , _hasAmmmo);
+	}
+	public void EmitChestCollection(int bullets_amount)
+	{
+		EmitSignal(SignalName.OnBulletChestCollected , bullets_amount);
 	}
 	
 

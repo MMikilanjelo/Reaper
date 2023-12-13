@@ -3,7 +3,7 @@ using System;
 
 namespace GameLogick.Utilities
 {
-	public   static class GameUtilities 
+	public  static class GameUtilities 
 	{
 		public static bool CheckIfPlayerExist(Node2D node)
 		{
@@ -20,6 +20,7 @@ namespace GameLogick.Utilities
 			return node.GetTree().GetFirstNodeInGroup("Player") as CharacterBody2D;
 		}
 	}
+	
 	public static class MathUtil
 	{
 		public static RandomNumberGenerator RNG { get; private set; } = new();

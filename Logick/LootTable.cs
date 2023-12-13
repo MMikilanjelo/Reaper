@@ -16,7 +16,6 @@ namespace GameLogick
             random = MathUtil.RNG;
         }
         public void SetSeed(ulong seed) => random.Seed = seed;
-
         public void SetRandom(Godot.RandomNumberGenerator random) => this.random = random;
        
         private int  TotalWeigthSum = 0;

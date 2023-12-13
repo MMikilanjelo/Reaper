@@ -1,9 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cd8qi5uva4rmb"]
+[gd_scene load_steps=26 format=3 uid="uid://cd8qi5uva4rmb"]
 
 [ext_resource type="Script" path="res://Entity/CrystalSlime/CrystalSlime.cs" id="1_yfvsi"]
 [ext_resource type="PackedScene" path="res://Components/EnemyConstractorComponent.tscn" id="2_eq5p4"]
 [ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_fihov"]
-[ext_resource type="PackedScene" uid="uid://ds70gf11ajlcg" path="res://World/Managers/TImerControllerManager.tscn" id="3_0rsrh"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="3_paws7"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="4_uf5tc"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_easg5"]
@@ -16,8 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="9_4507k"]
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_mkrsl"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
+[ext_resource type="Texture2D" uid="uid://dhcg1j6034c0f" path="res://Entity/CrystalSlime/crystal_slime_moving.png" id="15_0vln3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dtmh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwv5g"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
@@ -81,30 +81,107 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.8, 1.8), Vector2(1.5, 1.5), Vector2(1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Moving:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rdadx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Moving:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Moving:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_m0ywm"]
 resource_name = "WalkAnimation"
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Visuals/Moving:frame")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Moving:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r2ymp"]
 _data = {
 "AtackAnimation": SubResource("Animation_0rnrd"),
+"RESET": SubResource("Animation_rdadx"),
 "WalkAnimation": SubResource("Animation_m0ywm")
 }
 
-[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation")]
+[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation", "visuals")]
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
 collision_layer = 2
@@ -119,19 +196,17 @@ healthComponent = NodePath("HealthComponent")
 ExperiencePeal = ExtResource("2_fihov")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
+visuals = NodePath("Visuals")
 metadata/_edit_horizontal_guides_ = [-67.0]
-
-[node name="TimerController" parent="." instance=ExtResource("3_0rsrh")]
 
 [node name="EnemyConstructorComponent" parent="." instance=ExtResource("2_eq5p4")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_paws7")]
-maxSpeed = 10.0
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_awkp0")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_3dtmh")
+hit_flash_material = SubResource("ShaderMaterial_hwv5g")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")
@@ -193,10 +268,15 @@ time_horizon = 0.1
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+visible = false
 use_parent_material = true
-scale = Vector2(0.8, 0.8)
 texture = ExtResource("8_6vnel")
 hframes = 11
+
+[node name="Moving" type="Sprite2D" parent="Visuals"]
+use_parent_material = true
+texture = ExtResource("15_0vln3")
+hframes = 5
 
 [node name="HealthComponent" parent="." instance=ExtResource("9_4507k")]
 MaxHealth = 100.0

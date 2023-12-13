@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dl7eefty3fjxr"]
+[gd_scene load_steps=40 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="16_eqwgn"]
 [ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="17_nmp7d"]
 [ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="20_avvrh"]
+[ext_resource type="PackedScene" uid="uid://so6f1d223r5h" path="res://GameObjects/Chest/chest.tscn" id="21_wsgj7"]
 
 [sub_resource type="Environment" id="Environment_lhngk"]
 background_mode = 3
@@ -640,5 +641,8 @@ z_index = 3
 position = Vector2(46, -7)
 
 [node name="CharacterBody2D" parent="Entities" instance=ExtResource("4_kqosp")]
+
+[node name="Chest" parent="Entities" instance=ExtResource("21_wsgj7")]
+position = Vector2(154, 33)
 
 [node name="ForeGround" type="Node2D" parent="." groups=["ForeGroundLayer"]]

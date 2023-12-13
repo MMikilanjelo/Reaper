@@ -1,12 +1,5 @@
 using Godot;
-using System.Collections.Generic;
-using Generation;
-using Enemy.Parts;
-using System.Security.Cryptography.X509Certificates;
 using Game.Components;
-using Generation.Alghoritms;
-using System.ComponentModel;
-using GameUI;
 using GameLogick.Utilities;
 public partial class Core : Node2D
 {
@@ -20,7 +13,7 @@ public partial class Core : Node2D
 	HealthComponent playerHealth;
 	public override void _Ready()
 	{
-	
+    GD.Print("Hi there from neovim");
 		transitionAnimation.Play("fade_out");
 		ResourceLoader.LoadThreadedRequest(DefeatScenePath);
 		var player = GameUtilities.GetPlayerNode(this);

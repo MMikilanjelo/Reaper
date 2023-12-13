@@ -19,12 +19,14 @@ public partial class IndestructebleStatus : BaseEffect
 		shaderMaterial.SetShaderParameter("width" , .7);
 		shaderMaterial.SetShaderParameter("pattern" , 2);
 		_data.healthComponent.canAcceptDamage = false;
+		_data.statusRecivierComponent.SetReciveEffect(false);
 		_data.statusRecivierComponent.Connect(StatusRecivierComponent.SignalName.OnForsedRemoveEfect , Callable.From(()=> RemoveEffect()));
     }
 	public void RemoveEffect()
 	{
 		_data.healthComponent.canAcceptDamage = true;
 		_data.visuals.Material = null;
+		_data.statusRecivierComponent.SetReciveEffect(true);
 		EmitSignal(SignalName.OnRemoveEfect , this);
 		QueueFree();
 	}

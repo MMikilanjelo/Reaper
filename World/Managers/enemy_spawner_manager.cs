@@ -52,7 +52,7 @@ namespace Managers
 				else{
 					
 					randomDirection = randomDirection.Rotated(Godot.Mathf.DegToRad(90));
-				}
+				}	
 			}
 			return Vector2.Zero;
 		}
@@ -68,9 +68,8 @@ namespace Managers
 			var  enemy = enemyScene.Instantiate() as CharacterBody2D;
 			GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(enemy);
 			enemy.GlobalPosition = GetSpawnPosition();
-			
-
 		}
+		
 
 
 	}

@@ -18,6 +18,9 @@ namespace GameUI
 			
 			Game_Events.Connect(game_events.SignalName.OnEnemyDied, 
 			Callable.From((Vector2 pos , int enemy_cost_inBullets)=>{IncreaseBulletsCount(enemy_cost_inBullets);}));
+
+			Game_Events.Connect(game_events.SignalName.OnBulletChestCollected ,
+			Callable.From((int amount)=>{IncreaseBulletsCount(amount);}));
 			
 		}
 		private void IncreaseBulletsCount(int amount)

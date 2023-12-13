@@ -18,13 +18,12 @@ public partial class Knigth : CharacterBody2D
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] AnimationPlayer animationPlayer;
 	[Export] RayCast2D lineOfSigth;
-	private DelegateStateMachine stateMachine = new DelegateStateMachine();
-    public override void _Ready()
+	private DelegateStateMachine stateMachine = new DelegateStateMachine(); 
+  public override void _Ready()
     {
-       	Game_Events = GetNode<game_events>("/root/GameEvents");
+    Game_Events = GetNode<game_events>("/root/GameEvents");
 		healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
-		pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));
-	
+		pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));	
 		player = GameUtilities.GetPlayerNode(this);
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(NormalState , EnteredNormalState);
@@ -38,18 +37,17 @@ public partial class Knigth : CharacterBody2D
 			return;
 		}
 		
-		stateMachine.Update();
-		
+		stateMachine.Update();	
 		knigthSpriteImager.LookAtTarget(player.Position);
 		
     }
     
 
-    private void EnteredNormalState()
+  private void EnteredNormalState()
 	{
 		GetTree().CreateTimer(1).Connect(Timer.SignalName.Timeout , Callable.From(()=>
 			stateMachine.ChangeState(DetectionState)));
-  	}
+  }
 	private void NormalState()
 	{
 		velocityComponent.Move(this);

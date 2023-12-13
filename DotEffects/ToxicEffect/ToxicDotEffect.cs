@@ -80,7 +80,6 @@ namespace DotEffects
 			total_count_of_effect += 10;
 			total_effect_duration_timer.WaitTime += total_count_of_effect * effectStatsData.EFFECT_TICK_DURATION;
 			total_effect_duration_timer.Start();
-			//GD.Print(GetMaxStacks());
         }
         public override int GetMaxStacks()
         {

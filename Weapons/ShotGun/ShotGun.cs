@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Generation.Alghoritms;
 using Game.Components;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace Game.Weapons
@@ -15,10 +16,10 @@ namespace Game.Weapons
 		[Export] Marker2D shootPosition;
 		[Export] private bool isEnemy = false;
 		[Export] AudioStreamPlayer2D gunAudioPlayer;
-
+		
 		float currentRecoil = 0;
 		private WeaponStats shotGunStats;
-        public override void _Ready()
+    public override void _Ready()
         {
 			if(isEnemy)
 			{
@@ -30,8 +31,8 @@ namespace Game.Weapons
 			}
 			
         }
-        public override void _PhysicsProcess(double delta)
-        {
+    public override void _PhysicsProcess(double delta)
+    {
 			
 			if(timeToRecoilDecresment.IsStopped())
 			{
@@ -42,8 +43,9 @@ namespace Game.Weapons
 			if(atackDelayTimer.IsStopped()){
 				_canShoot = true;
 			}
-        }
-        public override void Shoot(Vector2 directionToTarget )
+			        
+		}
+    public override void Shoot(Vector2 directionToTarget )
 		{
 			animationPlayer.Play("Shoot");
 			gunAudioPlayer.Play();
@@ -62,6 +64,6 @@ namespace Game.Weapons
 			atackDelayTimer.Start(shotGunStats.atack_deley);
 		}
 		
-    }
+  }
 }
 

@@ -17,7 +17,14 @@ namespace Game.Components
 		[Export] HurtBoxComponent hurtBoxComponent;
 		[Export] Node2D visualsNode;
 		[Signal] public delegate void OnForsedRemoveEfectEventHandler();
-		private bool CanReciveEffect = true;
+		private bool _canReciveEffect = true;
+		public bool CanReciveEffect
+		{
+			get => _canReciveEffect;
+			private set{
+				_canReciveEffect = value;
+			}
+		}
 		private readonly Dictionary<PackedScene , BaseEffect> currentEffects = new Dictionary<PackedScene, BaseEffect>();
 		// TO do keep track of effects that uplied to enemy and update them if we try to add some sort of effect
 		
@@ -33,7 +40,7 @@ namespace Game.Components
 		public void ApplyEffect(PackedScene effectToApply)
 		{
 			
-			if(effectToApply == null)
+			if(effectToApply == null || _canReciveEffect == false)
 			{
 				return;
 			}
@@ -75,13 +82,17 @@ namespace Game.Components
 				}
 				
 			}
-			//GD.Print(currentEffects.Count);
+
 			
 		
 		}
 		public void ForcedRemoveEffect()
 		{
 			EmitSignal(SignalName.OnForsedRemoveEfect);
+		}
+		public void SetReciveEffect(bool value)
+		{
+			CanReciveEffect = value;
 		}
 	
         

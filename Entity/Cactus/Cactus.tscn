@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://dcs3cxlwfanhi"]
+
+[ext_resource type="Script" path="res://Entity/Cactus/Cactus.cs" id="1_i2a41"]
+[ext_resource type="PackedScene" uid="uid://c83qg8usfn8jx" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.tscn" id="2_b6vdg"]
+[ext_resource type="Texture2D" uid="uid://bij80ru635qm5" path="res://Entity/Cactus/cactus.png" id="3_sb0je"]
+[ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="4_3miwa"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="5_06akq"]
+[ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_41rlg"]
+[ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="7_677g3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_712mx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
+radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgah1"]
+resource_local_to_scene = true
+shader = ExtResource("5_06akq")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxlxk"]
+radius = 3.0
+height = 12.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer")]
+motion_mode = 1
+script = ExtResource("1_i2a41")
+alpha = 0.185
+BulletScene = ExtResource("2_b6vdg")
+atackTimer = NodePath("Timer")
+
+[node name="Visuals" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_712mx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+use_parent_material = true
+texture = ExtResource("3_sb0je")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_61c8g")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
+healthComponent = NodePath("../HealthComponent")
+visualsNode = NodePath("../Visuals")
+hit_flash_material = SubResource("ShaderMaterial_tgah1")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_677g3")]
+collision_layer = 2
+collision_mask = 16
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_uxlxk")

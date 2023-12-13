@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://87p6mdqn23ui" path="res://World/TIleSet/NewDungeon.png" id="1_lm1i1"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="1_rn4pu"]
-[ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="2_6ap0i"]
 [ext_resource type="PackedScene" uid="uid://ci5u1meyx80l2" path="res://Entity/Scenes/Player.tscn" id="3_vs4y7"]
-[ext_resource type="PackedScene" uid="uid://cd8qi5uva4rmb" path="res://Entity/CrystalSlime/CrystalSlime.tscn" id="5_g7mng"]
+[ext_resource type="PackedScene" uid="uid://so6f1d223r5h" path="res://GameObjects/Chest/chest.tscn" id="4_da5p3"]
+[ext_resource type="PackedScene" uid="uid://dcs3cxlwfanhi" path="res://Entity/Cactus/Cactus.tscn" id="6_oor3d"]
 
 [sub_resource type="Environment" id="Environment_4bebh"]
 background_mode = 3
@@ -427,18 +427,8 @@ position = Vector2(74, -9)
 [node name="Entities" type="Node2D" parent="." groups=["EntitiesLayer"]]
 z_index = 3
 
-[node name="dummyTarget2" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea") instance=ExtResource("2_6ap0i")]
-z_index = 1
-position = Vector2(114, -7)
-motion_mode = 1
-hurtBoxComponent = NodePath("../dummyTarget/HurtBoxComponent")
-healthComponent = NodePath("../dummyTarget/HealthComponent")
-baffArea = NodePath("../dummyTarget/DmgReductionArea")
+[node name="Chest" parent="." instance=ExtResource("4_da5p3")]
 
-[node name="dummyTarget" parent="." instance=ExtResource("2_6ap0i")]
-z_index = 1
-position = Vector2(18, -8)
-motion_mode = 1
-
-[node name="CrystalSlime" parent="." instance=ExtResource("5_g7mng")]
-position = Vector2(15, 40)
+[node name="CharacterBody2D2" parent="." instance=ExtResource("6_oor3d")]
+position = Vector2(22, 3)
+alpha = 1.2

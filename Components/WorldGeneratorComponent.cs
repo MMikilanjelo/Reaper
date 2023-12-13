@@ -52,7 +52,7 @@ namespace Game.Components
         {
 			//worldTileMap.Clear();
 			RunProceduralGeneration();	
-			PainSingleTile(worldTileMap ,RoomData.Keys.Last(),new Vector2I(4,8));
+			//PainSingleTile(worldTileMap ,RoomData.Keys.Last(),new Vector2I(4,8));
 			
         }
 
