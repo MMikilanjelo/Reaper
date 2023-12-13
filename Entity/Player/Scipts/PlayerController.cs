@@ -1,9 +1,7 @@
 using Godot;
-using System;
 using Game.Components;
 using GameLogick.StateMachine;
-using System.Runtime.CompilerServices;
-
+using GameUI;
 public partial class PlayerController : CharacterBody2D
 {
 	[Export]public  VelocityComponent velocityComponent;
@@ -11,6 +9,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export]  AnimationPlayer animationPlayer;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] EntitySpriteImager playerSpriteImager;
+  private PackedScene floatingTextScene;
 	private game_events game_Events;
 	
 	public float xMovent;
@@ -25,6 +24,9 @@ public partial class PlayerController : CharacterBody2D
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
 		game_Events = GetNode<game_events>("/root/GameEvents");	
+    floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
+    healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)
+      => OnDmg()));
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
 			playerSpriteImager.EmitBulletShelsParticle();
 			game_Events.EmitPlayerShootSignal(1);
@@ -77,6 +79,14 @@ public partial class PlayerController : CharacterBody2D
 	{
 		QueueFree();
 	}
+  private void OnDmg()
+  { 
+    // var Missed_text = floatingTextScene.Instantiate() as FloatingText;
+    // Missed_text.SetScale(0.5f);
+	  //	GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(Missed_text);
+	  //	Missed_text.GlobalPosition = GlobalPosition + Vector2.Right;
+		// Missed_text.Start("@#*!$!");
+  }
 
 	
 

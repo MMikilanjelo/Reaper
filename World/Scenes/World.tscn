@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dl7eefty3fjxr"]
+[gd_scene load_steps=41 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ce6u3vwjt6eyk" path="res://Entity/ExplosionsBat/ExploisionBat.tscn" id="10_exb6d"]
 [ext_resource type="PackedScene" uid="uid://dnserb7q8yhh4" path="res://World/Managers/ItemSpawnerManager.tscn" id="10_lywje"]
 [ext_resource type="PackedScene" uid="uid://5pil5ykbrsu7" path="res://Entity/Knight/knigth.tscn" id="11_61di8"]
+[ext_resource type="PackedScene" uid="uid://dcs3cxlwfanhi" path="res://Entity/Cactus/Cactus.tscn" id="13_day3j"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="13_t0234"]
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://World/TIleSet/testing_generation.png" id="13_v5n3o"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
@@ -574,6 +575,7 @@ BasickEnemyScene = ExtResource("9_m1bbd")
 BatEnemyScene = ExtResource("10_exb6d")
 KnigthEnemyScene = ExtResource("11_61di8")
 DummyTargetScene = ExtResource("20_avvrh")
+CactusScene = ExtResource("13_day3j")
 Activate = true
 
 [node name="UI" type="Node" parent="."]

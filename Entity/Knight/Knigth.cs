@@ -1,11 +1,7 @@
 using Godot;
-using System;
 using GameLogick.Utilities;
 using GameLogick.StateMachine;
 using Game.Components;
-using System.Linq;
-using Generation.Alghoritms;
-using System.Collections.Generic;
 
 public partial class Knigth : CharacterBody2D
 {

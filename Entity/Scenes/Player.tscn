@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ci5u1meyx80l2"]
+[gd_scene load_steps=25 format=3 uid="uid://ci5u1meyx80l2"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_prbvy"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="5_m8lgp"]
 [ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
 [ext_resource type="PackedScene" uid="uid://diq1xiiwcc07y" path="res://Weapons/ShotGun/ShotGun.tscn" id="6_dxcox"]
+[ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="7_t2lk5"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="8_bot5n"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
 [ext_resource type="PackedScene" uid="uid://c4bv8rfrsgp1p" path="res://Components/AbilitieUpgradeRecivierComponent.tscn" id="9_33jpr"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
@@ -16,6 +18,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28gut"]
+resource_local_to_scene = true
+shader = ExtResource("8_bot5n")
+shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtuf1"]
 radius = 4.0
@@ -136,22 +143,31 @@ EntitySprite = NodePath("CanvasGroup/Player")
 HandRotation = NodePath("CanvasGroup/RotationPivot")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="Visuals"]
+use_parent_material = true
 
 [node name="Player" type="Sprite2D" parent="Visuals/CanvasGroup"]
+use_parent_material = true
 texture = ExtResource("14_xvhy2")
 offset = Vector2(0, -9)
 hframes = 4
 
 [node name="RotationPivot" type="Marker2D" parent="Visuals/CanvasGroup"]
+use_parent_material = true
 position = Vector2(0, -2)
 
 [node name="WeaponRootComponent" parent="Visuals/CanvasGroup/RotationPivot" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("5_m8lgp")]
+use_parent_material = true
 entity = NodePath("../../../..")
 CurrentWeapon = NodePath("ShotGun")
 
 [node name="ShotGun" parent="Visuals/CanvasGroup/RotationPivot/WeaponRootComponent" instance=ExtResource("6_dxcox")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_6pqcu")
+
+[node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
+healthComponent = NodePath("../HealthComponent")
+visualsNode = NodePath("../Visuals")
+hit_flash_material = SubResource("ShaderMaterial_28gut")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")

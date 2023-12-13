@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcs3cxlwfanhi"]
+[gd_scene load_steps=18 format=3 uid="uid://dcs3cxlwfanhi"]
 
 [ext_resource type="Script" path="res://Entity/Cactus/Cactus.cs" id="1_i2a41"]
 [ext_resource type="PackedScene" uid="uid://c83qg8usfn8jx" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.tscn" id="2_b6vdg"]
@@ -8,13 +8,14 @@
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="5_06akq"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_41rlg"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="7_677g3"]
+[ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_bi7qc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_712mx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
 radius = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2q1r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c7yth"]
 resource_local_to_scene = true
 shader = ExtResource("5_06akq")
 shader_parameter/lerp_percent = 0.0
@@ -164,10 +165,11 @@ _data = {
 "idel": SubResource("Animation_11joq")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer", "animationPlayer")]
+[node name="Cactus" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer", "animationPlayer")]
+collision_layer = 2
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_i2a41")
-alpha = 0.185
 BulletScene = ExtResource("2_b6vdg")
 atackTimer = NodePath("Timer")
 animationPlayer = NodePath("AnimationPlayer")
@@ -176,11 +178,13 @@ animationPlayer = NodePath("AnimationPlayer")
 material = SubResource("ShaderMaterial_712mx")
 
 [node name="atack" type="Sprite2D" parent="Visuals"]
+use_parent_material = true
 texture = ExtResource("3_pt5fy")
 hframes = 4
 
 [node name="idel" type="Sprite2D" parent="Visuals"]
 visible = false
+use_parent_material = true
 texture = ExtResource("4_3kyw8")
 hframes = 5
 
@@ -194,7 +198,7 @@ wait_time = 0.1
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_n2q1r")
+hit_flash_material = SubResource("ShaderMaterial_c7yth")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
 
@@ -211,3 +215,7 @@ shape = SubResource("CapsuleShape2D_uxlxk")
 libraries = {
 "": SubResource("AnimationLibrary_aahm2")
 }
+
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_bi7qc")]
+hurtBoxComponent = NodePath("../HurtBoxComponent")
+visualsNode = NodePath("../Visuals")

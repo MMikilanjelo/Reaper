@@ -1,7 +1,5 @@
-using DotEffects;
 using GameUI;
 using Godot;
-using System;
 using GameLogick.Utilities;
 
 namespace Game.Components

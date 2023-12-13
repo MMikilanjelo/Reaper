@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
 using GameLogick;
 namespace Managers
 {
@@ -12,7 +9,8 @@ namespace Managers
 		[Export] PackedScene BatEnemyScene;
 		[Export] PackedScene KnigthEnemyScene;
 		[Export] PackedScene DummyTargetScene;
-		
+	  [Export] PackedScene CactusScene;
+
 		[Export] Timer EnemySpawnerInterval;
 		[Export] const float SPAWN_RADIUS = 100f;
 		[Export] private bool Activate = false;
@@ -21,11 +19,11 @@ namespace Managers
 		private readonly LootTable<PackedScene> enemyTable = new LootTable<PackedScene>();
 		public override void _Ready()
 		{
-			enemyTable.AddItemToTable(KnigthEnemyScene , 60);
-			enemyTable.AddItemToTable(BasickEnemyScene , 40);
-			enemyTable.AddItemToTable(BatEnemyScene , 20);
-			enemyTable.AddItemToTable(DummyTargetScene , 5);
-
+			enemyTable.AddItemToTable(KnigthEnemyScene , 100);
+			enemyTable.AddItemToTable(BasickEnemyScene , 80);
+			enemyTable.AddItemToTable(BatEnemyScene , 60);
+      enemyTable.AddItemToTable(CactusScene , 40);
+      enemyTable.AddItemToTable(DummyTargetScene , 10);
 			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
 			
 		}
