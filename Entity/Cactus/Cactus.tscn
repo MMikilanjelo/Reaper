@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcs3cxlwfanhi"]
+[gd_scene load_steps=17 format=3 uid="uid://dcs3cxlwfanhi"]
 
 [ext_resource type="Script" path="res://Entity/Cactus/Cactus.cs" id="1_i2a41"]
 [ext_resource type="PackedScene" uid="uid://c83qg8usfn8jx" path="res://Weapons/Bullets/EnemyBullet/EnemyBullet.tscn" id="2_b6vdg"]
-[ext_resource type="Texture2D" uid="uid://bij80ru635qm5" path="res://Entity/Cactus/cactus.png" id="3_sb0je"]
+[ext_resource type="Texture2D" uid="uid://b532e1bcks4bj" path="res://Entity/Cactus/cactus_atack_animation.png" id="3_pt5fy"]
+[ext_resource type="Texture2D" uid="uid://x3qtivpeoua1" path="res://Entity/Cactus/idel_cactus_animation.png" id="4_3kyw8"]
 [ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="4_3miwa"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="5_06akq"]
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="6_41rlg"]
@@ -13,7 +14,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
 radius = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgah1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mat27"]
 resource_local_to_scene = true
 shader = ExtResource("5_06akq")
 shader_parameter/lerp_percent = 0.0
@@ -22,19 +23,166 @@ shader_parameter/lerp_percent = 0.0
 radius = 3.0
 height = 12.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer")]
+[sub_resource type="Animation" id="Animation_xba5h"]
+resource_name = "atack"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/atack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/atack:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/idel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_oeyds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/atack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/idel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/idel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/atack:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_11joq"]
+resource_name = "idel"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/idel:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/idel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/atack:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aahm2"]
+_data = {
+"RESET": SubResource("Animation_oeyds"),
+"atack": SubResource("Animation_xba5h"),
+"idel": SubResource("Animation_11joq")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer", "animationPlayer")]
 motion_mode = 1
 script = ExtResource("1_i2a41")
 alpha = 0.185
 BulletScene = ExtResource("2_b6vdg")
 atackTimer = NodePath("Timer")
+animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Visuals" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_712mx")
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-use_parent_material = true
-texture = ExtResource("3_sb0je")
+[node name="atack" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("3_pt5fy")
+hframes = 4
+
+[node name="idel" type="Sprite2D" parent="Visuals"]
+visible = false
+texture = ExtResource("4_3kyw8")
+hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -46,7 +194,7 @@ wait_time = 0.1
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_tgah1")
+hit_flash_material = SubResource("ShaderMaterial_mat27")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
 
@@ -58,3 +206,8 @@ healthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_uxlxk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aahm2")
+}

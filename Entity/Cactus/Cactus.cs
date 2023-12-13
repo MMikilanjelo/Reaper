@@ -9,6 +9,7 @@ public partial class Cactus : CharacterBody2D
     [Export(PropertyHint.Range, "0,10, 0.2 * MathF.PI")] private float alpha = 0;
     [Export] PackedScene BulletScene;
     [Export] Timer atackTimer;
+    [Export] AnimationPlayer animationPlayer;
     HealthComponent healthComponent;
     private float theta = 0;
     public override void _Ready()
@@ -32,7 +33,7 @@ public partial class Cactus : CharacterBody2D
 			  return;
 		  }
 		
-		stateMachine.Update();	
+		  stateMachine.Update();	
 		}
 
     private Vector2 GetVector(float angle)
@@ -50,6 +51,7 @@ public partial class Cactus : CharacterBody2D
    
     private void EnteredNormalState()
     {
+      animationPlayer.Play("idel");
       GetTree().CreateTimer(2).Connect(Timer.SignalName.Timeout , Callable.From(()=>{
         stateMachine.ChangeState(AtackState);
       }));
@@ -57,6 +59,7 @@ public partial class Cactus : CharacterBody2D
     private void NormalState(){}
     private void EnteredAtackState()
 	  {
+        animationPlayer.Play("atack");
         GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=>{
         stateMachine.ChangeState(NormalState);
         }));
@@ -73,5 +76,4 @@ public partial class Cactus : CharacterBody2D
     private void Dead(){
       QueueFree();
     }
-
 }
