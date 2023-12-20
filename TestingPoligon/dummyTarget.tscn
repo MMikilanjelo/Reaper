@@ -18,7 +18,7 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2e7j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfgbd"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
@@ -74,7 +74,7 @@ MaxHealth = 180.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_55cds")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_y2e7j")
+hit_flash_material = SubResource("ShaderMaterial_yfgbd")
 
 [node name="DmgReductionArea" type="Area2D" parent="."]
 show_behind_parent = true

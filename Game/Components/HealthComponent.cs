@@ -41,11 +41,13 @@ public partial class HealthComponent : Node2D
 		private set
 		{
 			_currentHealth = Mathf.Clamp(value , 0 , MaxHealth);
+      var _previousHealth = _currentHealth;
 			var  healthUpdate = new HealthUpdate
 			{
 				CurrentHealth = _currentHealth,
 				MaxHealth  = _maxHealth,
-				
+        PreviousHEalth = _previousHealth,
+        isHeal = _previousHealth <= _currentHealth,
 			};
 			
 			EmitSignal(SignalName.HealthChanged , healthUpdate);
@@ -53,12 +55,9 @@ public partial class HealthComponent : Node2D
 			{
 				_hasDied = true;
 				EmitSignal(SignalName.Died);
-				
-
 			} 
-		}
-
-	}
+	  }
+  }
 	
 	
 	
@@ -97,7 +96,9 @@ public partial class HealthComponent : Node2D
 	{
 		public float MaxHealth;
 		public float CurrentHealth;
-	}
+    public float PreviousHEalth;
+    public bool isHeal;
+  }
 }
 }
 

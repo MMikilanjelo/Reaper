@@ -19,7 +19,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_28gut"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwxae"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -126,7 +126,7 @@ _data = {
 "Walk": SubResource("Animation_aukva")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
 texture_filter = 1
 collision_mask = 4
 motion_mode = 1
@@ -167,7 +167,7 @@ material = SubResource("ShaderMaterial_6pqcu")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_28gut")
+hit_flash_material = SubResource("ShaderMaterial_nwxae")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
@@ -178,7 +178,7 @@ hurtBoxComponent = NodePath("../HurtBoxComponent")
 accelerationCoeficient = 50.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_a1ggc")]
-MaxHealth = 50.0
+MaxHealth = 100.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
 collision_mask = 8

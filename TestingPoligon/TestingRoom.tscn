@@ -428,6 +428,7 @@ position = Vector2(74, -9)
 z_index = 3
 
 [node name="Chest" parent="." instance=ExtResource("4_da5p3")]
+position = Vector2(16, -28)
 
 [node name="Cactus" parent="." instance=ExtResource("6_oor3d")]
 position = Vector2(22, 3)
