@@ -642,7 +642,7 @@ z_index = 3
 [node name="Experience" parent="Entities" instance=ExtResource("17_nmp7d")]
 position = Vector2(46, -7)
 
-[node name="CharacterBody2D" parent="Entities" instance=ExtResource("4_kqosp")]
+[node name="Player" parent="Entities" instance=ExtResource("4_kqosp")]
 
 [node name="Chest" parent="Entities" instance=ExtResource("21_wsgj7")]
 position = Vector2(154, 33)

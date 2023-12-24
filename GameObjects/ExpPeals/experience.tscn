@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://drr3p0egpr4rx"]
+[gd_scene load_steps=6 format=3 uid="uid://drr3p0egpr4rx"]
 
 [ext_resource type="Script" path="res://GameObjects/ExpPeals/experience.cs" id="1_kqyy4"]
 [ext_resource type="Material" uid="uid://bnuawfd75kxqe" path="res://Visuals/Materials/indestructableMaterial.tres" id="2_2eia5"]
 [ext_resource type="Texture2D" uid="uid://b54wdc65t5wnd" path="res://GameObjects/ExpPeals/expireence.png" id="2_x4at3"]
+[ext_resource type="AudioStream" uid="uid://3wiaa5laq1w2" path="res://Audio/ExpPickUp.wav" id="4_58ai1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2lic4"]
 radius = 4.0
 
-[node name="Experience" type="Node2D" node_paths=PackedStringArray("PickableArea")]
+[node name="Experience" type="Node2D" node_paths=PackedStringArray("PickableArea", "soundPlayer")]
 script = ExtResource("1_kqyy4")
 PickableArea = NodePath("Area2D")
+soundPlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_2eia5")
@@ -22,3 +24,7 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_2lic4")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_58ai1")
