@@ -1,7 +1,6 @@
 using Godot;
 using Game.Components;
 using GameLogick.StateMachine;
-using GameUI;
 public partial class PlayerController : CharacterBody2D
 {
 	[Export]public  VelocityComponent velocityComponent;
@@ -82,8 +81,8 @@ public partial class PlayerController : CharacterBody2D
   { 
     // var Missed_text = floatingTextScene.Instantiate() as FloatingText;
     // Missed_text.SetScale(0.5f);
-	  //	GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(Missed_text);
-	  //	Missed_text.GlobalPosition = GlobalPosition + Vector2.Right;
-	  // Missed_text.Start("@#*!$!");
+	//	GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(Missed_text);
+	//	Missed_text.GlobalPosition = GlobalPosition + Vector2.Right;
+	// Missed_text.Start("@#*!$!");
   }
 }

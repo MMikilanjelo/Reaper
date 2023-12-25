@@ -20,7 +20,7 @@ namespace Game.Weapons
 		float currentRecoil = 0;
 		private WeaponStats shotGunStats;
     public override void _Ready()
-        {
+    {
 			if(isEnemy)
 			{
 				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
@@ -30,7 +30,7 @@ namespace Game.Weapons
 				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
 			}
 			
-        }
+    }
     public override void _PhysicsProcess(double delta)
     {
 			
@@ -43,7 +43,6 @@ namespace Game.Weapons
 			if(atackDelayTimer.IsStopped()){
 				_canShoot = true;
 			}
-			        
 		}
     public override void Shoot(Vector2 directionToTarget )
 		{

@@ -1,17 +1,12 @@
 using Godot;
-using System;
 using Game.Components;
 public partial class RedBullet : Bullet
 {
-
-
-
-
-	public override void _Ready()
+  public override void _Ready()
 	{
 	
 		TopLevel = true;
-	    velocityComponent.SetMaxSpeed(MoveSpeed);
+	  velocityComponent.SetMaxSpeed(MoveSpeed);
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnImpackt , new Callable(this , nameof(OnImpackt)));
 		timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof(OnTimeTimeOut)));
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnWallCollide , new Callable(this, nameof(OnWallColide)));

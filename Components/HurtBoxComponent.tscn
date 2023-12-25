@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg60wk53wx2ab"]
+[gd_scene load_steps=7 format=3 uid="uid://dg60wk53wx2ab"]
 
 [ext_resource type="Script" path="res://Game/Components/HurtBoxComponent.cs" id="1_l4n4y"]
+[ext_resource type="PackedScene" uid="uid://bmbc68ovi54ey" path="res://Components/RandomAudioPlayer.tscn" id="2_n85cs"]
+[ext_resource type="AudioStream" uid="uid://now4apvn6qqr" path="res://Audio/hitHurt (1).wav" id="3_2076l"]
+[ext_resource type="AudioStream" uid="uid://d2ah6sft40oo7" path="res://Audio/hitHurt (2).wav" id="4_y5mv2"]
+[ext_resource type="AudioStream" uid="uid://dejc1mjt8o74t" path="res://Audio/hitHurt (3).wav" id="5_ic7hr"]
+[ext_resource type="AudioStream" uid="uid://csknkyfvyikr1" path="res://Audio/hitHurt.wav" id="6_063yj"]
 
-[node name="HurtBoxComponent" type="Area2D"]
+[node name="HurtBoxComponent" type="Area2D" node_paths=PackedStringArray("audioPlayer")]
 script = ExtResource("1_l4n4y")
+audioPlayer = NodePath("RandomAudioStreamPlayer2DComponent")
+
+[node name="RandomAudioStreamPlayer2DComponent" parent="." instance=ExtResource("2_n85cs")]
+streams = [ExtResource("3_2076l"), ExtResource("4_y5mv2"), ExtResource("5_ic7hr"), ExtResource("6_063yj")]

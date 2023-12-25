@@ -1,10 +1,4 @@
 using Godot;
-using System;
-using Enemy.Parts;
-using DotEffects;
-using System.Collections.Generic;
-using GameLogick.Utilities;
-
 namespace Game.Components
 {
 	public partial class HitBoxComponent : Area2D
@@ -18,17 +12,15 @@ namespace Game.Components
 		public PackedScene AtackAfex
 		{
 			get => afex;
-			private	set=> afex = value;
+			private	set => afex = value;
 		} 
 		public override void _Ready()
-        {
+    	{
 			Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
 		}
-        
-		public void  OnHit()
+    	public void  OnHit()
 		{
-			
-			EmitSignal(SignalName.OnImpackt);
+		  EmitSignal(SignalName.OnImpackt);
 		}
 		private void onBodyEntered(Node2D Body)
 		{

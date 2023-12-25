@@ -12,8 +12,10 @@ namespace Game.Components
 		private int armmor = 0;
 		private float miss_chance = 0;
 		PackedScene floatingTextScene;
+		[Export] private RandomAudioPlayer audioPlayer;
 		[Export] private HealthComponent healthComponent;
 		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
+		
 		public float MissChance
 		{
 			get => miss_chance;
@@ -60,7 +62,7 @@ namespace Game.Components
 				var hitChance = random.RandiRange(0 , 100);
 				if(hitChance >= miss_chance)
 				{
-					
+					audioPlayer.PlayRandom();
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();

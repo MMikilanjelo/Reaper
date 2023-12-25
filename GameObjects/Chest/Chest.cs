@@ -18,8 +18,7 @@ public partial class Chest : Node2D
 		{
 			if(otherBody is PlayerController)
 			{
-              
-				OnInterackt(otherBody);
+        OnInterackt(otherBody);
 			}
 			
 		}));
