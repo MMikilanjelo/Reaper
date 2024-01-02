@@ -7,10 +7,11 @@ using Generation.Alghoritms;
 public partial class Cactus : CharacterBody2D
 {
     DelegateStateMachine stateMachine = new DelegateStateMachine();
-    [Export(PropertyHint.Range, "0,10, 0.2 * MathF.PI")] private float alpha = 1.2f;
+    [Export(PropertyHint.Range , "0,10, 0.2 * MathF.PI")] private float alpha = 1.2f;
     [Export] PackedScene BulletScene;
     [Export] Timer atackTimer;
     [Export] AnimationPlayer animationPlayer;
+    [Export] AudioStreamPlayer2D audioStreamPlayer;
     HealthComponent healthComponent;
     private float theta = 0;
     public override void _Ready()
@@ -18,7 +19,7 @@ public partial class Cactus : CharacterBody2D
         alpha = Directions.random.Randfn(0f , 3f);
         stateMachine.AddState(Dead);
         stateMachine.AddState(NormalState , EnteredNormalState);
-        stateMachine.AddState(AtackState , EnteredAtackState  ,ExitAtackState);
+        stateMachine.AddState(AtackState , EnteredAtackState , ExitAtackState);
         stateMachine.SetInitiioalState(NormalState);
         healthComponent = GetNode<HealthComponent>("HealthComponent");
         healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>{
@@ -26,6 +27,7 @@ public partial class Cactus : CharacterBody2D
         }));
         atackTimer.Connect(Timer.SignalName.Timeout, Callable.From(() =>
         {
+            audioStreamPlayer.Play();
             ShootBulletWithAngleOffset(theta);
         }));
     }
@@ -62,12 +64,13 @@ public partial class Cactus : CharacterBody2D
 	  {
         animationPlayer.Play("atack");
         GetTree().CreateTimer(5).Connect(Timer.SignalName.Timeout , Callable.From(()=>{
-        stateMachine.ChangeState(NormalState);
+          stateMachine.ChangeState(NormalState);
         }));
-        atackTimer.Start(0.1f);
+        atackTimer.Start(0.13f);
     }
     private void AtackState()
     {
+      
     }
     private void ExitAtackState()
     {

@@ -143,9 +143,13 @@ shader = ExtResource("5_pyrrj")
 shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 40.0
 
-[node name="DefeateScreen" type="CanvasLayer" node_paths=PackedStringArray("transitionAnimationPlayer")]
+[node name="DefeateScreen" type="CanvasLayer" node_paths=PackedStringArray("transitionAnimationPlayer", "TotalKills", "TotalUpgrades", "TotalDmg", "TotalSouls")]
 script = ExtResource("1_rwhqh")
 transitionAnimationPlayer = NodePath("Control/TransitionAnimation")
+TotalKills = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/KillCountBox/TotalKills")
+TotalUpgrades = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/UpgradeCountBox/TotalUpgrades")
+TotalDmg = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalDmgBox/TotalDealtDmg")
+TotalSouls = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalSoulsCollected/TotalSouls")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -216,7 +220,7 @@ theme_override_font_sizes/font_size = 12
 text = "Total Kills
 "
 
-[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/KillCountBox"]
+[node name="TotalKills" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/KillCountBox"]
 material = SubResource("ShaderMaterial_jovvo")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -237,7 +241,7 @@ theme_override_font_sizes/font_size = 12
 text = "Total Upgrades
 "
 
-[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/UpgradeCountBox"]
+[node name="TotalUpgrades" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/UpgradeCountBox"]
 material = SubResource("ShaderMaterial_ce3gt")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -256,7 +260,7 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 12
 text = "Total Dmg"
 
-[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalDmgBox"]
+[node name="TotalDealtDmg" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalDmgBox"]
 material = SubResource("ShaderMaterial_6nieb")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -275,7 +279,7 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 12
 text = "Total Souls "
 
-[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalSoulsCollected"]
+[node name="TotalSouls" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalSoulsCollected"]
 material = SubResource("ShaderMaterial_u7nba")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

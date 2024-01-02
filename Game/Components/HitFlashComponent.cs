@@ -13,14 +13,14 @@ namespace Game.Components
 
         public override void _Ready()
         {
-			
-			healthComponent.Connect(HealthComponent.SignalName.HealthChanged ,Callable.From((HealthComponent.HealthUpdate healthUpdate)=>
+			healthComponent.Connect(HealthComponent.SignalName.HealthChanged ,Callable.From((HealthComponent.HealthUpdate healthUpdate) =>
 			{
-				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth || healthUpdate.isHeal )
+				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth || !healthUpdate.isHeal)
 				{
 					return;
 				}
 				AppyMaterial();
+				
 			}));
 			
         }

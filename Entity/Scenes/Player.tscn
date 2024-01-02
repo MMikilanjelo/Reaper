@@ -19,7 +19,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqmic"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_10mc6"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -128,6 +128,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocityComponent", "healthComponent", "animationPlayer", "weaponRootComponent", "playerSpriteImager") groups=["Player"]]
 texture_filter = 1
+position = Vector2(1, 0)
 collision_mask = 4
 motion_mode = 1
 safe_margin = 0.001
@@ -167,10 +168,11 @@ material = SubResource("ShaderMaterial_6pqcu")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_gqmic")
+hit_flash_material = SubResource("ShaderMaterial_10mc6")
 
-[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent") instance=ExtResource("9_o4o0l")]
+[node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
+visualsNode = NodePath("../Visuals")
 
 [node name="AbilitieUpgradeRecivier" parent="." instance=ExtResource("9_33jpr")]
 

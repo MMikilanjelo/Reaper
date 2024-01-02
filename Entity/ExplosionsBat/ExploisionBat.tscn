@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ce6u3vwjt6eyk"]
+[gd_scene load_steps=27 format=3 uid="uid://ce6u3vwjt6eyk"]
 
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="1_1jb48"]
 [ext_resource type="Script" path="res://Entity/ExplosionsBat/ExploisionBat.cs" id="1_l801k"]
@@ -16,11 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="8_vju3f"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="9_i5n6s"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="11_ltikm"]
+[ext_resource type="AudioStream" uid="uid://djwr1scp3v8o8" path="res://Audio/explosion.wav" id="17_wvi1j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7d62c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ptdk"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -96,6 +97,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(0.0236831, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2.2, 2.2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_hg6x0"]
@@ -201,6 +214,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(0.996078, 0.996078, 0.996078, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yk1nc"]
 _data = {
@@ -245,6 +270,7 @@ visible = false
 position = Vector2(0, -7)
 texture = ExtResource("4_8m5qo")
 hframes = 14
+frame = 12
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_7ur5q")]
 BloodParticle = ExtResource("7_5tont")
@@ -272,7 +298,7 @@ MakeSmoothHalfWayDestination = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("8_vju3f")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_7d62c")
+hit_flash_material = SubResource("ShaderMaterial_0ptdk")
 
 [node name="Areas" type="Node2D" parent="."]
 
@@ -314,3 +340,7 @@ libraries = {
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("11_ltikm")]
 hurtBoxComponent = NodePath("../Areas/HurtBoxComponent")
 visualsNode = NodePath("../Visuals")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_wvi1j")
+volume_db = 6.0

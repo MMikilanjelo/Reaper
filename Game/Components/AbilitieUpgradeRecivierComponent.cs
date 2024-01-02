@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using GameLogick.Utilities;
+using PlayerPassive;
 
 namespace Game.Components
 {
@@ -11,6 +12,7 @@ namespace Game.Components
 		HurtBoxComponent playerHurtBox;
 		WeaponRootComponent playerWeaponRootComponent;
 		UIEvents uiEvents;
+		PackedScene lifeSteal;
         public override void _Ready()
         {
 			uiEvents = GetNode<UIEvents>("/root/UIEvents");
@@ -19,7 +21,8 @@ namespace Game.Components
 			playerWeaponRootComponent = player.GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
-			playerWeaponRootComponent.AddAfexToWeapon(ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicEffect/ToxicDotEffect.tscn"));
+
+			lifeSteal = ResourceLoader.Load("res://PlayerPassive/LifeStealPassive.tscn") as PackedScene;
         }
 		private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
 		{
@@ -34,7 +37,6 @@ namespace Game.Components
 			}
 			if(addedUpgrade.id =="dmg_reduction")
 			{
-				
 				playerHurtBox.SetDmgReductonMultiplier(addedUpgrade.value);
 				uiEvents.playerStats.dmg_reduction = playerHurtBox.DmgReductonMultiplier;
             }
@@ -46,6 +48,12 @@ namespace Game.Components
 			if(addedUpgrade.id == "toxic")
 			{
 				playerWeaponRootComponent.AddAfexToWeapon(ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicEffect/ToxicDotEffect.tscn"));	
+			}
+			if(addedUpgrade.id == "vampire")
+			{
+				var vampireAbility = lifeSteal.Instantiate() as LifeStealPassive;
+				vampireAbility.healthComponent = player.GetNode<HealthComponent>("HealthComponent"); 
+				player.AddChild(vampireAbility);
 			}
 		}
 	

@@ -7,4 +7,5 @@ script = ExtResource("1_7d8u4")
 Name = "Vampire"
 description = "Chance to gain laife after killing enemy"
 id = "vampire"
-isUnique = false
+isUnique = true
+value = 0.0

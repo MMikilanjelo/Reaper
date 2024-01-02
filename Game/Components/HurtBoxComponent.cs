@@ -7,6 +7,7 @@ namespace Game.Components
 	public partial class HurtBoxComponent : Area2D
 	{
 		RandomNumberGenerator random;
+		game_events Game_Events;
 		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
 		private float dmg_Reduction_Multiplier = 0f;
 		private int armmor = 0;
@@ -40,6 +41,7 @@ namespace Game.Components
 		}
 		public override void _Ready()
 		{
+			Game_Events = GetNode<game_events>("/root/GameEvents");
 			random = MathUtil.RNG;
 			floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 			if(CollisionLayer == 2)
@@ -67,7 +69,7 @@ namespace Game.Components
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
-						
+					Game_Events.EmitDmgRecivedByEnemy(totaldmg);
 				}
 				else 
 				{
@@ -77,9 +79,6 @@ namespace Game.Components
 					Missed_text.GlobalPosition = GlobalPosition;
 					Missed_text.Start("Missed");
 				}
-				
-			
-				
 			}
 		}
 		private void DealDmg(float dmg)
@@ -88,7 +87,6 @@ namespace Game.Components
 		}
 		private int CalculateIncomingDamage(float dmg  , float dmg_Reduction_Multiplier , int armmor = 0)
 		{
-			
 			return Mathf.CeilToInt(dmg - (dmg * dmg_Reduction_Multiplier) - armmor); 
 		}
 	}

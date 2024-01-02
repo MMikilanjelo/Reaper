@@ -20,7 +20,7 @@ namespace Game.Components
 		}
     	public void  OnHit()
 		{
-		  EmitSignal(SignalName.OnImpackt);
+		  	EmitSignal(SignalName.OnImpackt);
 		}
 		private void onBodyEntered(Node2D Body)
 		{

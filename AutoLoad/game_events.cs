@@ -2,7 +2,8 @@ using Game.Components;
 using GameUI;
 using Godot;
 using System;
-using System.Collections.Generic;	
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public partial class game_events : Node
 {
@@ -12,8 +13,12 @@ public partial class game_events : Node
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
 	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
 	[Signal] public delegate void OnBulletChestCollectedEventHandler(int bullets_amount);
-	
+	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
 
+	public void EmitDmgRecivedByEnemy(int dmg)
+	{
+		EmitSignal(SignalName.OnEnemyDmgRecived , dmg);
+	}
 	public void On_ExperienceVialCollected(float amount)
 	{
 		EmitSignal(SignalName.ExperienceVialCollected, amount);
@@ -38,6 +43,6 @@ public partial class game_events : Node
 	{
 		EmitSignal(SignalName.OnBulletChestCollected , bullets_amount);
 	}
-	
+
 
 }

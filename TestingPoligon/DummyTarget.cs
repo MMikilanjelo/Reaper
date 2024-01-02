@@ -27,6 +27,8 @@ public partial class DummyTarget : CharacterBody2D
         {
             QueueFree();
         }));
+        
+        
         player = GameUtilities.GetPlayerNode(this);
        
     }
