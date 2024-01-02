@@ -19,7 +19,6 @@ namespace PlayerPassive
         }
 		private void AddHealth()
 		{
-			GD.Print("Add health");
 			healthComponent.SetCurrentHealth(1);
 		}
     }

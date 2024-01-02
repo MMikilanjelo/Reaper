@@ -40,14 +40,14 @@ namespace Game.Components
             get => _currentHealth;
             private set
             {
-                _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
                 var _previousHealth = _currentHealth;
+                _currentHealth = Mathf.Clamp(value, 0, MaxHealth);
                 var healthUpdate = new HealthUpdate
                 {
                     CurrentHealth = _currentHealth,
                     MaxHealth = _maxHealth,
                     PreviousHEalth = _previousHealth,
-                    isHeal = _previousHealth <= _currentHealth,
+                    isHeal = _previousHealth < _currentHealth,
                 };
 
                 EmitSignal(SignalName.HealthChanged, healthUpdate);
@@ -91,6 +91,10 @@ namespace Game.Components
         public void SetCurrentHealth(int amount)
         {
             CurrentHealth += amount;
+        }
+        public void IncreaseMaxHealth(int amount)
+        {
+            MaxHealth += amount;
         }
         public partial class HealthUpdate : RefCounted
         {

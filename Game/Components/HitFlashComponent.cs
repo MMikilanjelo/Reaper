@@ -15,7 +15,7 @@ namespace Game.Components
         {
 			healthComponent.Connect(HealthComponent.SignalName.HealthChanged ,Callable.From((HealthComponent.HealthUpdate healthUpdate) =>
 			{
-				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth || !healthUpdate.isHeal)
+				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth || healthUpdate.isHeal)
 				{
 					return;
 				}

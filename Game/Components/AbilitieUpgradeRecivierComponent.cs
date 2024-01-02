@@ -21,14 +21,13 @@ namespace Game.Components
 			playerWeaponRootComponent = player.GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
 			Game_Events = GetNode<game_events>("/root/GameEvents");
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
-
 			lifeSteal = ResourceLoader.Load("res://PlayerPassive/LifeStealPassive.tscn") as PackedScene;
         }
 		private void OnAbilityUpgradeAded(Upgrade addedUpgrade ,  Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> currentPlayerUpgrades)
 		{
 			if(addedUpgrade.id == "hp_bonus")
 			{
-				player.healthComponent.SetCurrentHealth(10);
+				player.healthComponent.IncreaseMaxHealth(10);
 			}
 			if(addedUpgrade.id == "move_speed")
 			{

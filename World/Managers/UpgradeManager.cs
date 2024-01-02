@@ -43,12 +43,12 @@ public partial class UpgradeManager : Node
 		Upgrade armor_reduction = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/arrmor_reduction.tres");
 		Upgrade miss = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/miss_chance.tres");
 		Upgrade vampire = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/vampire.tres");
-		
+		Upgrade bulletDmg = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/BulletDmg.tres");
 
 		avaible_rare_upgrades_Pool.Add(armor_reduction);
 		avaible_rare_upgrades_Pool.Add(miss);
 		avaible_rare_upgrades_Pool.Add(vampire);
-
+		avaible_rare_upgrades_Pool.Add(bulletDmg);
 		
 		Upgrade serial = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Shroud.tres");
 		Upgrade toxic = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Toxic.tres");
