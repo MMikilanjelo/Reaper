@@ -9,6 +9,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export]  AnimationPlayer animationPlayer;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] EntitySpriteImager playerSpriteImager;
+	
   	private PackedScene floatingTextScene;
 	private game_events game_Events;
 	
@@ -18,7 +19,7 @@ public partial class PlayerController : CharacterBody2D
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
-		
+		//PackedScene sniperWeapon = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
@@ -29,6 +30,7 @@ public partial class PlayerController : CharacterBody2D
 			playerSpriteImager.EmitBulletShelsParticle();
 			game_Events.EmitPlayerShootSignal(1);
 		}));
+		//weaponRootComponent.ChangeWeapon(sniperWeapon);
 	}
 
 	public override void _PhysicsProcess(double delta)

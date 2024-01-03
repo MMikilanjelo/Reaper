@@ -21,14 +21,14 @@ namespace Game.Weapons
 		private WeaponStats shotGunStats;
 		public override void _Ready()
 		{
-				if(isEnemy)
-				{
-					shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
-				}
-				else
-				{
-					shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
-				}
+			if(isEnemy)
+			{
+				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
+			}
+			else
+			{
+				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
+			}
 				
 		}
 		public override void _PhysicsProcess(double delta)
@@ -45,23 +45,23 @@ namespace Game.Weapons
 				}
 			}
 		public override void Shoot(Vector2 directionToTarget )
-			{
-				animationPlayer.Play("Shoot");
-				gunAudioPlayer.Play();
-				_canShoot = false;
-				var recoilIncreasment = MaxRecoil * 0.1f;
-				var recoil_degree_max = currentRecoil * 0.5f;
-				var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
-				currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
-				BaseBullet bulletInstance =  shotGunStats.Bullet.Instantiate() as BaseBullet;
-				bulletInstance.ApplyAfexForBullet(Affex);
-				bulletInstance.Position = shootPosition.GlobalPosition;
-				bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
-				bulletInstance.LookAt(directionToTarget);
-				GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
-				timeToRecoilDecresment.Start(2);
-				atackDelayTimer.Start(shotGunStats.atack_deley);
-			}
+		{
+			animationPlayer.Play("Shoot");
+			gunAudioPlayer.Play();
+			_canShoot = false;
+			var recoilIncreasment = MaxRecoil * 0.1f;
+			var recoil_degree_max = currentRecoil * 0.5f;
+			var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
+			currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
+			BaseBullet bulletInstance =  shotGunStats.Bullet.Instantiate() as BaseBullet;
+			bulletInstance.ApplyAfexForBullet(Affex);
+			bulletInstance.Position = shootPosition.GlobalPosition;
+			bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
+			bulletInstance.LookAt(directionToTarget);
+			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
+			timeToRecoilDecresment.Start(2);
+			atackDelayTimer.Start(shotGunStats.atack_deley);
+		}
 			
   }
 }

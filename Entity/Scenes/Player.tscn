@@ -20,7 +20,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_51ywp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggghr"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -169,7 +169,7 @@ material = SubResource("ShaderMaterial_6pqcu")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_51ywp")
+hit_flash_material = SubResource("ShaderMaterial_ggghr")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
@@ -184,6 +184,7 @@ accelerationCoeficient = 50.0
 MaxHealth = 1000.0
 
 [node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_iyxdx")]
+visible = false
 collision_mask = 8
 monitorable = false
 healthComponent = NodePath("../HealthComponent")
@@ -194,6 +195,7 @@ shape = SubResource("CapsuleShape2D_wtuf1")
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.999996, 5)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_b7bvv")
