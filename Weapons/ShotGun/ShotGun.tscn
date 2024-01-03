@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://diq1xiiwcc07y"]
+[gd_scene load_steps=8 format=3 uid="uid://diq1xiiwcc07y"]
 
 [ext_resource type="Script" path="res://Weapons/ShotGun/ShotGun.cs" id="1_tgw5h"]
+[ext_resource type="PackedScene" uid="uid://brt1ygqkmec13" path="res://Visuals/Particles/BulletParticke.tscn" id="2_54jia"]
 [ext_resource type="Texture2D" uid="uid://dq55ebkqnd6xv" path="res://Entity/Player/Arts/ShootingAnimation.png" id="2_xlgnl"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_36tjs"]
 [ext_resource type="AudioStream" uid="uid://dxww4oyv16jj6" path="res://Audio/desert-eagle-gunshot-14622.mp3" id="4_dap3a"]
@@ -58,6 +59,7 @@ animationPlayer = NodePath("AnimationPlayer")
 atackDelayTimer = NodePath("AtackDelayTimer")
 shootPosition = NodePath("Weapon/ShootPosition")
 gunAudioPlayer = NodePath("AudioStreamPlayer2D")
+bulletPartickle = ExtResource("2_54jia")
 
 [node name="Weapon" type="Sprite2D" parent="."]
 use_parent_material = true

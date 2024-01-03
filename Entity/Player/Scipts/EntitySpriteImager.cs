@@ -20,13 +20,6 @@ public partial class EntitySpriteImager : Node2D
 			EntitySprite.Scale = new Vector2(-1 , 1);
 		}
 	}
-
-	public void EmitBulletShelsParticle()
-	{
-		GpuParticles2D 	patickles = bulletParickle.Instantiate() as GpuParticles2D;
-		patickles.Position = Position;
-		this.AddChild(patickles);
-	}
 	public  void LookAtTarget(Vector2 target)
 	{
 		HandRotation.LookAt(target);

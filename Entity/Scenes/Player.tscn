@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ci5u1meyx80l2"]
+[gd_scene load_steps=25 format=3 uid="uid://ci5u1meyx80l2"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_prbvy"]
@@ -15,12 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="9_o4o0l"]
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
-[ext_resource type="PackedScene" uid="uid://dupjfu4jc1scg" path="res://PlayerPassive/LifeStealPassive.tscn" id="16_embgd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ggghr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2b7v3"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -169,7 +168,7 @@ material = SubResource("ShaderMaterial_6pqcu")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_ggghr")
+hit_flash_material = SubResource("ShaderMaterial_2b7v3")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
@@ -219,5 +218,3 @@ color = Color(0.917647, 0.678431, 0.929412, 1)
 energy = 0.4
 texture = ExtResource("15_5scag")
 texture_scale = 3.0
-
-[node name="Node" parent="." instance=ExtResource("16_embgd")]

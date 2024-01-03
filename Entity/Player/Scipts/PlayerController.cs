@@ -19,7 +19,7 @@ public partial class PlayerController : CharacterBody2D
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
-		//PackedScene sniperWeapon = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
+		PackedScene sniperWeapon = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
@@ -27,10 +27,9 @@ public partial class PlayerController : CharacterBody2D
     	floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
     	healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
-			playerSpriteImager.EmitBulletShelsParticle();
 			game_Events.EmitPlayerShootSignal(1);
 		}));
-		//weaponRootComponent.ChangeWeapon(sniperWeapon);
+		weaponRootComponent.ChangeWeapon(sniperWeapon);
 	}
 
 	public override void _PhysicsProcess(double delta)

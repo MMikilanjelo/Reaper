@@ -16,6 +16,7 @@ namespace Game.Weapons
 		[Export] Marker2D shootPosition;
 		[Export] private bool isEnemy = false;
 		[Export] AudioStreamPlayer2D gunAudioPlayer;
+		[Export] PackedScene bulletPartickle;
 		
 		float currentRecoil = 0;
 		private WeaponStats shotGunStats;
@@ -48,6 +49,7 @@ namespace Game.Weapons
 		{
 			animationPlayer.Play("Shoot");
 			gunAudioPlayer.Play();
+			EmitBulletShelsParticle(bulletPartickle);
 			_canShoot = false;
 			var recoilIncreasment = MaxRecoil * 0.1f;
 			var recoil_degree_max = currentRecoil * 0.5f;
@@ -62,7 +64,11 @@ namespace Game.Weapons
 			timeToRecoilDecresment.Start(2);
 			atackDelayTimer.Start(shotGunStats.atack_deley);
 		}
-			
-  }
+        public override void EmitBulletShelsParticle(PackedScene bulletParickle)
+        {
+            base.EmitBulletShelsParticle(bulletParickle);
+        }
+
+    }
 }
 
