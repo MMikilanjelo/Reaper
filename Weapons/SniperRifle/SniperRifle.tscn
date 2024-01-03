@@ -1,19 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmdpvlgqj2xx4"]
+[gd_scene load_steps=6 format=3 uid="uid://cmdpvlgqj2xx4"]
 
 [ext_resource type="Script" path="res://Weapons/SniperRifle/SniperRifle.cs" id="1_ks04y"]
 [ext_resource type="Texture2D" uid="uid://cvma8iodfq0xq" path="res://Weapons/SniperRifle/SniperRifle.png" id="2_hfgj7"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_jhjtm"]
-[ext_resource type="Texture2D" uid="uid://dewi2j0fbslh5" path="res://Weapons/SniperRifle/crosshair.png" id="4_mtpny"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_f5tak"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_kupmf"]
 a = Vector2(23, 1)
 b = Vector2(117, 1)
 
-[node name="SniperRifle" type="Node2D" node_paths=PackedStringArray("shootRay", "crosshair", "aimLine")]
+[node name="SniperRifle" type="Node2D" node_paths=PackedStringArray("shootRay", "aimLine")]
 script = ExtResource("1_ks04y")
 shootRay = NodePath("Sprite2D/RayCast2D")
-crosshair = NodePath("Sprite2D/Crooshair")
 aimLine = NodePath("Sprite2D/Line2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -45,12 +43,7 @@ target_position = Vector2(1000, 0)
 collision_mask = 4
 collide_with_areas = true
 
-[node name="Crooshair" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(116, 1)
-texture = ExtResource("4_mtpny")
-offset = Vector2(0.5, 0.5)
-
 [node name="Line2D" type="Line2D" parent="Sprite2D"]
 points = PackedVector2Array(23, 1, 116, 1)
 width = 0.0
-default_color = Color(1, 0, 0, 1)
+default_color = Color(0.560784, 0.972549, 0.886275, 1)

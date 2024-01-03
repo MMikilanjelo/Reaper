@@ -5,7 +5,7 @@ namespace Game.Weapons
 {
 	public partial class Weapon : Node2D , IWeapon
 	{
-		public bool _canShoot;
+		public bool _canShoot = true;
 		public PackedScene Affex = null;
 		public virtual void Shoot(Vector2 directionToTarget  )
 		{

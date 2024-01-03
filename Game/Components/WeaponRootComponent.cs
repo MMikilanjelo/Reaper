@@ -28,13 +28,12 @@ namespace Game.Components
 		}
 		public void ShootFromCurrentWeapon(Vector2 directionToShoot)
 		{
-			if( _HasAmmoRemaining && CurrentWeapon._canShoot)
+			if(!_HasAmmoRemaining || !CurrentWeapon._canShoot)
 			{
-
-				EmitSignal(SignalName.ShotedFromWeapon);
-				CurrentWeapon?.Shoot(directionToShoot);
-				
+				return;
 			}
+			EmitSignal(SignalName.ShotedFromWeapon);
+			CurrentWeapon?.Shoot(directionToShoot);
 		}
 		public void AddAfexToWeapon(PackedScene AffexToAdd)
 		{
