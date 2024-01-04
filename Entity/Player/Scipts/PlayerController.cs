@@ -4,9 +4,9 @@ using GameLogick.StateMachine;
 using GameUI;
 public partial class PlayerController : CharacterBody2D
 {
-	[Export]public  VelocityComponent velocityComponent;
-	[Export]public  HealthComponent healthComponent;
-	[Export]  AnimationPlayer animationPlayer;
+	[Export] public  VelocityComponent velocityComponent;
+	[Export] public  HealthComponent healthComponent;
+	[Export] AnimationPlayer animationPlayer;
 	[Export] WeaponRootComponent weaponRootComponent;
 	[Export] EntitySpriteImager playerSpriteImager;
 	
@@ -19,7 +19,6 @@ public partial class PlayerController : CharacterBody2D
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
-		PackedScene sniperWeapon = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
@@ -29,7 +28,6 @@ public partial class PlayerController : CharacterBody2D
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
 			game_Events.EmitPlayerShootSignal(1);
 		}));
-		weaponRootComponent.ChangeWeapon(sniperWeapon);
 	}
 
 	public override void _PhysicsProcess(double delta)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmdpvlgqj2xx4"]
+[gd_scene load_steps=7 format=3 uid="uid://cmdpvlgqj2xx4"]
 
 [ext_resource type="Script" path="res://Weapons/SniperRifle/SniperRifle.cs" id="1_ks04y"]
 [ext_resource type="Texture2D" uid="uid://cvma8iodfq0xq" path="res://Weapons/SniperRifle/SniperRifle.png" id="2_hfgj7"]
 [ext_resource type="Texture2D" uid="uid://cwrjnxc2n1tlc" path="res://Entity/Player/Arts/scullHands.png" id="3_jhjtm"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_f5tak"]
+[ext_resource type="AudioStream" uid="uid://chkdirv3xfx30" path="res://Audio/SniperRIfleShoot.wav" id="5_yeo4r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_kupmf"]
 a = Vector2(23, 1)
@@ -29,7 +30,7 @@ position = Vector2(23, 1)
 position = Vector2(-23, -1)
 collision_layer = 16
 collision_mask = 4
-dmg = 1.0
+dmg = 300.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Marker2D/HitBoxComponent"]
@@ -38,7 +39,7 @@ disabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="Sprite2D"]
 process_priority = 1
-position = Vector2(23, 1)
+position = Vector2(5, 1)
 target_position = Vector2(1000, 0)
 collision_mask = 4
 collide_with_areas = true
@@ -47,3 +48,6 @@ collide_with_areas = true
 points = PackedVector2Array(23, 1, 116, 1)
 width = 0.0
 default_color = Color(0.560784, 0.972549, 0.886275, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_yeo4r")

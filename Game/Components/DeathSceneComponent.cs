@@ -44,7 +44,7 @@ namespace Game.Components
 			SpawnBloodPartickle(spawnPosition);
 			randomAudioPlayer.PlayRandom();
 			randomAudioPlayer.Connect(AudioStreamPlayer.SignalName.Finished , Callable.From(()=>
-			QueueFree()
+				QueueFree()
 			));
 			
 		}
