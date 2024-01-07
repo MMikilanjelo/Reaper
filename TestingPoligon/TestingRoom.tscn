@@ -8,11 +8,10 @@
 
 [sub_resource type="Environment" id="Environment_4bebh"]
 background_mode = 3
-ambient_light_energy = 2.0
-glow_intensity = 2.2
-glow_strength = 1.58
-glow_blend_mode = 1
-glow_hdr_threshold = 0.51
+ambient_light_energy = 16.0
+glow_levels/4 = 1.0
+glow_strength = 1.34
+glow_blend_mode = 0
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
 fog_light_energy = 10.0
 fog_height_density = 0.0157
@@ -431,9 +430,3 @@ z_index = 3
 position = Vector2(16, -28)
 
 [node name="dummyTarget" parent="." instance=ExtResource("5_ljggy")]
-
-[node name="dummyTarget2" parent="." node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea") instance=ExtResource("5_ljggy")]
-position = Vector2(-104, 31)
-hurtBoxComponent = NodePath("../dummyTarget/HurtBoxComponent")
-healthComponent = NodePath("../dummyTarget/HealthComponent")
-baffArea = NodePath("../dummyTarget/DmgReductionArea")

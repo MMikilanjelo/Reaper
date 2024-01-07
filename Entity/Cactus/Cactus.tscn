@@ -14,16 +14,16 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_712mx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
-radius = 1.0
+radius = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wx0ml"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmkbe"]
 resource_local_to_scene = true
 shader = ExtResource("5_06akq")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxlxk"]
-radius = 3.0
-height = 12.0
+radius = 5.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_oeyds"]
 length = 0.001
@@ -191,7 +191,7 @@ texture = ExtResource("4_3kyw8")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_61c8g")
 
 [node name="Timer" type="Timer" parent="."]
@@ -200,7 +200,7 @@ wait_time = 0.1
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_wx0ml")
+hit_flash_material = SubResource("ShaderMaterial_vmkbe")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
 
@@ -210,7 +210,7 @@ collision_mask = 16
 healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
-position = Vector2(0, 10)
+position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_uxlxk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

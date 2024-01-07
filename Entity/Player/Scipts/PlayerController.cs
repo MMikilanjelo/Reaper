@@ -13,12 +13,10 @@ public partial class PlayerController : CharacterBody2D
   	private PackedScene floatingTextScene;
 	private game_events game_Events;
 	
-	public float xMovent;
-	public float yMovent;
-
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
+		PackedScene sineperRifle = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.SetInitiioalState(NormalState);
 		delegateStateMachine.AddState(DeadState);		
@@ -28,6 +26,7 @@ public partial class PlayerController : CharacterBody2D
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
 			game_Events.EmitPlayerShootSignal(1);
 		}));
+		weaponRootComponent.ChangeWeapon(sineperRifle);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -38,10 +37,10 @@ public partial class PlayerController : CharacterBody2D
 	}
 	public Vector2 GetMovementVector()
 	{
-		Vector2 movementVector = Vector2.Zero;
-		xMovent = Input.GetActionStrength("Right") - Input.GetActionStrength("Left");
-		yMovent = Input.GetActionStrength("Down") - Input.GetActionStrength("Up");
-		movementVector = new Vector2(xMovent , yMovent);
+		
+		float xMovent = Input.GetActionStrength("Right") - Input.GetActionStrength("Left");
+		float yMovent = Input.GetActionStrength("Down") - Input.GetActionStrength("Up");
+		Vector2 movementVector = new Vector2(xMovent , yMovent);
 		return movementVector;
 	}
 

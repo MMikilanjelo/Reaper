@@ -23,7 +23,8 @@ public partial class Camere : Camera2D
 		{
 			targetPosition = playerNode?.GlobalPosition ?? GlobalPosition;
 		}
-		else{
+		else
+		{
 			return;
 		}
 		

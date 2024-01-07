@@ -26,7 +26,7 @@ public partial class UpgradeManager : Node
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
 		tier_List.AddItemToTable(avaible_common_upgrades_Pool,8);
 		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,4);
-		tier_List.AddItemToTable( avaible_legendary_upgrades_Pool,1);
+		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,1);
 
 		
 		

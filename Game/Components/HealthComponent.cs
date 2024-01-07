@@ -2,11 +2,12 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 using GameUI;
-
+using Game.Enteties;
 namespace Game.Components
 {
     public partial class HealthComponent : Node2D
     {
+        
 
         [Signal] public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
         [Signal] public delegate void DiedEventHandler();

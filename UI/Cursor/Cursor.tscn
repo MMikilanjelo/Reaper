@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://blrykqf8mr6sg"]
+
+[ext_resource type="Script" path="res://UI/Cursor/Cursor.cs" id="1_38wou"]
+[ext_resource type="Texture2D" uid="uid://cfy50pdc2sj55" path="res://UI/Cursor/Cursor_Idel.png" id="2_vwhdi"]
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_38wou")
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = ExtResource("2_vwhdi")
+hframes = 4

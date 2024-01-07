@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpfd0gpab66vn"
-path="res://.godot/imported/crosheir.png-631e495c00eb04da73724dbe1ed01c2d.ctex"
+uid="uid://cfy50pdc2sj55"
+path="res://.godot/imported/Cursor_Idel.png-bee7cfcfb1806574f7971ad8ee40e108.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/crosheir.png"
-dest_files=["res://.godot/imported/crosheir.png-631e495c00eb04da73724dbe1ed01c2d.ctex"]
+source_file="res://UI/Cursor/Cursor_Idel.png"
+dest_files=["res://.godot/imported/Cursor_Idel.png-bee7cfcfb1806574f7971ad8ee40e108.ctex"]
 
 [params]
 

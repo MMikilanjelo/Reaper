@@ -15,7 +15,7 @@ namespace Game.Weapons
 		CollisionShape2D hitBoxArea;
 		public override void _Ready()
 		{
-			hitBoxArea = GetNode<CollisionShape2D>("Sprite2D/Marker2D/HitBoxComponent/CollisionShape2D");
+			hitBoxArea = GetNode<CollisionShape2D>("SniperRifle/Marker2D/HitBoxComponent/CollisionShape2D");
 			hitBoxShape = hitBoxArea.Shape as SegmentShape2D;
 			soundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");		
 		}
@@ -49,7 +49,7 @@ namespace Game.Weapons
 				tween.TweenProperty(aimLine , "width" , 2f , 0.1f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Circ);
 				tween.TweenCallback(Callable.From(()=> {hitBoxArea.Disabled = true;}));
 				tween.Chain();
-				tween.TweenProperty(aimLine , "width" , 0 , 0.3f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Circ);
+				tween.TweenProperty(aimLine , "width" , 0 , 0.2f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Circ);
 			}
 
 	}

@@ -8,6 +8,7 @@ namespace PlayerPassive
 	{
 		public HealthComponent healthComponent;
 		private game_events Game_Events;
+		private int _lifeStealAmount = 1;
         public override void _Ready()
         {
 			Game_Events = GetNode<game_events>("/root/GameEvents");
@@ -19,7 +20,7 @@ namespace PlayerPassive
         }
 		private void AddHealth()
 		{
-			healthComponent.SetCurrentHealth(1);
+			healthComponent.SetCurrentHealth(_lifeStealAmount);
 		}
     }
 }

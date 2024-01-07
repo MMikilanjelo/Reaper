@@ -69,7 +69,12 @@ namespace Game.Components
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
+					if(Owner is  PlayerController)
+					{
+						return;
+					}
 					Game_Events.EmitDmgRecivedByEnemy(totaldmg);
+					
 				}
 				else 
 				{

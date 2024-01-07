@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Xml.Resolvers;
 
 namespace GameUI
 {
@@ -9,15 +10,20 @@ namespace GameUI
 		Godot.Collections.Array loadingProgres;
 		const string sceneName = "res://World/Scenes/World.tscn";
 		private Button StartButton;
-		[Export] private Button QuitBUtton;
+		PackedScene optionScene;
+		[Export] Button exitButton;
 		[Export] AnimationPlayer transitionAnimation;
+		[Export] ResourcePreloader resourcePreloader;
+		[Export] Button optionsButton;
 
         public override void _Ready()
         {
-			
+			optionScene = resourcePreloader.GetResource("OptionsMenu") as  PackedScene;
 			transitionAnimation.Play("fade_out");
 			StartButton = GetNode<Button>("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/StartButton");
 			StartButton.Pressed += () =>  LoadMainScene();
+			optionsButton.Pressed += () => LoadOptionsMenu();
+			exitButton.Pressed += () => OnExitPressed();
 			ResourceLoader.LoadThreadedRequest(sceneName);
 		}
 		private void LoadMainScene()
@@ -34,6 +40,20 @@ namespace GameUI
 				transitionAnimation.Play("fade_in");
 				
 			}
+		}
+		private void LoadOptionsMenu()
+		{
+			var optionInstance = optionScene.Instantiate() as OptionsMenu;
+			AddChild(optionInstance);
+			optionInstance.BackPressed += () => OnOptionClosed(optionInstance);
+		}
+		private void OnOptionClosed(Node optionsInstance)
+		{
+			optionsInstance.QueueFree();
+		}
+		private void OnExitPressed()
+		{
+			GetTree().Quit();
 		}
     }
 }

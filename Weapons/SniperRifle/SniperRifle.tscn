@@ -12,42 +12,43 @@ b = Vector2(117, 1)
 
 [node name="SniperRifle" type="Node2D" node_paths=PackedStringArray("shootRay", "aimLine")]
 script = ExtResource("1_ks04y")
-shootRay = NodePath("Sprite2D/RayCast2D")
-aimLine = NodePath("Sprite2D/Line2D")
+shootRay = NodePath("SniperRifle/RayCast2D")
+aimLine = NodePath("SniperRifle/Line2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SniperRifle" type="Sprite2D" parent="."]
 texture = ExtResource("2_hfgj7")
 offset = Vector2(7, -8)
 
-[node name="Hands" type="Sprite2D" parent="Sprite2D"]
+[node name="Hands" type="Sprite2D" parent="SniperRifle"]
 texture = ExtResource("3_jhjtm")
 offset = Vector2(5, -9)
 
-[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+[node name="Marker2D" type="Marker2D" parent="SniperRifle"]
 position = Vector2(23, 1)
 
-[node name="HitBoxComponent" parent="Sprite2D/Marker2D" node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("5_f5tak")]
+[node name="HitBoxComponent" parent="SniperRifle/Marker2D" node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("5_f5tak")]
 position = Vector2(-23, -1)
 collision_layer = 16
 collision_mask = 4
 dmg = 300.0
 hitBoxArea = NodePath("CollisionShape2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Marker2D/HitBoxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SniperRifle/Marker2D/HitBoxComponent"]
 shape = SubResource("SegmentShape2D_kupmf")
 disabled = true
 
-[node name="RayCast2D" type="RayCast2D" parent="Sprite2D"]
+[node name="RayCast2D" type="RayCast2D" parent="SniperRifle"]
 process_priority = 1
 position = Vector2(5, 1)
 target_position = Vector2(1000, 0)
 collision_mask = 4
 collide_with_areas = true
 
-[node name="Line2D" type="Line2D" parent="Sprite2D"]
+[node name="Line2D" type="Line2D" parent="SniperRifle"]
 points = PackedVector2Array(23, 1, 116, 1)
 width = 0.0
-default_color = Color(0.560784, 0.972549, 0.886275, 1)
+default_color = Color(0, 6, 6, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_yeo4r")
+bus = &"sfx"

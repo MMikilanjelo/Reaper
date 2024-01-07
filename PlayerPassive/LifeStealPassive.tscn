@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://PlayerPassive/LifeStealPassive.cs" id="1_nag1a"]
 
-[node name="Node" type="Node"]
+[node name="LifeSteal" type="Node"]
 script = ExtResource("1_nag1a")

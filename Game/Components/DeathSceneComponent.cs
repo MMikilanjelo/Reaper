@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using GameLogick.Utilities;
+using Game.Enteties;
 
 namespace Game.Components
 {
@@ -31,7 +32,7 @@ namespace Game.Components
 		}
 		public void OnEnemyDied()
 		{
-			if(this.Owner == null || Owner is not Node2D)
+			if(Owner == null || Owner is not Node2D)
 			{
 				return;
 			}
@@ -46,7 +47,6 @@ namespace Game.Components
 			randomAudioPlayer.Connect(AudioStreamPlayer.SignalName.Finished , Callable.From(()=>
 				QueueFree()
 			));
-			
 		}
 	}
 }

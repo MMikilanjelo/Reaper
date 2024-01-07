@@ -9,8 +9,7 @@ namespace Managers
 		[Export] PackedScene BatEnemyScene;
 		[Export] PackedScene KnigthEnemyScene;
 		[Export] PackedScene DummyTargetScene;
-	  [Export] PackedScene CactusScene;
-
+	  	[Export] PackedScene CactusScene;
 		[Export] Timer EnemySpawnerInterval;
 		[Export] const float SPAWN_RADIUS = 100f;
 		[Export] private bool Activate = false;
@@ -22,8 +21,8 @@ namespace Managers
 			enemyTable.AddItemToTable(KnigthEnemyScene , 100);
 			enemyTable.AddItemToTable(BasickEnemyScene , 80);
 			enemyTable.AddItemToTable(BatEnemyScene , 60);
-      enemyTable.AddItemToTable(CactusScene , 40);
-      enemyTable.AddItemToTable(DummyTargetScene , 10);
+     	 	enemyTable.AddItemToTable(CactusScene , 40);
+      		enemyTable.AddItemToTable(DummyTargetScene , 10);
 			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
 			
 		}
