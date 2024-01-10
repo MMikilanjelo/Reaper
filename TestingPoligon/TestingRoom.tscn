@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="1_rn4pu"]
 [ext_resource type="PackedScene" uid="uid://ci5u1meyx80l2" path="res://Entity/Scenes/Player.tscn" id="3_vs4y7"]
 [ext_resource type="PackedScene" uid="uid://so6f1d223r5h" path="res://GameObjects/Chest/chest.tscn" id="4_da5p3"]
-[ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="5_ljggy"]
+[ext_resource type="PackedScene" uid="uid://5pil5ykbrsu7" path="res://Entity/Knight/knigth.tscn" id="5_fhojo"]
 
 [sub_resource type="Environment" id="Environment_4bebh"]
 background_mode = 3
@@ -429,4 +429,4 @@ z_index = 3
 [node name="Chest" parent="." instance=ExtResource("4_da5p3")]
 position = Vector2(16, -28)
 
-[node name="dummyTarget" parent="." instance=ExtResource("5_ljggy")]
+[node name="Knigth" parent="." instance=ExtResource("5_fhojo")]

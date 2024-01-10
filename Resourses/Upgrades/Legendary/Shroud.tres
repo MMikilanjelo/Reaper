@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_r848s")
 Name = "Shroud"
-description = "can become invisible for all enemies"
+description = "dodge every second bullet"
 id = "shroud"
-isUnique = false
+isUnique = true
+value = 0.0

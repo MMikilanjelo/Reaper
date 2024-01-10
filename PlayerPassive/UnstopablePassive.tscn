@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c08vjcled0b1x"]
+
+[ext_resource type="Script" path="res://PlayerPassive/UnstopablePassive.cs" id="1_tm6kg"]
+
+[node name="UnstopablePassive" type="Node" node_paths=PackedStringArray("resetTimer")]
+script = ExtResource("1_tm6kg")
+resetTimer = NodePath("ResetTimer")
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 3.0

@@ -1,6 +1,7 @@
 using GameUI;
 using Godot;
 using GameLogick.Utilities;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Game.Components
 {
@@ -12,16 +13,28 @@ namespace Game.Components
 		private float dmg_Reduction_Multiplier = 0f;
 		private int armmor = 0;
 		private float miss_chance = 0;
+		private int _hitchance = 100;
 		PackedScene floatingTextScene;
 		[Export] private RandomAudioPlayer audioPlayer;
 		[Export] private HealthComponent healthComponent;
 		[Signal] public delegate void HitByHitBoxEventHandler(HitBoxComponent hitBoxComponent);
+		[Signal] public delegate void MissedAttackEventHandler();
+		[Signal] public delegate void MissChanceChangedEventHandler(int miss_chance);
+
 		
 		public float MissChance
 		{
 			get => miss_chance;
 			private set{
 				miss_chance = Mathf.Clamp(value , 0 , 100);
+				EmitSignal(SignalName.MissChanceChanged , miss_chance);
+			}
+		}
+		public int HitChance
+		{
+			get => _hitchance;
+			private set{
+				_hitchance = Mathf.Clamp(value , 0 , 100);
 			}
 		}
 		public float DmgReductonMultiplier
@@ -29,15 +42,30 @@ namespace Game.Components
 			get => dmg_Reduction_Multiplier;
 			private set{
 				dmg_Reduction_Multiplier = Mathf.Clamp(value, 0 , 1);
+				
+			}
+		}
+		public int Armmor{
+			get => armmor;
+			private set {
+				armmor = value;
 			}
 		}
 		public void SetDmgReductonMultiplier(float percent)
 		{
 			DmgReductonMultiplier += percent;
 		}
+		public void SetArrmor(int value)
+		{
+			Armmor = value;
+		}
 		public void SetMissChance(float amount)
 		{
 			MissChance += amount;
+		}
+		public void SetHitChance(int amount)
+		{
+			_hitchance = amount;
 		}
 		public override void _Ready()
 		{
@@ -61,8 +89,8 @@ namespace Game.Components
 			if(oterArea is HitBoxComponent hitBoxComponent)
 			{
 				
-				var hitChance = random.RandiRange(0 , 100);
-				if(hitChance >= miss_chance)
+				var hitChance = random.RandiRange(0 , _hitchance);
+				if(hitChance > miss_chance)
 				{
 					audioPlayer.PlayRandom();
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);
@@ -78,6 +106,7 @@ namespace Game.Components
 				}
 				else 
 				{
+					EmitSignal(SignalName.MissedAttack);
 					hitBoxComponent.EmitImpackt();
 					var Missed_text = floatingTextScene.Instantiate() as FloatingText;
 					GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(Missed_text);

@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource("1_mnshu")
 Name = "Unstopoble"
-description = "after killing 3 ene,ies in a raw gain + 10 movespeed and + 100 dmg efect can stack"
+description = "after killing enemy gain a +1% percent for move speed , incoming  dmg reduction
+(if you don't kill enemy with 3 seconds effect removed)"
 id = "unstopoble"
-isUnique = false
+isUnique = true
+value = 0.0

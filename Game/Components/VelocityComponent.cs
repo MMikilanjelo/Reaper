@@ -53,6 +53,39 @@ namespace Game.Components
 		{
 			maxSpeed = newSpeed;
 		}
+		public void AddSpeedPercentModifire(string _name , float _value)
+		{
+			if (!speedPercentModifires.ContainsKey(_name))
+        	{
+            	speedPercentModifires.Add(_name, _value);
+        	}
+		}
+		public void SetSpeedPercentModifire(string _name  , float _amount)
+		{
+			if (speedPercentModifires.ContainsKey(_name))
+			{
+				speedPercentModifires[_name] = _amount;
+			}
+		}
+		public void RemoveSpeedPercentModifire(string _name)
+		{
+			if(speedPercentModifires.ContainsKey(_name))
+			{
+				speedPercentModifires.Remove(_name);
+			}
+		}
+		public float? GetSpeedPercentModifier(string name)
+		{
+			if (speedPercentModifires.ContainsKey(name))
+			{
+				return speedPercentModifires[name];
+			}
+			else
+			{
+				return null;
+			}
+		}
+	
 
 
 	}

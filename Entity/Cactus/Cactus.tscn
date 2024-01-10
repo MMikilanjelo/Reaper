@@ -16,7 +16,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
 radius = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmkbe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65ead"]
 resource_local_to_scene = true
 shader = ExtResource("5_06akq")
 shader_parameter/lerp_percent = 0.0
@@ -200,7 +200,7 @@ wait_time = 0.1
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_vmkbe")
+hit_flash_material = SubResource("ShaderMaterial_65ead")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
 
@@ -224,3 +224,4 @@ visualsNode = NodePath("../Visuals")
 
 [node name="SoundEffectOnAttack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_togbx")
+bus = &"sfx"

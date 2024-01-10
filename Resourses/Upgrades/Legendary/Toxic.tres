@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_aatrp")
 Name = "Toxic"
-description = "can spawn toxic pollition area"
+description = "apply toxic debaff for enemy with every hit"
 id = "toxic"
-isUnique = false
+isUnique = true
+value = 0.0

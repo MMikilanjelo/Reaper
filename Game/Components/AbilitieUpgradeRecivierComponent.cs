@@ -2,26 +2,35 @@ using Godot;
 using System;
 using GameLogick.Utilities;
 using PlayerPassive;
+using System.Reflection.Metadata;
 
 namespace Game.Components
 {
 	public partial class AbilitieUpgradeRecivierComponent : Node
 	{
+		[Export] ResourcePreloader resourcePreloader;
 		game_events Game_Events;
 		PlayerController player;
 		HurtBoxComponent playerHurtBox;
 		WeaponRootComponent playerWeaponRootComponent;
 		UIEvents uiEvents;
 		PackedScene lifeSteal;
+		PackedScene shroudPassive;
+		PackedScene unstopoble;
         public override void _Ready()
         {
+			Game_Events = GetNode<game_events>("/root/GameEvents");
 			uiEvents = GetNode<UIEvents>("/root/UIEvents");
 			player  = GetParent<PlayerController>();
 			playerHurtBox = player.GetNode<HurtBoxComponent>("HurtBoxComponent");
 			playerWeaponRootComponent = player.GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
-			Game_Events = GetNode<game_events>("/root/GameEvents");
+			
+			
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
-			lifeSteal = ResourceLoader.Load("res://PlayerPassive/LifeStealPassive.tscn") as PackedScene;
+			
+			lifeSteal = resourcePreloader.GetResource("LifeStealPassive") as PackedScene;
+			shroudPassive = resourcePreloader.GetResource("ShroudPassive") as PackedScene;
+			unstopoble = resourcePreloader.GetResource("UnstopablePassive") as PackedScene;
         }
 		private void OnAbilityUpgradeAded(Upgrade addedUpgrade, Godot.Collections.Dictionary<string, Godot.Collections.Dictionary<Upgrade, int>> currentPlayerUpgrades)
 		{
@@ -54,6 +63,17 @@ namespace Game.Components
 					var vampireAbility = lifeSteal.Instantiate() as LifeStealPassive;
 					vampireAbility.healthComponent = player.GetNode<HealthComponent>("HealthComponent");
 					player.AddChild(vampireAbility);
+					break;
+				case "shroud" :
+					var shroudAbility = shroudPassive.Instantiate() as ShroudPassive;
+					shroudAbility.hurtBoxComponent = playerHurtBox;
+					player.AddChild(shroudAbility);
+					break;
+				case "unstopoble":
+					var unstopobleAbility = unstopoble.Instantiate() as UnstopablePassive;
+					unstopobleAbility.velocityComponent = player.velocityComponent;
+					unstopobleAbility.hurtBoxComponent = playerHurtBox;
+					player.AddChild(unstopobleAbility);
 					break;
 			}
 		}
