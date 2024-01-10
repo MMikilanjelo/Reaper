@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_bh32u")
 Name = "arrmor reduction"
-description = "-10 arrmor to enemy"
+description = " arrmor reduction to enemy "
 id = "arrmor_reduction"
 isUnique = false
+value = 0.0

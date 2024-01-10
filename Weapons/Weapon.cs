@@ -7,6 +7,7 @@ namespace Game.Weapons
 	{
 		public bool _canShoot = true;
 		public PackedScene Affex = null;
+		public HitBoxComponent hitBoxComponent = null;
 		public virtual void Shoot(Vector2 directionToTarget  )
 		{
 			

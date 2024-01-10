@@ -7,16 +7,14 @@ using GameLogick;
 
 public partial class UpgradeManager : Node
 {
-	
+	[Export] experience_manager ExperienceManager;
+	[Export] PackedScene UpgradeSceenScene;
 	private readonly  Godot.Collections.Array<Upgrade> avaible_common_upgrades_Pool = new ();
 	private readonly  Godot.Collections.Array<Upgrade> avaible_rare_upgrades_Pool = new ();
 	private readonly Godot.Collections.Array<Upgrade> avaible_legendary_upgrades_Pool = new ();
 
-	[Export] experience_manager ExperienceManager;
-	[Export] PackedScene UpgradeSceenScene;
 	private readonly LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
 	private readonly LootTable<Godot.Collections.Array<Upgrade>> tier_List = new();
-
 	private game_events game_Events;
 	
 	private readonly Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> current_upgrades = new ();
@@ -24,9 +22,9 @@ public partial class UpgradeManager : Node
 	{	
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
-		tier_List.AddItemToTable(avaible_common_upgrades_Pool,8);
+		tier_List.AddItemToTable(avaible_common_upgrades_Pool,10);
 		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,4);
-		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,1);
+		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,20);
 
 		
 		
@@ -53,18 +51,20 @@ public partial class UpgradeManager : Node
 		Upgrade serial = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Shroud.tres");
 		Upgrade toxic = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Toxic.tres");
 		Upgrade shroud = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Unstopoble.tres");
-	
+		Upgrade joke = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/joke.tres");
 
 		avaible_legendary_upgrades_Pool.Add(serial);
 		avaible_legendary_upgrades_Pool.Add(toxic);
 		avaible_legendary_upgrades_Pool.Add(shroud);
+		//avaible_legendary_upgrades_Pool.Add(joke);ddd
 
 }
 	private Godot.Collections.Array<Upgrade> pickUpgrades(Godot.Collections.Array<Upgrade> upgrades_pool)
 	{
+		var _cardsCount = upgrades_pool.Count < 3 ? upgrades_pool.Count : 3;
 		Godot.Collections.Array<Upgrade> chosenUpgrades = new Godot.Collections.Array<Upgrade>();
 		Godot.Collections.Array<Upgrade> filtered_upgrades = upgrades_pool.Duplicate();
-		for(int i = 0 ; i < 3 ; i ++)
+		for(int i = 0 ; i < _cardsCount ; i ++)
 		{
 			var chosenUpgrade = filtered_upgrades.PickRandom() as Upgrade;
 			chosenUpgrades.Add(chosenUpgrade);

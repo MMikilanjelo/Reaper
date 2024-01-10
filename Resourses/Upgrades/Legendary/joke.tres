@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://by2sketn5cydp"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_lkdos"]
+
+[resource]
+script = ExtResource("1_lkdos")
+Name = ":)"
+description = "AHAHHAHAH nothing to upgrade "
+id = "joke"
+isUnique = false
+value = 0.0

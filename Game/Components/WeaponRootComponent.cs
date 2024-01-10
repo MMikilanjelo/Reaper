@@ -38,6 +38,7 @@ namespace Game.Components
 		public void AddAfexToWeapon(PackedScene AffexToAdd)
 		{
 			CurrentWeapon.Affex = AffexToAdd;
+			CurrentWeapon.hitBoxComponent?.AddEffecToHit(CurrentWeapon.Affex);
 		}
 
 		

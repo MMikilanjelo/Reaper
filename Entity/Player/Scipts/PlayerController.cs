@@ -26,7 +26,7 @@ public partial class PlayerController : CharacterBody2D
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
 			game_Events.EmitPlayerShootSignal(1);
 		}));
-		weaponRootComponent.ChangeWeapon(sineperRifle);
+		//weaponRootComponent.ChangeWeapon(sineperRifle);
 	}
 
 	public override void _PhysicsProcess(double delta)
