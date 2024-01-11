@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://t38ui5d7kctr"]
+
+[ext_resource type="Script" path="res://Resourses/Upgrades/Upgrade.cs" id="1_ww7cg"]
+
+[resource]
+script = ExtResource("1_ww7cg")
+Name = "Exp Increasment"
+description = "+1 exp gain"
+id = "exp"
+isUnique = false
+value = 1.0

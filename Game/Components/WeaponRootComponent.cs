@@ -10,7 +10,6 @@ namespace Game.Components
 		[Export] Weapon CurrentWeapon;
 		public PackedScene AffexToApply = null;
 		[Signal] public delegate void ShotedFromWeaponEventHandler();
-		public WeaponStats currentWeaponStats;
 		private bool _HasAmmoRemaining = true;
 		game_events game_Events;
         public override void _Ready()

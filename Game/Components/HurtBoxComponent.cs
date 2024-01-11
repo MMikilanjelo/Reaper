@@ -55,6 +55,10 @@ namespace Game.Components
 		{
 			DmgReductonMultiplier += percent;
 		}
+		public void IncreaseArrmor(int value)
+		{
+			Armmor += value;
+		}
 		public void SetArrmor(int value)
 		{
 			Armmor = value;
@@ -90,7 +94,7 @@ namespace Game.Components
 			{
 				
 				var hitChance = random.RandiRange(0 , _hitchance);
-				if(hitChance > miss_chance)
+				if(hitChance >= miss_chance)
 				{
 					audioPlayer.PlayRandom();
 					var totaldmg = CalculateIncomingDamage(hitBoxComponent.dmg , dmg_Reduction_Multiplier , armmor);

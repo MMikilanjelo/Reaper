@@ -75,6 +75,10 @@ namespace Game.Components
 					unstopobleAbility.hurtBoxComponent = playerHurtBox;
 					player.AddChild(unstopobleAbility);
 					break;
+				case "arrmor":
+					playerHurtBox.IncreaseArrmor((int)addedUpgrade.value);
+					break;
+
 			}
 		}
 	}

@@ -8,7 +8,6 @@ namespace PlayerPassive
 	{
 		public HurtBoxComponent hurtBoxComponent;
 		private int _receivedAttackCount = 0;
-		private int _currentMissChance = 0;
 
         public override void _Ready()
         {
@@ -21,7 +20,7 @@ namespace PlayerPassive
 			if(_receivedAttackCount >= 2)
 			{
 				_receivedAttackCount = 0;
-				hurtBoxComponent.SetHitChance(0);
+				hurtBoxComponent.SetHitChance(-1);
 			}
 		}
 		private void RemoveShroud()

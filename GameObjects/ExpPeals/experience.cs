@@ -4,14 +4,18 @@ using Godot;
 public partial class experience : Node2D
 {
 	[Export] Area2D PickableArea;
-  [Export]private AudioStreamPlayer2D soundPlayer;
+  	[Export]private AudioStreamPlayer2D soundPlayer;
 	private game_events game_Events;
-  private bool _isCollected = false;
+  	private bool _isCollected = false;
+	private int _expDrop = 1;
 	public override void _Ready()
 	{
-    
+		
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		PickableArea.Connect(Area2D.SignalName.AreaEntered , new Callable(this , nameof(OnAreaEntered)));
+		game_Events.OnAbilityUpgradeAded += 
+		(Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades) => 
+		IncreaseExpDrop(addedUpgrade);
 		
 	}
 
@@ -28,6 +32,15 @@ public partial class experience : Node2D
     {
 		  QueueFree();
     }));
-    game_Events.On_ExperienceVialCollected(1);
+    game_Events.On_ExperienceVialCollected(_expDrop);
+	}
+	private void IncreaseExpDrop(Upgrade addedUpgrade)
+	{
+		if(addedUpgrade.id == "exp")
+		{
+			_expDrop += (int)addedUpgrade.value;
+			GD.Print(_expDrop);
+		}
 	}
 }
+	
