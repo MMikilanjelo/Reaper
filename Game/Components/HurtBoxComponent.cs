@@ -11,7 +11,7 @@ namespace Game.Components
 		game_events Game_Events;
 		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
 		private float dmg_Reduction_Multiplier = 0f;
-		private int armmor = 0;
+		[Export]private int armmor = 0;
 		private float miss_chance = 0;
 		private int _hitchance = 100;
 		PackedScene floatingTextScene;

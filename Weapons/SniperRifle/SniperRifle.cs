@@ -10,6 +10,7 @@ namespace Game.Weapons
 		[Export] private RayCast2D shootRay;
 		[Export] Line2D aimLine;
 		[Export] private float _atackDelay = 1.5f;
+		
 		AudioStreamPlayer2D soundPlayer;
 		SegmentShape2D hitBoxShape;
 		CollisionShape2D hitBoxArea;

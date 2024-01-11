@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_shy2f")
 Name = "BulletDmg"
-description = "Increase bullet Dmg by 1"
+description = "+5 bullet dmg"
 id = "bulletDmg"
 isUnique = false
 value = 0.0

@@ -287,6 +287,14 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 12
 text = "1000+"
 
+[node name="EscLable" type="Label" parent="Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/TotalSoulsCollected"]
+modulate = Color(1, 1, 1, 0.439216)
+material = SubResource("ShaderMaterial_73dre")
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = " Press Esc"
+
 [node name="TransitionTexture" type="TextureRect" parent="Control"]
 material = SubResource("ShaderMaterial_lia7v")
 layout_mode = 1

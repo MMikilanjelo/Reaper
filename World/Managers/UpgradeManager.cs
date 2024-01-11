@@ -24,7 +24,7 @@ public partial class UpgradeManager : Node
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
 		tier_List.AddItemToTable(avaible_common_upgrades_Pool,10);
 		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,4);
-		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,20);
+		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,1);
 
 		
 		
@@ -56,7 +56,7 @@ public partial class UpgradeManager : Node
 		avaible_legendary_upgrades_Pool.Add(serial);
 		avaible_legendary_upgrades_Pool.Add(toxic);
 		avaible_legendary_upgrades_Pool.Add(shroud);
-		//avaible_legendary_upgrades_Pool.Add(joke);ddd
+		avaible_legendary_upgrades_Pool.Add(joke);
 
 }
 	private Godot.Collections.Array<Upgrade> pickUpgrades(Godot.Collections.Array<Upgrade> upgrades_pool)

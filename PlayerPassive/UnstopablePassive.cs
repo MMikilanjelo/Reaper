@@ -14,6 +14,7 @@ namespace PlayerPassive
 		private float _speedMultiplier = 0.1f;
 		private int _arrmorMultiplier = 1;
 		private const string SPEED_MODIFIRE = "unstoppable";
+		private const int MAX_EFFECT_STACK = 6;
         public override void _Ready()
         {
 			//To do fix move speed multipliers  ) 
@@ -28,9 +29,13 @@ namespace PlayerPassive
 		private void ApplyBaff()
 		{
 			resetTimer.Start();
-			_effectCount += 1;
-			velocityComponent.SetSpeedPercentModifire(SPEED_MODIFIRE , _speedMultiplier * _effectCount);
-			hurtBoxComponent.SetArrmor(_arrmorMultiplier *  _effectCount);
+			if(_effectCount < MAX_EFFECT_STACK)
+			{
+				_effectCount += 1;
+				velocityComponent.SetSpeedPercentModifire(SPEED_MODIFIRE , _speedMultiplier * _effectCount);
+				hurtBoxComponent.SetArrmor(_arrmorMultiplier *  _effectCount);
+			}
+			
 			
 		}
 		private void ResetBaffs()

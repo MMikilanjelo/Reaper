@@ -14,6 +14,7 @@ b = Vector2(117, 1)
 script = ExtResource("1_ks04y")
 shootRay = NodePath("SniperRifle/RayCast2D")
 aimLine = NodePath("SniperRifle/Line2D")
+_atackDelay = 2.0
 
 [node name="SniperRifle" type="Sprite2D" parent="."]
 texture = ExtResource("2_hfgj7")
@@ -30,7 +31,7 @@ position = Vector2(23, 1)
 position = Vector2(-23, -1)
 collision_layer = 16
 collision_mask = 4
-dmg = 1.0
+dmg = 300.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SniperRifle/Marker2D/HitBoxComponent"]

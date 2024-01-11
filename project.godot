@@ -39,6 +39,10 @@ mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 project/assembly_name="Reaper"
 
+[editor]
+
+movie_writer/movie_file="D:/Recordings/Movie.avi"
+
 [gui]
 
 theme/custom="res://Resourses/Theme/theme.tres"
