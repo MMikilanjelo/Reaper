@@ -80,7 +80,6 @@ public partial class CrystalSlime : CharacterBody2D
     }
     private void DeadState()
     {
-
         Game_Events.EmitEnemyDeathSignal(Position, 10);
         QueueFree();
     }

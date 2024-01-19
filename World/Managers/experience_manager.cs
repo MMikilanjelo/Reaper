@@ -7,7 +7,7 @@ public partial class experience_manager : Node
 	game_events game_Events;
 	int current_Experience = 0;
 	int current_level = 1;
-	int target_exp = 10;
+	int target_exp = 1;
 	
 	[Signal] public delegate void ExperienceCollectedEventHandler(int current_exp , int target_exp);
 	[Signal] public delegate void LevelUpEventHandler(int newLvl);

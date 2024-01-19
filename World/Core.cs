@@ -13,7 +13,6 @@ public partial class Core : Node2D
 	HealthComponent playerHealth;
 	public override void _Ready()
 	{
-		GD.Print("Hi there from neovim");
 		transitionAnimation.Play("fade_out");
 		ResourceLoader.LoadThreadedRequest(DefeatScenePath);
 		var player = GameUtilities.GetPlayerNode(this);

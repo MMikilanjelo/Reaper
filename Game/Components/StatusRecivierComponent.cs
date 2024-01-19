@@ -20,7 +20,7 @@ namespace Game.Components
 			}
 		}
 		private readonly Dictionary<PackedScene , BaseEffect> currentEffects = new Dictionary<PackedScene, BaseEffect>();
-		// TO do keep track of effects that uplied to enemy and update them if we try to add some sort of effect
+		// TODO: keep track of effects that uplied to enemy and update them if we try to add some sort of effect
 		
 
         public override void _Ready()
