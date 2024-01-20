@@ -24,6 +24,7 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 GameEvents="*res://AutoLoad/game_events.tscn"
 UIEvents="*res://AutoLoad/UIEvents.tscn"
 MusicPlayer="*res://AutoLoad/MusicPlayer.tscn"
+AchievementsEvents="*res://AutoLoad/AchievementEvents.tscn"
 
 [display]
 

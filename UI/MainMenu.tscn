@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://lvs4ige8sb8o"]
+[gd_scene load_steps=14 format=3 uid="uid://lvs4ige8sb8o"]
 
 [ext_resource type="Shader" path="res://Visuals/Shaders/DefeateScreen.gdshader" id="1_e2c51"]
 [ext_resource type="Script" path="res://UI/MainMenu.cs" id="1_wt4bp"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="3_c3cg7"]
 [ext_resource type="Texture2D" uid="uid://7bqi7dbg7u85" path="res://Visuals/UI/TransitionTexture.png" id="4_8ihnj"]
+[ext_resource type="PackedScene" uid="uid://bv0gn7chbnfgf" path="res://UI/AchievementScreen.tscn" id="5_qowuv"]
 [ext_resource type="PackedScene" uid="uid://cda3fh2ci45m3" path="res://UI/OptionsMenu.tscn" id="5_uxvnq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6eex3"]
@@ -98,12 +99,13 @@ shader = ExtResource("3_c3cg7")
 shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 46.0
 
-[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("exitButton", "transitionAnimation", "resourcePreloader", "optionsButton")]
+[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("exitButton", "transitionAnimation", "resourcePreloader", "optionsButton", "achievemntMenuButton")]
 script = ExtResource("1_wt4bp")
 exitButton = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/QuitButton")
 transitionAnimation = NodePath("Control/TransitionAnimation")
 resourcePreloader = NodePath("ResourcePreloader")
 optionsButton = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/SettingsButton")
+achievemntMenuButton = NodePath("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/AchivmentsButton")
 
 [node name="Control" type="Control" parent="."]
 material = SubResource("ShaderMaterial_6eex3")
@@ -207,4 +209,4 @@ mouse_filter = 2
 texture = ExtResource("4_8ihnj")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("OptionsMenu"), [ExtResource("5_uxvnq")]]
+resources = [PackedStringArray("AchievementScreen", "OptionsMenu"), [ExtResource("5_qowuv"), ExtResource("5_uxvnq")]]

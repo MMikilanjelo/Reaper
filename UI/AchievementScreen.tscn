@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv0gn7chbnfgf"]
+
+[ext_resource type="Shader" path="res://Visuals/Shaders/DefeateScreen.gdshader" id="1_j2isb"]
+[ext_resource type="Script" path="res://UI/AchievementScreen.cs" id="1_y21c1"]
+[ext_resource type="PackedScene" uid="uid://rgwvayqkjxtv" path="res://UI/AchievementContainer.tscn" id="2_igqfk"]
+[ext_resource type="Script" path="res://UI/AchievementController.cs" id="3_vfky3"]
+[ext_resource type="Resource" uid="uid://btef1qtafqlhn" path="res://Resourses/AchievementResourses/CrabAchievement.tres" id="5_7dw8f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tofaw"]
+shader = ExtResource("1_j2isb")
+shader_parameter/color_gap = Color(0, 0, 0, 1)
+shader_parameter/color_stripe = Color(0.0980392, 0.0627451, 0.129412, 1)
+shader_parameter/divisions = 1.8
+shader_parameter/stripe_bias = 2.2
+shader_parameter/speed = 0.1
+shader_parameter/angle = 1.0
+
+[node name="AchievementScreen" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_y21c1")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("AchievementContainer"), [ExtResource("2_igqfk")]]
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_tofaw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="BackButton" type="Button" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"BackArrow"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 32
+
+[node name="GridContainer" type="GridContainer" parent="Control/ScrollContainer/MarginContainer" node_paths=PackedStringArray("_resourcePreloader")]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_vfky3")
+_achievements = [ExtResource("5_7dw8f")]
+_resourcePreloader = NodePath("../../../../ResourcePreloader")

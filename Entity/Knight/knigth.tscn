@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="15_nwxgw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne0t0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7ws6"]
 resource_local_to_scene = true
 shader = ExtResource("7_r1ao8")
 shader_parameter/lerp_percent = 0.0
@@ -97,7 +97,7 @@ collide_with_areas = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_42i4o")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_ne0t0")
+hit_flash_material = SubResource("ShaderMaterial_q7ws6")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
 visible = false

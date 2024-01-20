@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://rgwvayqkjxtv"]
+
+[ext_resource type="Texture2D" uid="uid://b48gkg1ujad2n" path="res://Visuals/Achievements/Crabs_Achivment.png" id="1_4y1oi"]
+[ext_resource type="Script" path="res://UI/AchievementContainer.cs" id="1_abryu"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="1_ybu8m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xqwq"]
+resource_local_to_scene = true
+shader = ExtResource("1_ybu8m")
+shader_parameter/lerp_percent = 1.0
+shader_parameter/target_color = Color(0.184314, 0.101961, 0.164706, 1)
+
+[node name="AchievementContainer" type="HBoxContainer"]
+script = ExtResource("1_abryu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8xqwq")
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("1_4y1oi")
+stretch_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_type_variation = &"AchievementPanelContainer"
+
+[node name="Conditions" type="Label" parent="PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "Testing  this"
+autowrap_mode = 3

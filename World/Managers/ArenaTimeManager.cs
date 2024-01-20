@@ -1,14 +1,36 @@
 using Godot;
 using System;
+using System.Xml.Schema;
 
 namespace Managers
 {
 	public partial class ArenaTimeManager : Node
 	{
-		[Export] Timer timer;
-		public double GetTImeEepsed()
+		Timer timer;
+		[Signal] public delegate void DifficultyIncreasedOverTimeEventHandler(int _arenaDifficulty);
+		const int DIFFICULTY_INTERVAL  = 5;
+		private int _arenaDifficulty;
+        public override void _Ready()
+        {
+           timer = GetNode<Timer>("Timer");
+		   timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof (WaveFinished))); 
+        }
+        public override void _Process(double delta)
+        {
+			var _nextTimeTarget = timer.WaitTime - ((_arenaDifficulty + 1 ) * DIFFICULTY_INTERVAL);
+			if(timer.TimeLeft <= _nextTimeTarget)
+			{
+				_arenaDifficulty += 1 ;
+				EmitSignal(SignalName.DifficultyIncreasedOverTime , _arenaDifficulty);
+			}
+        }
+        public double GetTImeEepsed()
 		{
 			return timer.WaitTime - timer.TimeLeft;
+		}
+		private void WaveFinished()
+		{
+			GD.Print("Spawning next lvl");
 		}
 	}
 }

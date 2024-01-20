@@ -11,20 +11,29 @@ namespace GameUI
 		const string sceneName = "res://World/Scenes/World.tscn";
 		private Button StartButton;
 		PackedScene optionScene;
+		PackedScene achievemntScreenScene;
 		[Export] Button exitButton;
 		[Export] AnimationPlayer transitionAnimation;
 		[Export] ResourcePreloader resourcePreloader;
 		[Export] Button optionsButton;
+		[Export] Button achievemntMenuButton; 
 
         public override void _Ready()
         {
 			optionScene = resourcePreloader.GetResource("OptionsMenu") as  PackedScene;
+			achievemntScreenScene = resourcePreloader.GetResource("AchievementScreen") as PackedScene;
+			
 			transitionAnimation.Play("fade_out");
 			StartButton = GetNode<Button>("Control/MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/StartButton");
+			SetUpButtonsInteractions();
+			ResourceLoader.LoadThreadedRequest(sceneName);
+		}
+		private void SetUpButtonsInteractions()
+		{
 			StartButton.Pressed += () =>  LoadMainScene();
 			optionsButton.Pressed += () => LoadOptionsMenu();
 			exitButton.Pressed += () => OnExitPressed();
-			ResourceLoader.LoadThreadedRequest(sceneName);
+			achievemntMenuButton.Pressed += () => OnAchievementButtonPressed();
 		}
 		private void LoadMainScene()
 		{
@@ -45,9 +54,16 @@ namespace GameUI
 		{
 			var optionInstance = optionScene.Instantiate() as OptionsMenu;
 			AddChild(optionInstance);
-			optionInstance.BackPressed += () => OnOptionClosed(optionInstance);
+			optionInstance.BackPressed += () => OnMenuClosed(optionInstance);
 		}
-		private void OnOptionClosed(Node optionsInstance)
+
+		private void OnAchievementButtonPressed ()
+		{
+			var achievemntScreenInstance = achievemntScreenScene.Instantiate() as AchievementScreen;
+			AddChild(achievemntScreenInstance);
+			achievemntScreenInstance.BackPressed += () => OnMenuClosed(achievemntScreenInstance);
+		}
+		private void OnMenuClosed(Node optionsInstance)
 		{
 			optionsInstance.QueueFree();
 		}

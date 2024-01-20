@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 
 namespace Managers
@@ -8,13 +9,16 @@ namespace Managers
 	{
 	[Export]ArenaTimeManager arenaTimeManager;	
 	[Export] Label label;
-       
+
+    public override void _Ready()
+    {
+
+        arenaTimeManager.
+			Connect(ArenaTimeManager.SignalName.DifficultyIncreasedOverTime,
+			new Callable(this , nameof(OnArenaDifficultyIncreased)));
+    }
     public override void _Process(double delta)
     {
-        if(arenaTimeManager == null)
-		{
-		 	return;
-		}
 		float timeElapsed = (float)arenaTimeManager.GetTImeEepsed();
 		label.Text = Format_Secontds_ToString(timeElapsed);
     }
@@ -24,6 +28,11 @@ namespace Managers
 	 	var remaining_seconds = seconds - (minutes * 60);
 		int displaySecenods = (int)Math.Floor(remaining_seconds);
 		return minutes.ToString() + ":" + displaySecenods.ToString("D2");
+	}
+
+	private void OnArenaDifficultyIncreased(int _arenaDifficulty)
+	{
+		GD.Print(_arenaDifficulty + "current difficulty");
 	}
   }
 }

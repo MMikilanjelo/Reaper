@@ -1,8 +1,18 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://7b3emhk4csf1"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://7b3emhk4csf1"]
 
 [ext_resource type="Texture2D" uid="uid://s5jrkhpp0pcy" path="res://Visuals/UI/UITheming.png" id="1_c4p8t"]
+[ext_resource type="Texture2D" uid="uid://dcydfe8sjykdu" path="res://Visuals/UI/AchievementPanelContainer.png" id="1_yf35l"]
 [ext_resource type="Texture2D" uid="uid://bcuoe1clg7y0u" path="res://Visuals/UI/UIButtons.png" id="2_bfe4o"]
 [ext_resource type="FontFile" uid="uid://b224c1slyuvsd" path="res://Resourses/Theme/Fonts/TinyPixie2.ttf" id="2_fmeak"]
+[ext_resource type="Texture2D" uid="uid://ladxebl2q6do" path="res://Visuals/UI/BackArrow.png" id="3_lwdge"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7t387"]
+texture = ExtResource("1_yf35l")
+texture_margin_left = 16.0
+texture_margin_top = 17.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+region_rect = Rect2(0, 0, 33, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v6vry"]
 texture = ExtResource("1_c4p8t")
@@ -10,6 +20,24 @@ texture_margin_left = 1.0
 texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 region_rect = Rect2(50, 5, 20, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s423m"]
+texture = ExtResource("3_lwdge")
+region_rect = Rect2(2, 4, 25, 24)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ruen8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_geptu"]
+texture = ExtResource("3_lwdge")
+region_rect = Rect2(34, 4, 25, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ycbhw"]
+texture = ExtResource("3_lwdge")
+region_rect = Rect2(2, 4, 25, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nxqd2"]
+texture = ExtResource("3_lwdge")
+region_rect = Rect2(2, 4, 25, 24)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osx3a"]
 
@@ -48,8 +76,16 @@ region_rect = Rect2(3, 1, 38, 49)
 [resource]
 default_font = ExtResource("2_fmeak")
 default_font_size = 6
+AchievementPanelContainer/base_type = &"PanelContainer"
+AchievementPanelContainer/styles/panel = SubResource("StyleBoxTexture_7t387")
 AlternativePannelContainer/base_type = &"PanelContainer"
 AlternativePannelContainer/styles/panel = SubResource("StyleBoxTexture_v6vry")
+BackArrow/base_type = &"Button"
+BackArrow/styles/disabled = SubResource("StyleBoxTexture_s423m")
+BackArrow/styles/focus = SubResource("StyleBoxEmpty_ruen8")
+BackArrow/styles/hover = SubResource("StyleBoxTexture_geptu")
+BackArrow/styles/normal = SubResource("StyleBoxTexture_ycbhw")
+BackArrow/styles/pressed = SubResource("StyleBoxTexture_nxqd2")
 Button/colors/font_color = Color(0.180392, 0.133333, 0.184314, 1)
 Button/colors/font_focus_color = Color(0.180392, 0.133333, 0.184314, 1)
 Button/colors/font_hover_color = Color(0.384314, 0.333333, 0.396078, 1)

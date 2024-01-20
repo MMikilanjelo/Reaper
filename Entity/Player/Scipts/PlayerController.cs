@@ -21,7 +21,7 @@ public partial class PlayerController : CharacterBody2D
 		game_Events = GetNode<game_events>("/root/GameEvents");	
 		InitializeStateMachine();
 		ConnectToSginals();
-		weaponRootComponent.ChangeWeapon(sineperRifle);
+		//weaponRootComponent.ChangeWeapon(sineperRifle);
 	}
 	#region Initialize State Machine
 	private void InitializeStateMachine()
