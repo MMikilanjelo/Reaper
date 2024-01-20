@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://mg46aqfogoev"]
+[gd_scene load_steps=3 format=3 uid="uid://mg46aqfogoev"]
 
 [ext_resource type="Script" path="res://AutoLoad/AchievementEvents.cs" id="1_rgdpa"]
+[ext_resource type="Resource" uid="uid://btef1qtafqlhn" path="res://Resourses/AchievementResourses/CrabAchievement.tres" id="2_qju7x"]
 
 [node name="AchievementsEvents" type="Node"]
 script = ExtResource("1_rgdpa")
+_achievements = [ExtResource("2_qju7x")]

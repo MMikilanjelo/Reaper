@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv0gn7chbnfgf"]
+[gd_scene load_steps=6 format=3 uid="uid://bv0gn7chbnfgf"]
 
 [ext_resource type="Shader" path="res://Visuals/Shaders/DefeateScreen.gdshader" id="1_j2isb"]
 [ext_resource type="Script" path="res://UI/AchievementScreen.cs" id="1_y21c1"]
 [ext_resource type="PackedScene" uid="uid://rgwvayqkjxtv" path="res://UI/AchievementContainer.tscn" id="2_igqfk"]
 [ext_resource type="Script" path="res://UI/AchievementController.cs" id="3_vfky3"]
-[ext_resource type="Resource" uid="uid://btef1qtafqlhn" path="res://Resourses/AchievementResourses/CrabAchievement.tres" id="5_7dw8f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tofaw"]
 shader = ExtResource("1_j2isb")
@@ -74,5 +73,4 @@ theme_override_constants/margin_top = 32
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("3_vfky3")
-_achievements = [ExtResource("5_7dw8f")]
 _resourcePreloader = NodePath("../../../../ResourcePreloader")

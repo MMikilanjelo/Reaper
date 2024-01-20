@@ -19,7 +19,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6pqcu"]
 shader = ExtResource("2_s0422")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nk2hg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxik5"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -169,7 +169,7 @@ material = SubResource("ShaderMaterial_6pqcu")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_nk2hg")
+hit_flash_material = SubResource("ShaderMaterial_xxik5")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")

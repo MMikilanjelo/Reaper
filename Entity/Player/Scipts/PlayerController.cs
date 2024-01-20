@@ -12,13 +12,14 @@ public partial class PlayerController : CharacterBody2D
 	
   	private PackedScene floatingTextScene;
 	private game_events game_Events;
-	
+	private	AchievementEvents _achievementEvents;
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
 		PackedScene sineperRifle = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
     	floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 		game_Events = GetNode<game_events>("/root/GameEvents");	
+		_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
 		InitializeStateMachine();
 		ConnectToSginals();
 		//weaponRootComponent.ChangeWeapon(sineperRifle);
@@ -89,6 +90,7 @@ public partial class PlayerController : CharacterBody2D
 	}
 	void DeadState()
 	{
+		_achievementEvents.EmitAchievementUnlocked("crab");
 		QueueFree();
 	}
 	private void OnDmg()

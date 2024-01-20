@@ -9,7 +9,7 @@ namespace GameUI
 {
 	public partial class AchievementController : GridContainer	
 	{
-		[Export] Godot.Collections.Array<Achievement> _achievements = new Godot.Collections.Array<Achievement>();
+		
 		[Export] ResourcePreloader _resourcePreloader;
 		AchievementEvents _achievementEvents;
 		private PackedScene _achievementContainerScene;
@@ -17,27 +17,18 @@ namespace GameUI
         {
 			_achievementContainerScene = _resourcePreloader.GetResource("AchievementContainer") as PackedScene;
 			_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
-			SetUpAchievements();
+			SetUpAchievements(_achievementEvents.GetAllAchievemnts());
+			
         }
-		public void SetUpAchievements()
+		public void SetUpAchievements(Godot.Collections.Array<Achievement> _achievements)
 		{
 			foreach(var _achievementData in _achievements)
 			{
-				
 				var _achievementContainerInstance = _achievementContainerScene.Instantiate() as AchievementContainer;
 				AddChild(_achievementContainerInstance);
-				InitializeAchievementContainer(_achievementContainerInstance , _achievementData);
+				_achievementContainerInstance.SetAchievement(_achievementData);
 			}
 		}
-		private void InitializeAchievementContainer(AchievementContainer _achievementContainer , Achievement _achievementData)
-		{
-			_achievementEvents.AchievementUnlocked += (string _unlockedAchievementId) => 
-			{
-				_achievementContainer.OnAchievementUnlocked(_unlockedAchievementId);
-			};
-			_achievementContainer.SetAchievementId(_achievementData._achievementId);
-			_achievementContainer.SetTexture(_achievementData._achievementTexture);
-			_achievementContainer.SetConditionLable(_achievementData._achievementСonditions);
-		}
+
 	}
 }

@@ -18,23 +18,21 @@ namespace GameUI
 			_achievementTextureRect = GetNode<TextureRect>("TextureRect");	
 			_achievementConditionLable = GetNode<Label>("PanelContainer/Conditions");
         }
-		public  void SetTexture(Texture2D _texture)
+		public  void SetAchievement(Achievement _achievementData)
 		{
-			_achievementTextureRect.Texture = _texture;
+			_achievementTextureRect.Texture = _achievementData._achievementTexture;
+			_achievementId = _achievementData._achievementId;
+			Unlock(_achievementData);
 		}
-		public void SetConditionLable(string _conditionText)
+		private void Unlock(Achievement _achievementData)
 		{
-			_achievementConditionLable.Text = _conditionText;
+			if(_achievementData._isUnlocked)
+			{
+				(_achievementTextureRect.Material as ShaderMaterial).SetShaderParameter("lerp_percent" , 0.0);
+				_achievementConditionLable.Text = _achievementData._achievementСonditions;
+			}
 		}
-		public void SetAchievementId(string _achievementId)
-		{
-			this._achievementId = _achievementId;
-			GD.Print(_achievementId);
-		}
-		public void OnAchievementUnlocked(string _unlockedAchievementId)
-		{
-			if(_unlockedAchievementId != _achievementId) return;
-		}
+
 		
     }
 }	
