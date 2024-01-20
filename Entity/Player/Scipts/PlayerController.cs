@@ -17,25 +17,39 @@ public partial class PlayerController : CharacterBody2D
 	public override void _Ready()
 	{
 		PackedScene sineperRifle = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
+    	floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
+		game_Events = GetNode<game_events>("/root/GameEvents");	
+		InitializeStateMachine();
+		ConnectToSginals();
+		weaponRootComponent.ChangeWeapon(sineperRifle);
+	}
+	#region Initialize State Machine
+	private void InitializeStateMachine()
+	{
 		delegateStateMachine.AddState(NormalState );
 		delegateStateMachine.SetInitiioalState(NormalState);
-		delegateStateMachine.AddState(DeadState);		
-		game_Events = GetNode<game_events>("/root/GameEvents");	
-    	floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
-    	healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
+		delegateStateMachine.AddState(DeadState);
+	}
+	#endregion
+
+	#region Connect to Signals
+
+	private void ConnectToSginals()
+	{
+		healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
 		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
 			game_Events.EmitPlayerShootSignal(1);
 		}));
-		weaponRootComponent.ChangeWeapon(sineperRifle);
-
-		
 	}
+	
+	#endregion
+
+
 
 	public override void _PhysicsProcess(double delta)
 	{	
 		delegateStateMachine.Update();
 		playerSpriteImager.LookAtTarget(GetGlobalMousePosition());
-		
 	}
 	public Vector2 GetMovementVector()
 	{

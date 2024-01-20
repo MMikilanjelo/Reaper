@@ -7,8 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://chkdirv3xfx30" path="res://Audio/SniperRIfleShoot.wav" id="5_yeo4r"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_kupmf"]
-a = Vector2(23, 1)
-b = Vector2(117, 1)
+a = Vector2(11.5, 0.5)
+b = Vector2(117, 0.5)
 
 [node name="SniperRifle" type="Node2D" node_paths=PackedStringArray("shootRay", "aimLine")]
 script = ExtResource("1_ks04y")
@@ -35,6 +35,7 @@ dmg = 300.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SniperRifle/Marker2D/HitBoxComponent"]
+scale = Vector2(2, 2)
 shape = SubResource("SegmentShape2D_kupmf")
 disabled = true
 

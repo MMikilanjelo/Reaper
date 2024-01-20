@@ -11,7 +11,6 @@ public partial class UpgradeScreen : CanvasLayer
 	[Export] HBoxContainer CardConteinerRight;
 	AnimationPlayer animationPlayer;
 	List<HBoxContainer> CardContainers = new List<HBoxContainer>();
-
 	[Signal] public delegate void UpgradeSelectedEventHandler(Upgrade playerUpgrade);
 
 	public override void _Ready()
@@ -43,8 +42,6 @@ public partial class UpgradeScreen : CanvasLayer
 			cardInstance.PlayIn(delay);
 			cardInstance.Selected += () => OnUpgradeSelected(upgrade);
 			delay += .2;
-			
-			
 			
 		}
 			

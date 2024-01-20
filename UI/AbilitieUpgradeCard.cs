@@ -23,7 +23,7 @@ public partial class AbilitieUpgradeCard : PanelContainer
 			}
 			hover_animation_player.Play("hover");
 		}));
-	}
+	} 
 	public void SetAbilitieUpgrade(Upgrade upgrade)
 	{
 		cardNameLabel.Text = upgrade.Name;

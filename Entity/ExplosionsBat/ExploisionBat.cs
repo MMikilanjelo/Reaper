@@ -26,12 +26,27 @@ public partial class ExploisionBat : CharacterBody2D
 		Game_Events = GetNode<game_events>("/root/GameEvents");
 		hitBoxComponent.AddEffecToHit(afex);
 		player = GameUtilities.GetPlayerNode(this);
-		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
-		stateMachine.AddState(StateNormal  , EnteredStateNormal);	
+		
+		InitializeStateMachine();
+		ConnectToSginals();
+	}
+	#region Initialize State Machine 
+	private void InitializeStateMachine()
+	{
+	   	stateMachine.AddState(StateNormal  , EnteredStateNormal);	
 		stateMachine.AddState(DeadState);
 		stateMachine.AddState(ExplodeState , EnterExplodeState);
 		stateMachine.SetInitiioalState(StateNormal);
 	}
+
+	#endregion
+
+	#region Connect to Signals
+	private void ConnectToSginals()
+	{
+		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
+	}
+	#endregion
 	public override void _Process(double delta)
 	{
 		if(!GameUtilities.CheckIfPlayerExist(this)) return;

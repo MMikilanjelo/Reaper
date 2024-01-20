@@ -17,12 +17,28 @@ public partial class Cactus : CharacterBody2D
     public override void _Ready()
     {
         alpha = Directions.random.Randfn(0f , 3f);
-        stateMachine.AddState(Dead);
-        stateMachine.AddState(NormalState , EnteredNormalState);
-        stateMachine.AddState(AtackState , EnteredAtackState , ExitAtackState);
-        stateMachine.SetInitiioalState(NormalState);
+        
         healthComponent = GetNode<HealthComponent>("HealthComponent");
-        healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>{
+
+        InitializeStateMachine();
+        ConnectToSginals();
+
+    }
+    #region Initialize State Machine 
+  	private void InitializeStateMachine()
+	  {
+	    stateMachine.AddState(Dead);
+      stateMachine.AddState(NormalState , EnteredNormalState);
+      stateMachine.AddState(AtackState , EnteredAtackState , ExitAtackState);
+      stateMachine.SetInitiioalState(NormalState);
+	  }
+
+	  #endregion
+
+	  #region Connect to Signals
+	  private void ConnectToSginals()
+	  {
+		    healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>{
             stateMachine.ChangeState(Dead);         
         }));
         atackTimer.Connect(Timer.SignalName.Timeout, Callable.From(() =>
@@ -30,7 +46,8 @@ public partial class Cactus : CharacterBody2D
             audioStreamPlayer.Play();
             ShootBulletWithAngleOffset(theta);
         }));
-    }
+	  }
+	#endregion
     public override void _Process(double delta)
     {
       if(!GameUtilities.CheckIfPlayerExist(this)){

@@ -25,13 +25,28 @@ public partial class CrystalSlime : CharacterBody2D
     {
 
         Game_Events = GetNode<game_events>("/root/GameEvents");
-        healthComponent.Connect(HealthComponent.SignalName.Died, Callable.From(() => stateMachine.ChangeState(DeadState)));
         player = GameUtilities.GetPlayerNode(this);
-        stateMachine.AddState(StateNormal, EnteredStateNormal);
+        ConnectToSginals();
+        InitializeStateMachine();
+        
+    }
+    #region Initialize State Machine 
+	private void InitializeStateMachine()
+	{
+	    stateMachine.AddState(StateNormal, EnteredStateNormal);
         stateMachine.AddState(DeadState);
         stateMachine.AddState(CloseRangeAtackState, EnterCLoseRangeAtack);
         stateMachine.SetInitiioalState(StateNormal);
-    }
+	}
+
+	#endregion
+
+	#region Connect to Signals
+	private void ConnectToSginals()
+	{
+		healthComponent.Connect(HealthComponent.SignalName.Died, Callable.From(() => stateMachine.ChangeState(DeadState)));	
+	}
+	#endregion
     public override void _Process(double delta)
     {
         if (!GameUtilities.CheckIfPlayerExist(this))

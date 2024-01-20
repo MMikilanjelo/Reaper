@@ -77,8 +77,6 @@ namespace Game.Components
 				
 			}
 
-			
-		
 		}
 		public void ForcedRemoveEffect()
 		{
@@ -89,9 +87,6 @@ namespace Game.Components
 			CanReciveEffect = value;
 		}
 	
-        
-
-
     }
 	public partial class StatusEfffectData : RefCounted
 	{

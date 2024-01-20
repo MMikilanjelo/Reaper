@@ -21,15 +21,30 @@ namespace Game.Enteties
 		public override void _Ready()
 		{
 			Game_Events = GetNode<game_events>("/root/GameEvents");
-			healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
-			pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));	
 			player = GameUtilities.GetPlayerNode(this);
+			ConnectToSginals();
+			InitializeStateMachine();
+		}
+
+		#region Initialize State Machine 
+		private void InitializeStateMachine()
+		{
 			stateMachine.AddState(DeadState);
 			stateMachine.AddState(NormalState , EnteredNormalState);
 			stateMachine.AddState(AtackState  , EnterAtackState);
 			stateMachine.AddState(DetectionState);
 			stateMachine.SetInitiioalState(NormalState);
 		}
+
+		#endregion
+
+		#region Connect to Signals
+		private void ConnectToSginals()
+		{
+			healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
+			pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));	
+		}
+		#endregion
 		public override void _Process(double delta)
 		{
 			if(!GameUtilities.CheckIfPlayerExist(this)){
