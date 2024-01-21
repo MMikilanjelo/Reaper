@@ -10,8 +10,10 @@ namespace Managers
 		[Signal] public delegate void DifficultyIncreasedOverTimeEventHandler(int _arenaDifficulty);
 		const int DIFFICULTY_INTERVAL  = 5;
 		private int _arenaDifficulty;
+		private game_events _gameEvents;
         public override void _Ready()
         {
+			_gameEvents = GetNode<game_events>("/root/GameEvents");
            timer = GetNode<Timer>("Timer");
 		   timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof (WaveFinished))); 
         }
@@ -30,7 +32,7 @@ namespace Managers
 		}
 		private void WaveFinished()
 		{
-			GD.Print("Spawning next lvl");
+			_gameEvents.EmitWaveFinishing();
 		}
 	}
 }

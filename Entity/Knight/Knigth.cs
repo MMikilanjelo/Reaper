@@ -6,7 +6,9 @@ using Game.Components;
 
 namespace Game.Enteties
 {
-	public partial class Knigth : CharacterBody2D
+
+
+	public partial class Knigth : CharacterBody2D  , IEnemy
 	{
 		CharacterBody2D player;
 		game_events Game_Events;
@@ -103,6 +105,12 @@ namespace Game.Enteties
 				stateMachine.ChangeState(NormalState);
 			}
 		}
-	}
+
+        public void OnWaveFinished()
+        {
+            healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+        }
+
+    }
 }
 

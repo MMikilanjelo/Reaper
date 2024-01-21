@@ -7,7 +7,8 @@ using Generation.Alghoritms;
 using GameLogick.Utilities;
 using System.Collections.Generic;
 using System.Net;
-public partial class CrystalSlime : CharacterBody2D
+using Game.Enteties;
+public partial class CrystalSlime : CharacterBody2D , IEnemy
 {
     [Export] EnemySensorComponent enemySensorComponent;
     [Export] PathFindingComponent pathFindingComponent;
@@ -99,5 +100,8 @@ public partial class CrystalSlime : CharacterBody2D
         QueueFree();
     }
 
-
+    public void OnWaveFinished()
+    {
+        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+    }
 }

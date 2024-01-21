@@ -5,7 +5,8 @@ using GameLogick.StateMachine;
 using Enemy.Parts;
 using GameLogick.Utilities;
 using DotEffects;
-public partial class ExploisionBat : CharacterBody2D
+using Game.Enteties;
+public partial class ExploisionBat : CharacterBody2D , IEnemy
 {
 	[Export] EnemySensorComponent enemySensorComponent;
 	[Export] PathFindingComponent pathFindingComponent;
@@ -95,5 +96,9 @@ public partial class ExploisionBat : CharacterBody2D
 		QueueFree();
 	}
 
-	
+    public void OnWaveFinished()
+    {
+        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+    }
+
 }

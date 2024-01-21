@@ -3,7 +3,8 @@ using System;
 using Game.Components;
 using GameLogick.Utilities;
 using GameLogick.StateMachine;
-public partial class DummyTarget : CharacterBody2D
+using Game.Enteties;
+public partial class DummyTarget : CharacterBody2D , IEnemy
 {
     [Export] HurtBoxComponent hurtBoxComponent;
     [Export] HealthComponent healthComponent;
@@ -50,5 +51,11 @@ public partial class DummyTarget : CharacterBody2D
         }
         
     }
+
+    public void OnWaveFinished()
+    {
+        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+    }
     // fix bug when enemy cross multiple areas the baff is  going on 
+
 }

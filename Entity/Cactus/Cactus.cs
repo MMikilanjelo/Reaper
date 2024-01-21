@@ -4,7 +4,8 @@ using GameLogick.StateMachine;
 using Game.Components;
 using GameLogick.Utilities;
 using Generation.Alghoritms;
-public partial class Cactus : CharacterBody2D
+using Game.Enteties;
+public partial class Cactus : CharacterBody2D , IEnemy
 {
     DelegateStateMachine stateMachine = new DelegateStateMachine();
     [Export(PropertyHint.Range , "0,10, 0.2 * MathF.PI")] private float alpha = 1.2f;
@@ -97,4 +98,10 @@ public partial class Cactus : CharacterBody2D
     private void Dead(){
       QueueFree();
     }
+
+    public void OnWaveFinished()
+    {
+        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+    }
+
 }

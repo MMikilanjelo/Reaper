@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://rgwvayqkjxtv"]
 
-[ext_resource type="Texture2D" uid="uid://b48gkg1ujad2n" path="res://Visuals/Achievements/Crabs_Achivment.png" id="1_4y1oi"]
+[ext_resource type="Texture2D" uid="uid://c3ec15c33fvfg" path="res://Visuals/Achievements/Crabs_Achivment.png" id="1_4y1oi"]
 [ext_resource type="Script" path="res://UI/AchievementContainer.cs" id="1_abryu"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="1_ybu8m"]
 

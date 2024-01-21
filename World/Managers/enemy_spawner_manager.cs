@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using GameLogick;
+using Game.Enteties;
 namespace Managers
 {
 	public partial class enemy_spawner_manager : Node
@@ -12,19 +13,32 @@ namespace Managers
 	  	[Export] PackedScene CactusScene;
 		[Export] Timer EnemySpawnerInterval;
 		[Export] const float SPAWN_RADIUS = 100f;
-		[Export] private bool Activate = false;
+		[Export] private bool _deactivate = false;
 		CharacterBody2D player;
+		game_events _gameEvents;
 		public static  RandomNumberGenerator random = new RandomNumberGenerator();
 		private readonly LootTable<PackedScene> enemyTable = new LootTable<PackedScene>();
 		public override void _Ready()
 		{
+			_gameEvents = GetNode<game_events>("/root/GameEvents");
 			enemyTable.AddItemToTable(KnigthEnemyScene , 100);
 			enemyTable.AddItemToTable(BasickEnemyScene , 80);
 			enemyTable.AddItemToTable(BatEnemyScene , 60);
      	 	enemyTable.AddItemToTable(CactusScene , 40);
       		enemyTable.AddItemToTable(DummyTargetScene , 10);
+			ConnectSignals();
 			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
-			
+		}
+		private void ConnectSignals()
+		{
+			_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+			{
+				_deactivate = true;	
+			}));
+			_gameEvents.Connect(game_events.SignalName.NewWaveStarted , Callable.From(()=>
+			{
+				_deactivate = false;	
+			}));
 		}
 		private Vector2 GetSpawnPosition()
 		{
@@ -55,7 +69,7 @@ namespace Managers
 		}
 		private void SpawnEnemy()
 		{
-			if(!Activate){return;}	
+			if(_deactivate){return;}	
 			player = GetTree().GetFirstNodeInGroup("Player") as CharacterBody2D;
 			if(player == null)
 			{
@@ -63,12 +77,14 @@ namespace Managers
 			}
 			var enemyScene = enemyTable.PickItem();
 			var  enemy = enemyScene.Instantiate() as CharacterBody2D;
+			_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+			{
+				(enemy as IEnemy)?.OnWaveFinished();
+			}
+			));
 			GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(enemy);
 			enemy.GlobalPosition = GetSpawnPosition();
 		}
-		
-
-
 	}
 }
 

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://btef1qtafqlhn"]
 
-[ext_resource type="Texture2D" path="res://Visuals/Achievements/Crabs_Achivment.png" id="1_r42yl"]
+[ext_resource type="Texture2D" uid="uid://c3ec15c33fvfg" path="res://Visuals/Achievements/Crabs_Achivment.png" id="1_r42yl"]
 [ext_resource type="Script" path="res://Resourses/AchievementResourses/Achievement.cs" id="2_0mscr"]
 
 [resource]
@@ -8,4 +8,4 @@ script = ExtResource("2_0mscr")
 _achievementTexture = ExtResource("1_r42yl")
 "_achievementСonditions" = "Die at first time . "
 _achievementId = "crab"
-_isUnlocked = true
+_isUnlocked = false

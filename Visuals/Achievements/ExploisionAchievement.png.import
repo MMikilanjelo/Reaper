@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3ec15c33fvfg"
-path="res://.godot/imported/Crabs_Achivment.png-076162be7233851eeee14f257959fdb3.ctex"
+uid="uid://hfhhjtec5d26"
+path="res://.godot/imported/ExploisionAchievement.png-062552717cc668324585c2fbb65921c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/Achievements/Crabs_Achivment.png"
-dest_files=["res://.godot/imported/Crabs_Achivment.png-076162be7233851eeee14f257959fdb3.ctex"]
+source_file="res://Visuals/Achievements/ExploisionAchievement.png"
+dest_files=["res://.godot/imported/ExploisionAchievement.png-062552717cc668324585c2fbb65921c9.ctex"]
 
 [params]
 

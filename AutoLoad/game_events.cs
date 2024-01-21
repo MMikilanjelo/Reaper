@@ -15,7 +15,8 @@ public partial class game_events : Node
 	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
 	[Signal] public delegate void OnBulletChestCollectedEventHandler(int bullets_amount);
 	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
-
+	[Signal] public delegate void WaveFinishedEventHandler();
+	[Signal] public delegate void NewWaveStartedEventHandler();
 
 
 	public void EmitDmgRecivedByEnemy(int dmg)
@@ -45,5 +46,13 @@ public partial class game_events : Node
 	public void EmitChestCollection(int bullets_amount)
 	{
 		EmitSignal(SignalName.OnBulletChestCollected , bullets_amount);
+	}
+	public void EmitWaveFinishing()
+	{
+		EmitSignal(SignalName.WaveFinished);
+	}
+	public void EmitNewWaveStarting()
+	{
+		EmitSignal(SignalName.NewWaveStarted);
 	}
 }

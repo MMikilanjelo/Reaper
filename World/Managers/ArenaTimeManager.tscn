@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" path="res://World/Managers/ArenaTimeManager.cs" id="1_0hgid"]
 
-[node name="ArenaTimeManager" type="Node" node_paths=PackedStringArray("timer")]
+[node name="ArenaTimeManager" type="Node"]
 script = ExtResource("1_0hgid")
-timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 5.0
 one_shot = true
 autostart = true

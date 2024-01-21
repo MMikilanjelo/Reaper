@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ce0fpgyk1q3hl"]
+
+[ext_resource type="Texture2D" uid="uid://hfhhjtec5d26" path="res://Visuals/Achievements/ExploisionAchievement.png" id="1_sjm1u"]
+[ext_resource type="Script" path="res://Resourses/AchievementResourses/Achievement.cs" id="2_0oi2q"]
+
+[resource]
+script = ExtResource("2_0oi2q")
+_achievementTexture = ExtResource("1_sjm1u")
+"_achievementСonditions" = "You need to explode really hard ."
+_achievementId = "explode"
+_isUnlocked = false
