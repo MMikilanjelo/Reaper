@@ -12,8 +12,8 @@ public partial class ExploisionBat : CharacterBody2D , IEnemy
 	[Export] PathFindingComponent pathFindingComponent;
 	[Export] VelocityComponent velocityComponent;
 	[Export] HealthComponent healthComponent;
-	
-	[Export] PackedScene ExperiencePeal;
+	[Export] DeathSceneComponent deathSceneComponent;
+
 	[Export] HitBoxComponent hitBoxComponent;
 	[Export] AnimationPlayer Animation;
 	[Export] private PackedScene afex;
@@ -98,7 +98,8 @@ public partial class ExploisionBat : CharacterBody2D , IEnemy
 
     public void OnWaveFinished()
     {
-        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+		deathSceneComponent.OnEnemyDied();
+		QueueFree();
     }
 
 }

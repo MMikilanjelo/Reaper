@@ -11,16 +11,19 @@ namespace Game.Components
 		[Export] PackedScene BloodParticle;
 		[Export] HealthComponent healthComponent;
 		[Export] RandomAudioPlayer randomAudioPlayer;
+		
+		game_events _gameEvents;
 
         public override void _Ready()
         {
-			healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>
+			
+			_gameEvents = GetNode<game_events>("/root/GameEvents");
+			player = GetTree().GetFirstNodeInGroup("Player") as CharacterBody2D;
+            healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=>
 			{
 				OnEnemyDied();
 			}));
 			
-			player = GetTree().GetFirstNodeInGroup("Player") as CharacterBody2D;
-            
         }
         public void SpawnBloodPartickle(Vector2 Position)
 		{

@@ -19,6 +19,7 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
     [Export] HitBoxComponent hitBoxComponent;
     [Export] AnimationPlayer Animation;
     [Export] Node2D visuals;
+    [Export] DeathSceneComponent deathSceneComponent;
     CharacterBody2D player;
     game_events Game_Events;
     private DelegateStateMachine stateMachine = new DelegateStateMachine();
@@ -102,6 +103,7 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
 
     public void OnWaveFinished()
     {
-        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+       deathSceneComponent.OnEnemyDied();
+	   QueueFree();
     }
 }

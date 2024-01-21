@@ -17,10 +17,9 @@ public partial class ItemSpawnerManager : Node
 		ChestScene = ResourceLoader.Load<PackedScene>("res://GameObjects/Chest/chest.tscn");
 		GameEvents.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
 		{
-				InstantiateExpirianceVial(pos);
+			InstantiateExpirianceVial(pos);
 		}
-			));
-		//GameEvents.OnEnemyDied += (Vector2 enemy_died_position , int _ )=> InstantiateExpirianceVial(enemy_died_position);
+		));
 		timer.Connect(Timer.SignalName.Timeout , Callable.From(()=>
 		{
 			SpawnBulletChest(GetSpawnPosition());

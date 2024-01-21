@@ -10,6 +10,7 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
     [Export] HealthComponent healthComponent;
     [Export] Area2D baffArea;
     [Export] PackedScene effect;
+    [Export] DeathSceneComponent deathSceneComponent;
     CharacterBody2D player;
     
     public override void _Ready()
@@ -54,7 +55,8 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
 
     public void OnWaveFinished()
     {
-        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+        deathSceneComponent.OnEnemyDied();
+			QueueFree();
     }
     // fix bug when enemy cross multiple areas the baff is  going on 
 

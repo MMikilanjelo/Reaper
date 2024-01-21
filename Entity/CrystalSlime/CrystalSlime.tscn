@@ -17,10 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 [ext_resource type="Texture2D" uid="uid://dhcg1j6034c0f" path="res://Entity/CrystalSlime/crystal_slime_moving.png" id="15_0vln3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwv5g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkyyv"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
+shader_parameter/target_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaqc2"]
 radius = 4.0
@@ -181,7 +182,7 @@ _data = {
 "WalkAnimation": SubResource("Animation_m0ywm")
 }
 
-[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation", "visuals")]
+[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation", "visuals", "deathSceneComponent")]
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
 collision_layer = 2
@@ -197,6 +198,7 @@ ExperiencePeal = ExtResource("2_fihov")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
+deathSceneComponent = NodePath("DeathSceneComponent")
 metadata/_edit_horizontal_guides_ = [-67.0]
 
 [node name="EnemyConstructorComponent" parent="." instance=ExtResource("2_eq5p4")]
@@ -206,7 +208,7 @@ metadata/_edit_horizontal_guides_ = [-67.0]
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_awkp0")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_hwv5g")
+hit_flash_material = SubResource("ShaderMaterial_vkyyv")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")

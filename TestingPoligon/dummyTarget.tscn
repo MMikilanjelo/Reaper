@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpbabs0lgbloo"]
+[gd_scene load_steps=18 format=3 uid="uid://dpbabs0lgbloo"]
 
 [ext_resource type="Script" path="res://TestingPoligon/DummyTarget.cs" id="1_q6utx"]
 [ext_resource type="Texture2D" uid="uid://cyywjyhauwv70" path="res://TestingPoligon/dummy.png" id="2_nbl6f"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bcbr3uhe57647" path="res://Components/health_component.tscn" id="5_efr5r"]
 [ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="6_55cds"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="7_i0wue"]
+[ext_resource type="PackedScene" uid="uid://7sjmmjt1jfke" path="res://Components/DeathSceneComponent.tscn" id="10_ojdhn"]
+[ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="11_376o1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_esacc"]
 radius = 5.0
@@ -18,10 +20,11 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2el0u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jw8mk"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
+shader_parameter/target_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u2dx8"]
 shader = ExtResource("3_3rp7r")
@@ -36,7 +39,7 @@ shader_parameter/phase_speed = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_a70y2"]
 radius = 86.0
 
-[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea")]
+[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea", "deathSceneComponent")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_q6utx")
@@ -44,6 +47,7 @@ hurtBoxComponent = NodePath("HurtBoxComponent")
 healthComponent = NodePath("HealthComponent")
 baffArea = NodePath("DmgReductionArea")
 effect = ExtResource("3_c5136")
+deathSceneComponent = NodePath("DeathSceneComponent")
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -75,7 +79,7 @@ MaxHealth = 120.0
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_55cds")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_2el0u")
+hit_flash_material = SubResource("ShaderMaterial_jw8mk")
 
 [node name="DmgReductionArea" type="Area2D" parent="."]
 show_behind_parent = true
@@ -93,3 +97,7 @@ texture = SubResource("CanvasTexture_0jdf7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DmgReductionArea"]
 shape = SubResource("CircleShape2D_a70y2")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_ojdhn")]
+BloodParticle = ExtResource("11_376o1")
+healthComponent = NodePath("../HealthComponent")

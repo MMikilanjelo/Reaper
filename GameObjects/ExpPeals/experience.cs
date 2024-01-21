@@ -25,21 +25,20 @@ public partial class experience : Node2D
 		{
 			return;
 		}
-    _isCollected = true;
-    soundPlayer.Play();
-    this.Visible = false;
-    soundPlayer.Connect(AudioStreamPlayer2D.SignalName.Finished , Callable.From(()=>
-    {
-		  QueueFree();
-    }));
-    game_Events.On_ExperienceVialCollected(_expDrop);
+		_isCollected = true;
+		soundPlayer.Play();
+		this.Visible = false;
+		soundPlayer.Connect(AudioStreamPlayer2D.SignalName.Finished , Callable.From(()=>
+		{
+			QueueFree();
+		}));
+		game_Events.On_ExperienceVialCollected(_expDrop);
 	}
 	private void IncreaseExpDrop(Upgrade addedUpgrade)
 	{
 		if(addedUpgrade.id == "exp")
 		{
 			_expDrop += (int)addedUpgrade.value;
-			GD.Print(_expDrop);
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace Game.Enteties
 		[Export] WeaponRootComponent weaponRootComponent;
 		[Export] AnimationPlayer animationPlayer;
 		[Export] RayCast2D lineOfSigth;
+		[Export] DeathSceneComponent deathSceneComponent;
 		private DelegateStateMachine stateMachine = new DelegateStateMachine(); 
 		public override void _Ready()
 		{
@@ -108,8 +109,9 @@ namespace Game.Enteties
 
         public void OnWaveFinished()
         {
-            healthComponent.EmitSignal(HealthComponent.SignalName.Died);
-        }
+			deathSceneComponent.OnEnemyDied();
+			QueueFree();
+		}
 
     }
 }

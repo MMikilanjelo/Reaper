@@ -574,7 +574,6 @@ BatEnemyScene = ExtResource("10_exb6d")
 KnigthEnemyScene = ExtResource("11_61di8")
 DummyTargetScene = ExtResource("20_avvrh")
 CactusScene = ExtResource("13_day3j")
-Activate = true
 
 [node name="UI" type="Node" parent="."]
 

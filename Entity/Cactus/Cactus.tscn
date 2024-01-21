@@ -18,10 +18,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_61c8g"]
 radius = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ni8u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gt8s7"]
 resource_local_to_scene = true
 shader = ExtResource("5_06akq")
 shader_parameter/lerp_percent = 0.0
+shader_parameter/target_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxlxk"]
 radius = 5.0
@@ -168,7 +169,7 @@ _data = {
 "idel": SubResource("Animation_11joq")
 }
 
-[node name="Cactus" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer", "animationPlayer", "audioStreamPlayer")]
+[node name="Cactus" type="CharacterBody2D" node_paths=PackedStringArray("atackTimer", "animationPlayer", "audioStreamPlayer", "deathSceneComponent")]
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
@@ -177,6 +178,7 @@ BulletScene = ExtResource("2_b6vdg")
 atackTimer = NodePath("Timer")
 animationPlayer = NodePath("AnimationPlayer")
 audioStreamPlayer = NodePath("SoundEffectOnAttack")
+deathSceneComponent = NodePath("DeathSceneComponent")
 
 [node name="Visuals" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_712mx")
@@ -202,7 +204,7 @@ wait_time = 0.1
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("4_3miwa")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_1ni8u")
+hit_flash_material = SubResource("ShaderMaterial_gt8s7")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_41rlg")]
 

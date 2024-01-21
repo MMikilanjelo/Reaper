@@ -13,6 +13,7 @@ public partial class Cactus : CharacterBody2D , IEnemy
     [Export] Timer atackTimer;
     [Export] AnimationPlayer animationPlayer;
     [Export] AudioStreamPlayer2D audioStreamPlayer;
+    [Export] DeathSceneComponent deathSceneComponent;
     HealthComponent healthComponent;
     private float theta = 0;
     public override void _Ready()
@@ -101,7 +102,8 @@ public partial class Cactus : CharacterBody2D , IEnemy
 
     public void OnWaveFinished()
     {
-        healthComponent.EmitSignal(HealthComponent.SignalName.Died);
+      deathSceneComponent.OnEnemyDied();
+			QueueFree();
     }
 
 }

@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://ce6u3vwjt6eyk"]
+[gd_scene load_steps=26 format=3 uid="uid://ce6u3vwjt6eyk"]
 
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="1_1jb48"]
 [ext_resource type="Script" path="res://Entity/ExplosionsBat/ExploisionBat.cs" id="1_l801k"]
-[ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_0y6te"]
 [ext_resource type="Texture2D" uid="uid://cvntpf3l2up" path="res://Entity/ExplosionsBat/crystalbat.png" id="2_231kp"]
 [ext_resource type="PackedScene" uid="uid://8lk0kx0u5smq" path="res://Components/PathFindingComponent.tscn" id="3_clt8o"]
 [ext_resource type="Texture2D" uid="uid://dmwghsh6a6hjd" path="res://Entity/ExplosionsBat/crystalBatExploisonANimation.png" id="4_8m5qo"]
@@ -21,10 +20,11 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nv1a8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ievps"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
+shader_parameter/target_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4ub5"]
 radius = 26.0
@@ -234,7 +234,7 @@ _data = {
 "RESET": SubResource("Animation_8i6qd")
 }
 
-[node name="ExploisionBat" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "healthComponent", "hitBoxComponent", "Animation")]
+[node name="ExploisionBat" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "healthComponent", "deathSceneComponent", "hitBoxComponent", "Animation")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_l801k")
@@ -242,7 +242,7 @@ enemySensorComponent = NodePath("Areas/EnemySensorComponent")
 pathFindingComponent = NodePath("PathFindingComponent")
 velocityComponent = NodePath("VelocityComponent")
 healthComponent = NodePath("HealthComponent")
-ExperiencePeal = ExtResource("2_0y6te")
+deathSceneComponent = NodePath("DeathSceneComponent")
 hitBoxComponent = NodePath("Areas/HitBoxComponent")
 Animation = NodePath("AnimationPlayer")
 afex = ExtResource("4_pn5nm")
@@ -299,7 +299,7 @@ MakeSmoothHalfWayDestination = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("8_vju3f")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_nv1a8")
+hit_flash_material = SubResource("ShaderMaterial_ievps")
 
 [node name="Areas" type="Node2D" parent="."]
 
