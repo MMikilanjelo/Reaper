@@ -13,7 +13,7 @@ namespace GameUI
 		#region Seting Up References  
 			private void SetNodes()
 			{
-				backButton =  GetNode<Button>("Control/MarginContainer/BackButton");
+				backButton =  GetNode<Button>("Control/Control/BackButton");
 			}
 		#endregion
 

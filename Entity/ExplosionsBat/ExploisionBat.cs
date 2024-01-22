@@ -20,11 +20,11 @@ public partial class ExploisionBat : CharacterBody2D , IEnemy
 
 	private DelegateStateMachine stateMachine = new DelegateStateMachine();
 	CharacterBody2D player;
-	game_events Game_Events;
+	game_events _gameEvents;
 	
 	public override void _Ready()
 	{
-		Game_Events = GetNode<game_events>("/root/GameEvents");
+		_gameEvents = GetNode<game_events>("/root/GameEvents");
 		hitBoxComponent.AddEffecToHit(afex);
 		player = GameUtilities.GetPlayerNode(this);
 		
@@ -46,6 +46,11 @@ public partial class ExploisionBat : CharacterBody2D , IEnemy
 	private void ConnectToSginals()
 	{
 		healthComponent.Connect(HealthComponent.SignalName.Died ,Callable.From(()=> stateMachine.ChangeState(DeadState)));
+		_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+		{
+			OnWaveFinished();
+		}
+		));
 	}
 	#endregion
 	public override void _Process(double delta)
@@ -92,7 +97,7 @@ public partial class ExploisionBat : CharacterBody2D , IEnemy
 	
 	private  void DeadState()
 	{
-		Game_Events.EmitEnemyDeathSignal(Position , 10);
+		_gameEvents.EmitEnemyDeathSignal(Position , 10);
 		QueueFree();
 	}
 

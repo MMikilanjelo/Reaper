@@ -20,7 +20,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6jm6"]
 radius = 2.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ievps"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxrmw"]
 resource_local_to_scene = true
 shader = ExtResource("9_i5n6s")
 shader_parameter/lerp_percent = 0.0
@@ -299,7 +299,7 @@ MakeSmoothHalfWayDestination = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("8_vju3f")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_ievps")
+hit_flash_material = SubResource("ShaderMaterial_rxrmw")
 
 [node name="Areas" type="Node2D" parent="."]
 

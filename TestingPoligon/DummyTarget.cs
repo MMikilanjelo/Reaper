@@ -12,9 +12,10 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
     [Export] PackedScene effect;
     [Export] DeathSceneComponent deathSceneComponent;
     CharacterBody2D player;
-    
+    game_events _gameEvents;
     public override void _Ready()
     {
+        _gameEvents = GetNode<game_events>("/root/GameEvents");
         baffArea.Connect(Area2D.SignalName.BodyEntered , Callable.From((Node2D otherBody)=>
         {
             if(otherBody is not DummyTarget)
@@ -29,6 +30,12 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
         {
             QueueFree();
         }));
+
+        _gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+		{
+			OnWaveFinished();
+		}
+		));
         
         
         player = GameUtilities.GetPlayerNode(this);
@@ -56,8 +63,7 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
     public void OnWaveFinished()
     {
         deathSceneComponent.OnEnemyDied();
-			QueueFree();
-    }
-    // fix bug when enemy cross multiple areas the baff is  going on 
+		QueueFree();
+    } 
 
 }

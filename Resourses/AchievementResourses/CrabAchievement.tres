@@ -8,4 +8,4 @@ script = ExtResource("2_0mscr")
 _achievementTexture = ExtResource("1_r42yl")
 "_achievementСonditions" = "Die at first time . "
 _achievementId = "crab"
-_isUnlocked = false
+_isUnlocked = true

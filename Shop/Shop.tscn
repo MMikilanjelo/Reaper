@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6rs7ugtvx8p5"]
+
+[ext_resource type="Script" path="res://Shop/Shop.cs" id="1_skert"]
+[ext_resource type="Texture2D" uid="uid://beq8scdn82mjd" path="res://Visuals/Shop/FrogShop.png" id="2_5jen4"]
+
+[node name="Shop" type="Node2D"]
+top_level = true
+script = ExtResource("1_skert")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5jen4")

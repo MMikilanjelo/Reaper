@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 [ext_resource type="Texture2D" uid="uid://dhcg1j6034c0f" path="res://Entity/CrystalSlime/crystal_slime_moving.png" id="15_0vln3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkyyv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pq213"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
@@ -208,7 +208,7 @@ metadata/_edit_horizontal_guides_ = [-67.0]
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_awkp0")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_vkyyv")
+hit_flash_material = SubResource("ShaderMaterial_pq213")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")

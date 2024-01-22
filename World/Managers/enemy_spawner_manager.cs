@@ -21,13 +21,17 @@ namespace Managers
 		public override void _Ready()
 		{
 			_gameEvents = GetNode<game_events>("/root/GameEvents");
+			SetUpWeigthTable();
+			ConnectSignals();
+			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
+		}
+		private void SetUpWeigthTable()
+		{
 			enemyTable.AddItemToTable(KnigthEnemyScene , 100);
 			enemyTable.AddItemToTable(BasickEnemyScene , 80);
 			enemyTable.AddItemToTable(BatEnemyScene , 60);
      	 	enemyTable.AddItemToTable(CactusScene , 40);
       		enemyTable.AddItemToTable(DummyTargetScene , 10);
-			ConnectSignals();
-			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
 		}
 		private void ConnectSignals()
 		{
@@ -77,11 +81,6 @@ namespace Managers
 			}
 			var enemyScene = enemyTable.PickItem();
 			var  enemy = enemyScene.Instantiate() as CharacterBody2D;
-			_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
-			{
-				(enemy as IEnemy)?.OnWaveFinished();
-			}
-			));
 			GetTree().GetFirstNodeInGroup("EntitiesLayer").AddChild(enemy);
 			enemy.GlobalPosition = GetSpawnPosition();
 		}

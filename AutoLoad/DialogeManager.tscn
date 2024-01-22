@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cij6rkw7vi48s"]
+
+[ext_resource type="Script" path="res://AutoLoad/DialogeManager.cs" id="1_raubx"]
+[ext_resource type="PackedScene" uid="uid://daakxt4qtonha" path="res://UI/DialogeBox.tscn" id="2_xk0gg"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_raubx")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("DialogeBox"), [ExtResource("2_xk0gg")]]

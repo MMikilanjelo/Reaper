@@ -1,17 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgbakigg81mlg"]
+[gd_scene load_steps=23 format=3 uid="uid://b6ecscavx7g7f"]
 
-[ext_resource type="Script" path="res://UI/AbilitieUpgradeCard.cs" id="1_0c4yc"]
-[ext_resource type="PackedScene" uid="uid://bmbc68ovi54ey" path="res://Components/RandomAudioPlayer.tscn" id="2_ugu2u"]
-[ext_resource type="AudioStream" uid="uid://ddh4l7i8dlid5" path="res://Audio/UI/switch1.ogg" id="3_6g84l"]
-[ext_resource type="AudioStream" uid="uid://ci2cwlfd7gdhw" path="res://Audio/UI/switch2.ogg" id="4_m260f"]
-[ext_resource type="AudioStream" uid="uid://m3e6ik87uor4" path="res://Audio/UI/switch3.ogg" id="5_72tlf"]
-[ext_resource type="AudioStream" uid="uid://dd6l7687esae6" path="res://Audio/UI/switch4.ogg" id="6_172qf"]
-[ext_resource type="AudioStream" uid="uid://cra8yrd1lwl7" path="res://Audio/UI/switch5.ogg" id="7_4rdtq"]
-[ext_resource type="AudioStream" uid="uid://ctalx3fysaili" path="res://Audio/UI/switch6.ogg" id="8_kschn"]
-[ext_resource type="AudioStream" uid="uid://8jhtp1bkeo3p" path="res://Audio/UI/switch7.ogg" id="9_rn1ls"]
-[ext_resource type="AudioStream" uid="uid://dhlg7v23oxx0l" path="res://Audio/UI/switch8.ogg" id="10_b22wl"]
-[ext_resource type="AudioStream" uid="uid://tmbmwld7ojye" path="res://Audio/UI/switch9.ogg" id="11_obi1x"]
-[ext_resource type="AudioStream" uid="uid://bo2lpi1twgnla" path="res://Audio/UI/switch10.ogg" id="12_uhbjv"]
+[ext_resource type="Script" path="res://UI/ShopSlot.cs" id="1_5y51k"]
+[ext_resource type="PackedScene" uid="uid://bmbc68ovi54ey" path="res://Components/RandomAudioPlayer.tscn" id="2_dhtgm"]
+[ext_resource type="AudioStream" uid="uid://ddh4l7i8dlid5" path="res://Audio/UI/switch1.ogg" id="3_kssna"]
+[ext_resource type="AudioStream" uid="uid://ci2cwlfd7gdhw" path="res://Audio/UI/switch2.ogg" id="4_xoafh"]
+[ext_resource type="AudioStream" uid="uid://m3e6ik87uor4" path="res://Audio/UI/switch3.ogg" id="5_6nakj"]
+[ext_resource type="AudioStream" uid="uid://dd6l7687esae6" path="res://Audio/UI/switch4.ogg" id="6_qg4au"]
+[ext_resource type="AudioStream" uid="uid://cra8yrd1lwl7" path="res://Audio/UI/switch5.ogg" id="7_8dhpn"]
+[ext_resource type="AudioStream" uid="uid://ctalx3fysaili" path="res://Audio/UI/switch6.ogg" id="8_jc7kg"]
+[ext_resource type="AudioStream" uid="uid://8jhtp1bkeo3p" path="res://Audio/UI/switch7.ogg" id="9_2usv3"]
+[ext_resource type="AudioStream" uid="uid://dhlg7v23oxx0l" path="res://Audio/UI/switch8.ogg" id="10_af7hb"]
+[ext_resource type="AudioStream" uid="uid://tmbmwld7ojye" path="res://Audio/UI/switch9.ogg" id="11_7r4o2"]
+[ext_resource type="Texture2D" uid="uid://cvma8iodfq0xq" path="res://Weapons/SniperRifle/SniperRifle.png" id="12_8dppk"]
+[ext_resource type="AudioStream" uid="uid://bo2lpi1twgnla" path="res://Audio/UI/switch10.ogg" id="12_djurt"]
+[ext_resource type="Texture2D" uid="uid://8ggofq3l6n5q" path="res://Visuals/UI/Scull_Slider.png" id="13_u7syh"]
 
 [sub_resource type="Animation" id="Animation_woqke"]
 length = 0.001
@@ -201,20 +203,21 @@ _data = {
 "hover": SubResource("Animation_6mvaf")
 }
 
-[node name="AbilitieUpgradeCard" type="PanelContainer" node_paths=PackedStringArray("cardNameLabel", "descriptionCardLabel") groups=["upgrade_card"]]
-custom_minimum_size = Vector2(95, 110)
+[node name="ShopCard" type="PanelContainer" node_paths=PackedStringArray("_itemNameLabel", "_descriptionItemLabel", "_selectButton")]
+custom_minimum_size = Vector2(100, 70)
 offset_right = 85.0
 offset_bottom = 100.0
 pivot_offset = Vector2(47, 55)
-script = ExtResource("1_0c4yc")
-cardNameLabel = NodePath("MarginContainer/VBoxContainer/PanelContainer/NameLabel")
-descriptionCardLabel = NodePath("MarginContainer/VBoxContainer/DescriptionLabel")
+script = ExtResource("1_5y51k")
+_itemNameLabel = NodePath("MarginContainer/VBoxContainer/PanelContainer/NameLabel")
+_descriptionItemLabel = NodePath("MarginContainer/VBoxContainer/DescriptionLabel")
+_selectButton = NodePath("MarginContainer/VBoxContainer/Button")
 
-[node name="HoverPlayerComponent" parent="." instance=ExtResource("2_ugu2u")]
-streams = [ExtResource("3_6g84l"), ExtResource("4_m260f"), ExtResource("5_72tlf"), ExtResource("6_172qf"), ExtResource("7_4rdtq"), ExtResource("8_kschn"), ExtResource("9_rn1ls"), ExtResource("10_b22wl"), ExtResource("11_obi1x"), ExtResource("12_uhbjv")]
+[node name="HoverPlayerComponent" parent="." instance=ExtResource("2_dhtgm")]
+streams = [ExtResource("3_kssna"), ExtResource("4_xoafh"), ExtResource("5_6nakj"), ExtResource("6_qg4au"), ExtResource("7_8dhpn"), ExtResource("8_jc7kg"), ExtResource("9_2usv3"), ExtResource("10_af7hb"), ExtResource("11_7r4o2"), ExtResource("12_djurt")]
 
-[node name="CLickPlayerCOmponent" parent="." instance=ExtResource("2_ugu2u")]
-streams = [ExtResource("3_6g84l"), ExtResource("4_m260f"), ExtResource("5_72tlf"), ExtResource("6_172qf"), ExtResource("7_4rdtq"), ExtResource("8_kschn"), ExtResource("9_rn1ls"), ExtResource("10_b22wl"), ExtResource("11_obi1x"), ExtResource("12_uhbjv")]
+[node name="CLickPlayerCOmponent" parent="." instance=ExtResource("2_dhtgm")]
+streams = [ExtResource("3_kssna"), ExtResource("4_xoafh"), ExtResource("5_6nakj"), ExtResource("6_qg4au"), ExtResource("7_8dhpn"), ExtResource("8_jc7kg"), ExtResource("9_2usv3"), ExtResource("10_af7hb"), ExtResource("11_7r4o2"), ExtResource("12_djurt")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -242,13 +245,53 @@ theme_type_variation = &"AlternativePannelContainer"
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-text = "666"
+text = "Sniper Rifle"
 horizontal_alignment = 1
 vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 6
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CostTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer/Control"]
+layout_mode = 2
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 13.0
+texture = ExtResource("13_u7syh")
+stretch_mode = 2
+
+[node name="CostLable" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "1000 "
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
+text = "Cool tool for killing "
 autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("12_8dppk")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"

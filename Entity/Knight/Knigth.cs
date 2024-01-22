@@ -12,6 +12,7 @@ namespace Game.Enteties
 	{
 		CharacterBody2D player;
 		game_events Game_Events;
+		private DelegateStateMachine stateMachine = new DelegateStateMachine(); 
 		[Export] HealthComponent healthComponent;
 		[Export] EntitySpriteImager knigthSpriteImager;
 		[Export] PathFindingComponent pathFindingComponent;
@@ -20,7 +21,6 @@ namespace Game.Enteties
 		[Export] AnimationPlayer animationPlayer;
 		[Export] RayCast2D lineOfSigth;
 		[Export] DeathSceneComponent deathSceneComponent;
-		private DelegateStateMachine stateMachine = new DelegateStateMachine(); 
 		public override void _Ready()
 		{
 			Game_Events = GetNode<game_events>("/root/GameEvents");
@@ -38,7 +38,6 @@ namespace Game.Enteties
 			stateMachine.AddState(DetectionState);
 			stateMachine.SetInitiioalState(NormalState);
 		}
-
 		#endregion
 
 		#region Connect to Signals
@@ -46,6 +45,11 @@ namespace Game.Enteties
 		{
 			healthComponent.Connect(HealthComponent.SignalName.Died , Callable.From(()=> stateMachine.ChangeState(DeadState)));
 			pathFindingComponent.Connect(PathFindingComponent.SignalName.NavigationFinished , Callable.From(()=> animationPlayer.Stop()));	
+			Game_Events.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+			{
+				OnWaveFinished();
+			}
+			));
 		}
 		#endregion
 		public override void _Process(double delta)
@@ -53,10 +57,8 @@ namespace Game.Enteties
 			if(!GameUtilities.CheckIfPlayerExist(this)){
 				return;
 			}
-			
 			stateMachine.Update();	
 			knigthSpriteImager.LookAtTarget(player.Position);
-			
 		}
 		
 
@@ -97,9 +99,7 @@ namespace Game.Enteties
 					stateMachine.ChangeState(AtackState);
 				}
 				else{
-					
 					stateMachine.ChangeState(NormalState);
-					
 				}
 			}
 			else{

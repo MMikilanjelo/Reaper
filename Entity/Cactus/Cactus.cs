@@ -15,11 +15,12 @@ public partial class Cactus : CharacterBody2D , IEnemy
     [Export] AudioStreamPlayer2D audioStreamPlayer;
     [Export] DeathSceneComponent deathSceneComponent;
     HealthComponent healthComponent;
+    game_events _gameEvents;
     private float theta = 0;
     public override void _Ready()
     {
+        _gameEvents = GetNode<game_events>("/root/GameEvents");
         alpha = Directions.random.Randfn(0f , 3f);
-        
         healthComponent = GetNode<HealthComponent>("HealthComponent");
 
         InitializeStateMachine();
@@ -48,6 +49,11 @@ public partial class Cactus : CharacterBody2D , IEnemy
             audioStreamPlayer.Play();
             ShootBulletWithAngleOffset(theta);
         }));
+        _gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+        {
+          OnWaveFinished();
+        }
+        ));
 	  }
 	#endregion
     public override void _Process(double delta)
