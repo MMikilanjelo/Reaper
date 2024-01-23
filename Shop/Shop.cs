@@ -9,6 +9,9 @@ public partial class Shop : Node2D
     PackedScene _shopScreenScene;
     ResourcePreloader _resourcePreloader;
     game_events _gameEvents;
+    AnimationPlayer _animationPlayer;
+    GpuParticles2D _appearanceParticle;
+    Sprite2D _shopImage;
     private bool _canInteract = false;
     private Godot.Collections.Array<string> _interactionMessages = new Godot.Collections.Array<string>
     {
@@ -24,6 +27,7 @@ public partial class Shop : Node2D
         SetDependencies();
         LoadResourses();
         ConnectToSignals();
+        _appearanceParticle.Emitting = true;
     }
     private void SetDependencies()
     {
@@ -32,6 +36,9 @@ public partial class Shop : Node2D
         _dialogBoxPosition = GetNode<Marker2D>("DialogBoxPosition");
         _interactionArea = GetNode<Area2D>("Area2D");
         _resourcePreloader = GetNode<ResourcePreloader>("ResourcePreloader");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _appearanceParticle = GetNode<GpuParticles2D>("GPUParticles2D");
+        _shopImage = GetNode<Sprite2D>("Sprite2D");
     }
     private void LoadResourses()
     {
@@ -70,10 +77,21 @@ public partial class Shop : Node2D
         }
         if(@event.IsActionPressed("next_wave"))
         {
-            _dialogeManager.FinishDialog();
-            _gameEvents.EmitNewWaveStarting();
-            QueueFree();     
+            OnNextWave();
+            GetTree().CreateTimer(_appearanceParticle.Lifetime).Connect(Timer.SignalName.Timeout , Callable.From(()=>
+            {
+                _gameEvents.EmitNewWaveStarting();
+                QueueFree(); 
+            }));
         }
+    }
+    private void OnNextWave()
+    {
+        _appearanceParticle.Emitting = true;
+        _shopImage.Visible = false;
+        _canInteract = false;
+        _interactionArea.Visible = false;
+        _dialogeManager.FinishDialog();
     }
     private void OpenShop()
     {

@@ -24,7 +24,7 @@ namespace Game.Components
 			player  = GetParent<PlayerController>();
 			playerHurtBox = player.GetNode<HurtBoxComponent>("HurtBoxComponent");
 			playerWeaponRootComponent = player.GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
-			
+			//TODO: Remove player passives from list to shop and give more flexebility in player stats managment;
 			
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
 			playerWeaponRootComponent.AddAfexToWeapon(ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicEffect/ToxicDotEffect.tscn"));

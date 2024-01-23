@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6rs7ugtvx8p5"]
+[gd_scene load_steps=20 format=3 uid="uid://c6rs7ugtvx8p5"]
 
 [ext_resource type="Script" path="res://Shop/Shop.cs" id="1_skert"]
 [ext_resource type="Resource" uid="uid://b7it5jdcup8pr" path="res://Resourses/ShopSlots/SniperRifle.tres" id="2_8xxbr"]
@@ -6,6 +6,37 @@
 [ext_resource type="Texture2D" uid="uid://bqhck7piqvug6" path="res://Visuals/Shop/FrogShop_Idel.png" id="2_j3qsg"]
 [ext_resource type="Resource" uid="uid://bcxuciv8yceq7" path="res://Resourses/ShopSlots/ScrabArtifact.tres" id="3_j1ed4"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/DotedCircle.gdshader" id="6_o62ih"]
+[ext_resource type="Texture2D" uid="uid://t2nk33ns5n3x" path="res://Visuals/Particles/Shop/ShopAppereanceParticle.png" id="7_yec1c"]
+
+[sub_resource type="Gradient" id="Gradient_p5xor"]
+colors = PackedColorArray(0.301961, 0.301961, 0.529412, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2j2px"]
+gradient = SubResource("Gradient_p5xor")
+
+[sub_resource type="Curve" id="Curve_f5bf2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.195767, 1), 0.0, 0.0, 0, 0, Vector2(0.62963, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_huu53"]
+curve = SubResource("Curve_f5bf2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x4a7t"]
+emission_shape = 1
+emission_sphere_radius = 6.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 600.0
+damping_max = 600.0
+angle_max = 360.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_huu53")
+color_initial_ramp = SubResource("GradientTexture1D_2j2px")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rq6n"]
 radius = 15.0
@@ -28,9 +59,14 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 0]
 }
 
+[sub_resource type="Animation" id="Animation_0c4xe"]
+resource_name = "appearance"
+length = 0.2
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o2jpw"]
 _data = {
-"Idel": SubResource("Animation_3q52f")
+"Idel": SubResource("Animation_3q52f"),
+"appearance": SubResource("Animation_0c4xe")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rr63j"]
@@ -51,6 +87,18 @@ top_level = true
 script = ExtResource("1_skert")
 _itemsInShop = [ExtResource("2_8xxbr"), ExtResource("3_j1ed4")]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j3qsg")
+hframes = 7
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_x4a7t")
+texture = ExtResource("7_yec1c")
+one_shot = true
+explosiveness = 0.9
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 0
@@ -62,10 +110,6 @@ shape = SubResource("CapsuleShape2D_3rq6n")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("ShopScreen"), [ExtResource("2_cq7ad")]]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_j3qsg")
-hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idel"
@@ -79,7 +123,7 @@ position = Vector2(-10, -7)
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="AuraReduction" type="Sprite2D" parent="Area2D"]
+[node name="InteractionArea" type="Sprite2D" parent="Area2D"]
 z_as_relative = false
 material = SubResource("ShaderMaterial_rr63j")
 position = Vector2(75, 76)

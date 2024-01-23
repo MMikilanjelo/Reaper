@@ -26,8 +26,10 @@ public partial class ItemSpawnerManager : Node
 		{
 			SpawnBulletChest(GetSpawnPosition());
 		}));
-		_gameEvents.WaveFinished += () => SpawnShop(Vector2.Zero);
-		
+		_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
+		{
+			SpawnShop(Vector2.Zero);
+		}));
 	}
 	private Vector2 GetSpawnPosition()
 	{
