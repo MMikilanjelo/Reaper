@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://b7it5jdcup8pr"]
+
+[ext_resource type="Texture2D" uid="uid://cvma8iodfq0xq" path="res://Weapons/SniperRifle/SniperRifle.png" id="1_0wv8u"]
+[ext_resource type="PackedScene" uid="uid://cmdpvlgqj2xx4" path="res://Weapons/SniperRifle/SniperRifle.tscn" id="1_7tybn"]
+[ext_resource type="Script" path="res://Resourses/ShopSlots/ShopSlotData.cs" id="2_vn2jj"]
+
+[resource]
+script = ExtResource("2_vn2jj")
+_itemName = "Sniper Rifle"
+_itemDescription = "Cool "
+_itemTexture = ExtResource("1_0wv8u")
+_itemCost = 0.0
+_itemScene = ExtResource("1_7tybn")

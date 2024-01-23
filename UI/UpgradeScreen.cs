@@ -50,7 +50,6 @@ public partial class UpgradeScreen : CanvasLayer
 	{
 		EmitSignal(SignalName.UpgradeSelected , upgrade);
 		animationPlayer.Play("out");
-		
 	}
 	
 }

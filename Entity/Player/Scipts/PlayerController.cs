@@ -38,7 +38,7 @@ public partial class PlayerController : CharacterBody2D
 	private void ConnectToSginals()
 	{
 		healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
-		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From(()=>{
+		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From((Vector2 _direction)=>{
 			game_Events.EmitPlayerShootSignal(1);
 		}));
 	}
@@ -79,7 +79,6 @@ public partial class PlayerController : CharacterBody2D
 		}
 		if(Input.IsActionPressed("Shoot"))
 		{
-			
 			var directionToShoot = (GetGlobalMousePosition() - GlobalPosition).Normalized();
 			weaponRootComponent.ShootFromCurrentWeapon(directionToShoot);
 		}

@@ -6,16 +6,18 @@ public partial class ItemSpawnerManager : Node
 {
 	PackedScene ExpirienceScene;
 	PackedScene ChestScene;
-	game_events GameEvents;
+	PackedScene _shopScene;
+	game_events _gameEvents;
 	[Export] Timer timer;
 	public static  RandomNumberGenerator random = new RandomNumberGenerator();
 	const float SPAWN_RADIUS = 400f;
 	public override void _Ready()
 	{
-		GameEvents = GetNode<game_events>("/root/GameEvents");
+		_gameEvents = GetNode<game_events>("/root/GameEvents");
 		ExpirienceScene = ResourceLoader.Load<PackedScene>("res://GameObjects/ExpPeals/experience.tscn");
 		ChestScene = ResourceLoader.Load<PackedScene>("res://GameObjects/Chest/chest.tscn");
-		GameEvents.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
+		_shopScene = ResourceLoader.Load<PackedScene>("res://Shop/Shop.tscn");
+		_gameEvents.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
 		{
 			InstantiateExpirianceVial(pos);
 		}
@@ -24,6 +26,7 @@ public partial class ItemSpawnerManager : Node
 		{
 			SpawnBulletChest(GetSpawnPosition());
 		}));
+		_gameEvents.WaveFinished += () => SpawnShop(Vector2.Zero);
 		
 	}
 	private Vector2 GetSpawnPosition()
@@ -64,6 +67,12 @@ public partial class ItemSpawnerManager : Node
 		Chest chest = ChestScene.Instantiate() as Chest;
 		chest.Position = position_to_spawn;
 		GetTree().GetFirstNodeInGroup("ForeGroundLayer")?.AddChild(chest);
+	}
+	private void SpawnShop(Vector2 _positionToSpawn)
+	{
+		var _shopInstance = _shopScene.Instantiate() as Shop;
+		GetTree().GetFirstNodeInGroup("ForeGroundLayer")?.AddChild(_shopInstance);
+		_shopInstance.GlobalPosition = _positionToSpawn;
 	}
 
 

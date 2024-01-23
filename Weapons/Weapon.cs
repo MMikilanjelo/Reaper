@@ -1,14 +1,20 @@
 using Godot;
 using Game.Components;
+using System;
 
 namespace Game.Weapons
 {
-	public partial class Weapon : Node2D , IWeapon
+	public partial class Weapon : Node2D , IWeapon 
 	{
+		protected WeaponRootComponent _weaponRootComponent;
 		public bool _canShoot = true;
 		public PackedScene Affex = null;
 		public HitBoxComponent hitBoxComponent = null;
-		public virtual void Shoot(Vector2 directionToTarget  )
+        public override void _Ready()
+        {
+            _weaponRootComponent = GetTree().GetFirstNodeInGroup("WeaponRootComponent") as WeaponRootComponent;
+        }
+        public virtual void Shoot(Vector2 directionToTarget)
 		{
 			
 		}
@@ -18,10 +24,17 @@ namespace Game.Weapons
 			patickles.Position = Position;
 			this.AddChild(patickles);
 		}
-	}
+		public void OnWeaponChanged()
+		{
+			QueueFree();
+		}
+
+
+    }
 	public interface IWeapon
 	{
 		void Shoot(Vector2 directionToTarget);
+		
 	}
 	public partial class BaseBullet : CharacterBody2D 
 	{

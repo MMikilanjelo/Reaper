@@ -203,7 +203,7 @@ _data = {
 "hover": SubResource("Animation_6mvaf")
 }
 
-[node name="ShopCard" type="PanelContainer" node_paths=PackedStringArray("_itemNameLabel", "_descriptionItemLabel", "_selectButton")]
+[node name="ShopCard" type="PanelContainer" node_paths=PackedStringArray("_itemNameLabel", "_descriptionItemLabel", "_costLable", "_selectButton", "_slotTextureRect")]
 custom_minimum_size = Vector2(100, 70)
 offset_right = 85.0
 offset_bottom = 100.0
@@ -211,7 +211,9 @@ pivot_offset = Vector2(47, 55)
 script = ExtResource("1_5y51k")
 _itemNameLabel = NodePath("MarginContainer/VBoxContainer/PanelContainer/NameLabel")
 _descriptionItemLabel = NodePath("MarginContainer/VBoxContainer/DescriptionLabel")
+_costLable = NodePath("MarginContainer/VBoxContainer/MarginContainer/CostLable")
 _selectButton = NodePath("MarginContainer/VBoxContainer/Button")
+_slotTextureRect = NodePath("MarginContainer/VBoxContainer/SlotTextureRect")
 
 [node name="HoverPlayerComponent" parent="." instance=ExtResource("2_dhtgm")]
 streams = [ExtResource("3_kssna"), ExtResource("4_xoafh"), ExtResource("5_6nakj"), ExtResource("6_qg4au"), ExtResource("7_8dhpn"), ExtResource("8_jc7kg"), ExtResource("9_2usv3"), ExtResource("10_af7hb"), ExtResource("11_7r4o2"), ExtResource("12_djurt")]
@@ -262,9 +264,9 @@ size_flags_vertical = 0
 
 [node name="CostTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer/Control"]
 layout_mode = 2
-offset_left = 35.0
+offset_left = 57.0
 offset_top = -3.0
-offset_right = 51.0
+offset_right = 73.0
 offset_bottom = 13.0
 texture = ExtResource("13_u7syh")
 stretch_mode = 2
@@ -275,7 +277,7 @@ size_flags_vertical = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 12
-text = "1000 "
+text = "100/100"
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -285,7 +287,7 @@ theme_override_constants/outline_size = 2
 text = "Cool tool for killing "
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="SlotTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("12_8dppk")

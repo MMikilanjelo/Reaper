@@ -38,6 +38,7 @@ public partial class UIEvents : Node
 		playerStatistic._totalKills = 0;
 		playerStatistic._totalUpgrades = 0;
 		playerStatistic._totalSouls = 0;
+		playerStatistic._currentCurrency = 0;
 	}
 
 }
@@ -46,6 +47,7 @@ public partial class PlayerStats : RefCounted
 	public  float dmg_reduction;
 	public  float speed_Multiplier;
 	public float miis_chance;
+	
 }
 public partial class PlayerStatistic : RefCounted
 {
@@ -53,4 +55,5 @@ public partial class PlayerStatistic : RefCounted
     public int _totalUpgrades = 0;
     public int _totalDealtDmg = 0;
     public int _totalSouls = 0;
+	public int _currentCurrency = 0;
 }

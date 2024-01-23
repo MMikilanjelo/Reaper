@@ -3,11 +3,12 @@ using System;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 
-public partial class DialogeBox : MarginContainer
+public partial class DialogeBox : Node2D
 {
 	[Signal] public delegate void FinishedDisplayingEventHandler();
 	private Label _messageLable;
 	private Timer _displayTimer;
+	private MarginContainer _marginContainer;
 	private string text = "";
 	private int _letterIndex = 0;
 	
@@ -17,11 +18,16 @@ public partial class DialogeBox : MarginContainer
     public override void _Ready()
     {
 
-		_displayTimer = GetNode<Timer>("Timer");
-		_messageLable = GetNode<Label>("MarginContainer/Label");
+		_displayTimer = GetNode<Timer>("MarginContainer/Timer");
+		_messageLable = GetNode<Label>("MarginContainer/MarginContainer/Label");
+		_marginContainer = GetNode<MarginContainer>("MarginContainer/MarginContainer");
         _displayTimer.Timeout += () => DisplayLetter();
+		_marginContainer.Resized += () => OnMessageBoxResized();
     }
-
+	private void OnMessageBoxResized()
+	{
+		
+	}
     public void DisplayMessage(string _messageToDisplay)
 	{
 		text = _messageToDisplay;
@@ -32,9 +38,10 @@ public partial class DialogeBox : MarginContainer
 	{
 		_messageLable.Text = "";
 	}
+
 	public void SetDialogBoxSize (Vector2 _newSize)
 	{
-		CustomMinimumSize = _newSize;
+		_marginContainer.CustomMinimumSize = _newSize;
 	}
 	private void DisplayLetter()
 	{

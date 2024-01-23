@@ -22,6 +22,8 @@ namespace Game.Weapons
 		private WeaponStats shotGunStats;
 		public override void _Ready()
 		{
+			base._Ready();
+			GD.Print(this._weaponRootComponent);
 			if(isEnemy)
 			{
 				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
@@ -30,22 +32,21 @@ namespace Game.Weapons
 			{
 				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
 			}
-				
 		}
 		public override void _PhysicsProcess(double delta)
 		{
 				
-				if(timeToRecoilDecresment.IsStopped())
-				{
-					var recoil_increment = MaxRecoil * 0.1f;
-					currentRecoil = Mathf.Clamp(currentRecoil - recoil_increment , 0 ,	MaxRecoil);
+			if(timeToRecoilDecresment.IsStopped())
+			{
+				var recoil_increment = MaxRecoil * 0.1f;
+				currentRecoil = Mathf.Clamp(currentRecoil - recoil_increment , 0 ,	MaxRecoil);
 
-				}
-				if(atackDelayTimer.IsStopped()){
-					_canShoot = true;
-				}
 			}
-		public override void Shoot(Vector2 directionToTarget )
+			if(atackDelayTimer.IsStopped()){
+					_canShoot = true;
+			}
+		}
+		public override void Shoot(Vector2 directionToTarget)
 		{
 			animationPlayer.Play("Shoot");
 			gunAudioPlayer.Play();

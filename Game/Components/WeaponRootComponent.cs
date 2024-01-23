@@ -8,31 +8,37 @@ namespace Game.Components
 	{
 		[Export] CharacterBody2D entity;
 		[Export] Weapon CurrentWeapon;
-		public PackedScene AffexToApply = null;
-		[Signal] public delegate void ShotedFromWeaponEventHandler();
+		[Signal] public delegate void ShotedFromWeaponEventHandler(Vector2 _direction);
+		[Signal] public delegate void WeaponChangedEventHandler();
 		private bool _HasAmmoRemaining = true;
 		game_events game_Events;
         public override void _Ready()
         {
+			
 			game_Events = GetNode<game_events>("/root/GameEvents");	
 	   		game_Events.Connect(game_events.SignalName.OnRunOutAmmo , Callable.From((bool _hasAmmmo)=> _HasAmmoRemaining = _hasAmmmo));
+			game_Events.Connect(game_events.SignalName.WeaponShopSlotPurchased , new Callable(this , nameof(ChangeWeapon)));
         }
-		public void ChangeWeapon(PackedScene newWeapon)
+		private void ChangeWeapon(ShopSlotData shopSlotData)
 		{
-			
-			CurrentWeapon.QueueFree();
-			var Weapon_To_Change = newWeapon.Instantiate() as Weapon;
+			if(CurrentWeapon != null)
+			{
+				CurrentWeapon.OnWeaponChanged();
+				CurrentWeapon = null;
+			}
+			var Weapon_To_Change = shopSlotData._itemScene.Instantiate() as Weapon;
 			AddChild(Weapon_To_Change);
-			CurrentWeapon = Weapon_To_Change;
+			CurrentWeapon = Weapon_To_Change as Weapon;
 		}
-		public void ShootFromCurrentWeapon(Vector2 directionToShoot)
+
+		public void ShootFromCurrentWeapon(Vector2 directionToShot)
 		{
 			if(!_HasAmmoRemaining || !CurrentWeapon._canShoot)
 			{
 				return;
 			}
-			EmitSignal(SignalName.ShotedFromWeapon);
-			CurrentWeapon?.Shoot(directionToShoot);
+			EmitSignal(SignalName.ShotedFromWeapon , directionToShot);
+			CurrentWeapon?.Shoot(directionToShot);
 		}
 		public void AddAfexToWeapon(PackedScene AffexToAdd)
 		{

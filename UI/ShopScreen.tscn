@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ecscavx7g7f" path="res://UI/ShopSlot.tscn" id="1_yqvt5"]
 
 [node name="ShopScreen" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_3okpo")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -48,18 +49,3 @@ theme_override_constants/margin_bottom = 8
 [node name="GridContainer" type="GridContainer" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer"]
 layout_mode = 2
 columns = 2
-
-[node name="AbilitieUpgradeCard5" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer/GridContainer" instance=ExtResource("1_yqvt5")]
-layout_mode = 2
-
-[node name="AbilitieUpgradeCard4" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer/GridContainer" instance=ExtResource("1_yqvt5")]
-layout_mode = 2
-
-[node name="AbilitieUpgradeCard3" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer/GridContainer" instance=ExtResource("1_yqvt5")]
-layout_mode = 2
-
-[node name="AbilitieUpgradeCard2" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer/GridContainer" instance=ExtResource("1_yqvt5")]
-layout_mode = 2
-
-[node name="AbilitieUpgradeCard" parent="Control/OuterMarginContainer/PanelContainer/ScrollContainer/InnerMarginContainer/GridContainer" instance=ExtResource("1_yqvt5")]
-layout_mode = 2

@@ -3,6 +3,7 @@ using System;
 
 public partial class DialogeManager : Node
 {
+	[Signal] public delegate void DialogFinishedEventHandler();
 	ResourcePreloader _resourcePreloader;
 	PackedScene _dialogeBoxScene;
 	private Godot.Collections.Array<string> _dialogMessages = new();
@@ -16,6 +17,7 @@ public partial class DialogeManager : Node
     {
         _resourcePreloader = GetNode("ResourcePreloader") as ResourcePreloader;
 		_dialogeBoxScene = _resourcePreloader.GetResource("DialogeBox") as PackedScene;
+		GD.Print(_dialogeBoxScene);
     }
 	public void StartDialog(Vector2 _dialogBoxPosition , Godot.Collections.Array<string> _messages)
 	{
@@ -28,17 +30,15 @@ public partial class DialogeManager : Node
 	public void ShowTextBox()
 	{
 		_dialogBoxInstance = _dialogeBoxScene.Instantiate() as DialogeBox;
-		GetTree().Root.AddChild(_dialogBoxInstance);
+		AddChild(_dialogBoxInstance);
 		
 		_dialogBoxInstance.FinishedDisplaying += () => OnDialogBoxFinishedDisplaying();
-		
 		_dialogBoxInstance.GlobalPosition = _dialogBoxPosition;
 		_dialogBoxInstance.DisplayMessage(_dialogMessages[_currentLineIndex]);
 		_canAdvanceLine = false;
 	}
 	private void OnDialogBoxFinishedDisplaying()
 	{
-		
 		_canAdvanceLine = true;
 	}
     public override void _UnhandledInput(InputEvent @event)
@@ -52,6 +52,7 @@ public partial class DialogeManager : Node
     		{
     			_isDialogActive = false;
     			_currentLineIndex = 0;
+				EmitSignal(SignalName.DialogFinished);
     			return;
     		}
     		ShowTextBox();
