@@ -52,7 +52,6 @@ namespace Game.Components
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
-			GD.Print("visited a weaponRoot component");
         }
 
     }

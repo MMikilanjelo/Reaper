@@ -4,6 +4,7 @@ using System;
 public partial class DialogeManager : Node
 {
 	[Signal] public delegate void DialogFinishedEventHandler();
+	[Signal] public delegate void ForcedFinishDialogEventHandler();
 	ResourcePreloader _resourcePreloader;
 	PackedScene _dialogeBoxScene;
 	private Godot.Collections.Array<string> _dialogMessages = new();
@@ -18,7 +19,7 @@ public partial class DialogeManager : Node
         _resourcePreloader = GetNode("ResourcePreloader") as ResourcePreloader;
 		_dialogeBoxScene = _resourcePreloader.GetResource("DialogeBox") as PackedScene;
     }
-	public void StartDialog(Vector2 _dialogBoxPosition , Godot.Collections.Array<string> _messages)
+	public void StartDialog(Vector2 _dialogBoxPosition , Godot.Collections.Array<string> _messages )
 	{
 		if(_isDialogActive) return;
 		_dialogMessages = _messages;
@@ -30,7 +31,7 @@ public partial class DialogeManager : Node
 	{
 		_dialogBoxInstance = _dialogeBoxScene.Instantiate() as DialogeBox;
 		AddChild(_dialogBoxInstance);
-		
+		//ForcedFinishDialog += () => _dialogBoxInstance.QueueFree();
 		_dialogBoxInstance.FinishedDisplaying += () => OnDialogBoxFinishedDisplaying();
 		_dialogBoxInstance.GlobalPosition = _dialogBoxPosition;
 		_dialogBoxInstance.DisplayMessage(_dialogMessages[_currentLineIndex]);
@@ -39,6 +40,15 @@ public partial class DialogeManager : Node
 	private void OnDialogBoxFinishedDisplaying()
 	{
 		_canAdvanceLine = true;
+	}
+	public void FinishDialog()
+	{
+		foreach (var _textBox in GetChildren())
+		{
+			_textBox.QueueFree();
+		}
+		_isDialogActive = false;
+		//EmitSignal(SignalName.ForcedFinishDialog);
 	}
     public override void _UnhandledInput(InputEvent @event)
     {

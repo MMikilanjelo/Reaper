@@ -17,6 +17,7 @@ public partial class game_events : Node
 	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
 	[Signal] public delegate void WaveFinishedEventHandler();
 	[Signal] public delegate void NewWaveStartedEventHandler();
+	[Signal] public delegate void DifficultyIncreasedOverTimeEventHandler(int _arenaDifficulty);
 	[Signal] public delegate void ShopSlotPurchasedEventHandler(ShopSlotData _purchasedItem);
 	public void EmitDmgRecivedByEnemy(int dmg)
 	{
@@ -57,6 +58,10 @@ public partial class game_events : Node
 	public void EmitShopSlotPurchased(ShopSlotData _purchasedSlotData)
 	{
 		EmitSignal(SignalName.ShopSlotPurchased  , _purchasedSlotData);
+	}
+	public void EmitDifficultyIncresed(int _arenaDifficulty)
+	{
+		EmitSignal(SignalName.DifficultyIncreasedOverTime , _arenaDifficulty);
 	}
 
 }

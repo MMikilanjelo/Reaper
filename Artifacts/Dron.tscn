@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjsivvxsh0qa6"]
+
+[ext_resource type="Script" path="res://Artifacts/Dron.cs" id="1_q8ma2"]
+
+[node name="Dron" type="Node2D"]
+script = ExtResource("1_q8ma2")

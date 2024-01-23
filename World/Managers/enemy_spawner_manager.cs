@@ -11,11 +11,12 @@ namespace Managers
 		[Export] PackedScene KnigthEnemyScene;
 		[Export] PackedScene DummyTargetScene;
 	  	[Export] PackedScene CactusScene;
-		[Export] Timer EnemySpawnerInterval;
+		[Export] Timer EnemySpawnerIntervalTimer;
 		[Export] const float SPAWN_RADIUS = 100f;
 		[Export] private bool _deactivate = false;
 		CharacterBody2D player;
 		game_events _gameEvents;
+		double _baseSpawnTime;
 		public static  RandomNumberGenerator random = new RandomNumberGenerator();
 		private readonly LootTable<PackedScene> enemyTable = new LootTable<PackedScene>();
 		public override void _Ready()
@@ -23,7 +24,8 @@ namespace Managers
 			_gameEvents = GetNode<game_events>("/root/GameEvents");
 			SetUpWeigthTable();
 			ConnectSignals();
-			EnemySpawnerInterval.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
+			EnemySpawnerIntervalTimer.Connect(Timer.SignalName.Timeout , new Callable(this, nameof(SpawnEnemy)));
+			_baseSpawnTime = EnemySpawnerIntervalTimer.WaitTime;
 		}
 		private void SetUpWeigthTable()
 		{
@@ -43,6 +45,7 @@ namespace Managers
 			{
 				_deactivate = false;	
 			}));
+			_gameEvents.Connect(game_events.SignalName.DifficultyIncreasedOverTime , Callable.From((int _arenaDifficulty)=> OnArenaDifficultyIncreased(_arenaDifficulty)));
 		}
 		private Vector2 GetSpawnPosition()
 		{
@@ -70,6 +73,12 @@ namespace Managers
 				}	
 			}
 			return Vector2.Zero;
+		}
+		private void OnArenaDifficultyIncreased(int _arenaDifficulty)
+		{
+			var _timeOff = (.1f / 12 ) * _arenaDifficulty;
+			_timeOff = MathF.Max(_timeOff , .5f);
+			EnemySpawnerIntervalTimer.WaitTime = _baseSpawnTime - _timeOff;
 		}
 		private void SpawnEnemy()
 		{

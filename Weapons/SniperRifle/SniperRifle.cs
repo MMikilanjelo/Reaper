@@ -37,7 +37,6 @@ namespace Game.Weapons
 				_canShoot = true;
 			}));
 			_canShoot = false;
-			GD.Print("Shooted");
 			Appear();
 		}
 		private void Appear()

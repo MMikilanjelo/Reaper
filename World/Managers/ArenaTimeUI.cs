@@ -13,9 +13,6 @@ namespace Managers
     public override void _Ready()
     {
 
-        arenaTimeManager.
-			Connect(ArenaTimeManager.SignalName.DifficultyIncreasedOverTime,
-			new Callable(this , nameof(OnArenaDifficultyIncreased)));
     }
     public override void _Process(double delta)
     {
@@ -30,10 +27,6 @@ namespace Managers
 		return minutes.ToString() + ":" + displaySecenods.ToString("D2");
 	}
 
-	private void OnArenaDifficultyIncreased(int _arenaDifficulty)
-	{
-		GD.Print(_arenaDifficulty + "current difficulty");
-	}
   }
 }
 

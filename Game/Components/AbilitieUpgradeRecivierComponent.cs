@@ -27,6 +27,7 @@ namespace Game.Components
 			
 			
 			Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded , new Callable(this , nameof(OnAbilityUpgradeAded)));
+			playerWeaponRootComponent.AddAfexToWeapon(ResourceLoader.Load<PackedScene>("res://DotEffects/ToxicEffect/ToxicDotEffect.tscn"));
 			
 			lifeSteal = resourcePreloader.GetResource("LifeStealPassive") as PackedScene;
 			shroudPassive = resourcePreloader.GetResource("ShroudPassive") as PackedScene;

@@ -12,9 +12,11 @@ public partial class Shop : Node2D
     private bool _canInteract = false;
     private Godot.Collections.Array<string> _interactionMessages = new Godot.Collections.Array<string>
     {
+        "Press I to interact and Enter to Advance Dialog",
         "Hi ('press Enter ->')",
         "Bro Press B and I will show you something",
         "Mrgl mrgl mrgl",
+        "When you finished just press P",
     };
     [Export] private Godot.Collections.Array<ShopSlotData> _itemsInShop = new Godot.Collections.Array<ShopSlotData>();
     public override void _Ready()
@@ -47,7 +49,13 @@ public partial class Shop : Node2D
             }
               
         };
-        _interactionArea.BodyExited += (Node2D _otherBody ) => {if (_otherBody is PlayerController) _canInteract = false; };
+        _interactionArea.BodyExited += (Node2D _otherBody ) => 
+        {
+            if (_otherBody is PlayerController) 
+            {
+                _canInteract = false;
+            } 
+        };
     }
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -59,6 +67,12 @@ public partial class Shop : Node2D
         if(@event.IsActionPressed("open"))
         {
             OpenShop();
+        }
+        if(@event.IsActionPressed("next_wave"))
+        {
+            _dialogeManager.FinishDialog();
+            _gameEvents.EmitNewWaveStarting();
+            QueueFree();     
         }
     }
     private void OpenShop()
