@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6rs7ugtvx8p5"]
+[gd_scene load_steps=10 format=3 uid="uid://c6rs7ugtvx8p5"]
 
 [ext_resource type="Script" path="res://Shop/Shop.cs" id="1_skert"]
 [ext_resource type="Resource" uid="uid://b7it5jdcup8pr" path="res://Resourses/ShopSlots/SniperRifle.tres" id="2_8xxbr"]
 [ext_resource type="PackedScene" uid="uid://cgadapq4chj7" path="res://UI/ShopScreen.tscn" id="2_cq7ad"]
 [ext_resource type="Texture2D" uid="uid://bqhck7piqvug6" path="res://Visuals/Shop/FrogShop_Idel.png" id="2_j3qsg"]
+[ext_resource type="Resource" uid="uid://bcxuciv8yceq7" path="res://Resourses/ShopSlots/ScrabArtifact.tres" id="3_j1ed4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3rq6n"]
 radius = 15.0
@@ -32,12 +33,12 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m7fbc"]
-radius = 56.0089
+radius = 74.108
 
 [node name="Shop" type="Node2D"]
 top_level = true
 script = ExtResource("1_skert")
-_itemsInShop = [ExtResource("2_8xxbr")]
+_itemsInShop = [ExtResource("2_8xxbr"), ExtResource("3_j1ed4")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4

@@ -12,8 +12,8 @@ public partial class Shop : Node2D
     private bool _canInteract = false;
     private Godot.Collections.Array<string> _interactionMessages = new Godot.Collections.Array<string>
     {
-        "I am Frog",
-        "Bro Just Press a B and i will show you something",
+        "Hi ('press Enter ->')",
+        "Bro Press B and I will show you something",
         "Mrgl mrgl mrgl",
     };
     [Export] private Godot.Collections.Array<ShopSlotData> _itemsInShop = new Godot.Collections.Array<ShopSlotData>();
@@ -37,8 +37,16 @@ public partial class Shop : Node2D
     }
     private void ConnectToSignals()
     {
-        _gameEvents.WeaponShopSlotPurchased += (ShopSlotData _purchasedSlot) => SpawnPurchasedItem(_purchasedSlot);
-        _interactionArea.BodyEntered += (Node2D _otherBody ) => { if (_otherBody is PlayerController) _canInteract = true; };
+        _gameEvents.ShopSlotPurchased += (ShopSlotData _purchasedSlot) => SpawnPurchasedItem(_purchasedSlot);
+        _interactionArea.BodyEntered += (Node2D _otherBody ) => 
+        { 
+            if (_otherBody is PlayerController)
+            {
+                _canInteract = true; 
+                _dialogeManager.StartDialog(_dialogBoxPosition.GlobalPosition , _interactionMessages); 
+            }
+              
+        };
         _interactionArea.BodyExited += (Node2D _otherBody ) => {if (_otherBody is PlayerController) _canInteract = false; };
     }
     public override void _UnhandledInput(InputEvent @event)
@@ -61,7 +69,7 @@ public partial class Shop : Node2D
     }
     private void SpawnPurchasedItem(ShopSlotData _itemData)
     {
-        //TODO: Creat logick for applying differents bufs;
+        
     }
 
 

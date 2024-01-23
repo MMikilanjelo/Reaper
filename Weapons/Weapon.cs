@@ -12,7 +12,7 @@ namespace Game.Weapons
 		public HitBoxComponent hitBoxComponent = null;
         public override void _Ready()
         {
-            _weaponRootComponent = GetTree().GetFirstNodeInGroup("WeaponRootComponent") as WeaponRootComponent;
+            //_weaponRootComponent = GetTree().GetFirstNodeInGroup("WeaponRootComponent") as WeaponRootComponent;
         }
         public virtual void Shoot(Vector2 directionToTarget)
 		{

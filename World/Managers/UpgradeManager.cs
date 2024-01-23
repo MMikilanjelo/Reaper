@@ -108,7 +108,7 @@ public partial class UpgradeManager : Node
 		}
 		foreach(KeyValuePair<Upgrade , int> pair in current_upgrades[chosenUpgrade.id] )
 		{
-		 	GD.Print(pair.Key.id , pair.Value);
+		 	//GD.Print(pair.Key.id , pair.Value);
 		}
 		game_Events.OmAbilityUpgradeAded(chosenUpgrade , current_upgrades);
 	}

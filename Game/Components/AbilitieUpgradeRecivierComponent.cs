@@ -37,12 +37,12 @@ namespace Game.Components
 			switch (addedUpgrade.id)
 			{
 				case "hp_bonus":
-					player.healthComponent.IncreaseMaxHealth(10);
+					player._healthComponent.IncreaseMaxHealth(10);
 					break;
 
 				case "move_speed":
-					player.velocityComponent.SpeedMultiplier += addedUpgrade.value;
-					uiEvents.playerStats.speed_Multiplier = player.velocityComponent.SpeedMultiplier;
+					player._velocityComponent.SpeedMultiplier += addedUpgrade.value;
+					uiEvents.playerStats.speed_Multiplier = player._velocityComponent.SpeedMultiplier;
 					break;
 
 				case "dmg_reduction":
@@ -71,7 +71,7 @@ namespace Game.Components
 					break;
 				case "unstopoble":
 					var unstopobleAbility = unstopoble.Instantiate() as UnstopablePassive;
-					unstopobleAbility.velocityComponent = player.velocityComponent;
+					unstopobleAbility.velocityComponent = player._velocityComponent;
 					unstopobleAbility.hurtBoxComponent = playerHurtBox;
 					player.AddChild(unstopobleAbility);
 					break;

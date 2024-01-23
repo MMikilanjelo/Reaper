@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc50xt7e6g4fx"]
+
+[ext_resource type="Script" path="res://UI/ArtifactContainer.cs" id="1_r73j1"]
+[ext_resource type="PackedScene" uid="uid://dtn42svgn6h2r" path="res://UI/Artifact.tscn" id="2_h55ll"]
+
+[node name="GridContainer" type="GridContainer"]
+columns = 5
+script = ExtResource("1_r73j1")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Artifact"), [ExtResource("2_h55ll")]]

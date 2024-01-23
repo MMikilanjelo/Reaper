@@ -22,8 +22,6 @@ namespace Game.Weapons
 		private WeaponStats shotGunStats;
 		public override void _Ready()
 		{
-			base._Ready();
-			GD.Print(this._weaponRootComponent);
 			if(isEnemy)
 			{
 				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");

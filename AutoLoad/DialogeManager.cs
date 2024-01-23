@@ -17,7 +17,6 @@ public partial class DialogeManager : Node
     {
         _resourcePreloader = GetNode("ResourcePreloader") as ResourcePreloader;
 		_dialogeBoxScene = _resourcePreloader.GetResource("DialogeBox") as PackedScene;
-		GD.Print(_dialogeBoxScene);
     }
 	public void StartDialog(Vector2 _dialogBoxPosition , Godot.Collections.Array<string> _messages)
 	{

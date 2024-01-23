@@ -13,7 +13,7 @@ namespace DotEffects
         }
         public override void ApplyEffect(StatusEfffectData _data)
         {
-            GD.Print("I am fire effect");
+            
 		}
     }
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv5fmhvyf2jwf"]
+[gd_scene load_steps=8 format=3 uid="uid://bv5fmhvyf2jwf"]
 
 [ext_resource type="Script" path="res://UI/HealthBarContainer.cs" id="1_a0woe"]
 [ext_resource type="PackedScene" uid="uid://dg0yovq6g1kem" path="res://UI/KiilCounterContainer.tscn" id="1_q4k88"]
 [ext_resource type="PackedScene" uid="uid://c3sh7wb8r7wmf" path="res://UI/RemainungBulletsContainer.tscn" id="2_2hqx1"]
 [ext_resource type="Texture2D" uid="uid://dgj5g47rs2vah" path="res://Visuals/UI/UIHealth.png" id="2_esb1j"]
+[ext_resource type="PackedScene" uid="uid://dc50xt7e6g4fx" path="res://UI/ArtifactContainer.tscn" id="5_rpvg3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ytnrh"]
 atlas = ExtResource("2_esb1j")
@@ -39,19 +40,19 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+[node name="Container" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="PlayerStaplesContainer" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer" node_paths=PackedStringArray("playerHealth")]
+[node name="PlayerStaplesContainer" type="VBoxContainer" parent="Control/MarginContainer/Container" node_paths=PackedStringArray("playerHealth")]
 layout_mode = 2
 alignment = 1
 script = ExtResource("1_a0woe")
 playerHealth = NodePath("TextureProgressBar")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/MarginContainer/Container/PlayerStaplesContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -60,20 +61,27 @@ step = 0.1
 texture_under = SubResource("AtlasTexture_ytnrh")
 texture_progress = SubResource("AtlasTexture_h4isi")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/Container/PlayerStaplesContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 
-[node name="PlayerCounters" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer/MarginContainer"]
+[node name="PlayerCounters" type="HBoxContainer" parent="Control/MarginContainer/Container/PlayerStaplesContainer/MarginContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="KillCounterContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer/MarginContainer/PlayerCounters" instance=ExtResource("1_q4k88")]
+[node name="KillCounterContainer" parent="Control/MarginContainer/Container/PlayerStaplesContainer/MarginContainer/PlayerCounters" instance=ExtResource("1_q4k88")]
 layout_mode = 2
 
-[node name="RemainingBulletsContainer" parent="Control/MarginContainer/VBoxContainer/PlayerStaplesContainer" instance=ExtResource("2_2hqx1")]
+[node name="RemainingBulletsContainer" parent="Control/MarginContainer/Container/PlayerStaplesContainer" instance=ExtResource("2_2hqx1")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 1
+
+[node name="ArtifactContainer" type="MarginContainer" parent="Control/MarginContainer/Container"]
+layout_mode = 2
+theme_override_constants/margin_top = 8
+
+[node name="GridContainer" parent="Control/MarginContainer/Container/ArtifactContainer" instance=ExtResource("5_rpvg3")]
+layout_mode = 2

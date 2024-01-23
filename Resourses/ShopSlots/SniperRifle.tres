@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_vn2jj")
+_itemType = 0
 _itemName = "Sniper Rifle"
 _itemDescription = "Cool "
 _itemTexture = ExtResource("1_0wv8u")

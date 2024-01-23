@@ -17,7 +17,7 @@ public partial class game_events : Node
 	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
 	[Signal] public delegate void WaveFinishedEventHandler();
 	[Signal] public delegate void NewWaveStartedEventHandler();
-	[Signal] public delegate void WeaponShopSlotPurchasedEventHandler(ShopSlotData _purchasedItem);
+	[Signal] public delegate void ShopSlotPurchasedEventHandler(ShopSlotData _purchasedItem);
 	public void EmitDmgRecivedByEnemy(int dmg)
 	{
 		EmitSignal(SignalName.OnEnemyDmgRecived , dmg);
@@ -56,6 +56,7 @@ public partial class game_events : Node
 	}
 	public void EmitShopSlotPurchased(ShopSlotData _purchasedSlotData)
 	{
-		EmitSignal(SignalName.WeaponShopSlotPurchased  , _purchasedSlotData);
+		EmitSignal(SignalName.ShopSlotPurchased  , _purchasedSlotData);
 	}
+
 }

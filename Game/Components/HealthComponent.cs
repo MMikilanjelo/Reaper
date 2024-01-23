@@ -5,7 +5,7 @@ using GameUI;
 using Game.Enteties;
 namespace Game.Components
 {
-    public partial class HealthComponent : Node2D
+    public partial class HealthComponent : Node2D , IVisitable
     {
         
 
@@ -97,6 +97,13 @@ namespace Game.Components
         {
             MaxHealth += amount;
         }
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+            GD.Print(visitor + " Visited");
+        }
+
         public partial class HealthUpdate : RefCounted
         {
             public float MaxHealth;

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtn42svgn6h2r"]
+
+[ext_resource type="Texture2D" uid="uid://khfk0e4s5u6j" path="res://Visuals/Artifacts/BulletCountRelick.png" id="1_hwmbk"]
+[ext_resource type="Script" path="res://UI/Artifact.cs" id="2_q72eo"]
+
+[node name="Artifact" type="TextureRect"]
+texture = ExtResource("1_hwmbk")
+script = ExtResource("2_q72eo")

@@ -21,7 +21,8 @@ namespace Game.Weapons
 			soundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 			hitBoxComponent = GetNode<HitBoxComponent>("SniperRifle/Marker2D/HitBoxComponent");
 		}
-		public override void _PhysicsProcess(double delta)
+
+		public override void Shoot(Vector2 directionToTarget)	
 		{
 			var _castPoint = shootRay.TargetPosition;
 			shootRay.ForceRaycastUpdate();
@@ -31,17 +32,13 @@ namespace Game.Weapons
 			}
 			hitBoxShape.B = _castPoint;
 			aimLine.SetPointPosition(1,_castPoint);
-		}
-				
-		public override void Shoot(Vector2 directionToTarget)	
-		{
 			GetTree().CreateTimer(_atackDelay).Connect(Timer.SignalName.Timeout , Callable.From(()=>
 			{
 				_canShoot = true;
 			}));
 			_canShoot = false;
+			GD.Print("Shooted");
 			Appear();
-				
 		}
 		private void Appear()
 		{

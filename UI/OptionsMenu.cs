@@ -28,7 +28,6 @@ namespace GameUI
 			var _busIndex = AudioServer.GetBusIndex(_busName);
 			var _volumeDb = Mathf.DbToLinear(_percent);
 			AudioServer.SetBusVolumeDb(_busIndex , (float)_volumeDb);
-			GD.Print(_volumeDb);
 		}
 		private float GetBusVolumePercent(string _busName)
 		{

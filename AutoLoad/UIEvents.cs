@@ -5,6 +5,7 @@ public partial class UIEvents : Node
 {
 	[Signal] public delegate void ArmorApplyedEventHandler(float amount);
 	[Signal] public delegate void GetPlayerStatsEventHandler();
+	[Signal] public delegate void PlayerCurrencyUpdatedEventHandler(int amount);
 	public PlayerStats playerStats = new PlayerStats();
 	public PlayerStatistic playerStatistic = new PlayerStatistic();
 	private game_events Game_Events;
@@ -15,6 +16,8 @@ public partial class UIEvents : Node
 		Callable.From((Vector2 pos , int enemy_cost_inBullets) => 
 		{
 			playerStatistic._totalKills++;
+			playerStatistic._currentCurrency ++;
+			EmitSignal(SignalName.PlayerCurrencyUpdated , playerStatistic._currentCurrency);
 		}));
 		Game_Events.Connect(game_events.SignalName.OnAbilityUpgradeAded, 
 		Callable.From((Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades) => 
@@ -30,6 +33,11 @@ public partial class UIEvents : Node
 		Callable.From((int amount) => 
 		{
 			playerStatistic._totalSouls += amount;
+		}));
+		Game_Events.Connect(game_events.SignalName.ShopSlotPurchased , Callable.From((ShopSlotData _itemData)=>
+		{
+			playerStatistic._currentCurrency -= (int)_itemData._itemCost;
+			EmitSignal(SignalName.PlayerCurrencyUpdated , playerStatistic._currentCurrency);
 		}));
     }
 	public void ResetStatistik()

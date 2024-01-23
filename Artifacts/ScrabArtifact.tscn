@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://q1im8ijei3up"]
+
+[ext_resource type="Script" path="res://Artifacts/ScrabArtifact.cs" id="1_43qdk"]
+
+[node name="ScrabRelick" type="Node2D"]
+script = ExtResource("1_43qdk")

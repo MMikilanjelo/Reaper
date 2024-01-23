@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bcxuciv8yceq7"]
+
+[ext_resource type="PackedScene" uid="uid://q1im8ijei3up" path="res://Artifacts/ScrabArtifact.tscn" id="1_246io"]
+[ext_resource type="Texture2D" uid="uid://khfk0e4s5u6j" path="res://Visuals/Artifacts/BulletCountRelick.png" id="2_qe0kr"]
+[ext_resource type="Script" path="res://Resourses/ShopSlots/ShopSlotData.cs" id="3_rlyql"]
+
+[resource]
+script = ExtResource("3_rlyql")
+_itemType = 2
+_itemName = "Scrab"
+_itemDescription = "Give +1 bullet"
+_itemTexture = ExtResource("2_qe0kr")
+_itemCost = 0.0
+_itemScene = ExtResource("1_246io")

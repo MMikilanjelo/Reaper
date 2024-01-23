@@ -2,27 +2,43 @@ using Godot;
 using Game.Components;
 using GameLogick.StateMachine;
 using GameUI;
-public partial class PlayerController : CharacterBody2D
+using System.Collections.Generic;
+using System.Linq;
+public partial class PlayerController : CharacterBody2D , IVisitable
 {
-	[Export] public  VelocityComponent velocityComponent;
-	[Export] public  HealthComponent healthComponent;
-	[Export] AnimationPlayer animationPlayer;
-	[Export] WeaponRootComponent weaponRootComponent;
-	[Export] EntitySpriteImager playerSpriteImager;
-	
+	public VelocityComponent _velocityComponent;
+	public HealthComponent _healthComponent;
+	public AnimationPlayer _animationPlayer;
+	public WeaponRootComponent _weaponRootComponent;
+	public EntitySpriteImager _playerSpriteImager;
+	private List<IVisitable> _visitableNodes = new();
   	private PackedScene floatingTextScene;
 	private game_events game_Events;
 	private	AchievementEvents _achievementEvents;
 	private DelegateStateMachine delegateStateMachine = new ();
 	public override void _Ready()
 	{
-		PackedScene sineperRifle = ResourceLoader.Load<PackedScene>("res://Weapons/SniperRifle/SniperRifle.tscn");
-    	floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
-		game_Events = GetNode<game_events>("/root/GameEvents");	
-		_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
+    	SetUpNodes();
 		InitializeStateMachine();
 		ConnectToSginals();
-		//weaponRootComponent.ChangeWeapon(sineperRifle);
+		GetVisitableNodes();
+	}
+	private void SetUpNodes()
+	{
+		floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
+		
+		game_Events = GetNode<game_events>("/root/GameEvents");	
+		_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
+		_velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+		_healthComponent = GetNode<HealthComponent>("HealthComponent");
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_weaponRootComponent = GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
+		_playerSpriteImager = GetNode<EntitySpriteImager>("Visuals");
+	}
+	private void GetVisitableNodes()
+	{
+		_visitableNodes = GetChildren().OfType<IVisitable>().ToList();
+		_visitableNodes.Add(_weaponRootComponent);
 	}
 	#region Initialize State Machine
 	private void InitializeStateMachine()
@@ -37,9 +53,14 @@ public partial class PlayerController : CharacterBody2D
 
 	private void ConnectToSginals()
 	{
-		healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
-		weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From((Vector2 _direction)=>{
+		_healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
+		_weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From((Vector2 _direction)=>{
 			game_Events.EmitPlayerShootSignal(1);
+		}));
+		game_Events.Connect(game_events.SignalName.ShopSlotPurchased , Callable.From((ShopSlotData _itemData)=>
+		{
+			if(_itemData._itemType != ShopSlotData.ItemType.Weapon) return;
+			_weaponRootComponent.ChangeWeapon(_itemData._itemScene);
 		}));
 	}
 	
@@ -50,7 +71,7 @@ public partial class PlayerController : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{	
 		delegateStateMachine.Update();
-		playerSpriteImager.LookAtTarget(GetGlobalMousePosition());
+		_playerSpriteImager.LookAtTarget(GetGlobalMousePosition());
 	}
 	public Vector2 GetMovementVector()
 	{
@@ -65,27 +86,25 @@ public partial class PlayerController : CharacterBody2D
 
 	void NormalState()
 	{
-		
-		
 		Vector2 direction = GetMovementVector().Normalized();
-		velocityComponent.AccelerateInDirection(direction);
-		velocityComponent.Move(this);
+		_velocityComponent.AccelerateInDirection(direction);
+		_velocityComponent.Move(this);
 		if(direction == Vector2.Zero)
 		{
-			animationPlayer.Play("Idel");
+			_animationPlayer.Play("Idel");
 		}
 		else{
-			animationPlayer.Play("Walk");
+			_animationPlayer.Play("Walk");
 		}
 		if(Input.IsActionPressed("Shoot"))
 		{
 			var directionToShoot = (GetGlobalMousePosition() - GlobalPosition).Normalized();
-			weaponRootComponent.ShootFromCurrentWeapon(directionToShoot);
+			_weaponRootComponent.ShootFromCurrentWeapon(directionToShoot);
 		}
-		if(!healthComponent._HasHealthRamaining){
+		if(!_healthComponent._HasHealthRamaining){
 			delegateStateMachine.ChangeState(DeadState);
 		}
-		velocityComponent.AccelerateInDirection(direction);
+		_velocityComponent.AccelerateInDirection(direction);
 	}
 	void DeadState()
 	{
@@ -100,4 +119,13 @@ public partial class PlayerController : CharacterBody2D
 		// Missed_text.GlobalPosition = GlobalPosition + Vector2.Right;
 		// Missed_text.Start("@#*!$!");
 	}
+
+    public void Accept(IVisitor visitor)
+    {
+        foreach(var _visitable in _visitableNodes)
+		{
+			_visitable.Accept(visitor);
+		}
+    }
+
 }
