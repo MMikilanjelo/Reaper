@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d2k5wk0ryghgq"]
+
+[ext_resource type="PackedScene" uid="uid://n30f20c5w085" path="res://Artifacts/PoisonArtifact.tscn" id="1_q4kvs"]
+[ext_resource type="Texture2D" uid="uid://bfcvdjrpyyd68" path="res://Visuals/Artifacts/PoisonArtifact.png" id="2_27cfc"]
+[ext_resource type="Script" path="res://Resourses/ShopSlots/ShopSlotData.cs" id="3_vxv7f"]
+
+[resource]
+script = ExtResource("3_vxv7f")
+_itemType = 2
+_itemName = "Poison tear"
+_itemDescription = "Apply poison for enemy"
+_itemTexture = ExtResource("2_27cfc")
+_itemCost = 0.0
+_itemScene = ExtResource("1_q4kvs")
+_isActive = true
+_isUnique = true

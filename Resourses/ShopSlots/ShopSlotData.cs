@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class ShopSlotData : Resource
 {
@@ -15,4 +16,5 @@ public partial class ShopSlotData : Resource
 	[Export] public Texture2D _itemTexture;
 	[Export] public float _itemCost;
 	[Export] public PackedScene _itemScene;
+	[Export] public bool _isUnique = false;
 }

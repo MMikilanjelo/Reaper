@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Game.Components
 {
-	public partial class HurtBoxComponent : Area2D
+	public partial class HurtBoxComponent : Area2D , IVisitable
 	{
 		RandomNumberGenerator random;
 		game_events Game_Events;
@@ -127,7 +127,12 @@ namespace Game.Components
 		{
 			return Mathf.CeilToInt(dmg - (dmg * dmg_Reduction_Multiplier) - armmor); 
 		}
-	}
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 	
 }
 

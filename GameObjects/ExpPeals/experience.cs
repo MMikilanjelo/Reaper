@@ -18,8 +18,7 @@ public partial class experience : Node2D
 		}));
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		PickableArea.Connect(Area2D.SignalName.AreaEntered , new Callable(this , nameof(OnAreaEntered)));
-		game_Events.OnAbilityUpgradeAded += 
-		(Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades) => 
+		game_Events.OnAbilityUpgradeAded += (Upgrade addedUpgrade , Godot.Collections.Dictionary<Upgrade , int> playerUpgrades) => 
 		IncreaseExpDrop(addedUpgrade);
 		
 	}
@@ -46,6 +45,7 @@ public partial class experience : Node2D
 	{
 		if(addedUpgrade.id == "exp")
 		{
+			GD.Print("Increased");
 			_expDrop += (int)addedUpgrade.value;
 		}
 	}

@@ -31,7 +31,7 @@ position = Vector2(23, 1)
 position = Vector2(-23, -1)
 collision_layer = 16
 collision_mask = 4
-dmg = 1.0
+dmg = 600.0
 hitBoxArea = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SniperRifle/Marker2D/HitBoxComponent"]

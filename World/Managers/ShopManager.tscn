@@ -1,0 +1,15 @@
+[gd_scene load_steps=8 format=3 uid="uid://5utlqashojs7"]
+
+[ext_resource type="Script" path="res://World/Managers/ShopManager.cs" id="1_weccb"]
+[ext_resource type="Resource" uid="uid://d2k5wk0ryghgq" path="res://Resourses/ShopSlots/PoisonArtifact.tres" id="2_p7iwt"]
+[ext_resource type="Resource" uid="uid://bcxuciv8yceq7" path="res://Resourses/ShopSlots/ScrabArtifact.tres" id="3_uc1k5"]
+[ext_resource type="Resource" path="res://Resourses/ShopSlots/ShroudArtifact.tres" id="4_eviab"]
+[ext_resource type="Resource" uid="uid://b7it5jdcup8pr" path="res://Resourses/ShopSlots/SniperRifle.tres" id="5_q8t6p"]
+[ext_resource type="Resource" uid="uid://dnilxiieupf0w" path="res://Resourses/ShopSlots/UnstapobleArtifact.tres" id="6_a2i7q"]
+[ext_resource type="Resource" uid="uid://qqtixr64irp6" path="res://Resourses/ShopSlots/VampireArtifact.tres" id="7_81vwj"]
+
+[node name="ShopManager" type="Node"]
+script = ExtResource("1_weccb")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("PoisonArtifact", "ScrabArtifact", "ShroudArtifact", "SniperRifle", "UnstapobleArtifact", "VampireArtifact"), [ExtResource("2_p7iwt"), ExtResource("3_uc1k5"), ExtResource("4_eviab"), ExtResource("5_q8t6p"), ExtResource("6_a2i7q"), ExtResource("7_81vwj")]]

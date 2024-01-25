@@ -81,6 +81,7 @@ size_flags_vertical = 1
 
 [node name="ArtifactContainer" type="MarginContainer" parent="Control/MarginContainer/Container"]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/margin_top = 8
 
 [node name="GridContainer" parent="Control/MarginContainer/Container/ArtifactContainer" instance=ExtResource("5_rpvg3")]

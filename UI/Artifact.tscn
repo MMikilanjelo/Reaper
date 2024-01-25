@@ -4,5 +4,7 @@
 [ext_resource type="Script" path="res://UI/Artifact.cs" id="2_q72eo"]
 
 [node name="Artifact" type="TextureRect"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hwmbk")
+stretch_mode = 2
 script = ExtResource("2_q72eo")

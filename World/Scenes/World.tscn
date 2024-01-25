@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dl7eefty3fjxr"]
+[gd_scene load_steps=40 format=3 uid="uid://dl7eefty3fjxr"]
 
 [ext_resource type="Script" path="res://World/Core.cs" id="1_h2ty1"]
 [ext_resource type="PackedScene" uid="uid://c2jvtvnwlp26l" path="res://UI/ExperiecneBar/ExperienceBar.tscn" id="2_b7ul1"]
@@ -18,6 +18,7 @@
 [ext_resource type="Shader" path="res://Visuals/Shaders/DimondTransition.gdshader" id="13_t0234"]
 [ext_resource type="Texture2D" uid="uid://sr8f4lukta0v" path="res://World/TIleSet/testing_generation.png" id="13_v5n3o"]
 [ext_resource type="PackedScene" uid="uid://dmdxbg6rk6p5b" path="res://World/Managers/enemy_spawner_manager.tscn" id="14_amk35"]
+[ext_resource type="PackedScene" uid="uid://5utlqashojs7" path="res://World/Managers/ShopManager.tscn" id="14_ww3sv"]
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="16_eqwgn"]
 [ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="20_avvrh"]
 
@@ -574,6 +575,8 @@ BatEnemyScene = ExtResource("10_exb6d")
 KnigthEnemyScene = ExtResource("11_61di8")
 DummyTargetScene = ExtResource("20_avvrh")
 CactusScene = ExtResource("13_day3j")
+
+[node name="ShopManager" parent="Managers" instance=ExtResource("14_ww3sv")]
 
 [node name="UI" type="Node" parent="."]
 

@@ -21,6 +21,7 @@ namespace Game.Components
         }
 		public void ChangeWeapon(PackedScene _itemScene)
 		{
+			
 			if(CurrentWeapon != null)
 			{
 				CurrentWeapon.OnWeaponChanged();
@@ -42,6 +43,7 @@ namespace Game.Components
 		}
 		public void AddAfexToWeapon(PackedScene AffexToAdd)
 		{
+			GD.Print("AddAfexToWeapon");
 			CurrentWeapon.Affex = AffexToAdd;
 			CurrentWeapon.hitBoxComponent?.AddEffecToHit(CurrentWeapon.Affex);
 		}

@@ -15,10 +15,15 @@ public partial class game_events : Node
 	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
 	[Signal] public delegate void OnBulletChestCollectedEventHandler(int bullets_amount);
 	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
+	//Wave managment
 	[Signal] public delegate void WaveFinishedEventHandler();
 	[Signal] public delegate void NewWaveStartedEventHandler();
 	[Signal] public delegate void DifficultyIncreasedOverTimeEventHandler(int _arenaDifficulty);
+	//
+	///Shop
 	[Signal] public delegate void ShopSlotPurchasedEventHandler(ShopSlotData _purchasedItem);
+	[Signal] public delegate void ShopOpenedEventHandler();
+	//
 	public void EmitDmgRecivedByEnemy(int dmg)
 	{
 		EmitSignal(SignalName.OnEnemyDmgRecived , dmg);
@@ -62,6 +67,10 @@ public partial class game_events : Node
 	public void EmitDifficultyIncresed(int _arenaDifficulty)
 	{
 		EmitSignal(SignalName.DifficultyIncreasedOverTime , _arenaDifficulty);
+	}
+	public void EmitShopOpening()
+	{
+		EmitSignal(SignalName.ShopOpened);
 	}
 
 }

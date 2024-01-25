@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwt02ygosk2jy"]
+[gd_scene load_steps=14 format=3 uid="uid://bwt02ygosk2jy"]
 
 [ext_resource type="PackedScene" uid="uid://bv5fmhvyf2jwf" path="res://UI/PlayerUI.tscn" id="1_bt64k"]
 [ext_resource type="Texture2D" uid="uid://87p6mdqn23ui" path="res://World/TIleSet/NewDungeon.png" id="1_lm1i1"]
 [ext_resource type="PackedScene" uid="uid://qnm3pkso1tyj" path="res://World/Scenes/Camera.tscn" id="1_rn4pu"]
+[ext_resource type="PackedScene" uid="uid://5utlqashojs7" path="res://World/Managers/ShopManager.tscn" id="1_yjmj8"]
 [ext_resource type="PackedScene" uid="uid://ci5u1meyx80l2" path="res://Entity/Scenes/Player.tscn" id="3_vs4y7"]
 [ext_resource type="PackedScene" uid="uid://so6f1d223r5h" path="res://GameObjects/Chest/chest.tscn" id="4_da5p3"]
 [ext_resource type="PackedScene" uid="uid://c6rs7ugtvx8p5" path="res://Shop/Shop.tscn" id="6_q72au"]
@@ -409,6 +410,8 @@ sources/0 = SubResource("TileSetAtlasSource_d8qg5")
 
 [node name="Polygon" type="Node2D"]
 
+[node name="ShopManager" parent="." instance=ExtResource("1_yjmj8")]
+
 [node name="PlayerUII" parent="." instance=ExtResource("1_bt64k")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -437,6 +440,3 @@ position = Vector2(16, -28)
 position = Vector2(-42, 19)
 
 [node name="dummyTarget" parent="." instance=ExtResource("6_splnb")]
-
-[node name="dummyTarget2" parent="." instance=ExtResource("6_splnb")]
-position = Vector2(0, -33)

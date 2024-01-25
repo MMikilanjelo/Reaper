@@ -12,3 +12,5 @@ _itemDescription = "Cool "
 _itemTexture = ExtResource("1_0wv8u")
 _itemCost = 0.0
 _itemScene = ExtResource("1_7tybn")
+_isActive = true
+_isUnique = true

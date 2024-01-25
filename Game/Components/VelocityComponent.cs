@@ -4,7 +4,7 @@ using System.Linq;
 namespace Game.Components
 
 {
-	public partial class VelocityComponent : Node
+	public partial class VelocityComponent : Node , IVisitable
 	{
 		[Export] 
 		private float maxSpeed = 100;
@@ -85,9 +85,11 @@ namespace Game.Components
 				return null;
 			}
 		}
-	
 
-
-	}
+        public void Accept(IVisitor visitor)
+        {
+			visitor.Visit(this);
+        }
+    }
 }
 

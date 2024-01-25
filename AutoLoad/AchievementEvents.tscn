@@ -1,9 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://mg46aqfogoev"]
 
 [ext_resource type="Script" path="res://AutoLoad/AchievementEvents.cs" id="1_rgdpa"]
-[ext_resource type="Resource" uid="uid://btef1qtafqlhn" path="res://Resourses/AchievementResourses/CrabAchievement.tres" id="2_qju7x"]
+[ext_resource type="Resource" uid="uid://clkp80gswq1wc" path="res://Resourses/AchievementResourses/CrabAchievement.tres" id="2_qju7x"]
 [ext_resource type="Resource" uid="uid://ce0fpgyk1q3hl" path="res://Resourses/AchievementResourses/ExplodeAchievement.tres" id="3_1x51n"]
 
 [node name="AchievementsEvents" type="Node"]
 script = ExtResource("1_rgdpa")
-_achievements = [ExtResource("2_qju7x"), ExtResource("3_1x51n")]
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("CrabAchievement", "ExplodeAchievement"), [ExtResource("2_qju7x"), ExtResource("3_1x51n")]]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://qqtixr64irp6"]
+
+[ext_resource type="Script" path="res://Resourses/ShopSlots/ShopSlotData.cs" id="1_m4647"]
+[ext_resource type="PackedScene" uid="uid://htei58rwk2mv" path="res://Artifacts/PlayerPassive/LifeStealPassive.tscn" id="1_qor8i"]
+[ext_resource type="Texture2D" uid="uid://dg5lanjm7x40w" path="res://Visuals/Artifacts/VampireArtifact.png" id="2_fvlb5"]
+
+[resource]
+script = ExtResource("1_m4647")
+_itemType = 2
+_itemName = "Vampire"
+_itemDescription = "Gain life after killing enemy"
+_itemTexture = ExtResource("2_fvlb5")
+_itemCost = 0.0
+_itemScene = ExtResource("1_qor8i")
+_isUnique = true

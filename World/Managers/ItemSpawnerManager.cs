@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Runtime.CompilerServices;
 
 public partial class ItemSpawnerManager : Node
 {
@@ -13,23 +13,23 @@ public partial class ItemSpawnerManager : Node
 	const float SPAWN_RADIUS = 400f;
 	public override void _Ready()
 	{
+		GetReferences();
+		ConnectToSignals();
+	}
+	private void GetReferences()
+	{
+		//Nodes 
 		_gameEvents = GetNode<game_events>("/root/GameEvents");
+		// Scenes
 		ExpirienceScene = ResourceLoader.Load<PackedScene>("res://GameObjects/ExpPeals/experience.tscn");
 		ChestScene = ResourceLoader.Load<PackedScene>("res://GameObjects/Chest/chest.tscn");
 		_shopScene = ResourceLoader.Load<PackedScene>("res://Shop/Shop.tscn");
-		_gameEvents.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>
-		{
-			InstantiateExpirianceVial(pos);
-		}
-		));
-		timer.Connect(Timer.SignalName.Timeout , Callable.From(()=>
-		{
-			SpawnBulletChest(GetSpawnPosition());
-		}));
-		_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
-		{
-			SpawnShop(Vector2.Zero);
-		}));
+	}
+	private void ConnectToSignals()
+	{
+		_gameEvents.Connect(game_events.SignalName.OnEnemyDied, Callable.From((Vector2 pos , int enemy_cost_inBullets)=>InstantiateExpirianceVial (pos)));
+		_gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From( ()=> SpawnShop(Vector2.Zero)));
+		timer.Connect(Timer.SignalName.Timeout , Callable.From(() =>  SpawnBulletChest(GetSpawnPosition())));
 	}
 	private Vector2 GetSpawnPosition()
 	{
@@ -38,12 +38,11 @@ public partial class ItemSpawnerManager : Node
 		{
 			return Vector2.Zero;
 		}
-		var spawnPosition = Vector2.Zero;
 		var randomDirection = Vector2.Right.Rotated(random.RandfRange(0 , MathF.Tau));
 		for(int i = 0 ; i < 4 ; i++)
 		{
 				
-			spawnPosition = player.GlobalPosition + (randomDirection * SPAWN_RADIUS );
+			var spawnPosition = player.GlobalPosition + (randomDirection * SPAWN_RADIUS );
 			var addditional_check_offset = randomDirection * 2;
 			var quety_parameters = PhysicsRayQueryParameters2D.Create(player.GlobalPosition , spawnPosition  + addditional_check_offset , 1);
 			var result =  GetTree().Root.World2D.DirectSpaceState.IntersectRay(quety_parameters);
@@ -51,13 +50,13 @@ public partial class ItemSpawnerManager : Node
 			{
 				return spawnPosition ;
 			}
-			else{
-					
-					randomDirection = randomDirection.Rotated(Godot.Mathf.DegToRad(90));
-				}	
-			}
-			return Vector2.Zero;
+			else
+			{
+				randomDirection = randomDirection.Rotated(Godot.Mathf.DegToRad(90));
+			}	
 		}
+		return Vector2.Zero;
+	}
 	private void InstantiateExpirianceVial(Vector2 position_to_instantiate)
 	{
 		experience exp = ExpirienceScene.Instantiate() as experience;

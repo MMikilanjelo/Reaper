@@ -59,7 +59,10 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
         }
         
     }
-
+    public override void _ExitTree()
+    {
+        _gameEvents.EmitEnemyDeathSignal(Position , 1);
+    }
     public void OnWaveFinished()
     {
         deathSceneComponent.OnEnemyDied();

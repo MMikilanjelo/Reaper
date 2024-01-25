@@ -1,13 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4bv8rfrsgp1p"]
+[gd_scene load_steps=2 format=3 uid="uid://c4bv8rfrsgp1p"]
 
 [ext_resource type="Script" path="res://Game/Components/AbilitieUpgradeRecivierComponent.cs" id="1_is0aw"]
-[ext_resource type="PackedScene" uid="uid://dupjfu4jc1scg" path="res://PlayerPassive/LifeStealPassive.tscn" id="2_7afum"]
-[ext_resource type="PackedScene" uid="uid://cp17cmqon474y" path="res://PlayerPassive/ShroudPassive.tscn" id="3_rerhr"]
-[ext_resource type="PackedScene" uid="uid://c08vjcled0b1x" path="res://PlayerPassive/UnstopablePassive.tscn" id="4_ejrhn"]
 
-[node name="AbilityUpgradeRecivier" type="Node" node_paths=PackedStringArray("resourcePreloader")]
+[node name="AbilityUpgradeRecivier" type="Node"]
 script = ExtResource("1_is0aw")
-resourcePreloader = NodePath("ResourcePreloader")
-
-[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("LifeStealPassive", "ShroudPassive", "UnstopablePassive"), [ExtResource("2_7afum"), ExtResource("3_rerhr"), ExtResource("4_ejrhn")]]

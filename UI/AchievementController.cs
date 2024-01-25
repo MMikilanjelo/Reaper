@@ -11,15 +11,14 @@ namespace GameUI
 	{
 		
 		[Export] ResourcePreloader _resourcePreloader;
-		AchievementEvents _achievementEvents;
 		private PackedScene _achievementContainerScene;
+		AchievementEvents _achievementEvents;
     	public override void _Ready()
         {
-			_achievementContainerScene = _resourcePreloader.GetResource("AchievementContainer") as PackedScene;
 			_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
+			_achievementContainerScene = _resourcePreloader.GetResource("AchievementContainer") as PackedScene;
 			SetUpAchievements(_achievementEvents.GetAllAchievemnts());
-			
-        }
+		}
 		public void SetUpAchievements(Godot.Collections.Array<Achievement> _achievements)
 		{
 			foreach(var _achievementData in _achievements)
@@ -29,6 +28,7 @@ namespace GameUI
 				_achievementContainerInstance.SetAchievement(_achievementData);
 			}
 		}
+
 
 	}
 }

@@ -14,7 +14,7 @@ public partial class UpgradeManager : Node
 	private readonly Godot.Collections.Array<Upgrade> avaible_legendary_upgrades_Pool = new ();
 
 	private readonly LootTable<Upgrade> upgradeTable = new LootTable<Upgrade>();
-	private readonly LootTable<Godot.Collections.Array<Upgrade>> tier_List = new();
+	private readonly LootTable<Godot.Collections.Array<Upgrade>> _tierListTable = new();
 	private game_events game_Events;
 	
 	private readonly Godot.Collections.Dictionary<string , Godot.Collections.Dictionary<Upgrade , int>> current_upgrades = new ();
@@ -22,9 +22,9 @@ public partial class UpgradeManager : Node
 	{	
 		game_Events = GetNode<game_events>("/root/GameEvents");
 		ExperienceManager.Connect(experience_manager.SignalName.LevelUp , new Callable(this , nameof(OnLevelUp)));
-		tier_List.AddItemToTable(avaible_common_upgrades_Pool,10);
-		tier_List.AddItemToTable(avaible_rare_upgrades_Pool,4);
-		tier_List.AddItemToTable(avaible_legendary_upgrades_Pool,1);
+		_tierListTable.AddItemToTable(avaible_common_upgrades_Pool,10);
+		_tierListTable.AddItemToTable(avaible_rare_upgrades_Pool,4);
+		_tierListTable.AddItemToTable(avaible_legendary_upgrades_Pool,1);
 
 		
 		
@@ -40,22 +40,13 @@ public partial class UpgradeManager : Node
 
 		Upgrade armor = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/arrmor.tres");
 		Upgrade miss = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/miss_chance.tres");
-		Upgrade vampire = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/vampire.tres");
 		Upgrade expIncrement = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/UnCommon/expIncrement.tres");
 
 		avaible_rare_upgrades_Pool.Add(armor);
 		avaible_rare_upgrades_Pool.Add(miss);
-		avaible_rare_upgrades_Pool.Add(vampire);
 		avaible_rare_upgrades_Pool.Add(expIncrement);
 		
-		Upgrade serial = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Shroud.tres");
-		Upgrade toxic = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Toxic.tres");
-		Upgrade shroud = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/Unstopoble.tres");
 		Upgrade joke = ResourceLoader.Load<Upgrade>("res://Resourses/Upgrades/Legendary/joke.tres");
-
-		avaible_legendary_upgrades_Pool.Add(serial);
-		avaible_legendary_upgrades_Pool.Add(toxic);
-		avaible_legendary_upgrades_Pool.Add(shroud);
 		avaible_legendary_upgrades_Pool.Add(joke);
 
 }
@@ -77,7 +68,7 @@ public partial class UpgradeManager : Node
 		
 		var upgradeScreenInstance = UpgradeSceenScene.Instantiate() as UpgradeScreen;
 		AddChild(upgradeScreenInstance);
-		var current_item_tier = tier_List.PickItem();
+		var current_item_tier = _tierListTable.PickItem();
 		Godot.Collections.Array<Upgrade> chosenUpgrades = pickUpgrades( current_item_tier);
 		upgradeScreenInstance.SetAbilitiesUpgrades(chosenUpgrades);
 		upgradeScreenInstance.UpgradeSelected += (Upgrade upgrade) => OnUpgradeSelected(upgrade  , current_item_tier);
@@ -96,19 +87,10 @@ public partial class UpgradeManager : Node
 			
 			current_upgrades.Add(chosenUpgrade.id , new ());	
 			current_upgrades[chosenUpgrade.id].Add(chosenUpgrade ,1);
-			if(chosenUpgrade.isUnique)
-			{
-				chosen_upgrade_pool.Remove(chosenUpgrade);
-				
-			}
 		}
 		else 
 		{
 			current_upgrades[chosenUpgrade.id][chosenUpgrade] += 1; 
-		}
-		foreach(KeyValuePair<Upgrade , int> pair in current_upgrades[chosenUpgrade.id] )
-		{
-		 	//GD.Print(pair.Key.id , pair.Value);
 		}
 		game_Events.OmAbilityUpgradeAded(chosenUpgrade , current_upgrades);
 	}

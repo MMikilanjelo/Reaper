@@ -89,7 +89,7 @@ namespace Game.Components
             }
 
         }
-        public void SetCurrentHealth(int amount)
+        public void IncreaseCurrentHealth(int amount)
         {
             CurrentHealth += amount;
         }
@@ -101,7 +101,7 @@ namespace Game.Components
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
-            GD.Print(visitor + " Visited");
+            GD.Print(this.Name + " Visited");
         }
 
         public partial class HealthUpdate : RefCounted

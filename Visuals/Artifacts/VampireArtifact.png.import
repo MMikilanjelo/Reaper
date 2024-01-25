@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brcktdgpyehxh"
-path="res://.godot/imported/PoisonUI.png-5742871a9506f1cfe8b758cee6b1834c.ctex"
+uid="uid://dg5lanjm7x40w"
+path="res://.godot/imported/VampireArtifact.png-2a36d4c26d97cc8dc024df16994e0625.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Visuals/UI/PoisonUI.png"
-dest_files=["res://.godot/imported/PoisonUI.png-5742871a9506f1cfe8b758cee6b1834c.ctex"]
+source_file="res://Visuals/Artifacts/VampireArtifact.png"
+dest_files=["res://.godot/imported/VampireArtifact.png-2a36d4c26d97cc8dc024df16994e0625.ctex"]
 
 [params]
 

@@ -12,3 +12,4 @@ _itemDescription = "Give +1 bullet"
 _itemTexture = ExtResource("2_qe0kr")
 _itemCost = 0.0
 _itemScene = ExtResource("1_246io")
+_isUnique = false
