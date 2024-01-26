@@ -21,8 +21,7 @@ public partial class Core : Node2D
 	}
 
 
-
-	public void ChangeScene()
+    public void ChangeScene()
 	{
 
 		var scene_loading_status = ResourceLoader.LoadThreadedGetStatus(DefeatScenePath, loadingProgres);

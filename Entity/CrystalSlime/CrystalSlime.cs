@@ -2,32 +2,28 @@ using Godot;
 using System;
 using GameLogick.StateMachine;
 using Game.Components;
-using Enemy.Parts;
-using Generation.Alghoritms;
 using GameLogick.Utilities;
-using System.Collections.Generic;
-using System.Net;
-using Game.Enteties;
+
+namespace Game.Enteties
+{
+
+
 public partial class CrystalSlime : CharacterBody2D , IEnemy
 {
-    [Export] EnemySensorComponent enemySensorComponent;
-    [Export] PathFindingComponent pathFindingComponent;
-    [Export] VelocityComponent velocityComponent;
-    [Export] EnemyConstructor enemyConstructor;
-    [Export] HealthComponent healthComponent;
-    [Export] PackedScene ExperiencePeal;
-    [Export] HitBoxComponent hitBoxComponent;
-    [Export] AnimationPlayer Animation;
-    [Export] Node2D visuals;
-    [Export] DeathSceneComponent deathSceneComponent;
-    CharacterBody2D player;
-    game_events _gameEvents;
-    private DelegateStateMachine stateMachine = new DelegateStateMachine();
+    private EnemySensorComponent _enemySensorComponent;
+    private PathFindingComponent _pathFindingComponent;
+    private VelocityComponent _velocityComponent;
+    private HealthComponent _healthComponent;
+    private HitBoxComponent _hitBoxComponent;
+    private AnimationPlayer _animationPlayer;
+    private Node2D _visuals;
+    private DeathSceneComponent _deathSceneComponent;
+    private CharacterBody2D _player;
+    private game_events _gameEvents;
+    private DelegateStateMachine _stateMachine = new DelegateStateMachine();
     public override void _Ready()
     {
-
-        _gameEvents = GetNode<game_events>("/root/GameEvents");
-        player = GameUtilities.GetPlayerNode(this);
+        SetDependencies();
         ConnectToSginals();
         InitializeStateMachine();
         
@@ -35,10 +31,11 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
     #region Initialize State Machine 
 	private void InitializeStateMachine()
 	{
-	    stateMachine.AddState(StateNormal, EnteredStateNormal);
-        stateMachine.AddState(DeadState);
-        stateMachine.AddState(CloseRangeAtackState, EnterCLoseRangeAtack);
-        stateMachine.SetInitiioalState(StateNormal);
+	    _stateMachine.AddState(StateNormal, EnteredStateNormal);
+        _stateMachine.AddState(DeadState);
+        _stateMachine.AddState(CloseRangeAtackState, EnterCLoseRangeAtack);
+        _stateMachine.SetInitiioalState(StateNormal);
+
 	}
 
 	#endregion
@@ -46,7 +43,7 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
 	#region Connect to Signals
 	private void ConnectToSginals()
 	{
-		healthComponent.Connect(HealthComponent.SignalName.Died, Callable.From(() => stateMachine.ChangeState(DeadState)));	
+		_healthComponent.Connect(HealthComponent.SignalName.Died, Callable.From(() => _stateMachine.ChangeState(DeadState)));	
         _gameEvents.Connect(game_events.SignalName.WaveFinished , Callable.From(()=>
 		{
 			OnWaveFinished();
@@ -54,51 +51,66 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
 		));
 	}
 	#endregion
+    private void SetDependencies()
+    {
+        
+        _gameEvents = GetNode<game_events>("/root/GameEvents");
+        _player = GameUtilities.GetPlayerNode(this);
+        _enemySensorComponent = GetNode<EnemySensorComponent>("Areas/EnemySensorComponent");
+        _pathFindingComponent = GetNode<PathFindingComponent>("PathFindingComponent");
+        _velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
+        _healthComponent = GetNode<HealthComponent>("HealthComponent");
+        _hitBoxComponent = GetNode<HitBoxComponent>("Areas/HitBoxComponent");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _visuals = GetNode<Node2D>("Visuals");
+        _deathSceneComponent = GetNode<DeathSceneComponent>("DeathSceneComponent");
+
+    }
     public override void _Process(double delta)
     {
         if (!GameUtilities.CheckIfPlayerExist(this))
         {
             return;
         }
-        var directionToPlayer = (player.GlobalPosition - GlobalPosition).Normalized();
+        var directionToPlayer = (_player.GlobalPosition - GlobalPosition).Normalized();
         if (directionToPlayer.X > 0)
         {
-            visuals.Scale = new Vector2(-1, 1);
+            _visuals.Scale = new Vector2(-1, 1);
         }
         else
         {
-            visuals.Scale = new Vector2(1, 1);
+            _visuals.Scale = new Vector2(1, 1);
         }
-        stateMachine.Update();
+        _stateMachine.Update();
     }
     private void EnterCLoseRangeAtack()
     {
 
-        Animation.Play("AtackAnimation");
+        _animationPlayer.Play("AtackAnimation");
     }
     private void CloseRangeAtackState()
     {
-        if (!Animation.IsPlaying())
+        if (!_animationPlayer.IsPlaying())
         {
-            stateMachine.ChangeState(StateNormal);
+            _stateMachine.ChangeState(StateNormal);
 
         }
     }
     private void StateNormal()
     {
-        if (enemySensorComponent.isInRange)
+        if (_enemySensorComponent.isInRange)
         {
-            stateMachine.ChangeState(CloseRangeAtackState);
+            _stateMachine.ChangeState(CloseRangeAtackState);
         }
-        velocityComponent.Move(this);
-        pathFindingComponent.FollowPath();
-        pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition);
+        _velocityComponent.Move(this);
+        _pathFindingComponent.FollowPath();
+        _pathFindingComponent.SetTargetPosition(_player?.GlobalPosition ?? GlobalPosition);
     }
 
     private void EnteredStateNormal()
     {
-        pathFindingComponent.SetTargetPosition(player?.GlobalPosition ?? GlobalPosition);
-        Animation.Play("WalkAnimation");
+        _pathFindingComponent.SetTargetPosition(_player?.GlobalPosition ?? GlobalPosition);
+        _animationPlayer.Play("WalkAnimation");
     }
     private void DeadState()
     {
@@ -108,7 +120,8 @@ public partial class CrystalSlime : CharacterBody2D , IEnemy
 
     public void OnWaveFinished()
     {
-       deathSceneComponent.OnEnemyDied();
+       _deathSceneComponent.OnEnemyDied();
 	   QueueFree();
     }
+}
 }

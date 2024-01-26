@@ -13,6 +13,7 @@ public partial class Bullet : BaseBullet
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnImpackt , new Callable(this , nameof(OnImpackt)));
 		timer.Connect(Timer.SignalName.Timeout , new Callable(this , nameof(OnTimeTimeOut)));
 		hitBoxComponent.Connect(HitBoxComponent.SignalName.OnWallCollide , new Callable(this, nameof(OnWallColide)));
+		velocityComponent.Velocity = direction * 300f;
 	}
 	private void OnImpackt()
 	{
@@ -28,9 +29,9 @@ public partial class Bullet : BaseBullet
 	}
 	public override void _Process(double delta)
 	{
-
-		velocityComponent.AccelerateInDirection(direction);
+		//velocityComponent.AccelerateInDirection(direction);
 		velocityComponent.Move(this);
+
 		
 	}
 	

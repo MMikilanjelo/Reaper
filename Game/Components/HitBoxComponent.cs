@@ -18,7 +18,7 @@ namespace Game.Components
     	{
 			Connect(SignalName.BodyEntered , new Callable(this, nameof(onBodyEntered)));
 		}
-    	public void  OnHit()
+    	public void OnHit()
 		{
 		  	EmitSignal(SignalName.OnImpackt);
 		}

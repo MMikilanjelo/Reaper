@@ -575,7 +575,6 @@ BatEnemyScene = ExtResource("10_exb6d")
 KnigthEnemyScene = ExtResource("11_61di8")
 DummyTargetScene = ExtResource("20_avvrh")
 CactusScene = ExtResource("13_day3j")
-_deactivate = null
 
 [node name="ShopManager" parent="Managers" instance=ExtResource("14_ww3sv")]
 
@@ -619,10 +618,7 @@ texture = SubResource("CanvasTexture_65u61")
 worldTileMap = NodePath("TileMap")
 iterations = 100
 walkLenght = 100
-corridor_count = null
-corridor_length = null
 roomPercent = 1.0
-startRandomlyEachIteration = null
 Floor_atlas_tile_coordinates = Vector2i(1, 1)
 Wall_Top_Atlas_Coordinates = Vector2i(1, 0)
 Wall_SideLeft_Atlas_Coordinates = Vector2i(0, 1)
@@ -633,7 +629,6 @@ Inner_Corner_Down_Left_Atlas_Coordinates = Vector2i(5, 5)
 Inner_Corner_Down_Right_Atlas_Coordinates = Vector2i(4, 5)
 Diagonal_Corner_Down_Right_Atlas_Coordinates = Vector2i(5, 4)
 Diagonal_Corner_Down_Left_Atlas_Coordinates = Vector2i(0, 4)
-Diagonal_Corner_Up_Left_Atlas_Coordinates = null
 Diagonal_Corner_Up_Right_Atlas_Coordinates = Vector2i(5, 0)
 
 [node name="TileMap" type="TileMap" parent="WorldGeneratorComponent"]

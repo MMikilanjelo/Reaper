@@ -14,23 +14,11 @@ namespace Game.Weapons
 		[Export] Timer atackDelayTimer;
 		[Export] float MaxRecoil = 30;
 		[Export] Marker2D shootPosition;
-		[Export] private bool isEnemy = true;
 		[Export] AudioStreamPlayer2D gunAudioPlayer;
 		[Export] PackedScene bulletPartickle;
 		private bool _canShoot;
 		float currentRecoil = 0;
-		private WeaponStats shotGunStats;
-		public override void _Ready()
-		{
-			if(isEnemy)
-			{
-				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/EnemyShootGun.tres");
-			}
-			else
-			{
-				shotGunStats = ResourceLoader.Load<WeaponStats>("res://Resourses/WeaponResourses/ShotGun/ShotGun.tres");
-			}
-		}
+		[Export] private WeaponStats shotGunStats;
 		public override void _PhysicsProcess(double delta)
 		{
 				

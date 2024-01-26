@@ -1,8 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://cd8qi5uva4rmb"]
+[gd_scene load_steps=24 format=3 uid="uid://cd8qi5uva4rmb"]
 
 [ext_resource type="Script" path="res://Entity/CrystalSlime/CrystalSlime.cs" id="1_yfvsi"]
-[ext_resource type="PackedScene" path="res://Components/EnemyConstractorComponent.tscn" id="2_eq5p4"]
-[ext_resource type="PackedScene" uid="uid://drr3p0egpr4rx" path="res://GameObjects/ExpPeals/experience.tscn" id="2_fihov"]
 [ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="3_paws7"]
 [ext_resource type="PackedScene" uid="uid://bo3wdhebscaxf" path="res://Components/EnemySensorComponent.tscn" id="4_uf5tc"]
 [ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="5_easg5"]
@@ -17,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="14_gak0x"]
 [ext_resource type="Texture2D" uid="uid://dhcg1j6034c0f" path="res://Entity/CrystalSlime/crystal_slime_moving.png" id="15_0vln3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pq213"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p70qe"]
 resource_local_to_scene = true
 shader = ExtResource("7_nglbb")
 shader_parameter/lerp_percent = 0.0
@@ -182,33 +180,21 @@ _data = {
 "WalkAnimation": SubResource("Animation_m0ywm")
 }
 
-[node name="CrystalSlime" type="CharacterBody2D" node_paths=PackedStringArray("enemySensorComponent", "pathFindingComponent", "velocityComponent", "enemyConstructor", "healthComponent", "hitBoxComponent", "Animation", "visuals", "deathSceneComponent")]
+[node name="CrystalSlime" type="CharacterBody2D"]
 y_sort_enabled = true
 position = Vector2(0, -1.03422e-12)
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_yfvsi")
-enemySensorComponent = NodePath("Areas/EnemySensorComponent")
-pathFindingComponent = NodePath("PathFindingComponent")
-velocityComponent = NodePath("VelocityComponent")
-enemyConstructor = NodePath("EnemyConstructorComponent")
-healthComponent = NodePath("HealthComponent")
-ExperiencePeal = ExtResource("2_fihov")
-hitBoxComponent = NodePath("Areas/HitBoxComponent")
-Animation = NodePath("AnimationPlayer")
-visuals = NodePath("Visuals")
-deathSceneComponent = NodePath("DeathSceneComponent")
 metadata/_edit_horizontal_guides_ = [-67.0]
-
-[node name="EnemyConstructorComponent" parent="." instance=ExtResource("2_eq5p4")]
-
-[node name="VelocityComponent" parent="." instance=ExtResource("3_paws7")]
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_awkp0")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_pq213")
+hit_flash_material = SubResource("ShaderMaterial_p70qe")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_paws7")]
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_qc4n0")]
 BloodParticle = ExtResource("9_mkrsl")

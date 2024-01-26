@@ -1,9 +1,0 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bcq8h6twulrwy"]
-
-[ext_resource type="PackedScene" uid="uid://dwsadnn172pyx" path="res://EnemyParts/EnemyPartsProjectilesResourses/BulletsScenes/IceArrowScene.tscn" id="1_8kngv"]
-[ext_resource type="Script" path="res://EnemyParts/EnemyPartsProjectilesResourses/Resourses/HeadRes.cs" id="2_3syvi"]
-
-[resource]
-script = ExtResource("2_3syvi")
-projectileScene = ExtResource("1_8kngv")
-projectileMoveSpeed = 100.0

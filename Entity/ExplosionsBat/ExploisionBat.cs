@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Game.Components;
 using GameLogick.StateMachine;
-using Enemy.Parts;
+
 using GameLogick.Utilities;
 using DotEffects;
 using Game.Enteties;

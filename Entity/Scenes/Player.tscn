@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ci5u1meyx80l2"]
+[gd_scene load_steps=24 format=3 uid="uid://ci5u1meyx80l2"]
 
 [ext_resource type="Script" path="res://Entity/Player/Scipts/PlayerController.cs" id="1_t5no0"]
 [ext_resource type="PackedScene" uid="uid://b1pg5udysiplf" path="res://Components/VisualsComponent.tscn" id="2_prbvy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvxyeylyxt23c" path="res://Components/WeaponRootComponent.tscn" id="5_m8lgp"]
 [ext_resource type="PackedScene" uid="uid://diq1xiiwcc07y" path="res://Weapons/ShotGun/ShotGun.tscn" id="5_ow8r6"]
 [ext_resource type="Texture2D" uid="uid://kcxm6vjepjlk" path="res://Entity/Player/Arts/ReaperMainCharackter.png" id="5_tuklw"]
+[ext_resource type="Resource" uid="uid://bjo2syoo4wmrs" path="res://Resourses/WeaponResourses/ShotGun/ShotGun.tres" id="6_ycgru"]
 [ext_resource type="PackedScene" uid="uid://i7o0sc2jx4qx" path="res://Components/HitFlashComponent.tscn" id="7_t2lk5"]
 [ext_resource type="Shader" path="res://Visuals/Shaders/HitFlash.gdshader" id="8_bot5n"]
 [ext_resource type="PackedScene" uid="uid://dg60wk53wx2ab" path="res://Components/HurtBoxComponent.tscn" id="8_iyxdx"]
@@ -15,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bdto3woumuy74" path="res://Entity/Player/Arts/SckeletonIddel.png" id="14_xvhy2"]
 [ext_resource type="Texture2D" uid="uid://bf6mgyvvhkri8" path="res://Visuals/LightArt/PlayerLight.png" id="15_5scag"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrpwf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ruq6"]
 resource_local_to_scene = true
 shader = ExtResource("8_bot5n")
 shader_parameter/lerp_percent = 0.0
@@ -154,12 +155,12 @@ WeaponNode = NodePath("ShotGun")
 entity = NodePath("../../../..")
 
 [node name="ShotGun" parent="Visuals/CanvasGroup/RotationPivot/WeaponRootComponent" instance=ExtResource("5_ow8r6")]
-isEnemy = false
+shotGunStats = ExtResource("6_ycgru")
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("7_t2lk5")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_wrpwf")
+hit_flash_material = SubResource("ShaderMaterial_5ruq6")
 
 [node name="StatusRecivierComponent" parent="." node_paths=PackedStringArray("hurtBoxComponent", "visualsNode") instance=ExtResource("9_o4o0l")]
 hurtBoxComponent = NodePath("../HurtBoxComponent")
