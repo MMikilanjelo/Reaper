@@ -73,7 +73,8 @@ public partial class Cactus : CharacterBody2D , IEnemy
     {
         var bullet = BulletScene.Instantiate() as EnemyBullet;
         bullet.Position = GlobalPosition;
-        bullet.direction = GetVector(angle);
+        //bullet.direction = GetVector(angle);
+        bullet.SetBulletDirection(GetVector(angle));
         GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bullet);
     }
    

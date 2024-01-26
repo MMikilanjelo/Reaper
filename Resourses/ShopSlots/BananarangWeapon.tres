@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dnp0xkroiuch8"]
+
+[ext_resource type="PackedScene" uid="uid://bsbl8ip42hla0" path="res://Weapons/Bananarang/Bananarang.tscn" id="1_ybx4y"]
+[ext_resource type="Texture2D" uid="uid://sgy72xpt7dsg" path="res://Weapons/Bananarang/bananarang.png" id="2_uy1nk"]
+[ext_resource type="Script" path="res://Resourses/ShopSlots/ShopSlotData.cs" id="3_yr7wk"]
+
+[resource]
+script = ExtResource("3_yr7wk")
+_itemType = 0
+_itemName = "Bananarang"
+_itemDescription = "Boomerang . Simple but effective"
+_itemTexture = ExtResource("2_uy1nk")
+_itemCost = 50.0
+_itemScene = ExtResource("1_ybx4y")
+_isUnique = true

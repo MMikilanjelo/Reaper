@@ -1,8 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://so6f1d223r5h"]
+[gd_scene load_steps=10 format=3 uid="uid://so6f1d223r5h"]
 
 [ext_resource type="Script" path="res://GameObjects/Chest/Chest.cs" id="1_ga6t0"]
 [ext_resource type="Texture2D" uid="uid://d352w7ny3i00j" path="res://GameObjects/Chest/BulletChest.png" id="2_d6ek2"]
+[ext_resource type="Shader" path="res://Visuals/Shaders/OutLine.gdshader" id="2_s8hq1"]
 [ext_resource type="AudioStream" uid="uid://diikrd5o78w1r" path="res://Audio/ChestPickUp.wav" id="3_b0p3b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmqhc"]
+shader = ExtResource("2_s8hq1")
+shader_parameter/color = Color(1, 1, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tpj48"]
 radius = 26.0
@@ -98,6 +107,7 @@ script = ExtResource("1_ga6t0")
 Chest_bullet_drop = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wmqhc")
 texture = ExtResource("2_d6ek2")
 
 [node name="Area2D" type="Area2D" parent="."]

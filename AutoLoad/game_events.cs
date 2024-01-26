@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.Enteties;
 using GameUI;
 using Godot;
 using System;
@@ -14,7 +15,7 @@ public partial class game_events : Node
 	[Signal] public delegate void OnPlayerShootEventHandler(int amount);
 	[Signal] public delegate void OnRunOutAmmoEventHandler(bool _hasAmmmo);
 	[Signal] public delegate void OnBulletChestCollectedEventHandler(int bullets_amount);
-	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg);
+	[Signal] public delegate void OnEnemyDmgRecivedEventHandler(int dmg , EnemyData _enemyData);
 	//Wave managment
 	[Signal] public delegate void WaveFinishedEventHandler();
 	[Signal] public delegate void NewWaveStartedEventHandler();
@@ -24,9 +25,9 @@ public partial class game_events : Node
 	[Signal] public delegate void ShopSlotPurchasedEventHandler(ShopSlotData _purchasedItem);
 	[Signal] public delegate void ShopOpenedEventHandler();
 	//
-	public void EmitDmgRecivedByEnemy(int dmg)
+	public void EmitDmgRecivedByEnemy(int dmg , EnemyData _enemyData)
 	{
-		EmitSignal(SignalName.OnEnemyDmgRecived , dmg);
+		EmitSignal(SignalName.OnEnemyDmgRecived , dmg ,_enemyData);
 	}
 	public void On_ExperienceVialCollected(float amount)
 	{

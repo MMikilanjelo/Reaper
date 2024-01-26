@@ -7,4 +7,5 @@ public interface IVisitor
 	void Visit(HurtBoxComponent _hurtBoxComponent);
 	void Visit(VelocityComponent _velocityComponent);
 	void Visit (WeaponRootComponent _weaponRootComponent);
+	void Visit(StatusRecivierComponent _statusRecivierComponent);	
 }

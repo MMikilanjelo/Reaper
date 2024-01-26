@@ -37,7 +37,6 @@ namespace PlayerPassive
 				_effectCount += 1;
 				_velocityComponent.SetSpeedPercentModifire(SPEED_MODIFIRE , _speedMultiplier * _effectCount);
 				_hurtBoxComponent.SetArrmor(_arrmorMultiplier *  _effectCount);
-				GD.Print(_hurtBoxComponent.Armmor);
 			}
 			
 			
@@ -64,6 +63,10 @@ namespace PlayerPassive
 			_velocityComponent.AddSpeedPercentModifire(SPEED_MODIFIRE , 0);
         }
 
+        public void Visit(StatusRecivierComponent _statusRecivierComponent)
+        {
+            
+        }
     }
 
 }

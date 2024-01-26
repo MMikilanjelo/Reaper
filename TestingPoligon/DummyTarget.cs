@@ -11,6 +11,7 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
     [Export] Area2D baffArea;
     [Export] PackedScene effect;
     [Export] DeathSceneComponent deathSceneComponent;
+    [Export] StatusRecivierComponent _statusRecivierComponent;
     CharacterBody2D player;
     game_events _gameEvents;
     public override void _Ready()
@@ -36,7 +37,7 @@ public partial class DummyTarget : CharacterBody2D , IEnemy
 			OnWaveFinished();
 		}
 		));
-        
+
         
         player = GameUtilities.GetPlayerNode(this);
        

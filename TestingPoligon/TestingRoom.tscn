@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ci5u1meyx80l2" path="res://Entity/Scenes/Player.tscn" id="3_vs4y7"]
 [ext_resource type="PackedScene" uid="uid://so6f1d223r5h" path="res://GameObjects/Chest/chest.tscn" id="4_da5p3"]
 [ext_resource type="PackedScene" uid="uid://c6rs7ugtvx8p5" path="res://Shop/Shop.tscn" id="6_q72au"]
-[ext_resource type="PackedScene" uid="uid://dpbabs0lgbloo" path="res://TestingPoligon/dummyTarget.tscn" id="6_splnb"]
+[ext_resource type="PackedScene" uid="uid://5pil5ykbrsu7" path="res://Entity/Knight/knigth.tscn" id="9_w8t4n"]
 
 [sub_resource type="Environment" id="Environment_4bebh"]
 background_mode = 3
@@ -439,4 +439,4 @@ position = Vector2(16, -28)
 [node name="Shop" parent="." instance=ExtResource("6_q72au")]
 position = Vector2(-42, 19)
 
-[node name="dummyTarget" parent="." instance=ExtResource("6_splnb")]
+[node name="Knigth" parent="." instance=ExtResource("9_w8t4n")]

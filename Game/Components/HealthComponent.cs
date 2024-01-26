@@ -101,7 +101,6 @@ namespace Game.Components
         public void Accept(IVisitor visitor)
         {
             visitor.Visit(this);
-            GD.Print(this.Name + " Visited");
         }
 
         public partial class HealthUpdate : RefCounted

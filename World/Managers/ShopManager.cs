@@ -11,6 +11,7 @@ public partial class ShopManager : Node
 	game_events _gameEvents;
     public override void _Ready()
     {
+		GD.PrintT(GetTree().GetNodesInGroup("enemy_hurtbox").Count);
 		SetDependencies();
 		LoadResourses();
 		ConnectToSignals();

@@ -20,7 +20,7 @@ height = 12.0
 radius = 5.0
 height = 22.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3i0f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kglfi"]
 resource_local_to_scene = true
 shader = ExtResource("7_i0wue")
 shader_parameter/lerp_percent = 0.0
@@ -39,7 +39,7 @@ shader_parameter/phase_speed = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_a70y2"]
 radius = 86.0
 
-[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea", "deathSceneComponent")]
+[node name="dummyTarget" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "baffArea", "deathSceneComponent", "_statusRecivierComponent")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_q6utx")
@@ -48,6 +48,7 @@ healthComponent = NodePath("HealthComponent")
 baffArea = NodePath("DmgReductionArea")
 effect = ExtResource("3_c5136")
 deathSceneComponent = NodePath("DeathSceneComponent")
+_statusRecivierComponent = NodePath("StatusRecivierComponent")
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -63,7 +64,7 @@ shape = SubResource("CapsuleShape2D_esacc")
 hurtBoxComponent = NodePath("../HurtBoxComponent")
 visualsNode = NodePath("../Visuals")
 
-[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_psdoa")]
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") groups=["enemy_hurtbox"] instance=ExtResource("4_psdoa")]
 collision_layer = 2
 collision_mask = 16
 monitorable = false
@@ -74,12 +75,12 @@ healthComponent = NodePath("../HealthComponent")
 shape = SubResource("CapsuleShape2D_eaqag")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_efr5r")]
-MaxHealth = 300.0
+MaxHealth = 80.0
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_55cds")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_q3i0f")
+hit_flash_material = SubResource("ShaderMaterial_kglfi")
 
 [node name="DmgReductionArea" type="Area2D" parent="."]
 show_behind_parent = true

@@ -13,9 +13,10 @@ public partial class PlayerController : CharacterBody2D , IVisitable
 	public EntitySpriteImager _playerSpriteImager;
 	private List<IVisitable> _visitableNodes = new();
   	private PackedScene floatingTextScene;
-	private game_events game_Events;
+	private game_events _gameEvents;
 	private	AchievementEvents _achievementEvents;
 	private DelegateStateMachine delegateStateMachine = new ();
+	
 	public override void _Ready()
 	{
     	SetUpNodes();
@@ -23,17 +24,23 @@ public partial class PlayerController : CharacterBody2D , IVisitable
 		ConnectToSginals();
 		GetVisitableNodes();
 	}
+	// private void BaseSetUp()
+	// {
+	// 	_weaponRootComponent.ChangeWeapon(ResourceLoader.Load<PackedScene>("res://Weapons/Bananarang/Bananarang.tscn"));	
+	// }
 	private void SetUpNodes()
 	{
 		floatingTextScene = ResourceLoader.Load("res://UI/FloatingText.tscn") as PackedScene;
 		
-		game_Events = GetNode<game_events>("/root/GameEvents");	
+		_gameEvents = GetNode<game_events>("/root/GameEvents");	
 		_achievementEvents = GetNode<AchievementEvents>("/root/AchievementsEvents");
 		_velocityComponent = GetNode<VelocityComponent>("VelocityComponent");
 		_healthComponent = GetNode<HealthComponent>("HealthComponent");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_weaponRootComponent = GetNode<WeaponRootComponent>("Visuals/CanvasGroup/RotationPivot/WeaponRootComponent");
 		_playerSpriteImager = GetNode<EntitySpriteImager>("Visuals");
+		
+		
 	}
 	private void GetVisitableNodes()
 	{
@@ -54,13 +61,14 @@ public partial class PlayerController : CharacterBody2D , IVisitable
 	private void ConnectToSginals()
 	{
 		_healthComponent.Connect(HealthComponent.SignalName.HealthChanged , Callable.From((HealthComponent.HealthUpdate healthUpdate)  => OnDmg()));
-		_weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From((Vector2 _direction)=>{
-			game_Events.EmitPlayerShootSignal(1);
-		}));
-		game_Events.Connect(game_events.SignalName.ShopSlotPurchased , Callable.From((ShopSlotData _itemData)=>
+		_gameEvents.Connect(game_events.SignalName.ShopSlotPurchased , Callable.From((ShopSlotData _itemData)=>
 		{
 			if(_itemData._itemType != ShopSlotData.ItemType.Weapon) return;
 			_weaponRootComponent.ChangeWeapon(_itemData._itemScene);
+		}));
+		_weaponRootComponent.Connect(WeaponRootComponent.SignalName.ShotedFromWeapon , Callable.From((Vector2 _direction)=>
+		{
+			_gameEvents.EmitPlayerShootSignal(1);
 		}));
 	}
 	
@@ -96,7 +104,7 @@ public partial class PlayerController : CharacterBody2D , IVisitable
 		else{
 			_animationPlayer.Play("Walk");
 		}
-		if(Input.IsActionPressed("Shoot"))
+		if(Input.IsActionJustPressed("Shoot"))
 		{
 			var directionToShoot = (GetGlobalMousePosition() - GlobalPosition).Normalized();
 			_weaponRootComponent.ShootFromCurrentWeapon(directionToShoot);
@@ -106,6 +114,7 @@ public partial class PlayerController : CharacterBody2D , IVisitable
 		}
 		_velocityComponent.AccelerateInDirection(direction);
 	}
+	
 	void DeadState()
 	{
 		_achievementEvents.EmitAchievementUnlocked("crab");

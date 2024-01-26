@@ -5,25 +5,27 @@ using System;
 
 namespace Game.Weapons
 {
-	public partial class SniperRifle : Weapon , IWeapon
+	public partial class SniperRifle : Node2D , IWeapon
 	{
 		[Export] private RayCast2D shootRay;
 		[Export] Line2D aimLine;
 		[Export] private float _atackDelay = 1.5f;
-		
+		HitBoxComponent _hitBoxComponent;
 		AudioStreamPlayer2D soundPlayer;
 		SegmentShape2D hitBoxShape;
 		CollisionShape2D hitBoxArea;
+		private bool _canShoot = true;
 		public override void _Ready()
 		{
 			hitBoxArea = GetNode<CollisionShape2D>("SniperRifle/Marker2D/HitBoxComponent/CollisionShape2D");
 			hitBoxShape = hitBoxArea.Shape as SegmentShape2D;
 			soundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
-			hitBoxComponent = GetNode<HitBoxComponent>("SniperRifle/Marker2D/HitBoxComponent");
+			_hitBoxComponent = GetNode<HitBoxComponent>("SniperRifle/Marker2D/HitBoxComponent");
 		}
 
-		public override void Shoot(Vector2 directionToTarget)	
+		public  void Shoot(Vector2 directionToTarget)	
 		{
+			_canShoot = false;
 			var _castPoint = shootRay.TargetPosition;
 			shootRay.ForceRaycastUpdate();
 			if(shootRay.IsColliding())
@@ -36,7 +38,6 @@ namespace Game.Weapons
 			{
 				_canShoot = true;
 			}));
-			_canShoot = false;
 			Appear();
 		}
 		private void Appear()
@@ -49,8 +50,18 @@ namespace Game.Weapons
 			tween.Chain();
 			tween.TweenProperty(aimLine , "width" , 0 , 0.2f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Circ);
 		}
-		
 
-	}
+		public void OnWeaponChanged()
+        {
+            QueueFree();
+        }
+
+        public bool IsReadyToShot()
+        {
+			GD.Print(_canShoot);
+			return _canShoot;
+        }
+
+    }
 }
 

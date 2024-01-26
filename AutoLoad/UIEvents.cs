@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Game.Components;
+using Game.Enteties;
 public partial class UIEvents : Node
 {
 	[Signal] public delegate void ArmorApplyedEventHandler(float amount);
@@ -25,7 +26,7 @@ public partial class UIEvents : Node
 			playerStatistic._totalUpgrades++;
 		}));
 		Game_Events.Connect(game_events.SignalName.OnEnemyDmgRecived, 
-		Callable.From((int dmg) => 
+		Callable.From((int dmg , EnemyData _enemyData) => 
 		{
 			playerStatistic._totalDealtDmg += dmg;
 		}));

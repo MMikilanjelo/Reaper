@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsbl8ip42hla0"]
+
+[ext_resource type="Script" path="res://Weapons/Bananarang/Bananarang.cs" id="1_wurvf"]
+[ext_resource type="Texture2D" uid="uid://sgy72xpt7dsg" path="res://Weapons/Bananarang/bananarang.png" id="2_8vw4j"]
+[ext_resource type="PackedScene" uid="uid://dgnman6foou8w" path="res://Weapons/Bananarang/BananarangProjectile.tscn" id="3_t5ktp"]
+
+[node name="Bananarang" type="Node2D"]
+script = ExtResource("1_wurvf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8vw4j")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("BananarangProjectile"), [ExtResource("3_t5ktp")]]

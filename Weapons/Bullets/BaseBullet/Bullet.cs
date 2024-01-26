@@ -7,10 +7,6 @@ public partial class Bullet : BaseBullet
 
 	[Export] protected Timer timer;
 	[Export] protected VelocityComponent velocityComponent;
-	
-	
-	
-
 	public override void _Ready()
 	{
 		TopLevel = true;

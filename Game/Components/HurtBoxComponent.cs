@@ -9,7 +9,7 @@ namespace Game.Components
 	{
 		RandomNumberGenerator random;
 		game_events Game_Events;
-		public const string GROUP_ENEMY_HURTBOX = "enemy_hitbox";
+		public const string GROUP_ENEMY_HURTBOX = "enemy_hurtbox";
 		private float dmg_Reduction_Multiplier = 0f;
 		[Export]private int armmor = 0;
 		private float miss_chance = 0;
@@ -79,7 +79,6 @@ namespace Game.Components
 			if(CollisionLayer == 2)
 			{
 				AddToGroup(GROUP_ENEMY_HURTBOX);
-				
 			}
 			Connect("area_entered" , new Callable(this, nameof(onAreaEntered)));
 			
@@ -101,12 +100,6 @@ namespace Game.Components
 					DealDmg(totaldmg);
 					hitBoxComponent.OnHit();
 					EmitSignal(SignalName.HitByHitBox , hitBoxComponent);
-					if(Owner is  PlayerController)
-					{
-						return;
-					}
-					Game_Events.EmitDmgRecivedByEnemy(totaldmg);
-					
 				}
 				else 
 				{
@@ -133,6 +126,5 @@ namespace Game.Components
             visitor.Visit(this);
         }
     }
-	
 }
 

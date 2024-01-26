@@ -24,17 +24,17 @@ namespace Game.Components
         }
         public void Shoot( CharacterBody2D Parent, Vector2 directionToTarget , Vector2 PostionToInstantiate , float MoveSpeed)
 		{
-			var recoilIncreasment = MaxRecoil * 0.1f;
-			var recoil_degree_max = currentRecoil * 0.5f;
-			var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
-			currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
-			Bullet bulletInstance =  Bullet.Instantiate() as Bullet;
-			bulletInstance.Position = PostionToInstantiate;
-			bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
-			bulletInstance.MoveSpeed = MoveSpeed;
-			bulletInstance.LookAt(GetGlobalMousePosition());
-			GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
-			timeToRecoilDecresment.Start(2);
+			// var recoilIncreasment = MaxRecoil * 0.1f;
+			// var recoil_degree_max = currentRecoil * 0.5f;
+			// var recoil_rad_actual = Mathf.DegToRad(Directions.random.RandfRange(-recoil_degree_max , recoil_degree_max));
+			// currentRecoil = Mathf.Clamp(currentRecoil + recoilIncreasment ,0, MaxRecoil); 
+			// Bullet bulletInstance =  Bullet.Instantiate() as Bullet;
+			// bulletInstance.Position = PostionToInstantiate;
+			// bulletInstance.direction = directionToTarget.Rotated(recoil_rad_actual);
+			// bulletInstance.MoveSpeed = MoveSpeed;
+			// bulletInstance.LookAt(GetGlobalMousePosition());
+			// GetTree().GetFirstNodeInGroup("ForeGroundLayer").AddChild(bulletInstance);
+			// timeToRecoilDecresment.Start(2);
 		}
 	}
 

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bmnrm1qhc6sqg" path="res://Visuals/Particles/BloodParticle.tscn" id="9_y5kyf"]
 [ext_resource type="PackedScene" uid="uid://cxndb0p4gyk3t" path="res://Components/StatusRecivierComponent.tscn" id="15_nwxgw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_glx0m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdn6g"]
 resource_local_to_scene = true
 shader = ExtResource("7_r1ao8")
 shader_parameter/lerp_percent = 0.0
@@ -83,14 +83,13 @@ hframes = 6
 [node name="Marker2D" type="Marker2D" parent="Visuals/CanvasGroup"]
 use_parent_material = true
 
-[node name="WeaponRootComponent" parent="Visuals/CanvasGroup/Marker2D" node_paths=PackedStringArray("entity", "CurrentWeapon") instance=ExtResource("3_yal06")]
+[node name="WeaponRootComponent" parent="Visuals/CanvasGroup/Marker2D" node_paths=PackedStringArray("WeaponNode", "entity") instance=ExtResource("3_yal06")]
 use_parent_material = true
+WeaponNode = NodePath("ShotGun")
 entity = NodePath("../../../..")
-CurrentWeapon = NodePath("ShotGun")
 
 [node name="ShotGun" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent" instance=ExtResource("5_0sbwb")]
 position = Vector2(1, 0)
-isEnemy = true
 
 [node name="RayCast2D" type="RayCast2D" parent="Visuals/CanvasGroup/Marker2D/WeaponRootComponent"]
 target_position = Vector2(150, 0)
@@ -99,7 +98,7 @@ collide_with_areas = true
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("healthComponent", "visualsNode") instance=ExtResource("6_42i4o")]
 healthComponent = NodePath("../HealthComponent")
 visualsNode = NodePath("../Visuals")
-hit_flash_material = SubResource("ShaderMaterial_glx0m")
+hit_flash_material = SubResource("ShaderMaterial_xdn6g")
 
 [node name="DeathSceneComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("8_wf6ay")]
 visible = false

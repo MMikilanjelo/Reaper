@@ -26,6 +26,7 @@ UIEvents="*res://AutoLoad/UIEvents.tscn"
 MusicPlayer="*res://AutoLoad/MusicPlayer.tscn"
 AchievementsEvents="*res://AutoLoad/AchievementEvents.tscn"
 DialogeManager="*res://AutoLoad/DialogeManager.tscn"
+CursorCanvasLayer="*res://UI/Cursor/CursorCanvasLayer.tscn"
 
 [display]
 
@@ -34,7 +35,6 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://Art Assets/crosheir.png"
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [dotnet]

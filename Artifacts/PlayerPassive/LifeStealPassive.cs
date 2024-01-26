@@ -31,8 +31,7 @@ namespace PlayerPassive
         public void Visit(VelocityComponent _velocityComponent){}
 
         public void Visit(WeaponRootComponent _weaponRootComponent){}
-        public override void _ExitTree()
-        {
-        }
+		public void Visit(StatusRecivierComponent _statusRecivierComponent){}
+
     }
 }

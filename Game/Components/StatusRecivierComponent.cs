@@ -5,8 +5,9 @@ namespace Game.Components
 {
 	
 	
-	public partial class StatusRecivierComponent : Node2D  
+	public partial class StatusRecivierComponent : Node2D  , IVisitable
 	{
+		private game_events _gameEvents;
 		CharacterBody2D entity;
 		[Export] HurtBoxComponent hurtBoxComponent;
 		[Export] Node2D visualsNode;
@@ -20,16 +21,24 @@ namespace Game.Components
 			}
 		}
 		private readonly Dictionary<PackedScene , BaseEffect> currentEffects = new Dictionary<PackedScene, BaseEffect>();
-		// TODO: keep track of effects that uplied to enemy and update them if we try to add some sort of effect
-		
-
-        public override void _Ready()
+		public override void _Ready()
         {
+			_gameEvents = GetNode<game_events>("/root/GameEvents");
 			hurtBoxComponent.Connect(HurtBoxComponent.SignalName.HitByHitBox , Callable.From((HitBoxComponent hitBox)=>
 			{
 				ApplyEffect(hitBox.AtackAfex);
 			}));
 			entity = GetParent<CharacterBody2D>();
+			if(hurtBoxComponent.IsInGroup("enemy_hurtbox"))
+			{
+				hurtBoxComponent.Connect(HurtBoxComponent.SignalName.HitByHitBox, Callable.From((HitBoxComponent _hitBox)=>
+				{
+					_gameEvents.EmitDmgRecivedByEnemy((int)_hitBox.dmg , 
+					new EnemyData{
+						_statusRecivierComponent = this
+					});
+				}));
+			}
 		}
 		public void ApplyEffect(PackedScene effectToApply)
 		{
@@ -60,7 +69,7 @@ namespace Game.Components
 							currentEffects.Remove(applied_effect.Key);
 						}
 					}
-					//GD.Print(currentEffects.Count);
+					
 				}));
 				currentEffect.ApplyEffect(_efect_recivier_data);
 				currentEffects.Add(effectToApply , currentEffect);
@@ -70,9 +79,6 @@ namespace Game.Components
 				if(currentEffects[effectToApply].effectStatsData.isStackable)
 				{
 					currentEffects[effectToApply].UpdateEffect();
-				}
-				else{
-					//GD.Print("Cant update");
 				}
 				
 			}
@@ -86,7 +92,12 @@ namespace Game.Components
 		{
 			CanReciveEffect = value;
 		}
-	
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+
     }
 	public partial class StatusEfffectData : RefCounted
 	{

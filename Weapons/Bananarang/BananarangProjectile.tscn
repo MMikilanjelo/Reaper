@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgnman6foou8w"]
+
+[ext_resource type="Texture2D" uid="uid://sgy72xpt7dsg" path="res://Weapons/Bananarang/bananarang.png" id="1_ief40"]
+[ext_resource type="Script" path="res://Weapons/Bananarang/BananarangProjectile.cs" id="1_kvy5c"]
+[ext_resource type="PackedScene" uid="uid://q35yu17aswhv" path="res://Components/VelocityComponent.tscn" id="2_g4wn2"]
+[ext_resource type="PackedScene" uid="uid://cikgnrq66sdhp" path="res://Components/HitBoxComponent.tscn" id="3_d2p81"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xoh4v"]
+radius = 2.0
+height = 12.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bitgn"]
+radius = 4.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_24ooq"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gp5nn"]
+_data = {
+"fly": SubResource("Animation_24ooq")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["bananarangsProjectils"]]
+top_level = true
+collision_layer = 0
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 3.14159
+script = ExtResource("1_kvy5c")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_g4wn2")]
+maxSpeed = 250.0
+accelerationCoeficient = 70.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 6.28319
+texture = ExtResource("1_ief40")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("CapsuleShape2D_xoh4v")
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("hitBoxArea") instance=ExtResource("3_d2p81")]
+position = Vector2(1, 0)
+collision_layer = 16
+collision_mask = 4
+hitBoxArea = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_bitgn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fly"
+libraries = {
+"": SubResource("AnimationLibrary_gp5nn")
+}

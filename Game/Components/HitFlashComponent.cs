@@ -11,8 +11,8 @@ namespace Game.Components
 		[Export] ShaderMaterial hit_flash_material;
 		Tween hit_flash_tween;
 
-        public override void _Ready()
-        {
+		public override void _Ready()
+		{
 			healthComponent.Connect(HealthComponent.SignalName.HealthChanged ,Callable.From((HealthComponent.HealthUpdate healthUpdate) =>
 			{
 				if(healthUpdate.CurrentHealth == healthUpdate.MaxHealth || healthUpdate.isHeal)
@@ -23,7 +23,7 @@ namespace Game.Components
 				
 			}));
 			
-        }
+		}
 		private void AppyMaterial()
 		{
 			if(hit_flash_tween != null  && hit_flash_tween.IsValid())
@@ -35,6 +35,6 @@ namespace Game.Components
 			hit_flash_tween = CreateTween();
 			hit_flash_tween.TweenProperty(visualsNode.Material,"shader_parameter/lerp_percent" , 0.0 , .2);
 		}
-    }
+	}
 
 }

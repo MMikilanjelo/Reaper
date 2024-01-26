@@ -15,7 +15,6 @@ namespace PlayerPassive
 			{
 				_receivedAttackCount = 0;
 				_hurtBoxComponent.SetHitChance(-1);
-				GD.Print(_hurtBoxComponent.HitChance);
 			}
 		}
 		private void RemoveShroud()
@@ -39,6 +38,7 @@ namespace PlayerPassive
 
         public void Visit(WeaponRootComponent _weaponRootComponent){}
 
+        public void Visit(StatusRecivierComponent _statusRecivierComponent){}
     }
 }
 

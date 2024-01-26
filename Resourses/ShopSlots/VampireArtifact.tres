@@ -10,6 +10,6 @@ _itemType = 2
 _itemName = "Vampire"
 _itemDescription = "Gain life after killing enemy"
 _itemTexture = ExtResource("2_fvlb5")
-_itemCost = 0.0
+_itemCost = 20.0
 _itemScene = ExtResource("1_qor8i")
 _isUnique = true

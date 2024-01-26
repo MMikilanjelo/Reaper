@@ -5,10 +5,7 @@ public partial class ScrabArtifact : Node2D , IVisitor
 {
 	private game_events _gameEvemts;
 	private ResourcePreloader _resourcePreloader;
-    public override void _Ready()
-    {
-		_gameEvemts = GetNode<game_events>("/root/GameEvents");
-    }
+
 	#region  IVistor Implementation
 
 	public void Visit(HealthComponent _healthComponent){}
@@ -22,7 +19,11 @@ public partial class ScrabArtifact : Node2D , IVisitor
 		{
 			var _degrees = Mathf.DegToRad(15);
 			_weaponRootComponent.AdditionalShoot(_direction.Rotated(_degrees));
+			
 		}));
     }
+
+    public void Visit(StatusRecivierComponent _statusRecivierComponent){}
+
     #endregion
 }

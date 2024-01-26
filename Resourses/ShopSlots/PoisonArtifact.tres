@@ -8,9 +8,8 @@
 script = ExtResource("3_vxv7f")
 _itemType = 2
 _itemName = "Poison tear"
-_itemDescription = "Apply poison for enemy"
+_itemDescription = "Apply poison for enemy with every hit"
 _itemTexture = ExtResource("2_27cfc")
-_itemCost = 0.0
+_itemCost = 100.0
 _itemScene = ExtResource("1_q4kvs")
-_isActive = true
 _isUnique = true

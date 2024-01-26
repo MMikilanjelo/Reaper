@@ -44,7 +44,11 @@ namespace Game.Components
 		}
 		public void AddEffecToHit(PackedScene afexToAdd)
 		{
-			AtackAfex = afexToAdd;
+			if(afexToAdd != null)
+			{
+				AtackAfex = afexToAdd;
+			}
+			
 		}
 	}
 }
